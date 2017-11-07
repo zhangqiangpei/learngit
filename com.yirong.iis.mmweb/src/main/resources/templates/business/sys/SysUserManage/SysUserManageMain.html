@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>用户管理</title>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+        <el-form :inline="true"
+                  :model="tableSearchModel"
+                  ref="tableSearchModel">
+           	 <el-row>
+           	   <el-form-item label="" prop="userName">
+                   <el-input v-model="tableSearchModel.userName" placeholder="请输入用户名"></el-input>
+               </el-form-item>
+  				<el-form-item label="" prop="userDisplayName">
+                   <el-input v-model="tableSearchModel.userDisplayName" placeholder="请输入中文名"></el-input>
+               </el-form-item>
+        
+                
+                <el-form-item>
+                    <el-button type="primary" @click="onSearch" size="small" name="per_sys_user_view">查 询</el-button>
+                    <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+                </el-form-item>
+            </el-row>
+              <el-row>
+                  <el-form-item> 
+                      <el-button type="primary" @click="addClick" icon="plus" size="small" name="per_sys_user_add">新 增</el-button>
+                      <el-button type="primary" @click="delClick" icon="delete" size="small" name="per_sys_user_del">删 除</el-button>
+                      <el-button type="primary" @click="upClick"  size="small" name="per_sys_user_password">重置密码</el-button>
+                  </el-form-item>
+              </el-row>
+			</el-form>
+                <el-table :data="tableData"
+                          @sort-change="tableSortChange"
+                          @selection-change="tableChange"
+                          ref="mytable" stripe
+                          border id="tableId" height=100% >
+		              <el-table-column type="selection"
+						               align="center"
+						               width="45" :selectable="selectAble">
+		              </el-table-column>
+ 
+                    <el-table-column prop="userName"
+                                     label="用户名" sortable="custom" width="100" show-overflow-tooltip>
+                    </el-table-column>
+                   
+                   <el-table-column prop="userDisplayName"
+                                     label="中文名" width="120" show-overflow-tooltip>
+                    </el-table-column>
+                   <el-table-column prop="organizationName"
+                                     label="所属机构" width="120"  show-overflow-tooltip>
+                    </el-table-column>
+                    <el-table-column prop="duties"
+                                     label="职务"   show-overflow-tooltip>
+                    </el-table-column>
+                    <el-table-column prop="post"
+                                     label="岗位"   show-overflow-tooltip>
+                    </el-table-column>
+                    <el-table-column prop="phone"
+                                     label="手机号"  show-overflow-tooltip >
+                    </el-table-column>
+           			<el-table-column prop="officePhone"
+                                     label="办公电话"  show-overflow-tooltip  width="120">
+                    </el-table-column>
+                    <el-table-column prop="email"
+                                     label="邮箱"   show-overflow-tooltip>
+                    </el-table-column>
+ 
+                    <el-table-column prop="createTime" sortable="custom"
+                                     label="创建时间" :formatter="formatDate"
+                                     width="180">
+                    </el-table-column>
+ 
+					<el-table-column prop="userStatus" label="状态"  :formatter="formatSelect" width="100">
+                     	<template scope="scope">
+	                        <el-switch v-model="scope.row.userStatus" @change="onOrOff(scope.row)"
+	                        on-text="启用" off-text="禁用"
+	                        on-value="000000" off-value="999999" v-if="scope.row.isBuilt == 1" disabled></el-switch>
+	                        <el-switch v-model="scope.row.userStatus" @change="onOrOff(scope.row)"
+	                        on-text="启用" off-text="禁用"
+	                        on-value="000000" off-value="999999" v-if="scope.row.isBuilt == 0"></el-switch>
+		                </template>
+                    </el-table-column>
+                    
+                     <el-table-column label="操作"
+	                             align="center"
+	                             width="100">
+	                	<template scope="scope">
+	                    	<el-button size="small"
+	                               @click="handleEdit(scope.$index, scope.row)" name="per_sys_user_edit">编辑</el-button>
+	               	 	</template>
+	            	</el-table-column>
+                </el-table>
+
+
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :page-size= "tableSearchModel.pageSize"
+                               :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+            </el-col>
+        </el-row>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/sys/SysUserManage/js/SysUserManageMain.js"></script>
+</body>
+</html>

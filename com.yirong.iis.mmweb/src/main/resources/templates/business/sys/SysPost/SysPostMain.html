@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>岗位管理</title>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+        <el-form :inline="true"
+                  :model="tableSearchModel"
+                  ref="tableSearchModel">
+           	 <el-row>
+  				<el-form-item label="岗位名称" prop="name">
+                   <el-input v-model="tableSearchModel.name" placeholder="请输入岗位名称" size="small"></el-input>
+               </el-form-item>
+        
+                <el-form-item>
+                    <el-button type="primary" @click="onSearch" size="small" size="small" name="per_sys_post_show">查 询</el-button>
+                    <el-button type="default" @click="tableResetCondition" size="small" size="small">重 置</el-button>
+                </el-form-item>
+            </el-row>
+              <el-row>
+                  <el-form-item>
+                      <el-button type="primary" @click="addClick" icon="plus" size="small" name="per_sys_post_add">新 增</el-button>
+                      <el-button type="primary" @click="delClick" icon="delete" size="small" name="per_sys_post_del">删 除</el-button>
+                  </el-form-item>
+              </el-row>
+			</el-form>
+                <el-table :data="tableData"
+                          @sort-change="tableSortChange"
+                          @selection-change="tableChange"
+                          ref="mytable" stripe
+                          border id="tableId" height=100% >
+		              <el-table-column type="selection"
+						               align="center"
+						               width="45">
+		              </el-table-column>
+ 
+                    <el-table-column prop="name"
+                                     label="岗位名称" sortable="custom" min-width="120" show-overflow-tooltip>
+                    </el-table-column>
+                    
+                    <el-table-column prop="createTime" sortable="custom"
+                                     label="创建时间" :formatter="formatDate"
+                                     width="180">
+                    </el-table-column>
+  
+                    <el-table-column label="操作"
+	                             align="center"
+	                             width="100">
+	                	<template scope="scope">
+	                    	<el-button size="small"
+	                               @click="handleEdit(scope.$index, scope.row)" name="per_sys_post_edit">编辑</el-button>
+	               	 	</template>
+	            	</el-table-column> 
+                </el-table>
+
+
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :page-size= "tableSearchModel.pageSize"
+                               :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+            </el-col>
+        </el-row>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/sys/SysPost/js/SysPostMain.js"></script>
+</body>
+</html>

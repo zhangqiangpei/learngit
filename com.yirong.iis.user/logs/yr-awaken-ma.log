@@ -1,0 +1,382 @@
+16:28:06.129 [INFO ] [main] [com.yirong.MiningAnalysisApplication] - Starting MiningAnalysisApplication on DESKTOP-1DIFKEJ with PID 15612 (E:\awaken\code\com.yirong.awaken.ma\target\classes started by lijp in E:\awaken\code\com.yirong.awaken.ma)
+16:28:06.138 [INFO ] [main] [com.yirong.MiningAnalysisApplication] - No active profile set, falling back to default profiles: default
+16:28:06.261 [INFO ] [main] [org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1cd629b3: startup date [Tue Aug 29 16:28:06 CST 2017]; root of context hierarchy
+16:28:06.659 [INFO ] [background-preinit] [org.hibernate.validator.internal.util.Version] - HV000001: Hibernate Validator 5.3.5.Final
+16:28:08.916 [INFO ] [main] [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=coreApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/awaken/core/CoreApplication.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=miningAnalysisApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in com.yirong.MiningAnalysisApplication]
+16:28:08.918 [INFO ] [main] [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Overriding bean definition for bean 'transactionInterceptor' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration; factoryMethodName=transactionInterceptor; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/transaction/annotation/ProxyTransactionManagementConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=miningAnalysisApplication; factoryMethodName=transactionInterceptor; initMethodName=null; destroyMethodName=(inferred); defined in com.yirong.MiningAnalysisApplication]
+16:28:10.004 [INFO ] [main] [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker] - Bean 'miningAnalysisApplication' of type [com.yirong.MiningAnalysisApplication$$EnhancerBySpringCGLIB$$40eb1d7f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+16:28:11.871 [INFO ] [main] [com.alibaba.druid.pool.DruidDataSource] - {dataSource-1} inited
+16:28:12.004 [INFO ] [main] [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean] - Building JPA container EntityManagerFactory for persistence unit 'default'
+16:28:12.023 [INFO ] [main] [org.hibernate.jpa.internal.util.LogHelper] - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+16:28:12.307 [INFO ] [main] [org.hibernate.Version] - HHH000412: Hibernate Core {5.0.12.Final}
+16:28:12.310 [INFO ] [main] [org.hibernate.cfg.Environment] - HHH000206: hibernate.properties not found
+16:28:12.312 [INFO ] [main] [org.hibernate.cfg.Environment] - HHH000021: Bytecode provider name : javassist
+16:28:12.361 [INFO ] [main] [org.hibernate.annotations.common.Version] - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+16:28:12.522 [INFO ] [main] [org.hibernate.dialect.Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+16:28:12.855 [WARN ] [main] [org.hibernate.id.UUIDHexGenerator] - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+16:28:13.254 [INFO ] [main] [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+16:28:13.552 [INFO ] [main] [org.eclipse.jetty.util.log] - Logging initialized @8492ms to org.eclipse.jetty.util.log.Slf4jLog
+16:28:13.710 [INFO ] [main] [org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainerFactory] - Server initialized with port: 8700
+16:28:13.712 [INFO ] [main] [org.eclipse.jetty.server.Server] - jetty-9.4.4.v20170414
+16:28:13.769 [INFO ] [main] [org.eclipse.jetty.server.session] - DefaultSessionIdManager workerName=node0
+16:28:13.769 [INFO ] [main] [org.eclipse.jetty.server.session] - No SessionScavenger set, using defaults
+16:28:13.770 [INFO ] [main] [org.eclipse.jetty.server.session] - Scavenging every 660000ms
+16:28:13.778 [INFO ] [main] [org.eclipse.jetty.server.handler.ContextHandler.application] - Initializing Spring embedded WebApplicationContext
+16:28:13.778 [INFO ] [main] [org.springframework.web.context.ContextLoader] - Root WebApplicationContext: initialization completed in 7517 ms
+16:28:13.943 [INFO ] [main] [org.springframework.boot.web.servlet.ServletRegistrationBean] - Mapping servlet: 'dispatcherServlet' to [/]
+16:28:13.945 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'characterEncodingFilter' to: [/*]
+16:28:13.948 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+16:28:13.948 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+16:28:13.948 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'requestContextFilter' to: [/*]
+16:28:13.948 [INFO ] [main] [org.eclipse.jetty.server.handler.ContextHandler] - Started o.s.b.c.e.j.JettyEmbeddedWebAppContext@1da2219c{/ma,[file:///E:/awaken/code/com.yirong.awaken.ma/src/main/webapp/],AVAILABLE}
+16:28:13.949 [INFO ] [main] [org.eclipse.jetty.server.Server] - Started @8888ms
+16:28:16.353 [WARN ] [main] [org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'taskAop': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'batch.exec.host' in value "${batch.exec.host}"
+16:28:16.355 [INFO ] [main] [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean] - Closing JPA EntityManagerFactory for persistence unit 'default'
+16:28:16.359 [INFO ] [main] [com.alibaba.druid.pool.DruidDataSource] - {dataSource-1} closed
+16:28:16.364 [INFO ] [main] [org.eclipse.jetty.server.session] - Stopped scavenging
+16:28:16.366 [INFO ] [main] [org.eclipse.jetty.server.handler.ContextHandler] - Stopped o.s.b.c.e.j.JettyEmbeddedWebAppContext@1da2219c{/ma,[file:///E:/awaken/code/com.yirong.awaken.ma/src/main/webapp/],UNAVAILABLE}
+16:28:16.374 [INFO ] [main] [org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer] - 
+
+Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+16:28:16.379 [ERROR] [main] [org.springframework.boot.SpringApplication] - Application startup failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'taskAop': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'batch.exec.host' in value "${batch.exec.host}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:372)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1264)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:553)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:866)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:542)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:737)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:370)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1162)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1151)
+	at com.yirong.MiningAnalysisApplication.main(MiningAnalysisApplication.java:56)
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'batch.exec.host' in value "${batch.exec.host}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:174)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:236)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer$2.resolveStringValue(PropertySourcesPlaceholderConfigurer.java:172)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:831)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1086)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1066)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:585)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:366)
+	... 17 common frames omitted
+16:29:16.611 [INFO ] [main] [com.yirong.MiningAnalysisApplication] - Starting MiningAnalysisApplication on DESKTOP-1DIFKEJ with PID 8516 (E:\awaken\code\com.yirong.awaken.ma\target\classes started by lijp in E:\awaken\code\com.yirong.awaken.ma)
+16:29:16.613 [INFO ] [main] [com.yirong.MiningAnalysisApplication] - No active profile set, falling back to default profiles: default
+16:29:16.675 [INFO ] [main] [org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@3d680b5a: startup date [Tue Aug 29 16:29:16 CST 2017]; root of context hierarchy
+16:29:17.068 [INFO ] [background-preinit] [org.hibernate.validator.internal.util.Version] - HV000001: Hibernate Validator 5.3.5.Final
+16:29:19.238 [INFO ] [main] [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=coreApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/awaken/core/CoreApplication.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=miningAnalysisApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in com.yirong.MiningAnalysisApplication]
+16:29:19.240 [INFO ] [main] [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Overriding bean definition for bean 'transactionInterceptor' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration; factoryMethodName=transactionInterceptor; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/transaction/annotation/ProxyTransactionManagementConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=miningAnalysisApplication; factoryMethodName=transactionInterceptor; initMethodName=null; destroyMethodName=(inferred); defined in com.yirong.MiningAnalysisApplication]
+16:29:19.930 [INFO ] [main] [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker] - Bean 'miningAnalysisApplication' of type [com.yirong.MiningAnalysisApplication$$EnhancerBySpringCGLIB$$7fa52f7b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+16:29:21.576 [INFO ] [main] [com.alibaba.druid.pool.DruidDataSource] - {dataSource-1} inited
+16:29:21.672 [INFO ] [main] [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean] - Building JPA container EntityManagerFactory for persistence unit 'default'
+16:29:21.691 [INFO ] [main] [org.hibernate.jpa.internal.util.LogHelper] - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+16:29:21.772 [INFO ] [main] [org.hibernate.Version] - HHH000412: Hibernate Core {5.0.12.Final}
+16:29:21.773 [INFO ] [main] [org.hibernate.cfg.Environment] - HHH000206: hibernate.properties not found
+16:29:21.774 [INFO ] [main] [org.hibernate.cfg.Environment] - HHH000021: Bytecode provider name : javassist
+16:29:21.911 [INFO ] [main] [org.hibernate.annotations.common.Version] - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+16:29:22.019 [INFO ] [main] [org.hibernate.dialect.Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+16:29:22.291 [WARN ] [main] [org.hibernate.id.UUIDHexGenerator] - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+16:29:22.636 [INFO ] [main] [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+16:29:22.819 [INFO ] [main] [org.eclipse.jetty.util.log] - Logging initialized @7007ms to org.eclipse.jetty.util.log.Slf4jLog
+16:29:22.900 [INFO ] [main] [org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainerFactory] - Server initialized with port: 8700
+16:29:22.902 [INFO ] [main] [org.eclipse.jetty.server.Server] - jetty-9.4.4.v20170414
+16:29:22.935 [INFO ] [main] [org.eclipse.jetty.server.session] - DefaultSessionIdManager workerName=node0
+16:29:22.935 [INFO ] [main] [org.eclipse.jetty.server.session] - No SessionScavenger set, using defaults
+16:29:22.938 [INFO ] [main] [org.eclipse.jetty.server.session] - Scavenging every 660000ms
+16:29:22.942 [INFO ] [main] [org.eclipse.jetty.server.handler.ContextHandler.application] - Initializing Spring embedded WebApplicationContext
+16:29:22.943 [INFO ] [main] [org.springframework.web.context.ContextLoader] - Root WebApplicationContext: initialization completed in 6268 ms
+16:29:23.072 [INFO ] [main] [org.springframework.boot.web.servlet.ServletRegistrationBean] - Mapping servlet: 'dispatcherServlet' to [/]
+16:29:23.075 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'characterEncodingFilter' to: [/*]
+16:29:23.079 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+16:29:23.079 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+16:29:23.080 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'requestContextFilter' to: [/*]
+16:29:23.080 [INFO ] [main] [org.eclipse.jetty.server.handler.ContextHandler] - Started o.s.b.c.e.j.JettyEmbeddedWebAppContext@6908674b{/ma,[file:///E:/awaken/code/com.yirong.awaken.ma/src/main/webapp/],AVAILABLE}
+16:29:23.080 [INFO ] [main] [org.eclipse.jetty.server.Server] - Started @7269ms
+16:29:24.559 [INFO ] [main] [org.hibernate.hql.internal.QueryTranslatorFactoryInitiator] - HHH000397: Using ASTQueryTranslatorFactory
+16:29:25.255 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@3d680b5a: startup date [Tue Aug 29 16:29:16 CST 2017]; root of context hierarchy
+16:29:25.330 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaAlgorithmApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaAlgorithmApi.tree()
+16:29:25.332 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.get(java.lang.String)
+16:29:25.332 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.update(java.lang.String)
+16:29:25.332 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.delete(java.lang.String)
+16:29:25.332 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.list(java.lang.String)
+16:29:25.333 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.save(java.lang.String)
+16:29:25.333 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.tree()
+16:29:25.333 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/getByFlowId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.getByFlowId(java.lang.String)
+16:29:25.334 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaElementApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaElementApi.get(java.lang.String)
+16:29:25.334 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaElementApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaElementApi.update(java.lang.String)
+16:29:25.334 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaElementApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaElementApi.list(java.lang.String)
+16:29:25.334 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaElementApi/getByObjectId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaElementApi.getByObjectId(java.lang.String)
+16:29:25.335 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFieldApi/getField],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFieldApi.getField(java.lang.String)
+16:29:25.336 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFieldApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFieldApi.list(java.lang.String)
+16:29:25.337 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFieldApi/getFieldView],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFieldApi.getFieldForView(java.lang.String)
+16:29:25.340 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.get(java.lang.String)
+16:29:25.340 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.update(java.lang.String)
+16:29:25.340 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.delete(java.lang.String)
+16:29:25.341 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.list(java.lang.String)
+16:29:25.341 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.save(java.lang.String)
+16:29:25.341 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.tree(java.lang.String)
+16:29:25.341 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/run],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.runFlow(java.lang.String)
+16:29:25.341 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/getReleaseFlow],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.getReleaseFlow()
+16:29:25.342 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaReleaseApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaReleaseApi.list(java.lang.String)
+16:29:25.342 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaReleaseApi/release],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaReleaseApi.release(java.lang.String)
+16:29:25.343 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaRuleApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaRuleApi.tree()
+16:29:25.343 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/health],methods=[GET]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.yirong.microservices.client.health.HealthController.health()
+16:29:25.344 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/update],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.update(java.lang.String)
+16:29:25.344 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.delete(java.lang.String)
+16:29:25.345 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/create],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.create(java.lang.String)
+16:29:25.345 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/list],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.list(java.lang.String)
+16:29:25.345 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.tree()
+16:29:25.345 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/getByCode],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.getByCode(java.lang.String)
+16:29:25.347 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.getById(java.lang.String)
+16:29:25.347 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysLocalCacheApi/getCodeList],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysLocalCacheApi.getCodeList(java.lang.String)
+16:29:25.348 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysLocalCacheApi/getCodeName],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysLocalCacheApi.getCodeName(java.lang.String)
+16:29:25.349 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+16:29:25.349 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+16:29:25.402 [INFO ] [main] [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping] - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+16:29:25.402 [INFO ] [main] [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping] - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+16:29:25.458 [INFO ] [main] [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping] - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+16:29:25.767 [INFO ] [main] [org.springframework.jmx.export.annotation.AnnotationMBeanExporter] - Registering beans for JMX exposure on startup
+16:29:25.768 [INFO ] [main] [org.springframework.jmx.export.annotation.AnnotationMBeanExporter] - Bean with name 'dataSource' has been autodetected for JMX exposure
+16:29:25.773 [INFO ] [main] [org.springframework.jmx.export.annotation.AnnotationMBeanExporter] - Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+16:29:25.781 [INFO ] [main] [org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor] - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+16:29:25.792 [INFO ] [main] [org.eclipse.jetty.server.handler.ContextHandler.application] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+16:29:25.793 [INFO ] [main] [org.springframework.web.servlet.DispatcherServlet] - FrameworkServlet 'dispatcherServlet': initialization started
+16:29:25.810 [INFO ] [main] [org.springframework.web.servlet.DispatcherServlet] - FrameworkServlet 'dispatcherServlet': initialization completed in 17 ms
+16:29:26.035 [INFO ] [main] [org.eclipse.jetty.server.AbstractConnector] - Started ServerConnector@6c4f48e2{HTTP/1.1,[http/1.1]}{0.0.0.0:8700}
+16:29:26.035 [INFO ] [main] [org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainer] - Jetty started on port(s) 8700 (http/1.1)
+16:29:26.040 [INFO ] [main] [com.yirong.awaken.ma.listener.InitServiceRunner] - 服务启动执行,执行初始化微服务等操作 .
+16:29:31.242 [INFO ] [main] [com.yirong.awaken.ma.listener.InitServiceRunner] - 执行初始化微服务等操作操作结束 .
+16:29:31.243 [INFO ] [main] [com.yirong.awaken.ma.listener.InitServiceRunner] - 服务启动执行,初始化errorinfo.properties操作 .
+16:29:31.244 [INFO ] [main] [com.yirong.awaken.ma.listener.InitServiceRunner] - 服务启动执行,初始化errorinfo.properties操作 .
+16:29:31.245 [INFO ] [main] [com.yirong.MiningAnalysisApplication] - Started MiningAnalysisApplication in 14.946 seconds (JVM running for 15.434)
+16:32:01.459 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:32:01.459 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:46:01.133 [INFO ] [main] [com.yirong.MiningAnalysisApplication] - Starting MiningAnalysisApplication on DESKTOP-1DIFKEJ with PID 19856 (E:\awaken\code\com.yirong.awaken.ma\target\classes started by lijp in E:\awaken\code\com.yirong.awaken.ma)
+16:46:01.141 [INFO ] [main] [com.yirong.MiningAnalysisApplication] - No active profile set, falling back to default profiles: default
+16:46:01.211 [INFO ] [main] [org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1b266842: startup date [Tue Aug 29 16:46:01 CST 2017]; root of context hierarchy
+16:46:01.550 [INFO ] [background-preinit] [org.hibernate.validator.internal.util.Version] - HV000001: Hibernate Validator 5.3.5.Final
+16:46:03.764 [INFO ] [main] [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=coreApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/awaken/core/CoreApplication.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=miningAnalysisApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in com.yirong.MiningAnalysisApplication]
+16:46:03.767 [INFO ] [main] [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Overriding bean definition for bean 'transactionInterceptor' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration; factoryMethodName=transactionInterceptor; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/transaction/annotation/ProxyTransactionManagementConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=miningAnalysisApplication; factoryMethodName=transactionInterceptor; initMethodName=null; destroyMethodName=(inferred); defined in com.yirong.MiningAnalysisApplication]
+16:46:04.709 [INFO ] [main] [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker] - Bean 'miningAnalysisApplication' of type [com.yirong.MiningAnalysisApplication$$EnhancerBySpringCGLIB$$e3661d9f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+16:46:06.490 [INFO ] [main] [com.alibaba.druid.pool.DruidDataSource] - {dataSource-1} inited
+16:46:06.612 [INFO ] [main] [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean] - Building JPA container EntityManagerFactory for persistence unit 'default'
+16:46:06.632 [INFO ] [main] [org.hibernate.jpa.internal.util.LogHelper] - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+16:46:06.803 [INFO ] [main] [org.hibernate.Version] - HHH000412: Hibernate Core {5.0.12.Final}
+16:46:06.805 [INFO ] [main] [org.hibernate.cfg.Environment] - HHH000206: hibernate.properties not found
+16:46:06.806 [INFO ] [main] [org.hibernate.cfg.Environment] - HHH000021: Bytecode provider name : javassist
+16:46:06.854 [INFO ] [main] [org.hibernate.annotations.common.Version] - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+16:46:06.997 [INFO ] [main] [org.hibernate.dialect.Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+16:46:07.302 [WARN ] [main] [org.hibernate.id.UUIDHexGenerator] - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+16:46:07.712 [INFO ] [main] [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+16:46:08.071 [INFO ] [main] [org.eclipse.jetty.util.log] - Logging initialized @7991ms to org.eclipse.jetty.util.log.Slf4jLog
+16:46:08.204 [INFO ] [main] [org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainerFactory] - Server initialized with port: 8700
+16:46:08.206 [INFO ] [main] [org.eclipse.jetty.server.Server] - jetty-9.4.4.v20170414
+16:46:08.271 [INFO ] [main] [org.eclipse.jetty.server.session] - DefaultSessionIdManager workerName=node0
+16:46:08.272 [INFO ] [main] [org.eclipse.jetty.server.session] - No SessionScavenger set, using defaults
+16:46:08.276 [INFO ] [main] [org.eclipse.jetty.server.session] - Scavenging every 600000ms
+16:46:08.297 [INFO ] [main] [org.eclipse.jetty.server.handler.ContextHandler.application] - Initializing Spring embedded WebApplicationContext
+16:46:08.298 [INFO ] [main] [org.springframework.web.context.ContextLoader] - Root WebApplicationContext: initialization completed in 7087 ms
+16:46:08.515 [INFO ] [main] [org.springframework.boot.web.servlet.ServletRegistrationBean] - Mapping servlet: 'dispatcherServlet' to [/]
+16:46:08.521 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'characterEncodingFilter' to: [/*]
+16:46:08.524 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+16:46:08.525 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+16:46:08.525 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'requestContextFilter' to: [/*]
+16:46:08.525 [INFO ] [main] [org.eclipse.jetty.server.handler.ContextHandler] - Started o.s.b.c.e.j.JettyEmbeddedWebAppContext@5f160341{/ma,[file:///E:/awaken/code/com.yirong.awaken.ma/src/main/webapp/],AVAILABLE}
+16:46:08.525 [INFO ] [main] [org.eclipse.jetty.server.Server] - Started @8446ms
+16:46:10.452 [INFO ] [main] [org.hibernate.hql.internal.QueryTranslatorFactoryInitiator] - HHH000397: Using ASTQueryTranslatorFactory
+16:46:11.241 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1b266842: startup date [Tue Aug 29 16:46:01 CST 2017]; root of context hierarchy
+16:46:11.390 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaAlgorithmApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaAlgorithmApi.tree()
+16:46:11.393 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.get(java.lang.String)
+16:46:11.394 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.update(java.lang.String)
+16:46:11.394 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.delete(java.lang.String)
+16:46:11.394 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.list(java.lang.String)
+16:46:11.394 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.save(java.lang.String)
+16:46:11.394 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.tree()
+16:46:11.394 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/getByFlowId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.getByFlowId(java.lang.String)
+16:46:11.395 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaElementApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaElementApi.get(java.lang.String)
+16:46:11.395 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaElementApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaElementApi.update(java.lang.String)
+16:46:11.395 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaElementApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaElementApi.list(java.lang.String)
+16:46:11.395 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaElementApi/getByObjectId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaElementApi.getByObjectId(java.lang.String)
+16:46:11.402 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFieldApi/getField],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFieldApi.getField(java.lang.String)
+16:46:11.403 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFieldApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFieldApi.list(java.lang.String)
+16:46:11.403 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFieldApi/getFieldView],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFieldApi.getFieldForView(java.lang.String)
+16:46:11.410 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.get(java.lang.String)
+16:46:11.410 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.update(java.lang.String)
+16:46:11.410 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.delete(java.lang.String)
+16:46:11.411 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.list(java.lang.String)
+16:46:11.411 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.save(java.lang.String)
+16:46:11.411 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.tree(java.lang.String)
+16:46:11.411 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/run],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.runFlow(java.lang.String)
+16:46:11.411 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/getReleaseFlow],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.getReleaseFlow()
+16:46:11.411 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaReleaseApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaReleaseApi.list(java.lang.String)
+16:46:11.412 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaReleaseApi/release],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaReleaseApi.release(java.lang.String)
+16:46:11.412 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaRuleApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaRuleApi.tree()
+16:46:11.414 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/health],methods=[GET]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.yirong.microservices.client.health.HealthController.health()
+16:46:11.418 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/update],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.update(java.lang.String)
+16:46:11.418 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.delete(java.lang.String)
+16:46:11.419 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/create],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.create(java.lang.String)
+16:46:11.419 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/list],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.list(java.lang.String)
+16:46:11.419 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.tree()
+16:46:11.419 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.getById(java.lang.String)
+16:46:11.419 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/getByCode],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.getByCode(java.lang.String)
+16:46:11.420 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysLocalCacheApi/getCodeName],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysLocalCacheApi.getCodeName(java.lang.String)
+16:46:11.420 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysLocalCacheApi/getCodeList],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysLocalCacheApi.getCodeList(java.lang.String)
+16:46:11.423 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+16:46:11.423 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+16:46:11.547 [INFO ] [main] [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping] - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+16:46:11.547 [INFO ] [main] [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping] - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+16:46:11.654 [INFO ] [main] [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping] - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+16:46:12.277 [INFO ] [main] [org.springframework.jmx.export.annotation.AnnotationMBeanExporter] - Registering beans for JMX exposure on startup
+16:46:12.278 [INFO ] [main] [org.springframework.jmx.export.annotation.AnnotationMBeanExporter] - Bean with name 'dataSource' has been autodetected for JMX exposure
+16:46:12.283 [INFO ] [main] [org.springframework.jmx.export.annotation.AnnotationMBeanExporter] - Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+16:46:12.291 [INFO ] [main] [org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor] - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+16:46:12.307 [INFO ] [main] [org.eclipse.jetty.server.handler.ContextHandler.application] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+16:46:12.308 [INFO ] [main] [org.springframework.web.servlet.DispatcherServlet] - FrameworkServlet 'dispatcherServlet': initialization started
+16:46:12.331 [INFO ] [main] [org.springframework.web.servlet.DispatcherServlet] - FrameworkServlet 'dispatcherServlet': initialization completed in 23 ms
+16:46:12.568 [INFO ] [main] [org.eclipse.jetty.server.AbstractConnector] - Started ServerConnector@e1f17e6{HTTP/1.1,[http/1.1]}{0.0.0.0:8700}
+16:46:12.568 [INFO ] [main] [org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainer] - Jetty started on port(s) 8700 (http/1.1)
+16:46:12.571 [INFO ] [main] [com.yirong.awaken.ma.listener.InitServiceRunner] - 服务启动执行,执行初始化微服务等操作 .
+16:46:17.666 [INFO ] [main] [com.yirong.awaken.ma.listener.InitServiceRunner] - 执行初始化微服务等操作操作结束 .
+16:46:17.667 [INFO ] [main] [com.yirong.awaken.ma.listener.InitServiceRunner] - 服务启动执行,初始化errorinfo.properties操作 .
+16:46:17.673 [INFO ] [main] [com.yirong.awaken.ma.listener.InitServiceRunner] - 服务启动执行,初始化errorinfo.properties操作 .
+16:46:17.676 [INFO ] [main] [com.yirong.MiningAnalysisApplication] - Started MiningAnalysisApplication in 16.942 seconds (JVM running for 17.597)
+16:48:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:48:47.979 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:50:47.979 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:50:47.979 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:52:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:52:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:54:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:54:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:56:47.977 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:56:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:58:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:58:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:00:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:00:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:02:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:02:47.979 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:04:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:04:47.979 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:05:01.910 [WARN ] [qtp1636639121-23] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaElementUserEntity
+17:05:09.780 [WARN ] [qtp1636639121-24] [net.sf.json.JSONObject] - Tried to assign property name:java.lang.String to bean of class com.yirong.awaken.ma.entity.MaElement
+17:05:09.780 [WARN ] [qtp1636639121-24] [net.sf.json.JSONObject] - Tried to assign property elementName:java.lang.String to bean of class com.yirong.awaken.ma.entity.MaElement
+17:05:10.154 [WARN ] [qtp1636639121-21] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaElementUserEntity
+17:05:15.111 [WARN ] [qtp1636639121-26] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaElementUserEntity
+17:05:16.014 [WARN ] [qtp1636639121-23] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaElementUserEntity
+17:05:17.296 [WARN ] [qtp1636639121-24] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaElementUserEntity
+17:05:19.494 [WARN ] [qtp1636639121-25] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaElementUserEntity
+17:05:20.674 [WARN ] [qtp1636639121-21] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaDatabaseUserEntity
+17:05:29.153 [WARN ] [qtp1636639121-21] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaDatabaseUserEntity
+17:05:33.829 [WARN ] [qtp1636639121-20] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaDatabaseUserEntity
+17:05:37.512 [WARN ] [qtp1636639121-26] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaDatabaseUserEntity
+17:05:40.087 [WARN ] [qtp1636639121-20] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaDatabaseUserEntity
+17:05:41.086 [WARN ] [qtp1636639121-21] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaDatabaseUserEntity
+17:05:43.141 [WARN ] [qtp1636639121-27] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaFlowUserEntity
+17:05:49.185 [WARN ] [qtp1636639121-26] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaFlowUserEntity
+17:05:53.759 [WARN ] [qtp1636639121-21] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaFlowUserEntity
+17:06:00.383 [WARN ] [qtp1636639121-24] [com.yirong.awaken.ma.service.impl.MaFlowServiceImpl] - yr-awaken-ma-00504:操作失败！ 提示：流程【sdf23】测试未成功，不能运行流程
+17:06:06.693 [WARN ] [qtp1636639121-23] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaFlowUserEntity
+17:06:09.669 [WARN ] [qtp1636639121-27] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaReleaseUserEntity
+17:06:14.843 [WARN ] [qtp1636639121-21] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaFlowUserEntity
+17:06:18.424 [WARN ] [qtp1636639121-24] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaFieldUserEntity
+17:06:18.686 [INFO ] [qtp1636639121-24] [com.yirong.awaken.core.aop.ApiAop] - apiAOP切面调用异常！
+org.elasticsearch.index.IndexNotFoundException: no such index
+	at org.elasticsearch.cluster.metadata.IndexNameExpressionResolver$WildcardExpressionResolver.infe(IndexNameExpressionResolver.java:660)
+	at org.elasticsearch.cluster.metadata.IndexNameExpressionResolver$WildcardExpressionResolver.innerResolve(IndexNameExpressionResolver.java:617)
+	at org.elasticsearch.cluster.metadata.IndexNameExpressionResolver$WildcardExpressionResolver.resolve(IndexNameExpressionResolver.java:567)
+	at org.elasticsearch.cluster.metadata.IndexNameExpressionResolver.concreteIndices(IndexNameExpressionResolver.java:164)
+	at org.elasticsearch.cluster.metadata.IndexNameExpressionResolver.concreteIndices(IndexNameExpressionResolver.java:135)
+	at org.elasticsearch.action.search.TransportSearchAction.executeSearch(TransportSearchAction.java:227)
+	at org.elasticsearch.action.search.TransportSearchAction.doExecute(TransportSearchAction.java:199)
+	at org.elasticsearch.action.search.TransportSearchAction.doExecute(TransportSearchAction.java:60)
+	at org.elasticsearch.action.support.TransportAction$RequestFilterChain.proceed(TransportAction.java:170)
+	at org.elasticsearch.action.support.TransportAction.execute(TransportAction.java:142)
+	at org.elasticsearch.action.support.HandledTransportAction$TransportHandler.messageReceived(HandledTransportAction.java:64)
+	at org.elasticsearch.action.support.HandledTransportAction$TransportHandler.messageReceived(HandledTransportAction.java:54)
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69)
+	at org.elasticsearch.transport.TcpTransport$RequestHandler.doRun(TcpTransport.java:1519)
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37)
+	at org.elasticsearch.common.util.concurrent.EsExecutors$1.execute(EsExecutors.java:110)
+	at org.elasticsearch.transport.TcpTransport.handleRequest(TcpTransport.java:1476)
+	at org.elasticsearch.transport.TcpTransport.messageReceived(TcpTransport.java:1360)
+	at org.elasticsearch.transport.netty4.Netty4MessageChannelHandler.channelRead(Netty4MessageChannelHandler.java:74)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:362)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:348)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:340)
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:293)
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:280)
+	at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:396)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:248)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:362)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:348)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:340)
+	at io.netty.channel.ChannelInboundHandlerAdapter.channelRead(ChannelInboundHandlerAdapter.java:86)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:362)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:348)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:340)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1334)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:362)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:348)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:926)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:134)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:624)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysPlain(NioEventLoop.java:524)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:478)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:438)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at java.lang.Thread.run(Thread.java:748)
+17:06:21.327 [WARN ] [qtp1636639121-23] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaReleaseUserEntity
+17:06:25.910 [WARN ] [qtp1636639121-23] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaReleaseUserEntity
+17:06:30.981 [WARN ] [qtp1636639121-20] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaReleaseUserEntity
+17:06:47.979 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:06:47.979 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:08:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:08:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:10:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:10:47.979 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:12:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:12:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:14:47.977 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:14:47.977 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:16:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:16:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:18:47.977 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:18:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:20:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:20:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:22:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:22:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:24:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:24:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:26:47.319 [WARN ] [qtp1636639121-23] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaElementUserEntity
+17:26:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:26:47.979 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:27:05.474 [WARN ] [qtp1636639121-24] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaDatabaseUserEntity
+17:28:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:28:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:30:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:30:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:32:47.977 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:32:47.977 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:34:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:34:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:36:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:36:47.978 [INFO ] [pool-3-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========

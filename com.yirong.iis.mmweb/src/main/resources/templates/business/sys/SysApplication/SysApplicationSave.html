@@ -1,0 +1,43 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div id="save" class="main">
+	<el-dialog title="新增应用" 
+                   :visible.sync="dialogVisible">
+            <el-form :model="saveModel"
+                     :rules="saveRules"
+                     ref="saveModel"
+                     label-width="100px"
+                      >
+                <el-form-item label="应用名称" prop="name">
+                    <el-input v-model="saveModel.name" placeholder="请输入应用名称（长度：1-100）" maxlength="100" size="small"></el-input>
+                </el-form-item>
+                <el-form-item label="应用标题" prop="title">
+                    <el-input v-model="saveModel.title" placeholder="请输入应用标题（长度：1-100）" maxlength="100" size="small"></el-input>
+                </el-form-item>
+                <el-form-item label="应用SN" prop="sn">
+                    <el-input v-model="saveModel.sn" placeholder="请输入应用SN（长度：1-64）" maxlength="64" size="small"></el-input>
+                </el-form-item>
+                 <el-form-item label="应用logo路径" prop="logo">      
+                   <el-input v-model="saveModel.logo" placeholder="请输入应用logo路径（长度：1-255）" maxlength="255" size="small"></el-input>
+                </el-form-item>  
+                <el-form-item label="应用域名" prop="domain">
+                    <el-input v-model="saveModel.domain" placeholder="请输入应用域名" maxlength="255" size="small"></el-input>
+                </el-form-item>
+                <el-form-item label="首页视图路径" prop="customIndexView">
+                    <el-input v-model="saveModel.customIndexView" placeholder="请输入首页视图路径" maxlength="255" size="small"></el-input>
+                </el-form-item>
+               
+                <el-form-item align="center">
+                    <el-button type="primary" @click="saveSubmit" size="small">确定</el-button>
+                    <el-button @click="saveReset" size="small">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/sys/SysApplication/js/SysApplicationSave.js"></script>

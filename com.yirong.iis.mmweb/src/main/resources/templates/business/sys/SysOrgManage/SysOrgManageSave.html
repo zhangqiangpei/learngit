@@ -1,0 +1,89 @@
+<style>
+#add_org_html .el-dialog__body {
+    padding: 10px 20px;
+    color: #48576a;
+    font-size: 14px;
+}
+
+#add_org_html .el-dialog{
+	top:15% !important;
+	height:70%;
+	overflow:auto;
+}
+
+#add_org_html .el-form-item{
+	float: left;
+}
+</style>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div id="save" class="main">
+	<el-dialog title="新增机构" 
+                   :visible.sync="dialogVisible" id="add_org_html">
+            <el-form :model="saveModel"
+                     :rules="saveRules"
+                     ref="saveModel"
+                     label-width="100px"
+                      >
+                     
+                <el-form-item label="所属机构" prop="parentName" style="width:100%">
+                    <el-input v-model="saveModel.parentName" :disabled="true" size="small" icon="delete"
+                    :on-icon-click="clearParent"></el-input>
+                </el-form-item>
+                <el-form-item label="名称" prop="name" style="width:100%">
+                    <el-input v-model="saveModel.name" placeholder="请输入名称" size="small"></el-input>
+                </el-form-item>
+                
+                <el-form-item label="类型" prop="type" style="width:50%">
+                    <el-select v-model="saveModel.type" filterable  placeholder="请选择机构类型" size="small">
+                        <el-option
+					        v-for="item in typeoptions"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                
+                <el-form-item label="顺序" prop="priority" style="width:50%">
+                    <el-input-number v-model="saveModel.priority"   :min="1" :max="100" size="small"> </el-input-number>
+                </el-form-item>
+                
+                <el-form-item label="邮政编码" prop="zipCode" style="width:50%">
+                    <el-input v-model="saveModel.zipCode" placeholder="请输入邮政编码" size="small"></el-input>
+                </el-form-item>
+                
+                  <el-form-item label="联系地址" prop="address" style="width:50%">
+                    <el-input v-model="saveModel.address" placeholder="请输入联系地址（长度：0-256）" size="small"></el-input>
+                </el-form-item>
+                
+                <el-form-item label="负责人" prop="master" style="width:50%">
+                    <el-input v-model="saveModel.master" placeholder="请输入负责人名称（长度：0-100）" size="small"></el-input>
+                </el-form-item>
+                
+                <el-form-item label="传真" prop="fax" style="width:50%">
+                    <el-input v-model="saveModel.fax" placeholder="请输入传真" size="small"></el-input>
+                </el-form-item>
+                
+                <el-form-item label="邮箱" prop="email" style="width:50%">
+                    <el-input v-model="saveModel.email" placeholder="请输入邮箱" size="small"></el-input>
+                </el-form-item>
+                
+                <el-form-item label="备注" prop="description" style="width:100%">
+                    <el-input v-model="saveModel.description" placeholder="请输入备注" size="small"></el-input>
+                </el-form-item>                                
+ 
+                <el-form-item style="text-align:center;width:100%;">
+                    <el-button type="primary" @click="saveSubmit" size="small">确定</el-button>
+                    <el-button @click="saveReset" size="small">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/sys/SysOrgManage/js/SysOrgManageSave.js"></script>

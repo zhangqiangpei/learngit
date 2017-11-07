@@ -1,0 +1,81 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+#add_user_html .el-dialog__body {
+    padding: 10px 20px;
+    color: #48576a;
+    font-size: 14px;
+}
+
+#add_user_html .el-dialog{
+	top:15% !important;
+	height:70%;
+	overflow:auto;
+}
+
+#add_user_html .el-form-item{
+	float: left;
+}
+</style>
+<div id="save" class="main">
+	<el-dialog title="新增用户" 
+                   :visible.sync="dialogVisible"  id="add_user_html">
+            <el-form :model="saveModel"
+                     :rules="saveRules"
+                     ref="saveModel"
+                     label-width="100px"
+                      >
+                <el-form-item label="用户名" prop="userName" style="width:100%">
+                    <el-input v-model="saveModel.userName" placeholder="请输入用户名（长度：1-32）" size="small"></el-input>
+                </el-form-item>
+                <el-form-item label="中文名称" prop="userDisplayName" style="width:100%">
+                    <el-input v-model="saveModel.userDisplayName" placeholder="请输入中文名称（长度：1-128）" size="small"></el-input>
+                </el-form-item>
+                
+                 <el-form-item label="所属机构" prop="organizationName" style="width:100%">      
+                   <el-input v-model="organizationName" placeholder="请选择所属机构" icon="search" 
+                   		:on-icon-click="changeClick" :disabled="true" size="small"></el-input>
+                </el-form-item>  
+                
+                <el-form-item label="职务" prop="duties" style="width:50%">
+                    <el-input v-model="saveModel.duties" placeholder="请输入职务" size="small" maxlength="100"></el-input>
+                </el-form-item>
+                <el-form-item label="岗位" prop="post"  style="width:50%">
+                    <el-input v-model="post" placeholder="请选择岗位"  maxlength="100"
+                    	icon="search" :on-icon-click="changePostClick" :disabled="true" size="small"></el-input>
+                </el-form-item>
+                <el-form-item label="手机号" prop="phone" style="width:50%">
+                    <el-input v-model="saveModel.phone" placeholder="请输入手机号" size="small" maxlength="32"></el-input>
+                </el-form-item>
+                <el-form-item label="办公电话" prop="officePhone" style="width:50%">
+                    <el-input v-model="saveModel.officePhone" placeholder="请输入办公电话" size="small" maxlength="30"></el-input>
+                </el-form-item>
+                
+                <el-form-item label="邮箱" prop="email" style="width:100%">
+                    <el-input v-model="saveModel.email" placeholder="请输入邮箱" size="small"></el-input>
+                </el-form-item>
+               
+                <el-form-item label="地址" prop="userAddress" style="width:100%">
+                    <el-input v-model="saveModel.userAddress" placeholder="请输入地址（长度：0-256）" size="small"></el-input>
+                </el-form-item>
+                
+                <el-form-item label="状态" prop="userStatus" style="width:100%">
+	                <el-switch v-model="saveModel.userStatus" 
+				      on-text="启用" off-text="禁用"
+					  on-value="000000" off-value="999999" size="small"> 
+					</el-switch>
+         		</el-form-item>
+         		
+                <el-form-item align="center" style="width:100%">
+                    <el-button type="primary" @click="saveSubmit" size="small">确定</el-button>
+                    <el-button @click="saveReset" size="small">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/sys/SysUserManage/js/SysUserManageSave.js"></script>

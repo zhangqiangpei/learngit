@@ -1,0 +1,51 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div id="pmssave" class="main">
+	<el-dialog title="新增权限信息" 
+                   :visible.sync="dialogVisible">
+            <el-form :model="saveModel"
+                     :rules="saveRules"
+                     ref="saveModel"
+                     label-width="100px"
+                      >
+    
+                <el-form-item label="权限名称" prop="name">
+                    <el-input v-model="saveModel.name" placeholder="请输入权限名称" size="small"></el-input>
+                </el-form-item>
+                
+                <el-form-item label="授权编码" prop="sn">
+                    <el-input v-model="saveModel.sn" placeholder="请输入授权编码" size="small"></el-input>
+                </el-form-item>
+                
+                <el-form-item label="权限url" prop="url">
+                    <el-input v-model="saveModel.url" placeholder="请输入权限url" size="small"></el-input>
+                </el-form-item>
+                
+                <el-form-item label="事件类型" prop="code" style="width:50%">
+                    <el-select v-model="saveModel.code" filterable  placeholder="请选择事件类型" size="small">
+                        <el-option
+					        v-for="item in codeoptions"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                
+                <el-form-item label="描述" prop="description">
+                    <el-input v-model="saveModel.description" placeholder="请输入描述" type="textarea" autosize :rows="2" size="small"></el-input>
+                </el-form-item>
+ 
+                <el-form-item align="center">
+                    <el-button type="primary" @click="saveSubmit" size="small">确定</el-button>
+                    <el-button @click="saveReset" size="small">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/sys/SysResourceManage/js/SysResourceManagePemissionSave.js"></script>

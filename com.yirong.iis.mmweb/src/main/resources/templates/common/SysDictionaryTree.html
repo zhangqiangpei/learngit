@@ -1,0 +1,29 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+.el-dialog__body {
+    padding: 10px 20px;
+    color: #48576a;
+    font-size: 14px;
+}
+
+#dictionTree .el-dialog{
+	top:5% !important;
+	height:90%;
+	overflow:hidden;
+}
+</style>
+<div id="SysDictionaryTree" class="main">
+	<el-dialog title="数字字典选择器"  :visible.sync="dialogVisible" id="dictionTree">
+    	<el-tree node-key="id" ref="tree" :data="treeData" :props="treeProps"   :expand-on-click-node="false" 
+    		:highlight-current="true" :default-expand-all="true"  @node-click="treeNodeClick"  style="height:100%;overflow:auto;">
+    	</el-tree>
+    </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/common/js/SysDictionaryTree.js"></script>

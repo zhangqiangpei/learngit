@@ -1,0 +1,786 @@
+11:24:51.202 [INFO ] [main] [com.yirong.AwakenWebApplication] - Starting AwakenWebApplication on DESKTOP-1DIFKEJ with PID 4088 (E:\awaken\code\com.yirong.awaken.akweb\target\classes started by lijp in E:\awaken\code\com.yirong.awaken.akweb)
+11:24:51.211 [INFO ] [main] [com.yirong.AwakenWebApplication] - No active profile set, falling back to default profiles: default
+11:24:51.292 [INFO ] [main] [org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7fc4780b: startup date [Thu Oct 26 11:24:51 CST 2017]; root of context hierarchy
+11:24:51.695 [INFO ] [background-preinit] [org.hibernate.validator.internal.util.Version] - HV000001: Hibernate Validator 5.3.5.Final
+11:25:03.603 [INFO ] [main] [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=coreApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/awaken/core/CoreApplication.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=interfaceApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/InterfaceApplication.class]]
+11:25:03.604 [INFO ] [main] [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Overriding bean definition for bean 'transactionInterceptor' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration; factoryMethodName=transactionInterceptor; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/transaction/annotation/ProxyTransactionManagementConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=interfaceApplication; factoryMethodName=transactionInterceptor; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [com/yirong/InterfaceApplication.class]]
+11:25:03.609 [INFO ] [main] [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=interfaceApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/InterfaceApplication.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=pretreatMentApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/PretreatMentApplication.class]]
+11:25:03.610 [INFO ] [main] [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=pretreatMentApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/PretreatMentApplication.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=collectionApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/CollectionApplication.class]]
+11:25:03.614 [INFO ] [main] [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=collectionApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/CollectionApplication.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=infoManageApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/InfoManageApplication.class]]
+11:25:03.615 [INFO ] [main] [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=infoManageApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/InfoManageApplication.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=miningAnalysisApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/MiningAnalysisApplication.class]]
+11:25:03.616 [INFO ] [main] [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=miningAnalysisApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/MiningAnalysisApplication.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=visualShowApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/awaken/vs/VisualShowApplication.class]]
+11:25:03.617 [INFO ] [main] [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=visualShowApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in class path resource [com/yirong/awaken/vs/VisualShowApplication.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=awakenWebApplication; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=close; defined in com.yirong.AwakenWebApplication]
+11:25:05.005 [INFO ] [main] [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker] - Bean 'interfaceApplication' of type [com.yirong.InterfaceApplication$$EnhancerBySpringCGLIB$$7edd7b2b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+11:25:06.837 [INFO ] [main] [com.alibaba.druid.pool.DruidDataSource] - {dataSource-1} inited
+11:25:07.145 [INFO ] [main] [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean] - Building JPA container EntityManagerFactory for persistence unit 'default'
+11:25:07.165 [INFO ] [main] [org.hibernate.jpa.internal.util.LogHelper] - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+11:25:07.254 [INFO ] [main] [org.hibernate.Version] - HHH000412: Hibernate Core {5.0.12.Final}
+11:25:07.257 [INFO ] [main] [org.hibernate.cfg.Environment] - HHH000206: hibernate.properties not found
+11:25:07.259 [INFO ] [main] [org.hibernate.cfg.Environment] - HHH000021: Bytecode provider name : javassist
+11:25:07.320 [INFO ] [main] [org.hibernate.annotations.common.Version] - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+11:25:07.489 [INFO ] [main] [org.hibernate.dialect.Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+11:25:07.911 [WARN ] [main] [org.hibernate.id.UUIDHexGenerator] - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+11:25:08.708 [INFO ] [main] [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+11:25:08.968 [INFO ] [main] [org.eclipse.jetty.util.log] - Logging initialized @19152ms to org.eclipse.jetty.util.log.Slf4jLog
+11:25:09.078 [INFO ] [main] [org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainerFactory] - Server initialized with port: 8280
+11:25:09.080 [INFO ] [main] [org.eclipse.jetty.server.Server] - jetty-9.4.4.v20170414
+11:25:09.129 [INFO ] [main] [org.eclipse.jetty.server.session] - DefaultSessionIdManager workerName=node0
+11:25:09.130 [INFO ] [main] [org.eclipse.jetty.server.session] - No SessionScavenger set, using defaults
+11:25:09.133 [INFO ] [main] [org.eclipse.jetty.server.session] - Scavenging every 660000ms
+11:25:09.141 [INFO ] [main] [org.eclipse.jetty.server.handler.ContextHandler.application] - Initializing Spring embedded WebApplicationContext
+11:25:09.144 [INFO ] [main] [org.springframework.web.context.ContextLoader] - Root WebApplicationContext: initialization completed in 17852 ms
+11:25:09.348 [INFO ] [main] [org.springframework.boot.web.servlet.ServletRegistrationBean] - Mapping servlet: 'dispatcherServlet' to [/]
+11:25:09.352 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'characterEncodingFilter' to: [/*]
+11:25:09.355 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+11:25:09.355 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+11:25:09.355 [INFO ] [main] [org.springframework.boot.web.servlet.FilterRegistrationBean] - Mapping filter: 'requestContextFilter' to: [/*]
+11:25:09.355 [INFO ] [main] [org.eclipse.jetty.server.handler.ContextHandler] - Started o.s.b.c.e.j.JettyEmbeddedWebAppContext@1c55ef24{/,[file:///C:/Users/lijp/AppData/Local/Temp/jetty-docbase.632137160928325457.8280/],AVAILABLE}
+11:25:09.356 [INFO ] [main] [org.eclipse.jetty.server.Server] - Started @19540ms
+11:25:11.212 [WARN ] [main] [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor] - Autowired annotation is not supported on static fields: private static com.yirong.awaken.ifs.service.InterfaceQueryService com.yirong.awaken.ifs.util.DBPool.interfaceQueryService
+11:25:11.300 [INFO ] [main] [org.hibernate.hql.internal.QueryTranslatorFactoryInitiator] - HHH000397: Using ASTQueryTranslatorFactory
+11:25:40.920 [WARN ] [main] [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor] - Autowired annotation is not supported on static fields: private static java.lang.String com.yirong.awaken.vs.VisualShowApplication.EsHost
+11:25:40.920 [WARN ] [main] [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor] - Autowired annotation is not supported on static fields: private static int com.yirong.awaken.vs.VisualShowApplication.EsPort
+11:25:40.921 [WARN ] [main] [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor] - Autowired annotation is not supported on static fields: private static java.lang.String com.yirong.awaken.vs.VisualShowApplication.EsClusterName
+11:25:41.340 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7fc4780b: startup date [Thu Oct 26 11:24:51 CST 2017]; root of context hierarchy
+11:25:41.448 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/file/downFile],methods=[POST]}" onto public java.lang.String com.yirong.awaken.akweb.controller.FileConttroller.downFile(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+11:25:41.453 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/file/upFile],methods=[POST]}" onto public java.lang.String com.yirong.awaken.akweb.controller.FileConttroller.upFile(java.lang.String,java.lang.String,org.springframework.web.multipart.MultipartFile,java.lang.String,javax.servlet.http.HttpServletRequest,java.lang.Integer,javax.servlet.http.HttpServletResponse)
+11:25:41.458 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/interfaceApi/getField],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ifs.api.InterfaceApi.getField(java.lang.String)
+11:25:41.458 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/interfaceApi/getData],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ifs.api.InterfaceApi.getData(java.lang.String)
+11:25:41.459 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/interfaceApi/getCatalog],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ifs.api.InterfaceApi.getCatalog(java.lang.String)
+11:25:41.462 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/unsInterfaceApi/downFile],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ifs.api.UnsInterfaceApi.downFile(java.lang.String,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+11:25:41.463 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/unsInterfaceApi/getFiles],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ifs.api.UnsInterfaceApi.getFiles(java.lang.String)
+11:25:41.464 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/updateDBPoolApi/updateDBPool],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ifs.api.UpdateDBPoolApi.updateDBPool(java.lang.String)
+11:25:41.473 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/update],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.update(java.lang.String)
+11:25:41.473 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.delete(java.lang.String)
+11:25:41.473 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/save],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.save(java.lang.String)
+11:25:41.474 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/getTree],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.getTree(java.lang.String)
+11:25:41.474 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.queryList(java.lang.String)
+11:25:41.474 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/getByCode],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.getByCode(java.lang.String)
+11:25:41.475 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/getCodeName],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.getCodeName(java.lang.String)
+11:25:41.475 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/getCodeList],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.getCodeList(java.lang.String)
+11:25:41.475 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysDictionaryApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysDictionaryApi.getById(java.lang.String)
+11:25:41.477 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysParameterApi/update],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysParameterApi.update(java.lang.String)
+11:25:41.477 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysParameterApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysParameterApi.delete(java.lang.String)
+11:25:41.478 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysParameterApi/save],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysParameterApi.save(java.lang.String)
+11:25:41.478 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysParameterApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysParameterApi.queryList(java.lang.String)
+11:25:41.478 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/sysParameterApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.commons.sys.api.SysParameterApi.getById(java.lang.String)
+11:25:41.479 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/health],methods=[GET]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.yirong.microservices.client.health.HealthController.health()
+11:25:41.480 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/isCheck.do],methods=[POST]}" onto public java.lang.String com.yirong.commons.web.controller.BaseController.isCheck(javax.servlet.http.HttpServletRequest)
+11:25:41.480 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/forward.do],methods=[GET]}" onto public java.lang.String com.yirong.commons.web.controller.BaseController.forward(java.lang.String,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+11:25:41.480 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/login.do],methods=[GET]}" onto public void com.yirong.commons.web.controller.BaseController.login(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+11:25:41.481 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/msService],methods=[POST]}" onto public java.lang.String com.yirong.commons.web.controller.BaseController.msService(java.lang.String,java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+11:25:41.488 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/baseRest/getLoginUser],methods=[POST]}" onto public java.lang.String com.yirong.commons.web.controller.BaseRestController.getLoginUser(javax.servlet.http.HttpServletRequest)
+11:25:41.488 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/baseRest/loginSubmit],methods=[POST]}" onto public java.lang.String com.yirong.commons.web.controller.BaseRestController.loginSubmit(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse,java.lang.String)
+11:25:41.488 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/baseRest/loginout],methods=[POST]}" onto public java.lang.String com.yirong.commons.web.controller.BaseRestController.loginout(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+11:25:41.488 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/baseRest/getSessionCount],methods=[POST]}" onto public java.lang.String com.yirong.commons.web.controller.BaseRestController.getSessionCount(javax.servlet.http.HttpServletRequest)
+11:25:41.489 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/baseRest/getMenu],methods=[POST]}" onto public java.lang.String com.yirong.commons.web.controller.BaseRestController.getMenu(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String)
+11:25:41.495 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogApi.get(java.lang.String)
+11:25:41.496 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogApi.update(java.lang.String)
+11:25:41.496 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogApi.delete(java.lang.String)
+11:25:41.496 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogApi.list(java.lang.String)
+11:25:41.496 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogApi.save(java.lang.String)
+11:25:41.496 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogApi/getType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogApi.getType(java.lang.String)
+11:25:41.498 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogApi.tree(java.lang.String)
+11:25:41.499 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogApi/treeVs],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogApi.treeVs(java.lang.String)
+11:25:41.499 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogApi/treeType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogApi.treeType(java.lang.String)
+11:25:41.499 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogApi/saveType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogApi.saveType(java.lang.String)
+11:25:41.501 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogApi/updateType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogApi.updateType(java.lang.String)
+11:25:41.502 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogApi/deleteType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogApi.deleteType(java.lang.String)
+11:25:41.503 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogApi/treeMa],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogApi.treeMa()
+11:25:41.507 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogDataApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogDataApi.update(java.lang.String)
+11:25:41.507 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogDataApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogDataApi.list(java.lang.String)
+11:25:41.508 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogFlowApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogFlowApi.update(java.lang.String)
+11:25:41.509 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogFlowApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogFlowApi.list(java.lang.String)
+11:25:41.510 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogObjectApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogObjectApi.update(java.lang.String)
+11:25:41.510 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogObjectApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogObjectApi.list(java.lang.String)
+11:25:41.510 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmCatalogObjectApi/queryDmCatalogObjectByObjectId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmCatalogObjectApi.queryDmCatalogObjectByObjectId(java.lang.String)
+11:25:41.510 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmEsFieldApi/listArrayByCatalogId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmEsFieldApi.listArrayByCatalogId(java.lang.String)
+11:25:41.510 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmEsFieldApi/queryDmEsFieldAndEsTable],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmEsFieldApi.queryDmEsFieldAndEsTable(java.lang.String)
+11:25:41.510 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmEsFieldApi/listByCatalogId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmEsFieldApi.listByCatalogId(java.lang.String)
+11:25:41.511 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmEsTableApi/getByCatalogId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmEsTableApi.getByCatalogId(java.lang.String)
+11:25:41.511 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmReleaseApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmReleaseApi.get(java.lang.String)
+11:25:41.511 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmReleaseApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmReleaseApi.list(java.lang.String)
+11:25:41.512 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmReleaseApi/release],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmReleaseApi.release(java.lang.String)
+11:25:41.512 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmReleaseApi/publish],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmReleaseApi.publish(java.lang.String)
+11:25:41.513 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmStructDataApi/getField],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmStructDataApi.getField(java.lang.String)
+11:25:41.513 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmStructDataApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmStructDataApi.list(java.lang.String)
+11:25:41.513 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/DmUnStructDataApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.DmUnStructDataApi.list(java.lang.String)
+11:25:41.515 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmContrastApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmContrastApi.get(java.lang.String)
+11:25:41.516 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmContrastApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmContrastApi.update(java.lang.String)
+11:25:41.516 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmContrastApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmContrastApi.delete(java.lang.String)
+11:25:41.516 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmContrastApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmContrastApi.list(java.lang.String)
+11:25:41.516 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmContrastApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmContrastApi.save(java.lang.String)
+11:25:41.516 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmContrastApi/getType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmContrastApi.getType(java.lang.String)
+11:25:41.516 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmContrastApi/treeType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmContrastApi.treeType(java.lang.String)
+11:25:41.516 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmContrastApi/saveType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmContrastApi.saveType(java.lang.String)
+11:25:41.517 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmContrastApi/updateType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmContrastApi.updateType(java.lang.String)
+11:25:41.524 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmContrastApi/deleteType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmContrastApi.deleteType(java.lang.String)
+11:25:41.524 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmDataApi/getField],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmDataApi.getField(java.lang.String)
+11:25:41.525 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmDataApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmDataApi.list(java.lang.String)
+11:25:41.525 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmElementApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmElementApi.get(java.lang.String)
+11:25:41.525 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmElementApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmElementApi.update(java.lang.String)
+11:25:41.525 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmElementApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmElementApi.list(java.lang.String)
+11:25:41.525 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmElementApi/getByObjectId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmElementApi.getByObjectId(java.lang.String)
+11:25:41.526 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmEsFieldApi/listByTaskLogId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmEsFieldApi.listByCatalogId(java.lang.String)
+11:25:41.526 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmFlowApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmFlowApi.get(java.lang.String)
+11:25:41.526 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmFlowApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmFlowApi.update(java.lang.String)
+11:25:41.526 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmFlowApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmFlowApi.delete(java.lang.String)
+11:25:41.527 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmFlowApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmFlowApi.list(java.lang.String)
+11:25:41.527 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmFlowApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmFlowApi.save(java.lang.String)
+11:25:41.527 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmFlowApi/able],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmFlowApi.able(java.lang.String)
+11:25:41.527 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmRuleApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmRuleApi.tree(java.lang.String)
+11:25:41.528 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmStandardApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmStandardApi.get(java.lang.String)
+11:25:41.528 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmStandardApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmStandardApi.update(java.lang.String)
+11:25:41.532 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmStandardApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmStandardApi.delete(java.lang.String)
+11:25:41.532 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmStandardApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmStandardApi.list(java.lang.String)
+11:25:41.533 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmStandardApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmStandardApi.save(java.lang.String)
+11:25:41.533 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmStandardApi/getType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmStandardApi.getType(java.lang.String)
+11:25:41.533 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmStandardApi/treeType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmStandardApi.treeType(java.lang.String)
+11:25:41.533 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmStandardApi/saveType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmStandardApi.saveType(java.lang.String)
+11:25:41.533 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmStandardApi/updateType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmStandardApi.updateType(java.lang.String)
+11:25:41.533 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmStandardApi/deleteType],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmStandardApi.deleteType(java.lang.String)
+11:25:41.535 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmTaskApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmTaskApi.list(java.lang.String)
+11:25:41.536 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmTaskApi/runTaskByObjectId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmTaskApi.runTaskByObjectId(java.lang.String)
+11:25:41.536 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmTaskApi/runTaskById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmTaskApi.runTaskById(java.lang.String)
+11:25:41.536 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmTaskApi/doRe],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmTaskApi.doRe(java.lang.String)
+11:25:41.537 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmTaskLogApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmTaskLogApi.list(java.lang.String)
+11:25:41.537 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmTaskLogApi/listData],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmTaskLogApi.listData(java.lang.String)
+11:25:41.537 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmTaskLogApi/getTableCount],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmTaskLogApi.getTableCount(java.lang.String)
+11:25:41.537 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/PmTaskLogApi/listTable],methods=[POST]}" onto public java.lang.String com.yirong.awaken.pm.api.PmTaskLogApi.listTable(java.lang.String)
+11:25:41.541 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDatabaseApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDatabaseApi.get(java.lang.String)
+11:25:41.541 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDatabaseApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDatabaseApi.update(java.lang.String)
+11:25:41.542 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDatabaseApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDatabaseApi.delete(java.lang.String)
+11:25:41.542 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDatabaseApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDatabaseApi.list(java.lang.String)
+11:25:41.542 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDatabaseApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDatabaseApi.save(java.lang.String)
+11:25:41.542 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDatabaseApi/getCtDatabase],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDatabaseApi.getCtDatabase()
+11:25:41.542 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDatabaseApi/getColBySQl],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDatabaseApi.getColBySQl(java.lang.String)
+11:25:41.542 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDatabaseApi/getDB],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDatabaseApi.getDB(java.lang.String)
+11:25:41.543 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDbDataApi/getField],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDbData.getField(java.lang.String)
+11:25:41.543 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDbMetadataApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDbMetadataApi.get(java.lang.String)
+11:25:41.544 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDbMetadataApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDbMetadataApi.update(java.lang.String)
+11:25:41.544 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDbMetadataApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDbMetadataApi.delete(java.lang.String)
+11:25:41.544 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDbMetadataApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDbMetadataApi.list(java.lang.String)
+11:25:41.545 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDbMetadataApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDbMetadataApi.save(java.lang.String)
+11:25:41.546 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDbMetadataFieldApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDbMetadataFieldApi.list(java.lang.String)
+11:25:41.546 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtDbMetadataFieldApi/listByDmid],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtDbMetadataFieldApi.listByDmid(java.lang.String)
+11:25:41.548 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtEsDataApi/getField],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtEsDataApi.getField(java.lang.String)
+11:25:41.548 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtEsDataApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtEsDataApi.list(java.lang.String)
+11:25:41.550 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtEsFieldApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtEsFieldApi.list(java.lang.String)
+11:25:41.551 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtEsFieldApi/listByTaskLogId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtEsFieldApi.listByTaskLogId(java.lang.String)
+11:25:41.551 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtEsFieldApi/listByObjectId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtEsFieldApi.listByObjectId(java.lang.String)
+11:25:41.552 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtEsFieldApi/listByManualId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtEsFieldApi.listByManualId(java.lang.String)
+11:25:41.552 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtEsTableApi/getByObjectId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtEsTableApi.getByObjectId(java.lang.String)
+11:25:41.555 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtEsTableApi/doCtEsToDmEs],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtEsTableApi.doCtEsToDmEs(java.lang.String)
+11:25:41.556 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtManualDataApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtManualDataApi.get(java.lang.String)
+11:25:41.556 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtManualDataApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtManualDataApi.update(java.lang.String)
+11:25:41.556 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtManualDataApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtManualDataApi.delete(java.lang.String)
+11:25:41.556 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtManualDataApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtManualDataApi.list(java.lang.String)
+11:25:41.556 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtManualDataApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtManualDataApi.save(java.lang.String)
+11:25:41.556 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtManualDataApi/listData],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtManualDataApi.listData(java.lang.String)
+11:25:41.556 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtManualDataApi/upFile],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtManualDataApi.upFile(java.lang.String,org.springframework.web.multipart.MultipartFile)
+11:25:41.557 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtManualDataDetailApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtManualDataDetailApi.delete(java.lang.String)
+11:25:41.560 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtManualDataDetailApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtManualDataDetailApi.list(java.lang.String)
+11:25:41.560 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtManualDataDetailApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtManualDataDetailApi.save(java.lang.String)
+11:25:41.560 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtManualDataDetailApi/getSuffix],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtManualDataDetailApi.getSuffix(java.lang.String)
+11:25:41.560 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtManualDataDetailApi/uploadFile/{fileId}],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtManualDataDetailApi.uploadFile(javax.servlet.http.HttpServletRequest,java.lang.String)
+11:25:41.561 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtTaskApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtTaskApi.get(java.lang.String)
+11:25:41.561 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtTaskApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtTaskApi.update(java.lang.String)
+11:25:41.561 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtTaskApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtTaskApi.delete(java.lang.String)
+11:25:41.561 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtTaskApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtTaskApi.list(java.lang.String)
+11:25:41.561 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtTaskApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtTaskApi.save(java.lang.String)
+11:25:41.562 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtTaskApi/runTask],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtTaskApi.runTask(java.lang.String)
+11:25:41.562 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtTaskApi/addLoad],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtTaskApi.addLoad(java.lang.String)
+11:25:41.563 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtTaskApi/stopTask],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtTaskApi.stopTask(java.lang.String)
+11:25:41.563 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtTaskLogApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtTaskLogApi.get(java.lang.String)
+11:25:41.563 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtTaskLogApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtTaskLogApi.list(java.lang.String)
+11:25:41.563 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtTaskLogApi/listData],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtTaskLogApi.listData(java.lang.String)
+11:25:41.564 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWebsiteApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWebsiteApi.delete(java.lang.String)
+11:25:41.569 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWebsiteApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWebsiteApi.list(java.lang.String)
+11:25:41.569 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWebsiteApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWebsiteApi.save(java.lang.String)
+11:25:41.570 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWebsiteGroupApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWebsiteGroupApi.get(java.lang.String)
+11:25:41.570 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWebsiteGroupApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWebsiteGroupApi.update(java.lang.String)
+11:25:41.570 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWebsiteGroupApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWebsiteGroupApi.delete(java.lang.String)
+11:25:41.570 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWebsiteGroupApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWebsiteGroupApi.list(java.lang.String)
+11:25:41.570 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWebsiteGroupApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWebsiteGroupApi.save(java.lang.String)
+11:25:41.570 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWebsiteGroupApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWebsiteGroupApi.tree(java.lang.String)
+11:25:41.571 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWebsiteGroupApi/getSpidperapp],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWebsiteGroupApi.getSpidperapp()
+11:25:41.571 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWebsiteGroupApi/getCtWebsiteGroup],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWebsiteGroupApi.getCtWebsiteGroup(java.lang.String)
+11:25:41.571 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWsDataApi/getField],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWsDataApi.getField(java.lang.String)
+11:25:41.571 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWsDataApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWsDataApi.list(java.lang.String)
+11:25:41.571 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWsMetadataApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWsMetadataApi.get(java.lang.String)
+11:25:41.572 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWsMetadataApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWsMetadataApi.update(java.lang.String)
+11:25:41.572 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWsMetadataApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWsMetadataApi.delete(java.lang.String)
+11:25:41.572 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWsMetadataApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWsMetadataApi.list(java.lang.String)
+11:25:41.572 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/CtWsMetadataApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.CtWsMetadataApi.save(java.lang.String)
+11:25:41.573 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/VeCtObjectApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.VeCtObjectApi.list(java.lang.String)
+11:25:41.573 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/VeCtObjectApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ct.api.VeCtObjectApi.tree(java.lang.String)
+11:25:41.574 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imAddressListCfgApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImAddressListCfgApi.update(java.lang.String)
+11:25:41.574 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imAddressListCfgApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImAddressListCfgApi.delete(java.lang.String)
+11:25:41.574 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imAddressListCfgApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImAddressListCfgApi.save(java.lang.String)
+11:25:41.574 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imAddressListCfgApi/onOrOff],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImAddressListCfgApi.onOrOff(java.lang.String)
+11:25:41.574 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imAddressListCfgApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImAddressListCfgApi.queryList(java.lang.String)
+11:25:41.575 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imAddressListCfgApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImAddressListCfgApi.getById(java.lang.String)
+11:25:41.575 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imAddressListGroupApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImAddressListGroupApi.update(java.lang.String)
+11:25:41.575 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imAddressListGroupApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImAddressListGroupApi.delete(java.lang.String)
+11:25:41.575 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imAddressListGroupApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImAddressListGroupApi.save(java.lang.String)
+11:25:41.575 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imAddressListGroupApi/getTree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImAddressListGroupApi.getTree(java.lang.String)
+11:25:41.575 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imAddressListGroupApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImAddressListGroupApi.getById(java.lang.String)
+11:25:41.576 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCallServiceCfgApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCallServiceCfgApi.update(java.lang.String)
+11:25:41.576 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCallServiceCfgApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCallServiceCfgApi.delete(java.lang.String)
+11:25:41.576 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCallServiceCfgApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCallServiceCfgApi.save(java.lang.String)
+11:25:41.576 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCallServiceCfgApi/onOrOff],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCallServiceCfgApi.onOrOff(java.lang.String)
+11:25:41.579 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCallServiceCfgApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCallServiceCfgApi.queryList(java.lang.String)
+11:25:41.579 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCallServiceCfgApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCallServiceCfgApi.getById(java.lang.String)
+11:25:41.580 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.update(java.lang.String)
+11:25:41.581 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.delete(java.lang.String)
+11:25:41.581 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.save(java.lang.String)
+11:25:41.581 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/doRelease],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.doRelease(java.lang.String)
+11:25:41.581 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/queryData],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.queryData(java.lang.String)
+11:25:41.581 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/queryExImList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.queryExImList(java.lang.String)
+11:25:41.581 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/getEsCatalogList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.getEsCatalogList()
+11:25:41.581 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/getEsEntityByid],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.getEsEntityByid(java.lang.String)
+11:25:41.581 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/queryDataById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.queryDataById(java.lang.String)
+11:25:41.581 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/deleteData],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.deleteData(java.lang.String)
+11:25:41.582 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/updateData],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.updateData(java.lang.String)
+11:25:41.582 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/queryFile],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.queryFile(java.lang.String)
+11:25:41.582 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/queryInfoList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.queryInfoList(java.lang.String)
+11:25:41.582 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.queryList(java.lang.String)
+11:25:41.582 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/downFile],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.downFile(java.lang.String,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+11:25:41.582 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.getById(java.lang.String)
+11:25:41.582 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogApi/esTextSearch],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogApi.esTextSearch(java.lang.String)
+11:25:41.584 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogDatabaseApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogDatabaseApi.update(java.lang.String)
+11:25:41.584 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogDatabaseApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogDatabaseApi.getById(java.lang.String)
+11:25:41.585 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogFieldApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogFieldApi.update(java.lang.String)
+11:25:41.585 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogFieldApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogFieldApi.delete(java.lang.String)
+11:25:41.585 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogFieldApi/getByClId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogFieldApi.getByClId(java.lang.String)
+11:25:41.586 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogFieldApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogFieldApi.getById(java.lang.String)
+11:25:41.586 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogSubscribeApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogSubscribeApi.get(java.lang.String)
+11:25:41.586 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogSubscribeApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogSubscribeApi.delete(java.lang.String)
+11:25:41.586 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogSubscribeApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogSubscribeApi.save(java.lang.String)
+11:25:41.587 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogTableApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogTableApi.update(java.lang.String)
+11:25:41.587 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCatalogTableApi/getByClId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCatalogTableApi.getByClId(java.lang.String)
+11:25:41.587 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCountServiceApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCountServiceApi.get(java.lang.String)
+11:25:41.588 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCountServiceApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCountServiceApi.update(java.lang.String)
+11:25:41.588 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCountServiceApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCountServiceApi.delete(java.lang.String)
+11:25:41.588 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCountServiceApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCountServiceApi.list(java.lang.String)
+11:25:41.588 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCountServiceApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCountServiceApi.save(java.lang.String)
+11:25:41.589 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCountServiceLogApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCountServiceLogApi.get(java.lang.String)
+11:25:41.589 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCountServiceLogApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCountServiceLogApi.update(java.lang.String)
+11:25:41.589 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCountServiceLogApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCountServiceLogApi.delete(java.lang.String)
+11:25:41.589 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCountServiceLogApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCountServiceLogApi.list(java.lang.String)
+11:25:41.589 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imCountServiceLogApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImCountServiceLogApi.save(java.lang.String)
+11:25:41.589 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imInfoQueryApi/getEntityByid],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImInfoQueryApi.getEntityByid(java.lang.String)
+11:25:41.589 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imInfoQueryApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImInfoQueryApi.queryList(java.lang.String)
+11:25:41.590 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imInfoStatApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImInfoStatApi.queryList(java.lang.String)
+11:25:41.590 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imIntegratetAppCfgApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImIntegratetAppCfgApi.update(java.lang.String)
+11:25:41.590 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imIntegratetAppCfgApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImIntegratetAppCfgApi.delete(java.lang.String)
+11:25:41.590 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imIntegratetAppCfgApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImIntegratetAppCfgApi.save(java.lang.String)
+11:25:41.590 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imIntegratetAppCfgApi/onOrOff],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImIntegratetAppCfgApi.onOrOff(java.lang.String)
+11:25:41.591 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imIntegratetAppCfgApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImIntegratetAppCfgApi.queryList(java.lang.String)
+11:25:41.591 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imIntegratetAppCfgApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImIntegratetAppCfgApi.getById(java.lang.String)
+11:25:41.592 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imJudgeCatalogApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImJudgeCatalogApi.update(java.lang.String)
+11:25:41.592 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imJudgeCatalogApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImJudgeCatalogApi.delete(java.lang.String)
+11:25:41.592 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imJudgeCatalogApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImJudgeCatalogApi.save(java.lang.String)
+11:25:41.592 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imJudgeCatalogApi/getTree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImJudgeCatalogApi.getTree(java.lang.String)
+11:25:41.592 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imJudgeCatalogApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImJudgeCatalogApi.getById(java.lang.String)
+11:25:41.593 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imJudgeDataApi/getFields],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImJudgeDataApi.getFields(java.lang.String)
+11:25:41.593 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imJudgeDataApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImJudgeDataApi.delete(java.lang.String)
+11:25:41.593 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imJudgeDataApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImJudgeDataApi.save(java.lang.String)
+11:25:41.593 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imJudgeDataApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImJudgeDataApi.queryList(java.lang.String)
+11:25:41.594 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imPushServiceCfgApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImPushServiceCfgApi.update(java.lang.String)
+11:25:41.594 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imPushServiceCfgApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImPushServiceCfgApi.delete(java.lang.String)
+11:25:41.594 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imPushServiceCfgApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImPushServiceCfgApi.save(java.lang.String)
+11:25:41.594 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imPushServiceCfgApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImPushServiceCfgApi.queryList(java.lang.String)
+11:25:41.594 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imPushServiceCfgApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImPushServiceCfgApi.getById(java.lang.String)
+11:25:41.594 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imPushServiceLogApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImPushServiceLogApi.queryList(java.lang.String)
+11:25:41.594 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imServiceSubscribeApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImServiceSubscribeApi.delete(java.lang.String)
+11:25:41.598 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imServiceSubscribeApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImServiceSubscribeApi.save(java.lang.String)
+11:25:41.598 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imServiceSubscribeApi/getTree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImServiceSubscribeApi.getTree(java.lang.String)
+11:25:41.598 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imServiceSubscribeApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImServiceSubscribeApi.queryList(java.lang.String)
+11:25:41.599 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imSpLibraryApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImSpLibraryApi.update(java.lang.String)
+11:25:41.599 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imSpLibraryApi/getFields],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImSpLibraryApi.getFields(java.lang.String)
+11:25:41.599 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imSpLibraryApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImSpLibraryApi.delete(java.lang.String)
+11:25:41.599 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imSpLibraryApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImSpLibraryApi.save(java.lang.String)
+11:25:41.599 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imSpLibraryApi/getSpLibray],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImSpLibraryApi.getSpLibray(java.lang.String)
+11:25:41.599 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imSpLibraryApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImSpLibraryApi.queryList(java.lang.String)
+11:25:41.599 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/imSpLibraryApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.im.api.ImSpLibraryApi.getById(java.lang.String)
+11:25:41.600 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaAlgorithmApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaAlgorithmApi.tree(java.lang.String)
+11:25:41.600 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.get(java.lang.String)
+11:25:41.601 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.update(java.lang.String)
+11:25:41.601 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.delete(java.lang.String)
+11:25:41.601 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.list(java.lang.String)
+11:25:41.601 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.save(java.lang.String)
+11:25:41.601 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.tree(java.lang.String)
+11:25:41.601 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaDatabaseApi/getByFlowId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaDatabaseApi.getByFlowId(java.lang.String)
+11:25:41.602 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaElementApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaElementApi.get(java.lang.String)
+11:25:41.602 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaElementApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaElementApi.update(java.lang.String)
+11:25:41.602 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaElementApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaElementApi.list(java.lang.String)
+11:25:41.602 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaElementApi/getByObjectId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaElementApi.getByObjectId(java.lang.String)
+11:25:41.605 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFieldApi/getField],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFieldApi.getField(java.lang.String)
+11:25:41.605 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFieldApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFieldApi.list(java.lang.String)
+11:25:41.606 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFieldApi/getFieldView],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFieldApi.getFieldForView(java.lang.String)
+11:25:41.607 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/get],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.get(java.lang.String)
+11:25:41.607 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.update(java.lang.String)
+11:25:41.607 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.delete(java.lang.String)
+11:25:41.607 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.list(java.lang.String)
+11:25:41.607 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.save(java.lang.String)
+11:25:41.607 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.tree(java.lang.String)
+11:25:41.607 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/getReleaseFlow],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.getReleaseFlow()
+11:25:41.607 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaFlowApi/run],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaFlowApi.runFlow(java.lang.String)
+11:25:41.608 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaReleaseApi/list],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaReleaseApi.list(java.lang.String)
+11:25:41.608 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaReleaseApi/release],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaReleaseApi.release(java.lang.String)
+11:25:41.608 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaReleaseApi/publish],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaReleaseApi.publish(java.lang.String)
+11:25:41.611 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/MaRuleApi/tree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.ma.api.MaRuleApi.tree(java.lang.String)
+11:25:41.612 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsAtlasApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsAtlasApi.update(java.lang.String)
+11:25:41.612 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsAtlasApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsAtlasApi.delete(java.lang.String)
+11:25:41.612 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsAtlasApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsAtlasApi.save(java.lang.String)
+11:25:41.612 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsAtlasApi/queryAll],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsAtlasApi.queryList(java.lang.String)
+11:25:41.612 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsAtlasApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsAtlasApi.getById(java.lang.String)
+11:25:41.613 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsAtlasModuleApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsAtlasModuleApi.update(java.lang.String)
+11:25:41.613 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsAtlasModuleApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsAtlasModuleApi.delete(java.lang.String)
+11:25:41.613 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsAtlasModuleApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsAtlasModuleApi.save(java.lang.String)
+11:25:41.613 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsAtlasModuleApi/queryByAtlasId],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsAtlasModuleApi.queryByAtlasId(java.lang.String)
+11:25:41.613 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsAtlasModuleApi/deleteRows],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsAtlasModuleApi.deleteRows(java.lang.String)
+11:25:41.613 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsAtlasModuleApi/updateAll],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsAtlasModuleApi.updateAll(java.lang.String)
+11:25:41.613 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsAtlasModuleApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsAtlasModuleApi.getById(java.lang.String)
+11:25:41.614 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsChartApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsChartApi.update(java.lang.String)
+11:25:41.614 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsChartApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsChartApi.delete(java.lang.String)
+11:25:41.614 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsChartApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsChartApi.save(java.lang.String)
+11:25:41.614 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsChartApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsChartApi.queryList(java.lang.String)
+11:25:41.615 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsChartCatalogApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsChartCatalogApi.update(java.lang.String)
+11:25:41.615 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsChartCatalogApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsChartCatalogApi.delete(java.lang.String)
+11:25:41.615 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsChartCatalogApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsChartCatalogApi.save(java.lang.String)
+11:25:41.615 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsChartCatalogApi/queryListTree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsChartCatalogApi.queryListTree(java.lang.String)
+11:25:41.615 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsChartCatalogApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsChartCatalogApi.getById(java.lang.String)
+11:25:41.615 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsCustomDBApi/queryMAData],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsCustomDBApi.queryList(java.lang.String)
+11:25:41.615 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/VsEsApi/queryAll],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsEsApi.queryList(java.lang.String)
+11:25:41.616 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsSubjectApi/update],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsSubjectApi.update(java.lang.String)
+11:25:41.616 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsSubjectApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsSubjectApi.delete(java.lang.String)
+11:25:41.616 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsSubjectApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsSubjectApi.save(java.lang.String)
+11:25:41.616 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsSubjectApi/queryListTree],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsSubjectApi.queryListTree(java.lang.String)
+11:25:41.616 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsSubjectApi/getById],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsSubjectApi.getById(java.lang.String)
+11:25:41.617 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsSubjectAtlasApi/delete],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsSubjectAtlasApi.delete(java.lang.String)
+11:25:41.618 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsSubjectAtlasApi/save],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsSubjectAtlasApi.save(java.lang.String)
+11:25:41.618 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsSubjectAtlasApi/updateRows],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsSubjectAtlasApi.updateRows(java.lang.String)
+11:25:41.620 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/vsSubjectAtlasApi/queryList],methods=[POST]}" onto public java.lang.String com.yirong.awaken.vs.api.VsSubjectAtlasApi.queryList(java.lang.String)
+11:25:41.622 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+11:25:41.622 [INFO ] [main] [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+11:25:41.712 [INFO ] [main] [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping] - Mapped URL path [/templates/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+11:25:41.712 [INFO ] [main] [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping] - Mapped URL path [/false**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+11:25:41.712 [INFO ] [main] [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping] - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+11:25:41.712 [INFO ] [main] [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping] - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+11:25:41.860 [INFO ] [main] [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping] - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+11:25:42.479 [INFO ] [main] [io.searchbox.client.AbstractJestClient] - Setting server pool to a list of 1 servers: [http://localhost:9200]
+11:25:42.481 [INFO ] [main] [io.searchbox.client.JestClientFactory] - Using multi thread/connection supporting pooling connection manager
+11:25:42.625 [INFO ] [main] [io.searchbox.client.JestClientFactory] - Using custom GSON instance
+11:25:42.625 [INFO ] [main] [io.searchbox.client.JestClientFactory] - Node Discovery disabled...
+11:25:42.625 [INFO ] [main] [io.searchbox.client.JestClientFactory] - Idle connection reaping disabled...
+11:25:43.113 [INFO ] [main] [org.springframework.jmx.export.annotation.AnnotationMBeanExporter] - Registering beans for JMX exposure on startup
+11:25:43.118 [INFO ] [main] [org.springframework.jmx.export.annotation.AnnotationMBeanExporter] - Bean with name 'dataSource' has been autodetected for JMX exposure
+11:25:43.154 [INFO ] [main] [org.springframework.jmx.export.annotation.AnnotationMBeanExporter] - Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+11:25:43.178 [INFO ] [main] [org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor] - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+11:25:43.240 [INFO ] [main] [org.eclipse.jetty.server.handler.ContextHandler.application] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+11:25:43.240 [INFO ] [main] [org.springframework.web.servlet.DispatcherServlet] - FrameworkServlet 'dispatcherServlet': initialization started
+11:25:43.294 [INFO ] [main] [org.springframework.web.servlet.DispatcherServlet] - FrameworkServlet 'dispatcherServlet': initialization completed in 54 ms
+11:25:43.915 [INFO ] [main] [org.eclipse.jetty.server.AbstractConnector] - Started ServerConnector@7af232dd{HTTP/1.1,[http/1.1]}{0.0.0.0:8280}
+11:25:43.917 [INFO ] [main] [org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainer] - Jetty started on port(s) 8280 (http/1.1)
+11:25:43.931 [INFO ] [main] [com.yirong.awaken.akweb.listener.AkWebInitServiceRunner] - ==============关联服务启动开始===============
+11:25:46.580 [INFO ] [main] [io.searchbox.client.AbstractJestClient] - Setting server pool to a list of 1 servers: [http://s03.basin.ali:9200]
+11:25:46.580 [INFO ] [main] [io.searchbox.client.JestClientFactory] - Using multi thread/connection supporting pooling connection manager
+11:25:46.583 [INFO ] [main] [io.searchbox.client.JestClientFactory] - Using custom GSON instance
+11:25:46.583 [INFO ] [main] [io.searchbox.client.JestClientFactory] - Node Discovery disabled...
+11:25:46.583 [INFO ] [main] [io.searchbox.client.JestClientFactory] - Idle connection reaping disabled...
+11:25:46.688 [INFO ] [main] [com.mchange.v2.log.MLog] - MLog clients using log4j logging.
+11:25:46.721 [INFO ] [main] [com.mchange.v2.c3p0.C3P0Registry] - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+11:25:46.755 [INFO ] [main] [com.yirong.awaken.akweb.listener.AkWebInitServiceRunner] - ==============关联服务启动结束===============
+11:25:46.760 [INFO ] [main] [com.yirong.AwakenWebApplication] - Started AwakenWebApplication in 56.047 seconds (JVM running for 56.944)
+11:27:26.541 [INFO ] [qtp1157549682-27] [com.yirong.commons.web.controller.BaseRestController] - 获取用户信息成功
+11:27:26.632 [INFO ] [qtp1157549682-33] [com.yirong.commons.web.controller.BaseRestController] - 获取菜单信息
+11:27:28.572 [INFO ] [qtp1157549682-33] [com.yirong.commons.web.controller.BaseRestController] - 获取用户信息成功
+11:27:28.642 [INFO ] [qtp1157549682-32] [com.yirong.commons.web.controller.BaseRestController] - 获取菜单信息
+11:28:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:28:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:30:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:30:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:30:43.332 [INFO ] [qtp1157549682-30] [com.yirong.commons.web.controller.BaseRestController] - 获取用户信息成功
+11:30:43.433 [INFO ] [qtp1157549682-28] [com.yirong.commons.web.controller.BaseRestController] - 获取菜单信息
+11:32:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:32:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:32:54.652 [INFO ] [qtp1157549682-58] [com.yirong.commons.web.controller.BaseRestController] - 获取用户信息成功
+11:32:54.758 [INFO ] [qtp1157549682-30] [com.yirong.commons.web.controller.BaseRestController] - 获取菜单信息
+11:33:56.562 [INFO ] [qtp1157549682-31] [com.yirong.commons.web.controller.BaseRestController] - 获取用户信息成功
+11:33:56.666 [INFO ] [qtp1157549682-58] [com.yirong.commons.web.controller.BaseRestController] - 获取菜单信息
+11:34:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:34:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:36:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:36:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:38:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:38:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:40:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:40:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:42:16.340 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:42:16.340 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:44:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:44:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:46:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:46:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:48:16.340 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:48:16.340 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:50:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:50:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:52:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:52:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:54:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:54:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:56:16.340 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:56:16.340 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+11:58:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+11:58:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+12:00:16.339 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+12:00:16.340 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.453 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.453 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.453 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.453 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.453 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.453 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.453 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.453 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.453 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.453 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.453 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.453 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.454 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.455 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:38:51.456 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:40:16.336 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:40:16.336 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:42:16.336 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:42:16.336 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:44:16.336 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:44:16.336 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:46:16.335 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:46:16.335 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:48:16.335 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:48:16.335 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:50:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:50:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:52:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:52:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:54:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:54:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:56:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:56:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+13:58:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+13:58:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:00:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:00:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:02:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:02:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:04:12.699 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:04:12.699 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:06:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:06:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:08:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:08:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:10:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:10:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:12:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:12:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:14:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:14:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:16:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:16:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:18:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:18:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:20:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:20:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:22:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:22:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:24:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:24:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:26:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:26:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:28:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:28:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:30:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:30:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:32:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:32:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:34:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:34:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:36:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:36:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:38:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:38:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:40:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:40:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:41:08.847 [INFO ] [qtp1157549682-472] [com.yirong.commons.web.controller.BaseRestController] - 获取用户信息成功
+14:41:09.264 [INFO ] [qtp1157549682-31] [com.yirong.commons.web.controller.BaseRestController] - 获取菜单信息
+14:42:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:42:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:42:22.946 [WARN ] [qtp1157549682-473] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaElementUserEntity
+14:44:12.698 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:44:12.698 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:45:31.575 [WARN ] [qtp1157549682-57] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaDatabaseUserEntity
+14:46:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:46:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:48:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:48:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:50:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:50:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:52:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:52:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:54:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:54:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:56:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:56:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+14:58:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+14:58:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:00:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:00:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:02:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:02:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:04:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:04:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:06:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:06:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:08:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:08:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:10:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:10:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:10:24.837 [WARN ] [qtp1157549682-473] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaFlowUserEntity
+15:12:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:12:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:14:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:14:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:16:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:16:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:18:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:18:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:20:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:20:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:22:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:22:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:24:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:24:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:26:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:26:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:28:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:28:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:30:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:30:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:32:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:32:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:32:24.488 [WARN ] [qtp1157549682-473] [net.sf.json.JSONObject] - Tried to assign property page:java.lang.Integer to bean of class com.yirong.awaken.ma.userentity.MaReleaseUserEntity
+15:34:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:34:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:36:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:36:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:38:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:38:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:40:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:40:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:42:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:42:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:44:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:44:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:46:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:46:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:48:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:48:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:50:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:50:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:52:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:52:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:54:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:54:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:56:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:56:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+15:58:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+15:58:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:00:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:00:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:02:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:02:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:04:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:04:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:06:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:06:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:08:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:08:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:10:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:10:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:12:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:12:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:14:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:14:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:16:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:16:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:18:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:18:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:20:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:20:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:22:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:22:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:24:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:24:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:26:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:26:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:28:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:28:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:30:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:30:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:32:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:32:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:34:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:34:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:36:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:36:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:38:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:38:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:40:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:40:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:42:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:42:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:44:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:44:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:46:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:46:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:48:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:48:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:50:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:50:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:52:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:52:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:54:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:54:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:56:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:56:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+16:58:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+16:58:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:00:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:00:12.698 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:02:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:02:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:04:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:04:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:06:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:06:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:08:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:08:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:10:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:10:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:12:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:12:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:14:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:14:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:16:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:16:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:18:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:18:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:20:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:20:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:22:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:22:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:24:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:24:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:26:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:26:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:28:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:28:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:30:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:30:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:32:12.697 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:32:12.698 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:34:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:34:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:36:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:36:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========
+17:38:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务开始运行==========
+17:38:12.696 [INFO ] [pool-5-thread-1] [com.yirong.commons.cache.util.LocalCacheJob] - ==============deleDataService定时任务结束运行==========

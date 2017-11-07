@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div id="errorTipDialog" class="main">
+	<el-dialog title="401" :visible.sync="dialogVisible">
+		<h1>抱歉，你所访问的页面不存在</h1>
+		<p>你要查看的网址可能已被删除或者暂时不可用.</p>
+	</el-dialog>
+</div>
+<script type="text/javascript">
+//获取dialog属性
+var errorDialog = getDialogMergeAttr({
+	el: '#errorTipDialog'
+});
+//生成vue对象
+var errorVue = new Vue(errorDialog);
+</script>

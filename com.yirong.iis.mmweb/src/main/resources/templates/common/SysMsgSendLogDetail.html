@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<link href="/common/css/SysMsgSendLogDetail.css" rel="stylesheet" /> 
+	<script>
+	//初始化头部
+		initHeadConfig();
+	</script>
+    <title>详情</title>
+</head>
+<body>
+   <div id="detail">
+		 <header class="bg-black">
+            <div class="header-logo">
+                <p class="p1">情报信息平台</p>
+                <p class="p2">Intelligence Information Platform</p>
+            </div>
+        </header>
+         <el-row class="container">
+         	<div class="title">
+         		<span>消息详情</span>
+         	</div>
+			<div class="content" id="detailMain">
+         	    <div class="content_title"><span id="title">{{msgTitle}}</span></div>
+ 				<div class="content_laiyuan">
+ 						<span>发送人：<span>{{senderName}}</span></span>
+			        	<span>&nbsp</span>
+			        	<span>发送时间：</span>{{createTime}}<span></span>　　
+			        	<span>&nbsp</span>
+			    </div>
+			    <div class="zhengwen">
+					<div id="contentdiv">
+					</div>
+			    </div>
+         	</div>
+ 
+ 		</el-row>
+    </div>
+
+    <!-- 本页面js -->
+ <script src="/common/js/SysMsgSendLogDetail.js"></script>
+</body>
+</html>

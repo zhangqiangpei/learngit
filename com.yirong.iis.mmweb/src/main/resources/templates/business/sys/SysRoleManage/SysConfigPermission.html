@@ -1,0 +1,39 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.el-dialog__body {
+    padding: 10px 20px;
+    color: #48576a;
+    font-size: 14px;
+}
+
+#permissionTree .el-dialog{
+	top:5% !important;
+	height:85%;
+	overflow:hidden;
+}
+</style>
+<div id="SysPermissionTree" class="main">
+	<el-dialog title="配置权限"  :visible.sync="dialogVisible" id="permissionTree">
+		<template>
+		  <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+		  <el-checkbox-group v-model="checkedMode" @change="handleCheckedModeChange">
+			   <el-checkbox v-for="mode in modeOptions" :label="mode" :key="mode" @change="modeChange">{{mode}}</el-checkbox>
+		  </el-checkbox-group>
+		</template>
+    	<el-tree node-key="id" ref="tree" :data="treeData" :props="treeProps" show-checkbox :expand-on-click-node="false" 
+    		:highlight-current="true" :default-expand-all="true"  id="permission_tree" style="height:100%;overflow:auto;"
+    		:default-checked-keys="checkedList"></el-tree>
+     
+            <span slot="footer" class="dialog-footer"  >
+			    <el-button @click="dialogVisible = false" size="small">取 消</el-button>
+			    <el-button type="primary" @click="treeSubmit" size="small">确 定</el-button>
+			  </span>
+    </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/sys/SysRoleManage/js/SysConfigPermission.js"></script>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>登录日志</title>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+        <el-form :inline="true"
+                  :model="tableSearchModel"
+                  ref="tableSearchModel">
+           	 <el-row>
+           	   <el-form-item label="" prop="userName">
+                   <el-input v-model="tableSearchModel.userName" placeholder="请输入用户名" size="small"></el-input>
+               </el-form-item>
+  				<el-form-item label="" prop="ip">
+                   <el-input v-model="tableSearchModel.ip" placeholder="请输入ip" size="small"></el-input>
+               </el-form-item>
+        
+         	  <el-form-item label="" prop="isSuccess">
+                    <el-select v-model="tableSearchModel.isSuccess" filterable  placeholder="请选择登陆状态" @change="" size="small" clearable>
+                        <el-option
+					        v-for="item in loginoptions"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                
+                <el-form-item label="" prop="isOnline">
+                    <el-select v-model="tableSearchModel.isOnline" filterable  placeholder="请选择在线状态" @change="" size="small" clearable>
+                        <el-option
+					        v-for="item in onlineoptions"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                
+                
+                <el-form-item>
+                    <el-button type="primary" @click="onSearch" size="small" name="per_sys_ll_show">查 询</el-button>
+                    <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+                </el-form-item>
+            </el-row>
+               
+			</el-form>
+                <el-table :data="tableData"
+                          @sort-change="tableSortChange"
+                          @selection-change="tableChange"
+                          ref="mytable" stripe
+                          border id="tableId" height=100% >
+ 
+                    <el-table-column prop="userName"
+                                     label="用户名" min-width="120" show-overflow-tooltip>
+                    </el-table-column>
+                   
+                   <el-table-column prop="userDisplayName"
+                                     label="中文名"  min-width="120" show-overflow-tooltip>
+                    </el-table-column>
+                   <el-table-column prop="unitName"
+                                     label="所属机构"   min-width="120" show-overflow-tooltip>
+                    </el-table-column>
+           			<el-table-column prop="loginIp"
+                                     label="登录IP"   min-width="120" show-overflow-tooltip>
+                    </el-table-column>
+                    <el-table-column prop="isOnline"
+                                     label="在线状态"  :formatter="onlineFormat" min-width="120" show-overflow-tooltip>
+                    </el-table-column>
+                    
+                     <el-table-column prop="isSuccess"
+                                     label="登陆状态"  :formatter="successFormat" min-width="120" show-overflow-tooltip>
+                    </el-table-column>
+ 
+ 					<el-table-column prop="loginTime" sortable="custom"
+                                     label="登录时间" :formatter="formatDate"
+                                     width="180">
+                    </el-table-column>
+                    
+                    <el-table-column prop="loginOutTime" sortable="custom"
+                                     label="退出时间" :formatter="formatDate"
+                                     width="180">
+                    </el-table-column>
+                   
+                </el-table>
+
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :page-size= "tableSearchModel.pageSize"
+                               :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+            </el-col>
+        </el-row>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/sys/SysLoginLog/js/SysLoginLogMain.js"></script>
+</body>
+</html>

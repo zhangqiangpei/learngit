@@ -1,0 +1,48 @@
+<style>
+#add_org_html .el-dialog__body {
+    padding: 10px 20px;
+    color: #48576a;
+    font-size: 14px;
+}
+
+#add_org_html .el-dialog{
+	top:15% !important;
+	height:70%;
+	overflow:auto;
+}
+
+#add_org_html .el-form-item{
+	float: left;
+}
+</style>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	 <div id="save" class="main" style="overflow:auto;">  
+	    <el-dialog title="消息发送" 
+                   :visible.sync="dialogVisible" id="add_org_html" height=400>
+	    <el-row>
+	    	<div style="width: 100px; text-align: right; font-size: medium; float:left;margin-top:5px;">标题：</div>
+        	<el-input v-model="title" placeholder="请输入标题" size="small" style="width:50%;margin-left:10px;"></el-input>
+        </el-row>
+        <el-row style="margin-top:10px;">
+	    	<div style="width: 100px; text-align: right; font-size: medium; float:left;margin-top:5px;">接收人：</div>
+        	<el-input v-model="receiverName" placeholder="请选择接收人" icon="search" style="width:50%;margin-left:10px;"  
+        		:disabled="true" size="small" :on-icon-click="selectReceiver"></el-input>
+        </el-row>
+	    <el-row style="margin-top:10px;">
+		    <iframe id="keIframe" frameborder=0 width="100%" height=270 marginheight=0 marginwidth=0 scrolling=no src="forward.do?viewPath=business/sys/SysMsgSendLog/SysMsgEditerFrame.html">
+		    </iframe>
+	    </el-row>
+	    <el-row style="margin-top:10px;text-align:center;">
+        	<el-button type="primary" @click="messageSave" size="small" >发送</el-button>
+            <el-button type="default" @click="mainResetInput" size="small">重 置</el-button>
+		</el-row>
+		</el-dialog>
+	 </div>
+	 <script src="/business/sys/SysMsgSendLog/js/SysMsgSendLogSave.js"></script>
+

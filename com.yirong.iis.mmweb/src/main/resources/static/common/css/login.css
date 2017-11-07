@@ -1,0 +1,192 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 1200px;
+    font-family: 'MicrosoftYaHei', '微软雅黑';
+    background: url(img/u0_state0.jpg) center;
+}
+
+.wrap {
+    position: relative;
+    margin: 0 auto;
+    padding: 0 50px;
+    width: 1200px;
+}
+
+.header {
+    position: absolute;
+    padding-top: 30px;
+    width: 1100px;
+    color: #fff;
+    z-index: 1;
+}
+
+    .header .p1 {
+        padding-left: 55px;
+        font-size: 36px;
+        background: url(img/u46.png) no-repeat left center;
+        background-size: 40px;
+    }
+
+    .header .p2 {
+        margin-top: 5px;
+        font-size: 16px;
+    }
+
+    .header .p3 {
+        margin-top: 10px;
+        width: 100px;
+        height: 2px;
+        background-color: #fff;
+    }
+
+    .header .p4 {
+        position: absolute;
+        top: 20px;
+        right: 0;
+    }
+
+        .header .p4 .btnExit {
+            margin-left: 10px;
+        }
+
+            .header .p4 .btnExit:hover {
+                cursor: pointer;
+                color: #009bef;
+            }
+
+
+.main {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+
+.login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 15px;
+    width: 260px;
+    height: 210px;
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    border: 1px solid #009bef;
+    border-radius: 5px;
+}
+
+    .login .face {
+        position: absolute;
+        left: 100px;
+        top: -30px;
+        width: 60px;
+        height: 60px;
+        border-radius: 60px;
+        background: url(img/头像_u46.png) no-repeat;
+        background-size: 60px;
+    }
+
+    .login .p1 {
+        margin-top: 30px;
+    }
+
+    .login .p2 {
+        margin-top: 15px;
+    }
+
+    .login .txt {
+        padding: 5px 10px 5px 35px;
+        width: 230px;
+        color: #333;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+    }
+
+        .login .txt:focus {
+            border: 1px solid #009bef;
+        }
+
+    .login .p1 .txt {
+        background: url(img/icon_search_u52.png) no-repeat 8px center;
+        background-size: 18px;
+    }
+
+    .login .p2 .txt {
+        background: url(img/icon_search_u58.png) no-repeat 8px center;
+        background-size: 18px;
+    }
+
+    .login .p3 {
+        margin-top: 40px;
+        background: #009bef;
+        color: #fff;
+        line-height: 31px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 2px;
+    }
+
+        .login .p3:hover {
+            background-color: #0080c6;
+        }
+
+
+.list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+
+.item {
+    display: inline-block;
+    width: 24.5%;
+    width: 20%;
+    background: url(img/u3.png) no-repeat center top;
+}
+
+    .item:hover {
+        background: url(img/u3_mouseOver.png) no-repeat center top;
+    }
+
+    .item .bg {
+        height: 120px;
+        text-align: center;
+        background: url(img/u5.png) no-repeat center;
+    }
+
+        .item .bg img {
+            margin-top: 35px;
+            width: 50px;
+            height: 50px;
+        }
+
+    .item .title {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #fff;
+    }
+
+
+.footer {
+    position: absolute;
+    bottom: 20px;
+    width: 1100px;
+    text-align: center;
+    font-size: 16px;
+    color: #009BEF;
+}
+
+
+
+.hidden {
+    display: none;
+}
