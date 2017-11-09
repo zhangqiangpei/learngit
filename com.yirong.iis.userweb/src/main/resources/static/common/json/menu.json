@@ -4,97 +4,175 @@
   "data": [
     {
       "id": "1",
-      "name": "专题库管理",
+      "name": "首 页",
       "ico": "el-icon-menu",
-      "url": "",
-      "subs": [
-        {
-          "id": "11",
-          "name": "专题库维护",
-          "url": "business/im/ImSpLibrary/ImSpLibraryMain.html"
-        }
-      ]
+      "url": "index.html"
     },
     {
       "id": "2",
-      "name": "信息处理",
+      "name": "国家",
       "ico": "el-icon-menu",
-      "url": "",
-      "subs": [
+      "url": "country.html",
+      "children": [
         {
           "id": "21",
-          "name": "智能研判",
-          "url": ""
+          "name": "北美洲",
+          "url": "country.html"
         },
         {
           "id": "22",
-          "name": "专家研判",
-          "url": ""
+          "name": "南美洲",
+          "url": "country.html"
+        },
+        {
+          "id": "23",
+          "name": "欧洲",
+          "url": "country.html"
+        },
+	{
+          "id": "24",
+          "name": "非洲",
+          "url": "country.html"
+        },
+	{
+          "id": "25",
+          "name": "亚洲",
+          "url": "country.html"
+        },
+	{
+          "id": "26",
+          "name": "大洋洲",
+          "url": "country.html"
         }
       ]
     },
     {
       "id": "3",
-      "name": "信息检索",
+      "name": "企业",
       "ico": "el-icon-menu",
       "url": "",
-      "subs": [
+      "children": [
         {
           "id": "31",
-          "name": "信息统计",
-          "url": "business/im/ImInfoStat/ImInfoStatMain.html"
-        },
-        {
-          "id": "32",
-          "name": "信息多维查询",
-          "url": "business/im/ImInfoQuery/ImInfoQueryMain.html"
+          "name": "关注企业",
+          "url": "form1.html"
         }
       ]
     },
     {
       "id": "4",
-      "name": "信息服务",
+      "name": "项目",
       "ico": "el-icon-menu",
-      "url": "",
-      "subs": [
+      "url": "project.html",
+      "children": [
         {
           "id": "41",
-          "name": "服务管理",
+          "name": "咨询",
+          "url": "project.html.html"
+        },
+	{
+          "id": "42",
+          "name": "存量",
+          "url": "project.html"
+        },
+	{
+          "id": "43",
+          "name": "绿地",
+          "url": "project.html"
+        },
+	{
+          "id": "44",
+          "name": "运营",
+          "url": "project.html"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "新闻",
+      "ico": "el-icon-menu",
+      "url": "news.html",
+      "children": [
+        {
+          "id": "51",
+          "name": "能源",
           "ico": "el-icon-menu",
-          "subs": [
-            {
-              "id": "411",
-              "name": "推送服务管理",
-              "url": "business/im/ImPushServiceCfg/ImPushServiceCfgMain.html"
-            },
-            {
-              "id": "412",
-              "name": "任务日志管理",
-              "url": "business/im/ImPushServiceLog/ImPushServiceLogMain.html"
-            }
-          ]
+          "url": "news.html"
         },
         {
           "id": "52",
-          "name": "配置管理",
-          "ico": "el-icon-menu",
-          "subs": [
-            {
-              "id": "521",
-              "name": "集成应用配置",
-              "url": "/business/im/ImIntegratetAppCfg/ImIntegratetAppCfgMain.html"
-            },
-            {
-              "id": "522",
-              "name": "通讯录配置",
-              "url": "/business/im/ImAddressListCfg/ImAddressListCfgMain.html"
-            },
-            {
-              "id": "523",
-              "name": "提醒服务配置",
-              "url": "/business/im/ImCallServiceCfg/ImCallServiceCfgMain.html"
-            } 
-          ]
+          "name": "企业",
+          "url": "news.html"
+        },
+        {
+          "id": "53",
+          "name": "政治",
+         "url": "news.html"
+        },
+        {
+          "id": "54",
+          "name": "财经",
+          "url": "news.html"
+        },
+        {
+          "id": "55",
+          "name": "社会",
+          "url": "news.html"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "name": "报告",
+      "ico": "el-icon-menu",
+      "url": "",
+      "children": [
+        {
+          "id": "61",
+          "name": "内部报告",
+          "ico": "el-icon-menu"
+        },
+        {
+          "id": "62",
+          "name": "外部报告"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "name": "数据",
+      "ico": "el-icon-menu",
+      "url": "",
+      "children": [
+        {
+          "id": "71",
+          "name": "宏观数据",
+          "ico": "el-icon-menu"
+        },
+        {
+          "id": "72",
+          "name": "市场数据"
+        },
+        {
+          "id": "73",
+          "name": "电力数据"
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "name": "工具",
+      "ico": "el-icon-menu",
+      "url": "",
+      "children": [
+        {
+          "id": "81",
+          "name": "可视化专题编辑",
+          "ico": "el-icon-menu"
+        },
+        {
+          "id": "82",
+          "name": "在线报告编辑"
         }
       ]
     }
