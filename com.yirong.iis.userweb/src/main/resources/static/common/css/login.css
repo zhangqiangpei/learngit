@@ -1,0 +1,106 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    background: url(img/login_bg.jpg) no-repeat center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.wrap {
+    position: relative;
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.header {
+    padding-top: 50px;
+    text-align:center;
+    color: #fff;
+    /*background: url(img/logo.svg) no-repeat 50px 34px;*/
+    background-size: 34px;
+}
+
+    .header .p1 {
+        font-size: 36px;
+    }
+
+    .header .p2 {
+        margin-top: 10px;
+        font-size: 16px;
+    }
+
+.main {
+    text-align: center;
+}
+
+.main .panel {
+    position: relative;
+    display: inline-block;
+    margin-top: 120px;
+    padding: 30px 15px 15px 15px;
+    border: 1px solid #009BEF;
+    border-radius: 5px;
+    background-color:#fff;
+}
+
+.main .panel .face {
+    margin: -30px 0 0 85px;
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    background-image: url(img/face.png);
+    background-size: 60px;
+}
+
+.main .panel .txt {
+    padding: 2px 5px 2px 40px;
+    width: 230px;
+    color: #646E7C;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+
+.main .panel .txt:focus {
+    border: 1px solid #009BEF;
+}
+
+
+
+#uname {
+    height:28px;
+    margin-top: 15px;
+    background: url(img/icon_search_u13.png) no-repeat 8px center;
+    background-size: 18px;
+}
+
+#pwd {
+    height:28px;
+    margin-top: 15px;
+    background: url(img/icon_search_u19.png) no-repeat 8px center;
+    background-size: 18px;
+}
+
+#btn {
+    margin-top: 40px;
+    padding: 7px 0;
+    color: #fff;
+    border-radius: 2px;
+    background-color: #009BEF;
+}
+
+#btn:hover {
+    background-color: #047cc0;
+    cursor: pointer;
+}
+
+
+.footer {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
