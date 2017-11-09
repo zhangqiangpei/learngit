@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>国家</title>
+
+    <link href="js/elementui/elementui.css" rel="stylesheet" />
+    <link href="css/common/com.css" rel="stylesheet" />
+    <link href="css/common/reset.css" rel="stylesheet" />
+    <link href="css/business/country/country_detail.css" rel="stylesheet" />
+</head>
+<body>
+    <!---------------网页头部start----------------->
+    <div id="header" class="header"></div>
+    <!---------------网页头部end------------------->
+        
+    <!---------------网页工具栏(如有)start----------
+    <div id="toolbar" class="toolbar"></div>
+    !---------------网页工具栏索(如有)end---------->
+    
+    <!---------------网页主体start----------------->
+    <div id="main" class="main clearfix">
+        <div class="fl left">
+            <el-menu class="el-menu-vertical-demo" :default-openeds="defOpens" id="menu">
+                <el-submenu v-for="item in menuList" v-if="item.children&&item.children.length!=0" :index="item.id" :key="item.id">
+                    <template slot="title">
+                        <span>{{item.name}}</span>
+                    </template>
+                    <el-menu-item-group>
+                        <el-menu-item v-for="subItem in item.children" :index="subItem.id" :key="item.id" :id="'item_'+subItem.id" @click="loadPageToIFrame(subItem.name)" >
+                            {{subItem.name}}
+                        </el-menu-item>
+                    </el-menu-item-group>
+                </el-submenu>
+                <el-menu-item v-else :index="item.id" :key="item.id">
+                    <span slot="title">{{item.name}}</span>
+                </el-menu-item>
+            </el-menu>
+        </div>
+        <div class="fl center">
+            <iframe src="" id="contentCenter" frameborder=0 scrolling=no width="100%" height="100%">
+                
+            </iframe>
+        </div>
+        <div class="fl right">
+            <div class="nav-head">
+                国家导航
+            </div>
+            <div class="nav-search">
+                <el-input placeholder="请输入国家" suffix-icon="el-icon-search" :on-icon-click="fnSrhCountry" v-model="countryName">
+                </el-input>
+            </div>
+            <div class="nav-select">
+                <el-select v-model="defContinent" placeholder="请选择">
+                    <el-option  v-for="item in continentList"  :key="item.id" :label="item.name"  :value="item.id">
+                    </el-option>
+                </el-select>
+            </div>
+            <div class="nav-list">
+                <ul>
+                    <li v-for="item in countryList"><a>{{item.name}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!---------------网页主体end------------------->
+     
+    <!---------------网页底部start----------------->
+    <div id="footer" class="footer"></div>
+    <!---------------网页底部end------------------->
+    
+</body>
+</html>
+<script src="js/jquery/jquery.min.js"></script>
+<script src="js/vue/vue.min.js"></script>
+<script src="js/vue/vue-router.min.js"></script>
+<script src="js/elementui/elementui.js"></script>
+<script src="js/com.js"></script>
+<script src="js/country_detail.js"></script>
