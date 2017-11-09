@@ -103,7 +103,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 			 }
 			 return ResultUtil.newOk("操作成功").toMap();
 		 } else {// 该名称及父类ID已存在
-			 String result = ErrorPromptInfoUtil.getErrorInfo("00201");
+			 String result = ErrorPromptInfoUtil.getErrorInfo("00101");
 			 logger.warn(result);
 			 return ResultUtil.newError(result).toMap();
 		 }
@@ -130,7 +130,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 				 .getId());
 		 if (null == iisReportTemp) {// 未查询到任何数据
 			 String promptInfo = "不存在ID：" + iisReport.getId();
-			 String result = ErrorPromptInfoUtil.getErrorInfo("00202",
+			 String result = ErrorPromptInfoUtil.getErrorInfo("00102",
 					 promptInfo);
 			 logger.warn(result);
 			 return ResultUtil.newError(result).toMap();
@@ -164,7 +164,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 			 IisReport iisReport = this.iisReportDao.findOne(id);
 			 if (null == iisReport) {// 不存在直接跳出循环
 				 String promptInfo = "不存在ID：" + id;
-				 sb.append(ErrorPromptInfoUtil.getErrorInfo("00202", promptInfo));
+				 sb.append(ErrorPromptInfoUtil.getErrorInfo("00102", promptInfo));
 				 break;
 			 }
 		 }
@@ -198,12 +198,19 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 	 @Override
 	 public Map queryIisReportById(String id) {
 		 StringBuffer sql = new StringBuffer();
-		 sql.append("");
-		 sql.append("");
-		 sql.append("");
-		 sql.append(" ");
-		 sql.append("");
+         sql.append("SELECT IR.ID AS id,");
+         sql.append("IR.TYPE_ID AS typeId,");
+         sql.append("IR.REPORT_NAME AS reportName,");
+         sql.append("IR.REPORT_INFO AS reportInfo,");
+         sql.append("IR.KM_ID AS kmId,");
+         sql.append("IR.EOS_ID AS eosId,");
+         sql.append("IR.IS_OPEN AS isOpen,");
+         sql.append("IR.CREATOR AS creator,");
+         sql.append("DATA_FORMAT(IR.CREATE_TIME, '%Y-%m-%d %H:%i:%S') AS creatorTime ");
+         sql.append("FROM IIS_REPORT AS IR ");
+         sql.append("WHERE IR.ID = ? ");
 		 List<Object> param = new ArrayList<Object>();
+		 param.add(id);
 		 Map map = this.exeSqlMap(sql.toString(), param);
 		 return ResultUtil.newOk("操作成功")
 				 .setData(map).toMap();
@@ -228,15 +235,32 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 		 // 拼装查询sql
 		 List<Object> param = new ArrayList<Object>();
 		 StringBuffer sql = new StringBuffer();
-		 sql.append("");
-		 sql.append("");
-		 sql.append("");
-		 sql.append("");
-		 // 标准编码
-		 if (StringUtil.isNotNullOrEmpty(ue.getReportName())) {
-			 sql.append("");
-			 param.add("%");
+		 sql.append("SELECT IR.ID AS id,");
+		 sql.append("IR.TYPE_ID AS typeId,");
+		 sql.append("IR.REPORT_NAME AS reportName,");
+		 sql.append("IR.REPORT_INFO AS reportInfo,");
+		 sql.append("IR.KM_ID AS kmId,");
+		 sql.append("IR.EOS_ID AS eosId,");
+		 sql.append("IR.IS_OPEN AS isOpen,");
+		 sql.append("IR.CREATOR AS creator,");
+		 sql.append("DATA_FORMAT(IR.CREATE_TIME, '%Y-%m-%d %H:%i:%S') AS creatorTime ");
+		 sql.append("FROM IIS_REPORT AS IR ");
+		 sql.append("WHERE 1=1 ");
+		 // 创建人
+		 if (StringUtil.isNotNullOrEmpty(ue.getCreator())) {
+			 sql.append("AND IR.CREATOR = ? ");
+			 param.add("%" + ue.getCreator()+"%");
 		 }
+		 // 类型
+         if (StringUtil.isNotNullOrEmpty(ue.getReportName())) {
+             sql.append("AND IR.REPORT_NAME LIKE ? ");
+             param.add("%" + ue.getReportName()+"%");
+         }
+          // 报告名
+         if (StringUtil.isNotNullOrEmpty(ue.getTypeId())) {
+             sql.append("AND IR.TYPE_ID = ? ");
+             param.add("%" + ue.getTypeId()+"%");
+         }
 		 // 获取数据
 		 PageEntiry pageEntiry = this.findPageSQLMap(sql.toString(), param,
 				 null, ue);

@@ -18,5 +18,18 @@ import com.yirong.iis.user.entity.IisReportShareObj;
  */
 public interface IisReportShareObjDao extends IBaseDao<IisReportShareObj, String> {
 
+     /**
+      * 功能描述：根据报告ID和共享对象ID查询
+      *
+      * @author 林明铁
+      *         <p>
+      *         创建时间 ：2017-11-09 10:00:09
+      *         </p>
+      *
+      *         <p>
+      *         修改历史：(修改人，修改时间，修改原因/内容)
+      *         </p>
+      */
+    IisReportShareObj findByReportIdAndObjId(String reportId, String objId);
 }
 

@@ -139,7 +139,7 @@ public class IisReportApi {
 		String pathName = "context/ids";
 		String ids = JsonUtil.getJsonStrByAttrName(paramAll, pathName);
 		// 处理业务
-		Map map = iisReportService.delIisReport(ids);
+		Map map = iisReportService.delIisReport(ids.replace("[","").replace("]","").replace("\"",""));
 		return JsonUtil.ObjectToString(map);
 	}
 

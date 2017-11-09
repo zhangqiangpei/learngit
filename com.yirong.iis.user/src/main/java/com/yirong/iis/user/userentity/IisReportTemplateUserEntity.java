@@ -40,6 +40,10 @@ public class IisReportTemplateUserEntity extends PageEntiry implements Serializa
 	*/
 	private String templateInfo;
 
+	 /**
+	  * 创建人
+	  */
+	private String creator;
 
 	public String getId() {
 		return id;
@@ -69,7 +73,12 @@ public class IisReportTemplateUserEntity extends PageEntiry implements Serializa
 	public void setTemplateInfo(String templateInfo) {
 		this.templateInfo = templateInfo;
 	}
-	
-	
 
-}
+	 public String getCreator() {
+		 return creator;
+	 }
+
+	 public void setCreator(String creator) {
+		 this.creator = creator;
+	 }
+ }
