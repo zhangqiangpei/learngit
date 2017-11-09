@@ -559,8 +559,8 @@ $(function() {
         sHTML += '        </el-radio-group>';
         sHTML += '    </div>';
         sHTML += '    <div class="toolbar-search fl" id="toolbarSrh">';
-        sHTML += '        <el-input placeholder="搜索" suffix-icon="el-icon-search" v-model="keyword">';
-        sHTML += '        </el-input>';
+        sHTML += '        <el-autocomplete class="inline-input" v-model="keyword" :fetch-suggestions="fnAutoSrh" ';
+        sHTML += '          placeholder="请输入关键字" :trigger-on-focus="false" @select="fnFullTextSrh"></el-autocomplete>';
         sHTML += '        <span class="hotkeyword-tit">搜索热词:</span>';
         sHTML += '        <ul class="hotkeyword-list">';
         sHTML += '            <li v-for="item in hotwords"><a @click="keyword=item.name;fnFullTextSrh()">{{item.name}}</a></li>';
@@ -590,6 +590,9 @@ $(function() {
                 },
                 showContentByCategory:function(idx){
                     alert(this.category[idx].name);
+                },
+                fnAutoSrh:function(keyword,cb){
+                    cb([{value:'智能匹配结果'},{value:'智能匹配结果'},{value:'智能匹配结果'}]);
                 },
                 fnFullTextSrh:function(){
                     alert(this.keyword);
