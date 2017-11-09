@@ -7,6 +7,10 @@ import java.util.Map;
 
 import com.yirong.awaken.core.util.BeanUtil;
 import com.yirong.commons.util.error.ErrorPromptInfoUtil;
+import com.yirong.iis.user.entity.IisReportShare;
+import com.yirong.iis.user.entity.IisReportShareObj;
+import com.yirong.iis.user.entity.IisReportType;
+import com.yirong.iis.user.service.IisReportShareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +54,9 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 	 */
 	@Autowired
 	private IisReportDao iisReportDao;
+
+	@Autowired
+    private IisReportShareService iisReportShareService;
 
 	 /**
 	 * 功能描述：获取dao操作类
@@ -100,6 +107,26 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 				 this.save(iisReportTemp);
 			 } else {
 				 this.save(iisReport);
+				 // 保存报告共享表
+                 IisReportShare iisReportShare = null;
+                 for (String typeId : iisReport.getTypeIdList()){
+                     iisReportShare = new IisReportShare();
+                     iisReportShare.setReportId(iisReport.getId());
+                     iisReportShare.setCreator(iisReport.getCreator());
+                     iisReportShare.setShareType(typeId);
+                     Map map = iisReportShareService.saveIisReportShare(iisReportShare);
+                     if (Integer.parseInt(map.get("code").toString()) != 0){
+                         return ResultUtil.newError("报告共享类型保存失败！").toMap();
+                     }
+                     // 保存报告共享对象表
+                     IisReportShareObj iisReportShareObj = null;
+                     switch (typeId){
+                         case "":
+                             break;
+                         default:
+                             return ResultUtil.newError("传入的共享类型不存在！").toMap();
+                     }
+                 }
 			 }
 			 return ResultUtil.newOk("操作成功").toMap();
 		 } else {// 该名称及父类ID已存在
