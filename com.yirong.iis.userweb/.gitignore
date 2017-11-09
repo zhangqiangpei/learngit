@@ -1,2 +1,12 @@
-/target
-/target
+.project
+*.git
+*.svn
+.idea
+*.iml
+.settings/
+target/
+bin/
+.classpath
+.mymetadata
+logs
+*.class
