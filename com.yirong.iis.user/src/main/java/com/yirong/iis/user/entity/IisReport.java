@@ -1,5 +1,7 @@
 package com.yirong.iis.user.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -30,6 +32,9 @@ public class IisReport implements Serializable {
 	/**
 	* 报告ID
 	*/
+	@Id
+	@GeneratedValue(generator="system-uuid",strategy = GenerationType.AUTO)
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	@Column(name="ID",nullable=false,length=32)
 	public String id;
 	
