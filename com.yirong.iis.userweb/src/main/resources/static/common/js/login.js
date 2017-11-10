@@ -25,7 +25,6 @@ $(function(){
             var data = {
                 param : param
             };
-            window.location.href = "index.html";
             z.ajax({
                 url : "/baseRest/loginSubmit",
                 async : false,
@@ -34,7 +33,7 @@ $(function(){
                     if(z.isNullOrEmpty(res)){
                         z.error("登陆失败.");
                     }else if(res.code == 0){	
-                        window.location.href = "/forward.do?viewPath=business/mm/index/index.html";
+                        window.location.href = "/forward.do?viewPath=business/user/index/index.html";
                     }else {
                         z.warning(res.msg);
                     }
