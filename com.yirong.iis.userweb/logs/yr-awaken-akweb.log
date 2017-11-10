@@ -1,3 +1,0 @@
-19:41:43.462 [INFO ] [main] [com.yirong.AwakenWebApplication] - Starting AwakenWebApplication on DESKTOP-1DIFKEJ with PID 1816 (E:\awaken\code\com.yirong.awaken.akweb\target\classes started by lijp in E:\awaken\code\com.yirong.awaken.akweb)
-19:41:43.472 [INFO ] [main] [com.yirong.AwakenWebApplication] - No active profile set, falling back to default profiles: default
-19:41:43.551 [INFO ] [main] [org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6a57ae10: startup date [Tue Oct 31 19:41:43 CST 2017]; root of context hierarchy
