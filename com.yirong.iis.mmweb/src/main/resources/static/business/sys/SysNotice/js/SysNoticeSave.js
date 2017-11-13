@@ -70,10 +70,10 @@ var tableAttr = getDialogMergeAttr({
                 	param.content = content;
  
                 	if(null != saveVue.effectiveAndFailure && saveVue.effectiveAndFailure.length == 2){
-                		param.effectiveTime = saveVue.effectiveAndFailure[0];
-                    	param.failureTime  = saveVue.effectiveAndFailure[1];
+                		param.effectiveTime = new Date(saveVue.effectiveAndFailure[0]).Format("yyyy-MM-dd HH:mm:ss");  
+                    	param.failureTime  = new Date(saveVue.effectiveAndFailure[1]).Format("yyyy-MM-dd HH:mm:ss");  
                 	}
- 
+
             		var data = ak.msService("sys","sysNoticeApi/save",param);
                 	if(null != data && data.code == 0){//操作成功
                 		//提示
@@ -101,3 +101,20 @@ var tableAttr = getDialogMergeAttr({
 
 //生成vue对象
 var saveVue = new Vue(tableAttr);
+
+Date.prototype.Format = function (fmt) { 
+    var o = {
+        "M+": this.getMonth() + 1, //月份 
+        "d+": this.getDate(), //日 
+        "h+": this.getHours(), //小时 
+        "H+" : this.getHours(), //小时
+        "m+": this.getMinutes(), //分 
+        "s+": this.getSeconds(), //秒 
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+        "S": this.getMilliseconds() //毫秒 
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}

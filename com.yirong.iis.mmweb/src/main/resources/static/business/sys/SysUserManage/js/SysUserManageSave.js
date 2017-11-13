@@ -42,6 +42,11 @@ var dialogAttr = getDialogMergeAttr({
 		saveSubmit : function(){
 			this.$refs["saveModel"].validate(function (valid) {
                 if (valid) {//验证通过
+                	if(null == saveVue.saveModel.organizationIds || saveVue.saveModel.organizationIds.length <1){
+                		ak.warning("请选择所属机构！");
+                		return;
+                	}
+                	
                     var result = ak.msService("sys","userManageApi/create",saveVue.saveModel);
                     if(null != result && result.code == 0){//操作成功
                     	//提示
