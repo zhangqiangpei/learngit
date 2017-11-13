@@ -434,7 +434,7 @@ $(function() {
         sHTML += '<div class="head-wrap">';
         sHTML += '  <div class="head">';
         sHTML += '      <div class="fl logo">';
-        sHTML += '          <img src="images/u253.svg" class="logImg">';
+        sHTML += '          <img src="/common/images/u253.svg" class="logImg">';
         sHTML += '      </div>';
         sHTML += '      <div class="fl logo">';
         sHTML += '           <p class="p1">国网国际发展有限公司</p>';
@@ -447,16 +447,16 @@ $(function() {
         sHTML += '              :index="item.id" :key="item.id">';
         sHTML += '                  <template slot="title"><span @click="selFirstNav(item)">{{item.name}}<span></template>';
         sHTML += '                  <el-menu-item v-for="subitem in item.children" :index="item.id" :key="item.id">';
-        sHTML += '                  <a :href=item.url+"?idx="+item.id>{{subitem.name}}</a></el-menu-item>';
+        sHTML += '                  <a :href=\'"forward.do?viewPath="+item.url+"&idx="+item.id\'>{{subitem.name}}</a></el-menu-item>';
         sHTML += '              </el-submenu>';
         sHTML += '              <el-menu-item v-else :index="item.id" :key="item.id" class="menu-item-nosubs">';
-        sHTML += '              <a :href=item.url+"?idx="+item.id>{{item.name}}</a></el-menu-item>';
+        sHTML += '              <a :href=\'"forward.do?viewPath="+item.url+"?idx="+item.id\'>{{item.name}}</a></el-menu-item>';
         sHTML += '          </el-menu>';
         sHTML += '      </div>';
         sHTML += '      <div class="info">';
     //    sHTML += '          <span class="icon notice"><i>3</i></span>';
     //    sHTML += '          <span class="icon msg"><i>1</i></span>';
-        sHTML += '          <img src="images/face.svg" class="userface" id="userface">';
+        sHTML += '          <img src="/common/images/face.svg" class="userface" id="userface">';
         sHTML += '          <el-popover ref="user" placement="bottom"  width="100" trigger="hover">';
         sHTML += '              <div style="border:none;" class="topOperation">';
         sHTML += '                  <a onclick="vm_head.setPwd()">修改密码</a><br/>';
@@ -494,7 +494,7 @@ $(function() {
             },
             methods: {
                 initMenuNav:function(){
-                    var sURL = 'js/menu.json';
+                    var sURL = '/common/json/menu.json';
                     z.get(sURL,null,function(r){
                         if(r.code==0){
                             vm_head.menuList = r.data;
@@ -511,7 +511,7 @@ $(function() {
                 },
                 selFirstNav:function(jo){
                     var sURL = 'index.html';
-                    if(z.isNotNullOrEmpty(jo))sURL = jo.url+'?idx='+jo.id;
+                    if(z.isNotNullOrEmpty(jo))sURL = 'forward.do?viewPath='+jo.url+'&idx='+jo.id;
                     window.location.href = sURL;
                 },
                 setPwd:function(){

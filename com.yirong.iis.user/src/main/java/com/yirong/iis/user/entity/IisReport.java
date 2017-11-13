@@ -1,8 +1,12 @@
 package com.yirong.iis.user.entity;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.hibernate.annotations.GenericGenerator;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -30,6 +34,9 @@ public class IisReport implements Serializable {
 	/**
 	* 报告ID
 	*/
+	@Id
+	@GeneratedValue(generator="system-uuid",strategy = GenerationType.AUTO)
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	@Column(name="ID",nullable=false,length=32)
 	public String id;
 	
@@ -92,7 +99,18 @@ public class IisReport implements Serializable {
 	*/
 	@Column(name="MODIFY_TIME",nullable=true)
 	public Date modifyTime;
-	
+
+     /**
+      * 共享类型
+      */
+     @Transient
+     public List<String> typeIdList;
+
+     /**
+      * 共享对象
+      */
+     @Transient
+     public List<String> shareObjId;
    
 	public String getId(){
 		return this.id;
@@ -172,5 +190,19 @@ public class IisReport implements Serializable {
 		this.modifyTime=modifyTime;
 	}
 
-   
-}
+     public List<String> getTypeIdList() {
+         return typeIdList;
+     }
+
+     public void setTypeIdList(List<String> typeIdList) {
+         this.typeIdList = typeIdList;
+     }
+
+     public List<String> getShareObjId() {
+         return shareObjId;
+     }
+
+     public void setShareObjId(List<String> shareObjId) {
+         this.shareObjId = shareObjId;
+     }
+ }
