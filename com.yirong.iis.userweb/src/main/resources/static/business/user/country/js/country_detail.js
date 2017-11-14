@@ -10,7 +10,7 @@ var vm = new Vue({
     },
     methods: {
         initMenu:function(){
-            var sURL = 'js/menu_country.json';
+            var sURL = '/common/json/menu_country.json';
             z.get(sURL,null,function(r){
                 if(r.code==0){
                     if(r.data.length>0){

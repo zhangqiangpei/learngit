@@ -450,7 +450,7 @@ $(function() {
         sHTML += '                  <a :href=\'"forward.do?viewPath="+item.url+"&idx="+item.id\'>{{subitem.name}}</a></el-menu-item>';
         sHTML += '              </el-submenu>';
         sHTML += '              <el-menu-item v-else :index="item.id" :key="item.id" class="menu-item-nosubs">';
-        sHTML += '              <a :href=\'"forward.do?viewPath="+item.url+"?idx="+item.id\'>{{item.name}}</a></el-menu-item>';
+        sHTML += '              <a :href=\'"forward.do?viewPath="+item.url+"&idx="+item.id\'>{{item.name}}</a></el-menu-item>';
         sHTML += '          </el-menu>';
         sHTML += '      </div>';
         sHTML += '      <div class="info">';

@@ -22,7 +22,7 @@ var vm_country = new Vue({
     },
     methods: {
         showCountryDetail:function(id){
-            var sURL = 'country_detail.html?idx='+z.getUrlParam('idx')+'&countryId='+id;
+            var sURL = 'forward.do?viewPath=business/user/country/country_detail.html&idx='+z.getUrlParam('idx')+'&countryId='+id;
             window.location.href = sURL;
         }
     },
