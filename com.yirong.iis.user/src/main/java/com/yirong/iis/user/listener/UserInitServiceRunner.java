@@ -46,7 +46,7 @@ public class UserInitServiceRunner implements CommandLineRunner {
 			//是否执行依赖模块InitServiceRunner类中初始化方法
 			//若该模块为pom依赖模块，则不执行以下初始化，直接跳出
 			if(null == map || StringUtil.isNullOrEmpty(map.get("awaken.dependency.do.init")) 
-					|| !map.get("awaken.dependency.do.init").contains("ma")){
+					|| !map.get("awaken.dependency.do.init").contains("user")){
 				return;
 			}
 			
@@ -59,7 +59,7 @@ public class UserInitServiceRunner implements CommandLineRunner {
 			MsClient.init(clientMap);
 			
 			//02 加载日志配置文件
-			ErrorPromptInfoUtil.init("errorinfo.properties","mm");
+			ErrorPromptInfoUtil.init("errorinfo.properties","user");
 			
 			//03 初始化系统参数
 			SysParameterEif.init();
