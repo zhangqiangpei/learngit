@@ -31,22 +31,22 @@ var vm = new Vue({
             if(z.isNullOrEmpty(sIFrame))return;
             var oIFrame = document.getElementById(sIFrame);
             var iHeight = 0;
-            iHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+            iHeight = $(oIFrame.contentWindow.document.body).height();
             return iHeight;
         },
         loadPageToIFrame:function(sURL){
             var iframe = document.getElementById('contentCenter');
-            iframe.src = "http://www.baidu.com";
+            iframe.src = "/forward.do?viewPath=business/user/country/country.html&idx=2";
             var iHeight = $(document).height();
             if (iframe.attachEvent){    
                 iframe.attachEvent("onload", function(){
-                    iHeight = this.getIFrameBodyHeight>0?this.getIFrameBodyHeight:iHeight;
-                    $(iframe).css('height',iHeight);   
+                    iHeight = vm.getIFrameBodyHeight('contentCenter')?vm.getIFrameBodyHeight('contentCenter'):iHeight;
+                    $('#contentCenter').height(iHeight+'px'); 
                 });
             } else {    
-                iframe.onload = function(){ 
-                    iHeight = this.getIFrameBodyHeight>0?this.getIFrameBodyHeight:iHeight;
-                    $(iframe).css('height',iHeight);
+                iframe.onload = function(){
+                    iHeight = vm.getIFrameBodyHeight('contentCenter')?vm.getIFrameBodyHeight('contentCenter'):iHeight;
+                    $('#contentCenter').height(iHeight+'px');
                 };
             }
         }
