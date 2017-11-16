@@ -12,37 +12,37 @@
       "id": "2",
       "name": "国家",
       "ico": "el-icon-menu",
-      "url": "business/user/country/country.html",
+      "url": "business/user/country/CountryMain.html",
       "children": [
         {
           "id": "21",
           "name": "北美洲",
-          "url": "business/user/country/country.html"
+          "url": "business/user/country/CountryMain.html"
         },
         {
           "id": "22",
           "name": "南美洲",
-          "url": "business/user/country/country.html"
+          "url": "business/user/country/CountryMain.html"
         },
         {
           "id": "23",
           "name": "欧洲",
-          "url": "business/user/country/country.html"
+          "url": "business/user/country/CountryMain.html"
         },
 	{
           "id": "24",
           "name": "非洲",
-          "url": "business/user/country/country.html"
+          "url": "business/user/country/CountryMain.html"
         },
 	{
           "id": "25",
           "name": "亚洲",
-          "url": "business/user/country/country.html"
+          "url": "business/user/country/CountryMain.html"
         },
 	{
           "id": "26",
           "name": "大洋洲",
-          "url": "business/user/country/country.html"
+          "url": "business/user/country/CountryMain.html"
         }
       ]
     },
@@ -63,27 +63,27 @@
       "id": "4",
       "name": "项目",
       "ico": "el-icon-menu",
-      "url": "business/user/project/project.html",
+      "url": "business/user/project/ProjectMain.html",
       "children": [
         {
           "id": "41",
           "name": "咨询",
-          "url": "business/user/project/project.html"
+          "url": "business/user/project/ProjectMain.html"
         },
 	{
           "id": "42",
           "name": "存量",
-          "url": "business/user/project/project.html"
+          "url": "business/user/project/ProjectMain.html"
         },
 	{
           "id": "43",
           "name": "绿地",
-          "url": "business/user/project/project.html"
+          "url": "business/user/project/ProjectMain.html"
         },
 	{
           "id": "44",
           "name": "运营",
-          "url": "business/user/project/project.html"
+          "url": "business/user/project/ProjectMain.html"
         }
       ]
     },
@@ -91,33 +91,33 @@
       "id": "5",
       "name": "新闻",
       "ico": "el-icon-menu",
-      "url": "business/user/news/news.html",
+      "url": "business/user/news/NewsMain.html",
       "children": [
         {
           "id": "51",
           "name": "能源",
           "ico": "el-icon-menu",
-          "url": "business/user/news/news.html"
+          "url": "business/user/news/NewsMain.html"
         },
         {
           "id": "52",
           "name": "企业",
-          "url": "business/user/news/news.html"
+          "url": "business/user/news/NewsMain.html"
         },
         {
           "id": "53",
           "name": "政治",
-         "url": "business/user/news/news.html"
+         "url": "business/user/news/NewsMain.html"
         },
         {
           "id": "54",
           "name": "财经",
-          "url": "business/user/news/news.html"
+          "url": "business/user/news/NewsMain.html"
         },
         {
           "id": "55",
           "name": "社会",
-          "url": "business/user/news/news.html"
+          "url": "business/user/news/NewsMain.html"
         }
       ]
     },
