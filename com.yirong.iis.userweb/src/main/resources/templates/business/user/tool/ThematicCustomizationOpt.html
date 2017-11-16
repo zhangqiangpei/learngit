@@ -1,0 +1,85 @@
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>工作台拖拽</title>
+	
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>	
+    <link href="/frame/elementui/elementui.css" rel="stylesheet" />
+    <link href="/common/css/reset.css" rel="stylesheet" />
+    <link href="/common/css/com.css" rel="stylesheet" />
+    <link href="/business/user/tool/css/ThematicCustomizationOpt.css" rel="stylesheet" />
+    
+</head>
+
+<body scroll1="auto" style="background: rgb(247, 247, 247)">
+	<div id="wrap">
+
+	<div style="position:absolute; right:10px; top:78px;display:none;"><a href="javascript:setAdminEdit();void(0);">修改首页</a></div>
+
+	<table id="tabTemplate" style="display:none;margin-bottom:15px;" width="100%" border="0" cellspacing="0" cellpadding="3" class="miiTemplate">
+		<tr>
+			<td><div id="divTemplate"></div></td>
+			<td width="180">
+				<div>设置布局：</div>
+				<div id="divTemplateLayout"></div>
+				<form onsubmit="changePageLayout();return false;">
+				<div ><input type="text" name="txtPageLayout" id="txtPageLayout" class="input" style="width:120px;" value=""> <input type="submit" class="button" value="确定"></div>
+				</form>
+			</td>
+		</tr>
+	</table>
+
+	<div id="divMain">
+	</div>
+
+	<el-dialog title="编辑文本":visible.sync="dialogEditTextVisible" :close-on-press-escape="true">
+		<iframe src="kindEditor.htm" id="keFrame" frameborder="0" style="width:100%;height:300px"></iframe>
+		<span slot="footer" class="dialog-footer">
+			<el-button @click="dialogEditTextVisible = false">取 消</el-button>
+			<el-button type="primary" @click="vm.saveText()">确 定</el-button>
+		  </span>
+	</el-dialog>
+
+	<el-dialog title="编辑表格":visible.sync="dialogEditGridVisible" :close-on-press-escape="true">
+		<iframe src="gridEditor.htm" id="gdFrame" frameborder="0" style="width:100%;height:300px"></iframe>
+		<span slot="footer" class="dialog-footer">
+			<el-button @click="dialogEditGridVisible = false">取 消</el-button>
+			<el-button type="primary" @click="vm.saveGrid()">确 定</el-button>
+		  </span>
+	</el-dialog>
+
+	</div>
+</body>
+</html>
+<script src="/frame/jquery/jquery.min.js"></script>
+<script src="/frame/vue/vue.min.js"></script>
+<script src="/frame/elementui/elementui.js"></script>
+<script src="/common/js/com.js"></script>
+<script src="/business/user/tool/js/ThematicLayout.js"></script>
+<script src="/business/user/tool/js/ThematicMoudleEdit.js"></script>
+
+
+<script type="text/javascript">
+    var strHomeJSON='{&#34;cols&#34;:&#34;*|260,*,270&#34;,&#34;items&#34;:[{&#34;type&#34;:&#34;text&#34;,&#34;title&#34;:&#34;文本框&#34;,&#34;idx&#34;:1,&#34;col&#34;:0,&#34;row&#34;:0,&#34;tab&#34;:1},{&#34;type&#34;:&#34;table&#34;,&#34;title&#34;:&#34;表格&#34;,&#34;idx&#34;:2,&#34;col&#34;:1,&#34;row&#34;:0,&#34;tab&#34;:1},{&#34;col&#34;:2,&#34;row&#34;:1,&#34;type&#34;:&#34;chart&#34;,&#34;title&#34;:&#34;图表&#34;,&#34;idx&#34;:3,&#34;tab&#34;:1},{&#34;type&#34;:&#34;list&#34;,&#34;title&#34;:&#34;列表&#34;,&#34;idx&#34;:4,&#34;col&#34;:0,&#34;row&#34;:1,&#34;tab&#34;:1},{&#34;col&#34;:1,&#34;row&#34;:1,&#34;type&#34;:&#34;tabs&#34;,&#34;title&#34;:&#34;选项卡&#34;,&#34;tabs&#34;:[&#34;tab01&#34;,&#34;tab02&#34;],&#34;showCount&#34;:15,&#34;keyword&#34;:&#34;&#34;,&#34;searchTitle&#34;:&#34;&#34;,&#34;folderId&#34;:&#34;&#34;,&#34;folderName&#34;:&#34;&#34;,&#34;orgId&#34;:&#34;&#34;,&#34;orgName&#34;:&#34;&#34;,&#34;idx&#34;:5,&#34;tab&#34;:1}]}'.replace(/&#34;/img,'"');
+	//strHomeJSON='';
+	//alert(strHomeJSON);
+	if (strHomeJSON==''){
+		strHomeJSON = "{'cols':'*|260,*,260','items':[]}";
+	}
+	var hJson;
+	try{
+		eval('hJson='+strHomeJSON)
+	}catch(e){}
+	
+	hJson.items.sort(function(a, b){return a.row-b.row});
+
+	var isAdminEdit=true;
+	initHomeDoc();
+</script>

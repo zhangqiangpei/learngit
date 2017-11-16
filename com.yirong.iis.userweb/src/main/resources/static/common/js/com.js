@@ -421,7 +421,71 @@ window.z = top.z || {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
         var r = window.location.search.substr(1).match(reg); //匹配目标参数
         if (r != null) return unescape(r[2]); return null; //返回参数值
-    }
+    },
+    /////将JSON转为字符串
+    Obj2str:function (o) {
+        if (o == undefined) {
+            return "";
+        }
+        var r = [];
+        if (typeof o == "string") return "\"" + o.replace(/([\"\\])/g, "\\$1").replace(/(\n)/g, "\\n").replace(/(\r)/g, "\\r").replace(/(\t)/g, "\\t") + "\"";
+        if (typeof o == "object") {
+            if (!o.sort) {
+                for (var i in o)
+                    r.push("\"" + i + "\":" + Obj2str(o[i]));
+                if (!!document.all && !/^\n?function\s*toString\(\)\s*\{\n?\s*\[native code\]\n?\s*\}\n?\s*$/.test(o.toString)) {
+                    r.push("toString:" + o.toString.toString());
+                }
+                r = "{" + r.join() + "}"
+            } else {
+                for (var i = 0; i < o.length; i++)
+                    r.push(Obj2str(o[i]))
+                r = "[" + r.join() + "]";
+            }
+            return r;
+        }
+        return o.toString().replace(/\"\:/g, '":""');
+    },
+    isInArray:function (arr,sItem){
+        for (var i=0; i<arr.length; i++){
+            if (arr[i]==sItem) return true;
+        }
+        return false;
+    },
+    getTime:function (){
+        return (new Date().getTime()).toString();
+    },
+    getURLWithTime:function (sURL){
+        return (sURL + (sURL.indexOf('?')==-1?'?':'&') + 'tmp='+z.getTime());
+    },
+    // 获取对象的实际Left
+	getAbsLeft:function(obj, objStopAt){
+		var iResult=obj.offsetLeft;
+		while(obj = obj.offsetParent){
+			if (obj == document.body) break;
+			if (typeof(objStopAt)=='object'){
+				if (obj == objStopAt) break;
+			}else{
+				if (/absolute|relative/i.test(obj.style.position)) break;
+			};
+			iResult += obj.offsetLeft;
+		};
+		return iResult;
+	},
+	//获取对象的实际Top
+	getAbsTop:function(obj, objStopAt){
+		var iResult=obj.offsetTop; 
+		while(obj = obj.offsetParent){
+			if (obj == document.body) break;
+			if (typeof(objStopAt)=='object'){
+				if (obj == objStopAt) break;
+			}else{
+				if (/absolute|relative/i.test(obj.style.position)) break;
+			};
+			iResult += obj.offsetTop;
+		};
+		return iResult;
+	}
 }
 
 /********************************************网页公共部分加载start*********************************************************/

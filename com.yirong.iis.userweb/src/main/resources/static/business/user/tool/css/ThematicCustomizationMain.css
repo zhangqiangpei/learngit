@@ -1,0 +1,40 @@
+.left{
+    margin-right: 20px;
+    border:1px solid rgba(204, 204, 204, 1);
+    border-radius: 2px;
+    min-height: 400px;
+    padding: 10px;
+}
+
+.right{
+    width: 975px;
+    height: auto;
+    border:1px solid rgba(204, 204, 204, 1);
+}
+
+.left .tit,.left .search,.left .tabs{
+    width: 180px;
+    margin-bottom: 10px;
+}
+
+.left .tit{
+    color: #00253E;
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(204, 204, 204, 1);
+}
+
+.left .search{
+}
+
+.left .tabs li{
+    padding: 5px 10px;
+    color: #646E7C;
+}
+
+.left .tabs li:hover{
+    background: rgba(247, 247, 247, 1);
+}
+
+
