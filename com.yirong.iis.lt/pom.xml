@@ -72,7 +72,12 @@
 
 	<!-- 本工程依赖包 -->
 	<dependencies>
-
+		<dependency>
+			<groupId>com.yirong.awaken</groupId>
+			<artifactId>yr-awaken-core</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+		
 		<!-- 工具包 -->
 		<dependency>
 			<groupId>com.yirong.commons</groupId>
@@ -97,6 +102,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.yirong.commons</groupId>
+			<artifactId>yr-commons-sys</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
