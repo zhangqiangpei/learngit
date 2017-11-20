@@ -1,4 +1,4 @@
-package com.yirong.iis.dl.util;
+package com.yirong.iis.tp.dl.util;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class SqlServerUtil {
