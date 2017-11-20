@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.yirong.commons.akclient.Eif.AkClient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -80,7 +81,14 @@ public class UserInitServiceRunner implements CommandLineRunner {
 			
 			//07 初始化etl服务
 			//EtlEif.init(SysParameterEif.getValueByCode("iis.etl.url"));
-			
+
+			// 08 初始化awaken接口
+			String url = map.get("awaken.url");
+			String serviceName = map.get("awaken.service.name");
+			String account = map.get("awaken.username");
+			String secretKey = map.get("awaken.key");
+			AkClient.init(url, serviceName, account, secretKey);
+
 			logger.info("==============关联服务启动结束===============");		
 		} 
 		

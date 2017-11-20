@@ -1,5 +1,6 @@
 package com.yirong.iis.user.api;
 
+import com.yirong.commons.cache.eif.RedisCacheEif;
 import com.yirong.commons.util.datatype.JsonUtil;
 import com.yirong.commons.util.order.Order;
 import com.yirong.iis.user.entity.IisReportTemplate;
@@ -62,9 +63,12 @@ public class IisReportTemplateApi {
 		 // 实体转换
 		 IisReportTemplate iisReportTemplate = (IisReportTemplate) JsonUtil.StringToObject(param,
 				 IisReportTemplate.class);
+		 String tokenId = JsonUtil.getJsonStrByAttrName(paramAll, "sessionId");
+		 String creator = RedisCacheEif.hget(tokenId, "id");
+		 iisReportTemplate.setCreator(creator);
 		 // 业务处理
 		 Map map = this.iisReportTemplateService.saveIisReportTemplate(iisReportTemplate);
-		 return JsonUtil.ObjectToString(map);
+		 return JsonUtil.ObjectToStringClob(map);
 	 }
 
 	 /**
@@ -91,7 +95,7 @@ public class IisReportTemplateApi {
 				 IisReportTemplate.class);
 		 // 业务处理
 		 Map map = this.iisReportTemplateService.updateIisReportTemplate(iisReportTemplate);
-		 return JsonUtil.ObjectToString(map);
+		 return JsonUtil.ObjectToStringClob(map);
 	 }
 
 	 /**
@@ -115,7 +119,7 @@ public class IisReportTemplateApi {
 		 String id = JsonUtil.getJsonStrByAttrName(paramAll, pathName);
 		 // 处理业务
 		 Map map = iisReportTemplateService.queryIisReportTemplateById(id);
-		 return JsonUtil.ObjectToString(map);
+		 return JsonUtil.ObjectToStringClob(map);
 	 }
 
 	 /**
@@ -135,11 +139,11 @@ public class IisReportTemplateApi {
 	 @RequestMapping(value = "delete", method = RequestMethod.POST)
 	 public String delete(@RequestBody String paramAll) {
 		 // 获取参数信息
-		 String pathName = "context/ids";
+		 String pathName = "context/id";
 		 String ids = JsonUtil.getJsonStrByAttrName(paramAll, pathName);
 		 // 处理业务
 		 Map map = iisReportTemplateService.delIisReportTemplate(ids.replace("[","").replace("]","").replace("\"",""));
-		 return JsonUtil.ObjectToString(map);
+		 return JsonUtil.ObjectToStringClob(map);
 	 }
 
 	 /**
@@ -167,9 +171,12 @@ public class IisReportTemplateApi {
 		 // 实体转换
 		 IisReportTemplateUserEntity psue = (IisReportTemplateUserEntity) JsonUtil
 				 .StringToObject(param, IisReportTemplateUserEntity.class,calssMap);
+         String tokenId = JsonUtil.getJsonStrByAttrName(paramAll, "sessionId");
+         String creator = RedisCacheEif.hget(tokenId, "id");
+         psue.setCreator(creator);
 		 // 处理业务
 		 Map map = iisReportTemplateService.queryIisReportTemplateList(psue);
-		 return JsonUtil.ObjectToString(map);
+		 return JsonUtil.ObjectToStringClob(map);
 	 }
 
 }

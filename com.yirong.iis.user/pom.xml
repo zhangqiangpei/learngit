@@ -121,6 +121,18 @@
 			<artifactId>ojdbc14</artifactId>
 			<version>10.2.0.4.0</version>
 		</dependency>
-		
+
+        <!-- awaken接口客户端 -->
+        <dependency>
+            <groupId>com.yirong.commons</groupId>
+            <artifactId>yr-commons-akclient</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+		<dependency>
+			<groupId>com.yirong.commons</groupId>
+			<artifactId>yr-commons-eos</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
