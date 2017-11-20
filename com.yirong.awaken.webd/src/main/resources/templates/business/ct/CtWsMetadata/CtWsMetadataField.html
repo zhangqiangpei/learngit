@@ -1,0 +1,40 @@
+<div id="saveField" class="main">
+	<el-dialog title="新增元数据字段" 
+                   :visible.sync="dialogVisible">
+            <el-form :model="saveModel"
+                     :rules="saveRules"
+                     ref="saveModel"
+                     label-width="100px">
+                 <!--根据SQL语句查询相关字段  -->
+	                <el-form-item label="字段名称" prop="fieldName">
+	                    <el-input v-model="saveModel.fieldName" placeholder="请输入元数据字段名称名称(长度：1-32)"></el-input>
+	                </el-form-item>
+	                <el-form-item label="英文名称" prop="fieldCode">
+	                    <el-input v-model="saveModel.fieldCode" placeholder="请输入元数据字段英文名称"></el-input>
+	                </el-form-item>
+	                <el-form-item label="字段类型" prop="fieldType">
+	                     <el-select v-model="saveModel.fieldType"   placeholder="字段类型" >
+	                    <el-option
+					        v-for="item in fieldTypes"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value+','+item.label">
+					    </el-option>
+					    </el-select>
+	                </el-form-item>
+	                <el-form-item label="字段路径" prop="nodeName">
+	                    <el-input v-model="saveModel.nodeName" placeholder="请输入元数据字段路径，非必填"></el-input>
+	                </el-form-item>
+	                <el-form-item label="字段排序" prop="fieldSort">
+	                    <el-input-number v-model="saveModel.fieldSort" :min="1" :max="100"></el-input-number>
+	                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="saveSubmit" size="small">确定</el-button>
+                    <el-button @click="saveReset" size="small">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/ct/CtWsMetadata/js/CtWsMetadataField.js"></script>

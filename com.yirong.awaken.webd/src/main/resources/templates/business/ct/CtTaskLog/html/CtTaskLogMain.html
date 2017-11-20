@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+		           <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel"> 
+		           <el-row> 
+		           	<el-form-item label="任务名称" prop=taskName> 
+		           	<el-input v-model="tableSearchModel.taskName" placeholder="请输入任务名称" size="small"></el-input> 
+		           </el-form-item>
+		           <el-form-item>
+		           	<el-form-item label="采集对象" prop=ctObjectName> 
+		           	<el-input v-model="tableSearchModel.ctObjectName" placeholder="请输入采集对象名称" size="small"></el-input> 
+		           </el-form-item>
+		           <el-form-item>
+		           	<el-form-item label="采集渠道" prop=ctChannel> 
+		           	<el-select v-model="tableSearchModel.ctChannel" placeholder="请选择采集渠道" >
+	                        <el-option
+					        v-for="item in ctChannels"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+	                 </el-select>
+		           </el-form-item>
+		           <el-form-item>
+		           	<el-form-item label="采集方式" prop=ctWay> 
+		           	<el-select v-model="tableSearchModel.ctWay" placeholder="请选择采集方式">
+	                        <el-option
+					        v-for="item in ctWays"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+	                 </el-select>
+		           </el-form-item>
+		           <el-form-item>  
+		           	<el-button type="primary" @click="searchClick" size="small" name="per_ct_tasklog_show">查 询</el-button> 
+		           	<el-button type="default" @click="tableResetCondition" size="small">重 置</el-button> 
+		           </el-form-item> </el-row> <el-row> 
+		           	<!-- <el-button type="primary" @click="showDate">查看数据</el-button>  -->
+		           </el-row>
+		           </el-form> 
+		           <el-table id="tableId" height=100% :data="tableData" @sort-change="tableSortChange" @selection-change="tableChange" ref="mytable" stripe border> 
+		          	<el-table-column type="selection" align="center" width="45">
+		          	</el-table-column>
+		          <el-table-column prop="ctChannel" label="采集方式" width="100">
+                    </el-table-column>
+                    <el-table-column prop="taskName" label="任务名称"  >
+                    </el-table-column>
+                    <el-table-column prop="ct_object_name" label="采集对象"  >
+                    </el-table-column>
+                    <el-table-column prop="startTime" label="开始时间"  width="180">
+                    </el-table-column>
+                    <!-- <el-table-column prop="endTime" label="结束时间"  width="180">
+                    </el-table-column> -->
+                    <el-table-column prop="isSuccess" label="运行状态" width="100">
+                    </el-table-column>
+                    <el-table-column label="操作" align="center" width="100">
+		            <template scope="scope">
+	                	<el-button size="small" type="warning" @click="queryDataClick(scope.$index, scope.row)" name="per_ct_tasklog_viewData">查看数据</el-button>
+	                </template>
+                </el-table-column>
+		           </el-table>
+		           <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"  @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize"  @current-change="tableCurrentChange" layout="total, sizes, prev, pager, next, jumper"> 
+		           </el-pagination>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/ct/CtTaskLog/js/CtTaskLogMain.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<div id="saveType" class="main">
+	<el-dialog title="新增目录分类" :visible.sync="dialogVisible">
+    	<el-form :model="saveTypeModel" :rules="saveTypeRules" ref="saveTypeModel" label-width="150px"  >
+        	<el-form-item label="目录分类名称" prop="catalogTypeName">
+            	<el-input v-model="saveTypeModel.catalogTypeName" placeholder="请输入目录分类名称(长度：1-40)"></el-input>
+        	</el-form-item>
+            <el-form-item label="上级目录分类名称" prop="pname">
+                <el-input v-model="pname" :disabled="true"></el-input>
+            </el-form-item>
+            <el-row style="text-align:center">
+                <el-button type="primary" @click="saveTypeSubmit" size="small">确定</el-button>
+                <el-button @click="saveTypeReset" size="small">重置</el-button>
+            </el-row>
+    	</el-form>
+	</el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/dm/DmCatalog/js/DmCatalogTypeSave.js"></script>

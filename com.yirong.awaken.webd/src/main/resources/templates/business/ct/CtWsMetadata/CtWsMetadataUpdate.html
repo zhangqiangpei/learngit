@@ -1,0 +1,69 @@
+<style>
+#edit_org_html .el-dialog__body {
+    padding: 10px 20px;
+    color: #48576a;
+    font-size: 14px;
+}
+
+#edit_org_html .el-dialog{
+  top:5% !important;
+  height:90%;
+  overflow:auto;
+}
+#edit_org_html .el-form-item{
+  float: left;
+}
+</style>
+<div id="update" class="main">
+	<el-dialog title="更新爬虫元数据"  :visible.sync="dialogVisible" id="edit_org_html" size="large">
+			    <el-form :model="updateModel" :rules="updateRules" ref="updateModel" label-width="100px"  >
+			    	<el-form-item label="名称" prop="wsMetadataName"  style="width:50%">
+	                    <el-input v-model="updateModel.wsMetadataName" placeholder="请输入元数据名称(长度：1-32)"></el-input>
+	                </el-form-item>
+			         <el-form-item label="网址组名称" prop="websiteGroupId"  style="width:50%">
+	                    <el-select v-model="updateModel.websiteGroupId" placeholder="请选择网址组" clearable >
+	                        <el-option :label="websiteGroup.websiteGroupName" :value="websiteGroup.id" v-for="websiteGroup in websiteGroupList"></el-option>
+	                    </el-select>
+	                </el-form-item>
+				     <el-form-item label="说明" prop="wsMetadataRemark"  style="width:100%">
+	                    <el-input type="textarea" :rows="2" v-model="updateModel.wsMetadataRemark" placeholder="请输入说明(长度：1-64)"></el-input>
+	                </el-form-item>
+	                <el-form-item>
+	                    <el-button type="primary" @click="saveFieldData">添加字段</el-button>
+	                   <!--  <el-button type="primary" @click="delFieldData">删除字段</el-button> -->
+	                </el-form-item>
+	               <el-table :data="fieldData" height="250" stripe border ref="fieldDataTable"  > 
+			           <el-table-column prop="fieldName" label="字段名称" sortable>
+			           </el-table-column>
+			           </el-table-column>
+			           <el-table-column prop="fieldCode" label="英文名称" sortable>
+			           </el-table-column>
+			           </el-table-column>
+			           <el-table-column prop="fieldTypeName" label="字段类型" sortable>
+			           </el-table-column>
+			           <el-table-column prop="nodeName" label="字段路径" sortable>
+			           </el-table-column>
+			           <el-table-column prop="fieldSort" label="字段排序" sortable>
+			           </el-table-column>
+			            <el-table-column prop="fielddel" label="操作"  width="150" sortable>
+			           	 <template scope="scope">
+			           	 	<el-button
+					          size="small"
+					          type="primary"
+					          @click="upFieldData(scope.$index, scope.row)">修改</el-button>
+			           	 	<el-button
+					          size="small"
+					          type="danger"
+					          @click="delCondition(scope.$index, scope.row)">删除</el-button>
+			           	 </template>
+			           </el-table-column>
+			        </el-table>
+			        <el-form-item>
+	                    <el-button type="primary" @click="updateSubmit">确定</el-button>
+	                </el-form-item>
+	                </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/ct/CtWsMetadata/js/CtWsMetadataUpdate.js"></script>

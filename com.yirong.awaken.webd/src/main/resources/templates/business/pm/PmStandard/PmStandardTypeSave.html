@@ -1,0 +1,19 @@
+<div id="saveType" class="main">
+	<el-dialog title="新增标准分类" :visible.sync="dialogVisible">
+		<el-form :model="saveTypeModel" :rules="saveTypeRules" ref="saveTypeModel" label-width="150px">
+        	<el-form-item label="标准分类名称" prop="standardTypeName">
+            	<el-input v-model="saveTypeModel.standardTypeName" placeholder="请输入标准分类名称(长度：1-64)"></el-input>
+            </el-form-item>
+            <el-form-item label="上级标准分类名称" prop="standardTypePname">
+                <el-input v-model="standardTypePname" :disabled="true"></el-input>
+            </el-form-item>
+            <el-row style="text-align:center">
+            	<el-button type="primary" @click="saveTypeSubmit" size="small">确定</el-button>
+                <el-button @click="saveTypeReset" size="small">重置</el-button>
+            </el-row>
+        </el-form>
+    </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/pm/PmStandard/js/PmStandardTypeSave.js"></script>

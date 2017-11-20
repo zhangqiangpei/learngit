@@ -1,0 +1,76 @@
+body{
+	font-family: 'MicrosoftYaHei', '微软雅黑';
+	font-weight: 400;
+}
+#detailMain {
+    height: initial;
+   	min-height: 500px;
+    /* overflow: hidden; */
+    font-size: 14px;
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+
+.title {
+	border-width: 0px;
+	position: absolute;
+	left: 150px;
+	width: 965px;
+	padding-top: 20px; padding-bottom : 20px;
+	font-style: normal;
+	font-size: 14px;
+	color: #646E7C;
+	border-bottom: 1px solid rgb(223, 234, 236);
+	padding-bottom: 20px;
+}
+
+.content {
+	border-width: 0px;
+	position: absolute;
+	left: 150px;
+	top: 158px;
+	width: 866px;
+	height: 600px;
+	background: inherit;
+	background-color: rgba(255, 255, 255, 1);
+	border: none;
+	border-radius: 2px;
+	padding: 40px 50px 20px 50px;
+}
+
+.content_title {
+	font-size: 26px;
+	line-height: 30px;
+	font-style: normal;
+	font-size: 18px;
+	color: #00253E;
+	text-align: left;
+}
+
+.content_laiyuan {
+	text-align: left;
+	padding-top: 10px;
+	padding-bottom: 30px;
+	font-style: normal;
+	font-size: 12px;
+	color: #646E7C;
+	text-align: left;
+}
+
+.show {
+	font-style: normal;
+	font-size: 12px;
+	color: #009BEF;
+	text-align: left;
+}
+
+.zhengwen {
+	color: #333333;
+	font-size: 14px;
+	line-height: 30px;
+}
+
+.zhengwen_title {
+	border-bottom: 1px solid rgb(223, 234, 236);
+	margin-bottom: 10px;
+}

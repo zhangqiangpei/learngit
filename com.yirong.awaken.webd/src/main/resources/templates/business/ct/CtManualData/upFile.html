@@ -1,0 +1,19 @@
+<div id="upFile" class="main">
+	<el-dialog title="上传文件"  :visible.sync="dialogVisible">
+           <el-upload
+           :accept="fileType"
+			  class="upload-demo"
+			  ref="upload"
+			  action="/file/upFile"
+			  :file-list="fileList"
+			  :data="form"
+			  :multiple="false"
+			  :before-upload="beforeAvatarUpload">
+			  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+			  <div slot="tip" class="el-upload__tip">只能上传excel文件</div>
+			</el-upload>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/ct/CtManualData/js/upFile.js"></script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+		window.onload = function (){
+			var yScroll = (document.documentElement.scrollHeight >document.documentElement.clientHeight) ? document.documentElement.scrollHeight : document.documentElement.clientHeight; 
+			$("#main").css("height", yScroll - top.$(".bg-black").height()); 
+		};
+		
+	</script>
+</head>
+<body>
+	 <div id="main" class="main" style="overflow:auto;">
+		 <!-- 查询条件 -->
+         <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel">
+            <el-row>
+                <el-form-item label="流程名称" prop="flowName">
+                    <el-input v-model="tableSearchModel.flowName" placeholder="请输入流程名称"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="searchClick" size="small" name="per_dm_fml_show">查 询</el-button>
+                    <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+                </el-form-item>
+            </el-row>
+            <el-row>
+                <el-form-item>
+                    <el-button type="primary" @click="updateClick" icon="plus" size="small" name="per_dm_fml_edit">配置目录</el-button>
+                </el-form-item>
+            </el-row>
+        </el-form>
+
+		<!-- 数据 -->
+        <el-table :data="tableData" id="tableId" height=100% @sort-change="tableSortChange"  @selection-change="tableChange" ref="mytable" stripe  border>
+            <el-table-column type="selection" align="center" width="55"></el-table-column>
+            <el-table-column prop="flow_name" label="流程名称" sortable="custom"></el-table-column>
+            <el-table-column prop="name" label="采集渠道 " sortable="custom"></el-table-column>
+            <el-table-column prop="catalog_name" label="目录名称" sortable="custom"></el-table-column>
+        </el-table>
+
+		<!-- 分页 -->
+        <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"  @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize" 
+        	@current-change="tableCurrentChange" layout="total, sizes, prev, pager, next, jumper">
+        </el-pagination>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/dm/DmCatalogFlow/js/DmCatalogFlowMain.js"></script>
+</body>
+</html>

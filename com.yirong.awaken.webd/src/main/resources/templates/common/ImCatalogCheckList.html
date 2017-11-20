@@ -1,0 +1,52 @@
+<script src="/frame/awaken/awaken.util.js"></script>
+<div id="ImCatalogAddList" class="main">
+	<el-dialog title="标准列表选择器" 
+                   :visible.sync="dialogVisible">
+            <!-- 查询条件 -->
+            <el-form :inline="true"
+                         :model="tableSearchModel"
+                         ref="tableSearchModel">
+                    <el-row>
+                        <el-form-item label="名称" prop=catalogName>
+                            <el-input v-model="tableSearchModel.catalogName" placeholder="请输入目录名称"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="searchClick">查 询</el-button>
+                            <el-button type="default" @click="tableResetCondition">重 置</el-button>
+                        </el-form-item>
+                    </el-row>
+                </el-form>
+
+				<!-- 数据 -->
+                <el-table :data="tableData"
+                          @sort-change="tableSortChange"
+                          ref="mytable" stripe
+                          highlight-current-row height="300"
+                           @selection-change="tableChange"
+                          border>
+                   <el-table-column type="selection" align="center" width="45">
+		           </el-table-column>
+                    <el-table-column prop="catalogName"
+                                     label="目录名称" sortable="custom"
+                                     >
+                    </el-table-column>
+                    <el-table-column prop="catalogRemark"
+                                     label="说明" sortable="custom"
+                                     width="300">
+                    </el-table-column>
+                </el-table>
+
+				<!-- 分页 -->
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :total="tableTotal"
+                                @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize" 
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+                <el-button type="primary" @click="saveSubmit" size="small">确定</el-button>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/common/js/ImCatalogCheckList.js"></script>
