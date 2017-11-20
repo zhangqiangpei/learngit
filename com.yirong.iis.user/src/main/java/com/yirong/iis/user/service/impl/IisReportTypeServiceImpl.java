@@ -84,20 +84,24 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
 		// 拼装查询sql
 		List<Object> param = new ArrayList<Object>();
 		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT IRT.ID,");
-		sql.append("IRT.TYPE_NAME AS typeName,");
-		sql.append("FROM IIS_REPORT_TYPE AS IRT ");
+		sql.append("SELECT IRT.ID AS id,");
+		sql.append("IRT.TYPE_NAME AS typeName ");
+		sql.append("FROM IIS_REPORT_TYPE IRT ");
 		sql.append("WHERE 1=1 ");
 		// 标准编码
 		if (StringUtil.isNotNullOrEmpty(ue.getTypeName())) {
 			sql.append("AND IRT.TYPE_NAME LIKE ? ");
 			param.add("%" + ue.getTypeName() + "%");
 		}
+		// 标准编码
+		if (StringUtil.isNotNullOrEmpty(ue.getIsOutside().toString())) {
+			sql.append("AND IRT.IS_OUTSIDE = ? ");
+			param.add(ue.getIsOutside());
+		}
 		// 获取数据
-		PageEntiry pageEntiry = this.findPageSQLMap(sql.toString(), param,
-				null, ue);
+		List<Map<String, Object>> mapList = this.exeNativeQueryMap(sql.toString(), param);
 		return ResultUtil.newOk("操作成功")
-				.setData(pageEntiry).toMap();
+				.setData(mapList).toMap();
 	}
 	
 }

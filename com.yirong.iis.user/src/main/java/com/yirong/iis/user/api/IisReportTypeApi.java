@@ -66,7 +66,7 @@ public class IisReportTypeApi {
 				 .StringToObject(param, IisReportTypeUserEntity.class,calssMap);
 		 // 处理业务
 		 Map map = iisReportTypeService.queryIisReportTypeList(psue);
-		 return JsonUtil.ObjectToString(map);
+		 return JsonUtil.ObjectToStringClob(map);
 	 }
 
 }

@@ -1,0 +1,44 @@
+<div id="save" class="main">
+	<el-dialog title="新增数据库" 
+                   :visible.sync="dialogVisible">
+            <el-form :model="saveModel"
+                     :rules="saveRules"
+                     ref="saveModel"
+                     label-width="100px"
+                      >
+                <el-form-item label="名称" prop="databaseName">
+                    <el-input v-model="saveModel.databaseName" placeholder="请输入数据库名称(长度：1-32)"></el-input>
+                </el-form-item>
+               <el-form-item label="类型" prop="databaseType"> 
+		           	<el-select v-model="saveModel.databaseType" placeholder="数据库类型">
+                        <el-option label="MySQL" value="014001"></el-option>
+                        <el-option label="Oracle" value="014002"></el-option>
+                    </el-select>
+		          </el-form-item>
+		        <el-form-item label="用户名" prop="databaseUsername">
+                    <el-input v-model="saveModel.databaseUsername" placeholder="请输入数据库用户名"></el-input>
+                </el-form-item>
+                <el-form-item label="密码" prop=databasePassword>
+                	<el-input v-model="saveModel.databasePassword" placeholder="请输入数据库密码"></el-input>
+                </el-form-item>
+                <el-form-item label="URL" prop="databaseUrl">
+                	<el-input v-model="saveModel.databaseUrl" placeholder="请输入数据库链接地址"></el-input>
+                </el-form-item>
+                <el-form-item label="说明" prop="databaseRemark">
+                    <el-input type="textarea" :rows="2" v-model="saveModel.databaseRemark" placeholder="请输入说明(长度：1-64)"></el-input>
+                </el-form-item>
+                 <el-form-item label="是否启用" prop="isEnable">
+                    <el-switch v-model="saveModel.isEnable"
+                    on-text="启用" off-text="禁用" 
+                    on-value="1" off-value="0"></el-switch>
+				</el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="saveSubmit" size="small">确定</el-button>
+                    <el-button @click="saveReset" size="small">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/ct/CtDatabase/js/CtDatabaseSave.js"></script>

@@ -1,0 +1,22 @@
+<div id="save" class="main">
+	<el-dialog title="新增标准"  :visible.sync="dialogVisible">
+    	<el-form :model="saveModel" :rules="saveRules" ref="saveModel" label-width="100px">
+        	<el-form-item label="标准编号" prop="standardCode">
+            	<el-input v-model="saveModel.standardCode" placeholder="请输入标准编码(长度：1-32)"></el-input>
+            </el-form-item>
+            <el-form-item label="标准名称" prop="standardName">
+                <el-input v-model="saveModel.standardName" placeholder="请输入标准名称(长度：1-64)"></el-input>
+            </el-form-item>
+            <el-form-item label="标准分类名称" prop="standardTypeName">
+                <el-input v-model="standardTypeName" :disabled="true"></el-input>
+            </el-form-item>
+            <el-row style="text-align:center">
+                <el-button type="primary" @click="saveSubmit" size="small">确定</el-button>
+                <el-button @click="saveReset" size="small">重置</el-button>
+            </el-form-item>
+        </el-form>
+    </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/pm/PmStandard/js/PmStandardSave.js"></script>

@@ -199,9 +199,8 @@ public class IisReportTemplateServiceImpl extends BaseService<IisReportTemplate,
          StringBuffer sql = new StringBuffer();
          sql.append("SELECT IRT.ID AS id,");
          sql.append("IRT.TEMPLATE_NAME AS templateName,");
-         sql.append("IRT.TEMPLATE_INFO AS templateInfo,");
-         sql.append("DATA_FORMAT(IRT.CREATE_TIME, '%Y-%m-%d %H:%i:%S') AS creatorTime ");
-         sql.append("FROM IIS_REPORT_TEMPLATE AS IRT ");
+         sql.append("IRT.TEMPLATE_INFO AS templateInfo ");
+         sql.append("FROM IIS_REPORT_TEMPLATE IRT ");
          sql.append("WHERE IRT.ID = ? ");
          List<Object> param = new ArrayList<Object>();
          param.add(id);
@@ -230,9 +229,8 @@ public class IisReportTemplateServiceImpl extends BaseService<IisReportTemplate,
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT IRT.ID AS id,");
 		sql.append("IRT.TEMPLATE_NAME AS templateName,");
-		sql.append("IRT.TEMPLATE_INFO AS templateInfo,");
-		sql.append("DATA_FORMAT(IRT.CREATE_TIME, '%Y-%m-%d %H:%i:%S') AS creatorTime ");
-		sql.append("FROM IIS_REPORT_TEMPLATE AS IRT ");
+		sql.append("IRT.TEMPLATE_INFO AS templateInfo ");
+		sql.append("FROM IIS_REPORT_TEMPLATE IRT ");
 		sql.append("WHERE IRT.CREATOR = ? ");
 		param.add(ue.getCreator());
 		// 添加模板名称

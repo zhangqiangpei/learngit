@@ -71,12 +71,6 @@ public class IisReport implements Serializable {
 	public String eosId;
 	
 	/**
-	* 是否开放(1是、0否)
-	*/
-	@Column(name="IS_OPEN",nullable=false,length=22)
-	public BigDecimal isOpen;
-	
-	/**
 	* 创建人
 	*/
 	@Column(name="CREATOR",nullable=true,length=32)
@@ -99,18 +93,6 @@ public class IisReport implements Serializable {
 	*/
 	@Column(name="MODIFY_TIME",nullable=true)
 	public Date modifyTime;
-
-     /**
-      * 共享类型
-      */
-     @Transient
-     public List<String> typeIdList;
-
-     /**
-      * 共享对象
-      */
-     @Transient
-     public List<String> shareObjId;
    
 	public String getId(){
 		return this.id;
@@ -154,13 +136,6 @@ public class IisReport implements Serializable {
 	public void setEosId (String eosId){
 		this.eosId=eosId;
 	}
-	public BigDecimal getIsOpen(){
-		return this.isOpen;
-	}
-		
-	public void setIsOpen (BigDecimal isOpen){
-		this.isOpen=isOpen;
-	}
 	public String getCreator(){
 		return this.creator;
 	}
@@ -189,20 +164,4 @@ public class IisReport implements Serializable {
 	public void setModifyTime (Date modifyTime){
 		this.modifyTime=modifyTime;
 	}
-
-     public List<String> getTypeIdList() {
-         return typeIdList;
-     }
-
-     public void setTypeIdList(List<String> typeIdList) {
-         this.typeIdList = typeIdList;
-     }
-
-     public List<String> getShareObjId() {
-         return shareObjId;
-     }
-
-     public void setShareObjId(List<String> shareObjId) {
-         this.shareObjId = shareObjId;
-     }
  }

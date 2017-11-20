@@ -1,0 +1,27 @@
+<div id="save" class="main">
+	<el-dialog title="新增目录" :visible.sync="dialogVisible">
+    	<el-form :model="saveModel" :rules="saveRules" ref="saveModel" label-width="100px"  >
+            <el-form-item label="目录名称" prop="catalogName">
+                <el-input v-model="saveModel.catalogName" placeholder="请输入目录名称(长度：1-40)"></el-input>
+            </el-form-item>
+            <el-form-item label="目录说明" prop="catalogRemark">
+                <el-input type="textarea" :rows="2" v-model="saveModel.catalogRemark" placeholder="请输入目录说明(长度：1-100)"></el-input>
+            </el-form-item>
+            <el-form-item label="目录属性" prop="catalogAttr">
+				<el-select v-model="saveModel.catalogAttr" placeholder="请选择">
+	            	<el-option :key="rs.key" :label="rs.label" :value="rs.value" v-for="rs in catalogAttrList"></el-option>
+	            </el-select>
+			</el-form-item>
+			<el-form-item label="目录分类名称" prop="catalogTypeName">
+            	<el-input v-model="catalogTypeName" :disabled="true"></el-input>
+            </el-form-item>
+            <el-row style="text-align:center">
+                <el-button type="primary" @click="saveSubmit" size="small">确定</el-button>
+            	<el-button @click="saveReset" size="small">重置</el-button>
+            </el-row>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/dm/DmCatalog/js/DmCatalogSave.js"></script>

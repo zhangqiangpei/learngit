@@ -1,0 +1,87 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+.flow {
+    position: relative;
+    padding: 0;
+    height: 560px;
+    border: 1px solid #d1e1e5;
+}
+
+.node {
+    position: absolute;
+    z-index: 20;
+    box-shadow: 2px 2px 19px #aaa;
+    border-radius: 5px;
+    opacity: 0.8;
+    border: 1px solid #346789;
+    width: 150px;
+    text-align: center;
+    background-color: #eeeeef;
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+    height: 50px;
+    line-height: 50px;
+}
+
+.node.begin, .node.end {
+    border-radius: 40px;
+}
+
+.node:hover {
+    box-shadow: 2px 2px 19px #444;
+    opacity: 1;
+}
+
+.node:hover .el-icon-delete {
+    display: inline-block;
+}
+
+.node .el-icon-delete {
+    display: none;
+    margin-left: 5px;
+}
+
+.aLabel.jtk-overlay {
+    display:none;
+    background-color: #fff;
+    font-size:24px;
+    color: #444;
+    z-index: 21;
+    cursor: pointer;
+}
+
+.aLabel.jtk-hover {
+    display:inline-block;
+}
+
+.active {
+    border: 1px dotted green;
+} 
+
+.hover {
+    border: 1px dotted red;
+}
+
+.jtk-endpoint, .endpointTargetLabel, .endpointSourceLabel {
+    z-index: 21;
+    cursor: pointer;
+}
+
+.jtk-connected {
+    border: 1px solid green;
+}
+
+.jtk-drag {
+    outline: 4px solid pink !important;
+}
+
+path, .jtk-endpoint {
+    cursor: pointer;
+}
+
+.jtk-overlay {
+    background-color: transparent;
+}

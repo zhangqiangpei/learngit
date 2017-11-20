@@ -1,0 +1,64 @@
+<style>
+	#rule300 .el-dialog--small{ width:90%;}
+</style>
+<div id="rule300" class="main">
+	<el-dialog :title="checkObjectName" :visible.sync="dialogVisible">
+		<el-row style="margin-top:10px">
+			<div style="width:40%;float:left;">
+				<el-checkbox v-model="isCount" @change="countChange()">参与计数</el-checkbox>
+				<el-input v-model="countName" placeholder="请输入计数中文名称" style="width:150px;margin-left:10px;" v-show="countNameShow"></el-input>
+				<el-input v-model="countCode" placeholder="请输入计数英文名称" style="width:150px;margin-left:10px;" v-show="countCodeShow"></el-input>
+			</div>
+			<el-button type="primary" @click="saveCondition" style="float:left;margin-left:1%;">新增输出字段</el-button>
+		</el-row>
+		<el-row style="margin-top:10px;">
+	        <template>
+				<el-transfer v-model="rule300Model" :data="rule300Data" :titles="['选择前字段','参与分组字段']" style="float:left;width:40%;height:300px;" @change="groupChange()"></el-transfer>
+			</template>
+	        <!-- 数据 -->
+	        <el-table :data="tableData" ref="mytable" stripe  border height="290"  style="float:left;width:59%;margin-left:1%;">
+	            <el-table-column prop="name" label="字段名称" width="150" align="center">
+	            	<template scope="scope">
+	            		<el-select v-model="scope.row.name" placeholder="请选择字段" clearable @change="fieldChange(scope.$index, scope.row)">
+                        	<el-option :key="rs.key" :label="rs.label" :value="rs.value" v-for="rs in nameList"></el-option>
+                    	</el-select>
+                    </template>
+	            </el-table-column>
+	            <el-table-column prop="operationMode" label="操作方式" width="100">
+	            	<template scope="scope">
+	            		<el-select v-model="scope.row.operationMode" placeholder="请选择操作方式" clearable @change="operationModeChange(scope.$index, scope.row)">
+                        	<el-option :key="rs.key" :label="rs.label" :value="rs.value" v-for="rs in conditionList"></el-option>
+                    	</el-select>
+                    </template>
+	            </el-table-column>
+            	<el-table-column prop="newName" label="新字段中文名称" align="center">
+	            	<template scope="scope">
+	                    <el-input v-model="scope.row.newName" placeholder="请输入新字段中文名" ></el-input>
+	                </template>
+                </el-table-column>
+            	<el-table-column prop="newCode" label="新字段英文名称" align="center">
+            		<template scope="scope">
+            			<el-input v-model="scope.row.newCode" placeholder="请输入新字段英文名" ></el-input>
+            		</template>
+            	</el-table-column>
+	            <el-table-column label="操作" align="center" width="70">
+	                <template scope="scope">
+	                    <el-button size="small" type="danger"  @click="delCondition(scope.$index, scope.row)">删除</el-button>
+	                </template>
+	            </el-table-column>
+	        </el-table>
+		</el-row>
+		<!-- 按扭区 -->
+        <el-row style="text-align: center;width: 100%;">
+        	<el-button type="primary" @click="rule300Submit">确定</el-button>
+            <el-button @click="rule300Cancel">取消</el-button>
+            <el-popover ref="popover" placement="right" width="400" trigger="click" @show="getPopoverInfo">
+				<el-input type="textarea" v-model="elementRemark" disabled="true"></el-input>
+			</el-popover>
+            <el-button type="warning" v-popover:popover>帮助说明</el-button>
+        </el-row>
+     </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/pm/PmFlow/js/PmFlowRule300.js"></script>

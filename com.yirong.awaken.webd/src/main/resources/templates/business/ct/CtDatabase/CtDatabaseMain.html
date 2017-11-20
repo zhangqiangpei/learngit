@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+		           <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel"> 
+		           <el-row  id="divSrhBox"> 
+		           	<el-form-item label="名称" prop="databaseName"> 
+		           	<el-input v-model="tableSearchModel.databaseName" placeholder="请输入数据库名称" size="small"></el-input> 
+		           </el-form-item>
+		           <el-form-item label="类型" prop="databaseType"> 
+		           	<el-select v-model="tableSearchModel.databaseType" placeholder="数据库类型" size="small">
+                        <el-option
+					        v-for="item in databaseTypes"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+		           </el-form-item>
+		           <el-form-item label="是否启用" prop="isEnable"> 
+		           	<el-select v-model="tableSearchModel.isEnable" placeholder="状态" size="small">
+                        <el-option label="是" value="1"></el-option>
+                        <el-option label="否" value="0"></el-option>
+                    </el-select>
+		           </el-form-item>
+		           <el-form-item> 
+		           	<el-button type="primary" @click="searchClick" size="small" name="per_ct_db_show">查 询</el-button> 
+		           	<el-button type="default" @click="tableResetCondition" size="small">重 置</el-button> 
+		           </el-form-item>
+		          </el-row> 
+		          <el-row id="divOptBox"> 
+			          <el-form-item> 
+			           	<el-button type="primary" @click="addClick" icon="plus" size="small" name="per_ct_db_add">新 增</el-button> 
+			           	<el-button type="primary" @click="updateClick"icon="edit" size="small" name="per_ct_db_edit">修改</el-button> 
+			           	<el-button type="primary" @click="delClick" icon="delete" size="small" name="per_ct_db_del">删 除</el-button> 
+			           </el-form-item> 
+		           </el-row>
+		           </el-form> 
+		           <el-table id="tableId" height=100% :data="tableData" @sort-change="tableSortChange" @selection-change="tableChange" ref="mytable" stripe border> 
+		           <el-table-column type="selection" align="center" width="45">
+		           </el-table-column> <el-table-column prop="databaseName" label="名称" sortable>
+		           </el-table-column> <el-table-column prop="database_type" label="数据类型" width="100"> 
+		           </el-table-column> <el-table-column prop="database_username" label="用户名" width="150">  
+		           </el-table-column> <el-table-column prop="database_remark" label="说明" width="300">
+		           </el-table-column> <el-table-column prop="is_enable" label="启用状态" width="120">
+		           </el-table-column> <el-table-column prop="create_time" label="创建时间" width="180"> </el-table-column> 
+		           </el-table>
+		           <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"  @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize"  @current-change="tableCurrentChange" layout="total, sizes, prev, pager, next, jumper"> 
+		           </el-pagination>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/ct/CtDatabase/js/CtDatabaseMain.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div id="ImJudgeSpSingleTree" class="main">
+	<el-dialog title="信息处理库选择器"  :visible.sync="dialogVisible">
+    	<el-tree node-key="id" ref="tree" :data="treeData" :props="treeProps"  :expand-on-click-node="false" 
+    		:highlight-current="true" :default-expand-all="true"  @node-click="treeNodeClick" >
+    		</el-tree>
+ 
+    </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/common/js/ImJudgeSpSingleTree.js"></script>
