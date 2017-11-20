@@ -1,4 +1,4 @@
-package com.yirong.iis.lt.trkd.service;
+package com.yirong.iis.tp.trkd.service;
 
 import java.util.Date;
 import java.util.Map;
@@ -9,7 +9,7 @@ import com.yirong.awaken.core.util.ResultUtil;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.commons.util.datatype.StringUtil;
-import com.yirong.iis.lt.constant.LtConstant;
+import com.yirong.iis.tp.trkd.constant.LtConstant;
 
 @SuppressWarnings("unchecked")
 public abstract class LtHttpService {
