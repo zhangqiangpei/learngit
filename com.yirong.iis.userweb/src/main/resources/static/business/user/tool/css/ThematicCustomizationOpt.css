@@ -11,19 +11,20 @@ html,body {width: 955px; min-width: 955px;}
 	border-radius: 4px;
     -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    text-align:center;
 }
 /*.miiTitle{height:25px;background:url('bgx.png') repeat-x 0px -150px; padding:3px; font-weight:bold; color:#054C4D;}*/
 .miiTitle td{height:24px; padding:4px 3px 3px 15px;}
 .miiTitle_more{}
 .miiTitle_btn{}
-.miiTitle_btn_up{width:16px; height:16px; background:url('bg.png') no-repeat -18px 0px; float:left;}
-.miiTitle_btn_down{width:16px; height:16px; background:url('bg.png') no-repeat -34px 0px; float:left;}
-.miiTitle_btn_edit{width:16px; height:16px; background:url('bg.png') no-repeat -66px 0px; float:left;}
-.miiTitle_btn_close{width:16px; height:16px; background:url('bg.png') no-repeat -50px 0px; float:left;}
-.miiTitle_btn_up_{width:16px; height:16px; background:url('bg.png') no-repeat -18px -20px; float:left;}
-.miiTitle_btn_down_{width:16px; height:16px; background:url('bg.png') no-repeat -34px -20px; float:left;}
-.miiTitle_btn_edit_{width:16px; height:16px; background:url('bg.png') no-repeat -66px -20px; float:left;}
-.miiTitle_btn_close_{width:16px; height:16px; background:url('bg.png') no-repeat -50px -20px; float:left;}
+.miiTitle_btn_up{width:16px; height:16px; background:url('img/bg.png') no-repeat -18px 0px; float:left;}
+.miiTitle_btn_down{width:16px; height:16px; background:url('img/bg.png') no-repeat -34px 0px; float:left;}
+.miiTitle_btn_edit{width:16px; height:16px; background:url('img/bg.png') no-repeat -66px 0px; float:left;}
+.miiTitle_btn_close{width:16px; height:16px; background:url('img/bg.png') no-repeat -50px 0px; float:left;}
+.miiTitle_btn_up_{width:16px; height:16px; background:url('img/bg.png') no-repeat -18px -20px; float:left;}
+.miiTitle_btn_down_{width:16px; height:16px; background:url('img/bg.png') no-repeat -34px -20px; float:left;}
+.miiTitle_btn_edit_{width:16px; height:16px; background:url('img/bg.png') no-repeat -66px -20px; float:left;}
+.miiTitle_btn_close_{width:16px; height:16px; background:url('img/bg.png') no-repeat -50px -20px; float:left;}
 .miiEdit{border-bottom:1px solid #ddd;}
 .miiEdit_item{padding:3px;}
 .miiEdit_item .cap{width:80px;text-align:right; padding-right:3px;}
@@ -56,6 +57,8 @@ html,body {width: 955px; min-width: 955px;}
 	margin-left:-4px !important; margin-left:-4px;
 	filter:alpha(opacity=90); -moz-opacity:0.9; opacity:0.9;
 }
+
+#divDragItem .miiOperation{margin-left:0px !important; margin-left:0px;}
 
 
 .Grid{width:100%;border-color:#ddd;table-layout: fixed;border-collapse:collapse;}

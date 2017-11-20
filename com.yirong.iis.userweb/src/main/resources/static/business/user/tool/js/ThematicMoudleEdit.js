@@ -3,6 +3,9 @@ var vm = new Vue({
     data: {       
         dialogEditTextVisible:false,
 		dialogEditGridVisible:false,
+        curItemIdx:'',//当前编辑对象index
+        itemTit:'',
+        titDisplay:'1',
         editor:'',
 		datasourceURL:'',
 		checkedColumns:['id'],
@@ -11,6 +14,7 @@ var vm = new Vue({
     },
     methods: {
         saveText:function(){
+            debugger;
             var sHTML = $('#keFrame').get(0).contentWindow.editor.html();
             top.curEditObj.innerHTML = sHTML;
             $('#keFrame').get(0).contentWindow.editor.html('<strong>请输入内容<strong>');

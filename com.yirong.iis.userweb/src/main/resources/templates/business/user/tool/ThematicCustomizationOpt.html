@@ -40,11 +40,19 @@
 	</div>
 
 	<el-dialog title="编辑文本":visible.sync="dialogEditTextVisible" :close-on-press-escape="true">
+        <template>
+            <div style="margin-bottom:10px;">
+                标题：
+                <el-radio v-model="titDisplay" label="1">显示</el-radio>
+                <el-radio v-model="titDisplay" label="0">不显示</el-radio>
+                <el-input v-model="itemTit" v-if="titDisplay==1" placeholder="请输入标题" style="width:200px;"></el-input>
+            </div>
+        </template>
 		<iframe src="kindEditor.htm" id="keFrame" frameborder="0" style="width:100%;height:300px"></iframe>
 		<span slot="footer" class="dialog-footer">
-			<el-button @click="dialogEditTextVisible = false">取 消</el-button>
-			<el-button type="primary" @click="vm.saveText()">确 定</el-button>
-		  </span>
+            <el-button @click="dialogEditTextVisible = false">取 消</el-button>
+            <el-button type="primary" @click="saveText()">确 定</el-button>
+        </span>
 	</el-dialog>
 
 	<el-dialog title="编辑表格":visible.sync="dialogEditGridVisible" :close-on-press-escape="true">
@@ -67,7 +75,7 @@
 
 
 <script type="text/javascript">
-    var strHomeJSON='{&#34;cols&#34;:&#34;*|260,*,270&#34;,&#34;items&#34;:[{&#34;type&#34;:&#34;text&#34;,&#34;title&#34;:&#34;文本框&#34;,&#34;idx&#34;:1,&#34;col&#34;:0,&#34;row&#34;:0,&#34;tab&#34;:1},{&#34;type&#34;:&#34;table&#34;,&#34;title&#34;:&#34;表格&#34;,&#34;idx&#34;:2,&#34;col&#34;:1,&#34;row&#34;:0,&#34;tab&#34;:1},{&#34;col&#34;:2,&#34;row&#34;:1,&#34;type&#34;:&#34;chart&#34;,&#34;title&#34;:&#34;图表&#34;,&#34;idx&#34;:3,&#34;tab&#34;:1},{&#34;type&#34;:&#34;list&#34;,&#34;title&#34;:&#34;列表&#34;,&#34;idx&#34;:4,&#34;col&#34;:0,&#34;row&#34;:1,&#34;tab&#34;:1},{&#34;col&#34;:1,&#34;row&#34;:1,&#34;type&#34;:&#34;tabs&#34;,&#34;title&#34;:&#34;选项卡&#34;,&#34;tabs&#34;:[&#34;tab01&#34;,&#34;tab02&#34;],&#34;showCount&#34;:15,&#34;keyword&#34;:&#34;&#34;,&#34;searchTitle&#34;:&#34;&#34;,&#34;folderId&#34;:&#34;&#34;,&#34;folderName&#34;:&#34;&#34;,&#34;orgId&#34;:&#34;&#34;,&#34;orgName&#34;:&#34;&#34;,&#34;idx&#34;:5,&#34;tab&#34;:1}]}'.replace(/&#34;/img,'"');
+    var strHomeJSON='{&#34;cols&#34;:&#34;*|260,*,270&#34;,&#34;items&#34;:[{&#34;type&#34;:&#34;text&#34;,&#34;title&#34;:&#34;文本框&#34;,&#34;idx&#34;:1,&#34;col&#34;:0,&#34;row&#34;:0,&#34;tab&#34;:1},{&#34;type&#34;:&#34;table&#34;,&#34;title&#34;:&#34;表格&#34;,&#34;idx&#34;:2,&#34;col&#34;:1,&#34;row&#34;:0,&#34;tab&#34;:1},{&#34;col&#34;:2,&#34;row&#34;:1,&#34;type&#34;:&#34;chart&#34;,&#34;title&#34;:&#34;图表&#34;,&#34;idx&#34;:3,&#34;tab&#34;:1},{&#34;type&#34;:&#34;list&#34;,&#34;title&#34;:&#34;列表&#34;,&#34;idx&#34;:4,&#34;col&#34;:0,&#34;row&#34;:1,&#34;tab&#34;:1}]}'.replace(/&#34;/img,'"');
 	//strHomeJSON='';
 	//alert(strHomeJSON);
 	if (strHomeJSON==''){
