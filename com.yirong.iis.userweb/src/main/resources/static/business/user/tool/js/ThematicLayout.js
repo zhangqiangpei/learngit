@@ -558,11 +558,14 @@ function showItemEdit(idx){
 	//oDiv.style.display = oDiv.style.display=='none'?'':'none';
 	var oDiv=_('#MainIndexItemCnt_'+idx);
 	top.curEditObj = oDiv;
-
+    vm.curItemIdx = idx;
 	var item = getJsonItem(idx);
 	//文本框
 	if (item.type=='text'){
 		vm.dialogEditTextVisible = true;
+        vm.itemTit = item.title;
+        vm.titDisplay = '1';
+        if(z.isNullOrEmpty(item.title))vm.titDisplay = '0';
 		var sHTML = oDiv.innerHTML;
         if(sHTML)setTimeout(function(){$('#keFrame').get(0).contentWindow.editor.html(sHTML)},100);
 	}

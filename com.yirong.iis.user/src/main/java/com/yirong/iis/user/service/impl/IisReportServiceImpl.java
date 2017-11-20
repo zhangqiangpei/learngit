@@ -1,17 +1,27 @@
 package com.yirong.iis.user.service.impl;
 
 
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import com.yirong.awaken.core.util.BeanUtil;
+import com.yirong.commons.cache.eif.RedisCacheEif;
 import com.yirong.commons.util.error.ErrorPromptInfoUtil;
-import com.yirong.iis.user.entity.IisReportShare;
-import com.yirong.iis.user.entity.IisReportShareObj;
-import com.yirong.iis.user.entity.IisReportType;
-import com.yirong.iis.user.service.IisReportShareService;
+import com.yirong.iis.user.service.IisUserAwakenService;
+import com.yirong.iis.user.service.IisUserWebAwakenService;
+import com.yirong.iis.user.userentity.IisUserAwakenAddFileUserEntity;
+import com.yirong.iis.user.userentity.IisUserAwakenFileUserEntity;
+import com.yirong.iis.user.userentity.IisUserAwakenOperUserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.yirong.awaken.core.dao.IBaseDao;
@@ -56,7 +66,13 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 	private IisReportDao iisReportDao;
 
 	@Autowired
-    private IisReportShareService iisReportShareService;
+    private IisUserWebAwakenService iisUserWebAwakenService;
+
+	@Autowired
+    private IisUserAwakenService iisUserAwakenService;
+
+     @Autowired
+     private Environment environment;
 
 	 /**
 	 * 功能描述：获取dao操作类
@@ -87,14 +103,19 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 	  *         修改历史：(修改人，修改时间，修改原因/内容)
 	  *         </p>
 	  * @param iisReport
-	  * @return
+	  * @param tokenId
+      * @return
 	  */
 	 @Override
-	 public Map saveIisReport(IisReport iisReport){
+	 public Map saveIisReport(IisReport iisReport, String tokenId){
 		 // 根据编码及分类ID获取数据（唯一键）
 		 IisReport iisReportTemp = this.iisReportDao
 				 .findByReportName(iisReport.getReportName());
 		 String id = iisReport.getId();
+         String creator = RedisCacheEif.hget(tokenId, "id");
+         String creatorName = RedisCacheEif.hget(tokenId, "userDisplayName");
+         String createOrg = RedisCacheEif.hget(tokenId, "organizationId");
+         String createOrgName = RedisCacheEif.hget(tokenId, "organizationName");
 		 if (null == iisReportTemp
 				 || (StringUtil.isNotNullOrEmpty(id) && id.equals(iisReportTemp
 				 .getId()))) {// 该唯一键不存在 或者为“修改操作且修改本身数据”
@@ -104,29 +125,83 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 				 iisReportTemp = this.iisReportDao.findOne(id);
 				 // 复制属性
 				 BeanUtil.copyPropertiesIgnoreNull(iisReport, iisReportTemp);
-				 this.save(iisReportTemp);
-			 } else {
-				 this.save(iisReport);
-				 // 保存报告共享表
-                 IisReportShare iisReportShare = null;
-                 for (String typeId : iisReport.getTypeIdList()){
-                     iisReportShare = new IisReportShare();
-                     iisReportShare.setReportId(iisReport.getId());
-                     iisReportShare.setCreator(iisReport.getCreator());
-                     iisReportShare.setShareType(typeId);
-                     Map map = iisReportShareService.saveIisReportShare(iisReportShare);
-                     if (Integer.parseInt(map.get("code").toString()) != 0){
-                         return ResultUtil.newError("报告共享类型保存失败！").toMap();
-                     }
-                     // 保存报告共享对象表
-                     IisReportShareObj iisReportShareObj = null;
-                     switch (typeId){
-                         case "":
-                             break;
-                         default:
-                             return ResultUtil.newError("传入的共享类型不存在！").toMap();
+                 // 将文档转成docs
+                 File reportDocs = this.reportToDocs(iisReportTemp);
+                 if (!reportDocs.exists()){
+                     return ResultUtil.newError("文件转成doc失败！").toMap();
+                 }
+                 // Eos上传文件
+                 IisUserAwakenAddFileUserEntity iaafue = new IisUserAwakenAddFileUserEntity();
+                 iaafue.setDocName(reportDocs.getName());
+                 iaafue.setDocSize(Integer.parseInt(String.valueOf(reportDocs.length()/1024)));
+                 iaafue.setOrgCode(createOrg);
+                 iaafue.setOrgName(createOrgName);
+                 iaafue.setCreator(creator);
+                 iaafue.setCreatorName(creatorName);
+                 String eosId = null;
+                 try {
+                     eosId = iisUserWebAwakenService.httpUploadFile(iaafue, reportDocs);
+                 } catch (Exception e){
+                     logger.error(e);
+                     logger.error("文件上传到Eos失败");
+                 } finally {
+                     if (reportDocs.delete()) {
+                         logger.info("临时文件删除成功");
+                     } else {
+                         logger.error("临时文件删除失败");
                      }
                  }
+                 if (null == eosId){
+                     return ResultUtil.newError("文件上传到Eos失败").toMap();
+                 }
+                 IisUserAwakenFileUserEntity iafue = new IisUserAwakenFileUserEntity();
+                 iafue.setDocEosId(eosId);
+                 String kmId = iisUserAwakenService.httpAddInfo(iafue);
+                 if (null == kmId){
+                     return ResultUtil.newError("知识添加失败").toMap();
+                 }
+                 iisReportTemp.setKmId(kmId);
+                 iisReportTemp.setEosId(eosId);
+				 this.save(iisReportTemp);
+			 } else {
+                 // 将文档转成docs
+                 File reportDocs = this.reportToDocs(iisReport);
+                 if (!reportDocs.exists()){
+                     return ResultUtil.newError("文件转成doc失败！").toMap();
+                 }
+                 // Eos上传文件
+                 IisUserAwakenAddFileUserEntity iaafue = new IisUserAwakenAddFileUserEntity();
+                 iaafue.setDocName(reportDocs.getName());
+                 iaafue.setDocSize(Integer.parseInt(String.valueOf(reportDocs.length()/1024)));
+                 iaafue.setOrgCode(createOrg);
+                 iaafue.setOrgName(createOrgName);
+                 iaafue.setCreator(creator);
+                 iaafue.setCreatorName(creatorName);
+                 String eosId = null;
+                 try {
+                     eosId = iisUserWebAwakenService.httpUploadFile(iaafue, reportDocs);
+                 } catch (Exception e){
+                     logger.error(e);
+                     logger.error("文件上传到Eos失败");
+                 } finally {
+                     if (reportDocs.delete()) {
+                         logger.info("临时文件删除成功");
+                     } else {
+                         logger.error("临时文件删除失败");
+                     }
+                 }
+                 if (null == eosId){
+                     return ResultUtil.newError("文件上传到Eos失败").toMap();
+                 }
+                 IisUserAwakenFileUserEntity iafue = new IisUserAwakenFileUserEntity();
+                 iafue.setDocEosId(eosId);
+			 	String kmId = iisUserAwakenService.httpAddInfo(iafue);
+			 	if (null == kmId){
+                    return ResultUtil.newError("知识添加失败").toMap();
+                }
+			 	iisReport.setKmId(kmId);
+			 	iisReport.setEosId(eosId);
+				 this.save(iisReport);
 			 }
 			 return ResultUtil.newOk("操作成功").toMap();
 		 } else {// 该名称及父类ID已存在
@@ -151,18 +226,30 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 	  * @return
 	  */
 	 @Override
-	 public Map updateIisReport(IisReport iisReport) {
+	 public Map updateIisReport(IisReport iisReport, String tokenId) {
 		 // 根据编号Id
 		 IisReport iisReportTemp = this.iisReportDao.findOne(iisReport
 				 .getId());
 		 if (null == iisReportTemp) {// 未查询到任何数据
 			 String promptInfo = "不存在ID：" + iisReport.getId();
-			 String result = ErrorPromptInfoUtil.getErrorInfo("00102",
-					 promptInfo);
+			 String result = ErrorPromptInfoUtil.getErrorInfo("00102", promptInfo);
 			 logger.warn(result);
 			 return ResultUtil.newError(result).toMap();
 		 } else {// 有该数据
-			 return saveIisReport(iisReport);
+             // 删除EOS文件
+             IisUserAwakenOperUserEntity iuaoue = new IisUserAwakenOperUserEntity();
+             iuaoue.setId(iisReportTemp.getEosId());
+             iuaoue.setOperationtor(iisReportTemp.getCreator());
+             iuaoue.setOperationtorName(RedisCacheEif.hget(tokenId, "userDisplayName"));
+             if (!iisUserAwakenService.httpDeleteFile(iuaoue)){
+                 ResultUtil.newError("删除EOS文件失败").toMap();
+             }
+             // 删除知识
+             iuaoue.setId(iisReportTemp.getKmId());
+             if (!iisUserAwakenService.httpDeleteInfo(iuaoue)){
+                 ResultUtil.newOk("删除知识失败").toMap();
+             }
+			 return saveIisReport(iisReport, tokenId);
 		 }
 	 }
 
@@ -178,18 +265,19 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 	  *         修改历史：(修改人，修改时间，修改原因/内容)
 	  *         </p>
 	  * @param idStrs
-	  * @return
+	  * @param tokenId
+      * @return
 	  */
 	 @Override
-	 public Map delIisReport(String idStrs) {
+	 public Map delIisReport(String idStrs, String tokenId) {
 		 // 处理id集合串
 		 String[] ids = idStrs.split(",");
 		 /** 先判断所有ID是否允许删除 **/
-		 StringBuffer sb = new StringBuffer();
+         StringBuffer sb = new StringBuffer();
 		 for (String id : ids) {
 			 // 判断ID是否存在
-			 IisReport iisReport = this.iisReportDao.findOne(id);
-			 if (null == iisReport) {// 不存在直接跳出循环
+             IisReport iisReport = this.iisReportDao.findOne(id);
+             if (null == iisReport) {// 不存在直接跳出循环
 				 String promptInfo = "不存在ID：" + id;
 				 sb.append(ErrorPromptInfoUtil.getErrorInfo("00102", promptInfo));
 				 break;
@@ -199,7 +287,21 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 		 if (StringUtil.isNullOrEmpty(sb.toString())) {// 所有数据均允许删除
 			 // 将id循环拼装成序列化集合
 			 for (String id : ids) {
-				 this.iisReportDao.delete(id);// 物理删除
+                 IisReport iisReport = this.iisReportDao.findOne(id);
+                 // 删除EOS文件
+                 IisUserAwakenOperUserEntity iuaoue = new IisUserAwakenOperUserEntity();
+                 iuaoue.setId(iisReport.getEosId());
+                 iuaoue.setOperationtor(iisReport.getCreator());
+                 iuaoue.setOperationtorName(RedisCacheEif.hget(tokenId, "userDisplayName"));
+                 if (!iisUserAwakenService.httpDeleteFile(iuaoue)){
+                     ResultUtil.newError("删除EOS文件失败").toMap();
+                 }
+                 // 删除知识
+                 iuaoue.setId(iisReport.getKmId());
+                 if (!iisUserAwakenService.httpDeleteInfo(iuaoue)){
+                     ResultUtil.newOk("删除知识失败").toMap();
+                 }
+                 this.iisReportDao.delete(id);// 物理删除
 			 }
 			 return ResultUtil.newOk("操作成功").toMap();
 		 } else {// 不允许删除
@@ -231,10 +333,8 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
          sql.append("IR.REPORT_INFO AS reportInfo,");
          sql.append("IR.KM_ID AS kmId,");
          sql.append("IR.EOS_ID AS eosId,");
-         sql.append("IR.IS_OPEN AS isOpen,");
-         sql.append("IR.CREATOR AS creator,");
-         sql.append("DATA_FORMAT(IR.CREATE_TIME, '%Y-%m-%d %H:%i:%S') AS creatorTime ");
-         sql.append("FROM IIS_REPORT AS IR ");
+         sql.append("IR.CREATOR AS creator ");
+         sql.append("FROM IIS_REPORT IR ");
          sql.append("WHERE IR.ID = ? ");
 		 List<Object> param = new ArrayList<Object>();
 		 param.add(id);
@@ -268,10 +368,8 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 		 sql.append("IR.REPORT_INFO AS reportInfo,");
 		 sql.append("IR.KM_ID AS kmId,");
 		 sql.append("IR.EOS_ID AS eosId,");
-		 sql.append("IR.IS_OPEN AS isOpen,");
-		 sql.append("IR.CREATOR AS creator,");
-		 sql.append("DATA_FORMAT(IR.CREATE_TIME, '%Y-%m-%d %H:%i:%S') AS creatorTime ");
-		 sql.append("FROM IIS_REPORT AS IR ");
+		 sql.append("IR.CREATOR AS creator ");
+		 sql.append("FROM IIS_REPORT IR ");
 		 sql.append("WHERE 1=1 ");
 		 // 创建人
 		 if (StringUtil.isNotNullOrEmpty(ue.getCreator())) {
@@ -295,4 +393,92 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 				 .setData(pageEntiry).toMap();
 	 }
 
-}
+     /**
+      * 功能描述：报告转换成docs，返回转换后文件
+      *
+      * @author 林明铁
+      *         <p>
+      *         创建时间 ：2017-11-09 10:00:09
+      *         </p>
+      *
+      *         <p>
+      *         修改历史：(修改人，修改时间，修改原因/内容)
+      *         </p>
+      * @return
+      */
+	 @Override
+	 public File reportToDocs(IisReport iisReport) {
+	     File reportDocs = new File(
+	             this.getFileDirPath(null).toString() + File.separator + iisReport.getReportName()+".doc");
+         InputStream inputStream = null;
+         OutputStream os = null;
+         logger.info("报告开始转成doc文件。");
+         try {
+             String urlString = environment.getProperty("htmlToDoc.URL");
+             URL url = new URL(urlString);
+             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+             //设置发送数据
+             httpURLConnection.setDoOutput(true);
+             //设置接受数据
+             httpURLConnection.setDoInput(true);
+             //发送数据,使用输出流
+             OutputStream outputStream = httpURLConnection.getOutputStream();
+             String content = "html="+ URLEncoder.encode(iisReport.getReportInfo(), "UTF-8");
+             outputStream.write(content.getBytes());
+             outputStream.flush();
+             //接收数据
+             inputStream = httpURLConnection.getInputStream();
+             //定义字节数组
+             os = null;
+             os = new FileOutputStream(reportDocs);
+             int bytesRead = 0;
+             byte[] buffer = new byte[3096];
+             while ((bytesRead = inputStream.read(buffer, 0, 3096)) != -1) {
+                 os.write(buffer, 0, bytesRead);
+             }
+         } catch (IOException e) {
+             e.printStackTrace();
+         }finally {
+             try {
+                 if (null != inputStream) {
+                     inputStream.close();
+                 }
+             } catch (IOException e) {
+                 logger.error("文件输入流关闭异常");
+             }
+             if (os != null){
+                 try {
+                     os.close();
+                 } catch (IOException e) {
+                     logger.error("文件输出流关闭异常");
+                 }
+             }
+         }
+         logger.info("报告转成docs结束。");
+         return reportDocs;
+	 }
+
+     /**
+      * 获取临时文件存放路径
+      *
+      * @return
+      */
+     private Path getFileDirPath(String path) {
+         String dirPath;
+         if (null == path) {
+             dirPath = environment.getProperty("fileTemp.directory");
+         } else {
+             dirPath = path;
+         }
+         Path fileDirPath = Paths.get(dirPath);
+         try {
+             if (!Files.exists(fileDirPath)) {
+                 fileDirPath = Files.createDirectory(fileDirPath);
+             }
+         } catch (IOException e) {
+             logger.error(e);
+         }
+         return fileDirPath;
+     }
+
+ }
