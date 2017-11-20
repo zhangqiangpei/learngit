@@ -1,6 +1,5 @@
 package com.yirong.iis.tp.trkd.service.impl;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.json.JSONObject;
@@ -10,10 +9,8 @@ import org.springframework.stereotype.Service;
 import com.yirong.awaken.core.util.ResultUtil;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
-import com.yirong.commons.sys.eif.SysParameterEif;
 import com.yirong.commons.util.datatype.StringUtil;
 import com.yirong.commons.util.server.HttpRequestUtils;
-import com.yirong.iis.tp.trkd.constant.LtConstant;
 import com.yirong.iis.tp.trkd.service.LtHttpService;
 
 /**
@@ -29,9 +26,6 @@ public class LtGetRatiosReportsServiceImpl extends LtHttpService{
 	
 	@Override
 	public Map<String, Object> exec(Map<String, Object> param) {
-		Map<String,String> headMap = new HashMap<String,String>();
-		headMap.put("X-Trkd-Auth-Token", LtConstant.ltToken);
-		headMap.put("X-Trkd-Auth-ApplicationID", SysParameterEif.getValueByCode("Trkd-ApplicationID"));
 		JSONObject content = new JSONObject();
 		JSONObject GetRatiosReports_Request_1 = new JSONObject();
 		GetRatiosReports_Request_1.put("companyId", param.get("companyId").toString());//"IBM.N"
@@ -46,9 +40,9 @@ public class LtGetRatiosReportsServiceImpl extends LtHttpService{
 		
 		content.put("GetRatiosReports_Request_1", GetRatiosReports_Request_1);
 		String result = HttpRequestUtils.httpPostHead(
-				new StringBuffer("http://").append(SysParameterEif.getValueByCode("Trkd-Url")).append(LtConstant.trkdMap.get("GetRatiosReports")).toString(), 
+				getHttpUrl("GetRatiosReports"), 
 				content,
-				headMap);
+				getHeadMap());
 		logger.info("获取比率报告接口返回："+result);
 		if(StringUtil.isNotNullOrEmpty(result)){
 			JSONObject data = JSONObject.fromObject(result);

@@ -1,6 +1,7 @@
 package com.yirong.iis.tp.trkd.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.yirong.awaken.core.util.ResultUtil;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
+import com.yirong.commons.sys.eif.SysParameterEif;
 import com.yirong.commons.util.datatype.StringUtil;
 import com.yirong.iis.tp.trkd.constant.LtConstant;
 
@@ -39,5 +41,20 @@ public abstract class LtHttpService {
 	}
 	
 	public abstract Map<String, Object> exec(Map<String, Object> param);
+	
+	/**
+	 * 组装http head 公共头部
+	 * @return
+	 */
+	public Map<String,String> getHeadMap(){
+		Map<String,String> headMap = new HashMap<String,String>();
+		headMap.put("X-Trkd-Auth-Token", LtConstant.ltToken);
+		headMap.put("X-Trkd-Auth-ApplicationID", SysParameterEif.getValueByCode("Trkd-ApplicationID"));
+		return headMap;
+	}
+	
+	public String getHttpUrl(String code){
+		return new StringBuffer("http://").append(SysParameterEif.getValueByCode("Trkd-Url")).append(LtConstant.trkdMap.get(code)).toString();
+	}
 	
 }

@@ -1,6 +1,5 @@
 package com.yirong.iis.tp.trkd.service.impl;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.json.JSONObject;
@@ -10,10 +9,8 @@ import org.springframework.stereotype.Service;
 import com.yirong.awaken.core.util.ResultUtil;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
-import com.yirong.commons.sys.eif.SysParameterEif;
 import com.yirong.commons.util.datatype.StringUtil;
 import com.yirong.commons.util.server.HttpRequestUtils;
-import com.yirong.iis.tp.trkd.constant.LtConstant;
 import com.yirong.iis.tp.trkd.service.LtHttpService;
 
 /**
@@ -30,9 +27,6 @@ public class LtGetOfficersAndDirectorsServiceImpl extends LtHttpService{
 	
 	@Override
 	public Map<String, Object> exec(Map<String, Object> param) {
-		Map<String,String> headMap = new HashMap<String,String>();
-		headMap.put("X-Trkd-Auth-Token", LtConstant.ltToken);
-		headMap.put("X-Trkd-Auth-ApplicationID", SysParameterEif.getValueByCode("Trkd-ApplicationID"));
 		JSONObject content = new JSONObject();
 		JSONObject GetOfficersAndDirectors_Request_1 = new JSONObject();
 		GetOfficersAndDirectors_Request_1.put("companyId", param.get("companyId").toString());//"IBM.N"
@@ -48,9 +42,9 @@ public class LtGetOfficersAndDirectorsServiceImpl extends LtHttpService{
 		GetOfficersAndDirectors_Request_1.put("ShowReferenceInformation", param.get("ShowReferenceInformation"));
 		content.put("GetOfficersAndDirectors_Request_1", GetOfficersAndDirectors_Request_1);
 		String result = HttpRequestUtils.httpPostHead(
-				new StringBuffer("http://").append(SysParameterEif.getValueByCode("Trkd-Url")).append(LtConstant.trkdMap.get("GetOfficersAndDirectors")).toString(), 
+				getHttpUrl("GetOfficersAndDirectors"), 
 				content,
-				headMap);
+				getHeadMap());
 		logger.info("获取官员和董事接口返回："+result);
 		if(StringUtil.isNotNullOrEmpty(result)){
 			JSONObject data = JSONObject.fromObject(result);

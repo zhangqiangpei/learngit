@@ -1,7 +1,6 @@
 package com.yirong.iis.tp.trkd.service.impl;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.json.JSONObject;
@@ -31,9 +30,6 @@ public class LtValidateTokenServiceImpl extends LtHttpService{
 	
 	@Override
 	public Map<String, Object> exec(Map<String, Object> param) {
-		Map<String,String> headMap = new HashMap<String,String>();
-		headMap.put("X-Trkd-Auth-Token", LtConstant.ltToken);
-		headMap.put("X-Trkd-Auth-ApplicationID", SysParameterEif.getValueByCode("Trkd-ApplicationID"));
 		JSONObject content = new JSONObject();
 		JSONObject ValidateToken_Request_1 = new JSONObject();
 		ValidateToken_Request_1.put("ApplicationID", SysParameterEif.getValueByCode("Trkd-ApplicationID"));
@@ -41,9 +37,9 @@ public class LtValidateTokenServiceImpl extends LtHttpService{
 		
 		content.put("ValidateToken_Request_1", ValidateToken_Request_1);
 		String result = HttpRequestUtils.httpPostHead(
-				new StringBuffer("http://").append(SysParameterEif.getValueByCode("Trkd-Url")).append(LtConstant.trkdMap.get("ValidateToken")).toString(), 
+				getHttpUrl("ValidateToken"), 
 				content,
-				headMap);
+				getHeadMap());
 		logger.info("验证token返回："+result);
 		if(StringUtil.isNotNullOrEmpty(result)){
 			JSONObject data = JSONObject.fromObject(result);

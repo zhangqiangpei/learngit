@@ -74,9 +74,9 @@ public class MMInitServiceRunner implements CommandLineRunner {
 			RedisCacheEif.init(redisMap);
 			
 			//06初始化es配置信息
-			ElasticsearchCfg.initEsCfg(SysParameterEif.getValueByCode("iis.es.host"), 
-					Integer.parseInt(SysParameterEif.getValueByCode("iis.es.port")),  
-					SysParameterEif.getValueByCode("iis.es.clusterName"));
+			ElasticsearchCfg.initEsCfg(SysParameterEif.getValueByCode("awaken.es.host"), 
+					Integer.parseInt(SysParameterEif.getValueByCode("awaken.es.port")),  
+					SysParameterEif.getValueByCode("awaken.es.clusterName"));
 			
 			//07 初始化etl服务
 			//EtlEif.init(SysParameterEif.getValueByCode("iis.etl.url"));
