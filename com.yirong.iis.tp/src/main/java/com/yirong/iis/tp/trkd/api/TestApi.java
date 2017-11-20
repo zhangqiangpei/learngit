@@ -18,7 +18,7 @@ import com.yirong.iis.tp.trkd.service.LtHttpService;
 @RequestMapping("test")
 public class TestApi {
 	
-	@Resource(name="ltGetRatiosReportsServiceImpl")
+	@Resource(name="ltGetTRBCSchemaFulHierarchyServiceImpl")
 	private LtHttpService ltHttpService;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.POST)

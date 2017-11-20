@@ -52,7 +52,7 @@ public class LtTokenServiceImpl implements ILtTokenService{
 			if(data.has("CreateServiceToken_Response_1")){
 				LtConstant.ltToken = data.getJSONObject("CreateServiceToken_Response_1").getString("Token");
 				String dateStr = data.getJSONObject("CreateServiceToken_Response_1").getString("Expiration");
-				dateStr = dateStr.replace("T", " ").substring(0, dateStr.length()-9);
+				dateStr = dateStr.replace("T", " ").substring(0, 19);
 				Date date = DateUtil.dateAdd(DateUtil.str2Date(dateStr,DateUtil.FORMAT_SECOND), DateUtil.HOUR, 8);
 				LtConstant.expiration = date;
 				return ResultUtil.newOk("获取路透接口成功！").toMap();

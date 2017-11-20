@@ -52,7 +52,7 @@ public class LtValidateTokenServiceImpl extends LtHttpService{
 			//返回成功 处理数据
 			if(data.has("ValidateToken_Response_1")){
 				String dateStr = data.getJSONObject("ValidateToken_Response_1").getString("Expiration");
-				dateStr = dateStr.replace("T", " ").replace("Z", "");
+				dateStr = dateStr.replace("T", " ").substring(0, 19);
 				Date date = DateUtil.dateAdd(DateUtil.str2Date(dateStr,DateUtil.FORMAT_SECOND), DateUtil.HOUR, 8);
 				LtConstant.expiration = date;
 				
