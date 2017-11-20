@@ -1,11 +1,11 @@
-package com.yirong.iis.lt.trkd.service.impl;
+package com.yirong.iis.tp.trkd.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.stereotype.Service;
-
 import net.sf.json.JSONObject;
+
+import org.springframework.stereotype.Service;
 
 import com.yirong.awaken.core.util.ResultUtil;
 import com.yirong.commons.logging.Logger;
@@ -13,8 +13,8 @@ import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.commons.sys.eif.SysParameterEif;
 import com.yirong.commons.util.datatype.StringUtil;
 import com.yirong.commons.util.server.HttpRequestUtils;
-import com.yirong.iis.lt.constant.LtConstant;
-import com.yirong.iis.lt.trkd.service.LtHttpService;
+import com.yirong.iis.tp.trkd.constant.LtConstant;
+import com.yirong.iis.tp.trkd.service.LtHttpService;
 
 /**
  * Get Officers & Directors
@@ -47,7 +47,8 @@ public class LtGetOfficersAndDirectorsServiceImpl extends LtHttpService{
 		
 		GetOfficersAndDirectors_Request_1.put("ShowReferenceInformation", param.get("ShowReferenceInformation"));
 		content.put("GetOfficersAndDirectors_Request_1", GetOfficersAndDirectors_Request_1);
-		String result = HttpRequestUtils.httpPostHead("http://api.trkd.thomsonreuters.com/api/Fundamentals/Fundamentals.svc/REST/Fundamentals_1/GetOfficersAndDirectors_1", 
+		String result = HttpRequestUtils.httpPostHead(
+				new StringBuffer("http://").append(SysParameterEif.getValueByCode("Trkd-Url")).append(LtConstant.trkdMap.get("GetOfficersAndDirectors")).toString(), 
 				content,
 				headMap);
 		logger.info("获取官员和董事接口返回："+result);
@@ -61,6 +62,8 @@ public class LtGetOfficersAndDirectorsServiceImpl extends LtHttpService{
 			
 			//返回成功 处理数据
 			if(data.has("GetOfficersAndDirectors_Response_1")){
+				
+				
 				return ResultUtil.newOk("获取获得官员和董事成功！").toMap();
 			}
 		}
