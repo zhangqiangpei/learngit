@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.yirong.commons.sys.eif.SysParameterEif;
 
 public class SqlServerUtil {
 	public static ComboPooledDataSource dataSource = new ComboPooledDataSource();
@@ -19,13 +20,13 @@ public class SqlServerUtil {
 	public static void initPoolConfig(){
         try {
 			dataSource.setDriverClass("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			dataSource.setJdbcUrl("jdbc:sqlserver://10.142.55.192:1433;DatabaseName=SGDatabase");
-	        dataSource.setUser("dl");
-	        dataSource.setPassword("dl@123");
-	        dataSource.setInitialPoolSize(1);//连接池初始化时创建的连接数
-	        dataSource.setMaxPoolSize(5);//连接池中拥有的最大连接数，如果获得新连接时会使连接总数超过这个值则不会再获取新连接，而是等待其他连接释放，所以这个值有可能会设计地很大
-	        dataSource.setMinPoolSize(1);//连接池保持的最小连接数
-	        dataSource.setMaxIdleTime(30);//连接的最大空闲时间，如果超过这个时间，某个数据库连接还没有被使用，则会断开掉这个连接。如果为0，则永远不会断开连接,即回收此连接
+			dataSource.setJdbcUrl(SysParameterEif.getValueByCode("Dl-SqlServer-Url"));
+	        dataSource.setUser(SysParameterEif.getValueByCode("Dl-Username"));
+	        dataSource.setPassword(SysParameterEif.getValueByCode("Dl-Password"));
+	        dataSource.setInitialPoolSize(Integer.parseInt(SysParameterEif.getValueByCode("Dl-InitialPoolSize")));//连接池初始化时创建的连接数
+	        dataSource.setMaxPoolSize(Integer.parseInt(SysParameterEif.getValueByCode("Dl-MaxPoolSize")));//连接池中拥有的最大连接数，如果获得新连接时会使连接总数超过这个值则不会再获取新连接，而是等待其他连接释放，所以这个值有可能会设计地很大
+	        dataSource.setMinPoolSize(Integer.parseInt(SysParameterEif.getValueByCode("Dl-MinPoolSize")));//连接池保持的最小连接数
+	        dataSource.setMaxIdleTime(Integer.parseInt(SysParameterEif.getValueByCode("Dl-MaxIdleTime")));//连接的最大空闲时间，如果超过这个时间，某个数据库连接还没有被使用，则会断开掉这个连接。如果为0，则永远不会断开连接,即回收此连接
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
