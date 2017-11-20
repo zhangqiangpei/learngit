@@ -93,6 +93,11 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
 			sql.append("AND IRT.TYPE_NAME LIKE ? ");
 			param.add("%" + ue.getTypeName() + "%");
 		}
+		// 标准编码
+		if (StringUtil.isNotNullOrEmpty(ue.getIsOutside().toString())) {
+			sql.append("AND IRT.IS_OUTSIDE = ? ");
+			param.add(ue.getIsOutside());
+		}
 		// 获取数据
 		List<Map<String, Object>> mapList = this.exeNativeQueryMap(sql.toString(), param);
 		return ResultUtil.newOk("操作成功")

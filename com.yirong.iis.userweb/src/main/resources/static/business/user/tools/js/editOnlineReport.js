@@ -335,7 +335,7 @@ var editOnlineReportVue = new Vue({
     mounted: function() {
         var result;
         // 初始化报告分类
-        result = z.msService("user","IisReportTypeApi/list",{typeName: ""});
+        result = z.msService("user","IisReportTypeApi/list",{typeName: "", isOutside: 0});
         if(result.code === 0){
             this.reportTypeTreeData = result.data;
         }
