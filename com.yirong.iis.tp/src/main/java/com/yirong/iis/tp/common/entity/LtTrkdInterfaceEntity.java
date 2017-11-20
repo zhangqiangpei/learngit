@@ -1,4 +1,4 @@
-package com.yirong.iis.tp.trkd.entity;
+package com.yirong.iis.tp.common.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
