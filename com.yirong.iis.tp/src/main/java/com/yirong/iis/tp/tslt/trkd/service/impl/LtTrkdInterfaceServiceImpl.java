@@ -1,4 +1,4 @@
-package com.yirong.iis.tp.trkd.service.impl;
+package com.yirong.iis.tp.tslt.trkd.service.impl;
 
 import java.util.List;
 
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import com.yirong.awaken.core.dao.IBaseDao;
 import com.yirong.awaken.core.service.impl.BaseService;
 import com.yirong.commons.util.order.Order;
-import com.yirong.iis.tp.trkd.constant.LtConstant;
-import com.yirong.iis.tp.trkd.dao.LtTrkdInterfaceDao;
-import com.yirong.iis.tp.trkd.entity.LtTrkdInterfaceEntity;
-import com.yirong.iis.tp.trkd.service.ILtTrkdInterfaceService;
+import com.yirong.iis.tp.common.constant.LtConstant;
+import com.yirong.iis.tp.common.dao.LtTrkdInterfaceDao;
+import com.yirong.iis.tp.common.entity.LtTrkdInterfaceEntity;
+import com.yirong.iis.tp.tslt.trkd.service.ILtTrkdInterfaceService;
 
 @Service("ltTrkdInterfaceServiceImpl")
 public class LtTrkdInterfaceServiceImpl extends BaseService<LtTrkdInterfaceEntity,String> implements ILtTrkdInterfaceService{

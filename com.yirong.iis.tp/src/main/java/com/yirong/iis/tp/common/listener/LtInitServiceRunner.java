@@ -1,4 +1,4 @@
-package com.yirong.iis.tp.trkd.listener;
+package com.yirong.iis.tp.common.listener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ import com.yirong.commons.sys.eif.SysParameterEif;
 import com.yirong.commons.util.datatype.StringUtil;
 import com.yirong.commons.util.error.ErrorPromptInfoUtil;
 import com.yirong.commons.util.file.PropertiesFileUtil;
-import com.yirong.iis.tp.trkd.constant.LtConstant;
+import com.yirong.iis.tp.common.constant.LtConstant;
 import com.yirong.microservices.client.MsClient;
 
 /**

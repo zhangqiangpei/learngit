@@ -1,4 +1,4 @@
-package com.yirong.iis.tp.trkd.service.impl;
+package com.yirong.iis.tp.tslt.trkd.service.impl;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.commons.util.datatype.StringUtil;
 import com.yirong.commons.util.server.HttpRequestUtils;
-import com.yirong.iis.tp.trkd.service.LtHttpService;
+import com.yirong.iis.tp.tslt.trkd.service.LtHttpService;
 
 /**
  * 获取基础知识参考列表

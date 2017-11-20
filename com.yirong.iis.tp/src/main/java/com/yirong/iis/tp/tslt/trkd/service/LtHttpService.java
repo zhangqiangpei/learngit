@@ -1,4 +1,4 @@
-package com.yirong.iis.tp.trkd.service;
+package com.yirong.iis.tp.tslt.trkd.service;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.commons.sys.eif.SysParameterEif;
 import com.yirong.commons.util.datatype.StringUtil;
-import com.yirong.iis.tp.trkd.constant.LtConstant;
+import com.yirong.iis.tp.common.constant.LtConstant;
 
 @SuppressWarnings("unchecked")
 public abstract class LtHttpService {

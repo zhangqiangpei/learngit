@@ -1,4 +1,4 @@
-package com.yirong.iis.tp.trkd.service.impl;
+package com.yirong.iis.tp.tslt.trkd.service.impl;
 
 import java.util.Date;
 import java.util.Map;
@@ -14,8 +14,8 @@ import com.yirong.commons.sys.eif.SysParameterEif;
 import com.yirong.commons.util.datatype.DateUtil;
 import com.yirong.commons.util.datatype.StringUtil;
 import com.yirong.commons.util.server.HttpRequestUtils;
-import com.yirong.iis.tp.trkd.constant.LtConstant;
-import com.yirong.iis.tp.trkd.service.ILtTokenService;
+import com.yirong.iis.tp.common.constant.LtConstant;
+import com.yirong.iis.tp.tslt.trkd.service.ILtTokenService;
 
 /**
  * 获取token

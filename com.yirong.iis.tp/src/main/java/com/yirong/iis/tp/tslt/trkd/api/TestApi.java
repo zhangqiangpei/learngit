@@ -1,4 +1,4 @@
-package com.yirong.iis.tp.trkd.api;
+package com.yirong.iis.tp.tslt.trkd.api;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yirong.commons.util.datatype.JsonUtil;
-import com.yirong.iis.tp.trkd.service.LtHttpService;
+import com.yirong.iis.tp.tslt.trkd.service.LtHttpService;
 
 @SuppressWarnings("rawtypes")
 @RestController

@@ -1,4 +1,4 @@
-package com.yirong.iis.tp.trkd.listener;
+package com.yirong.iis.tp.common.listener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
-import com.yirong.iis.tp.trkd.service.ILtTrkdInterfaceService;
+import com.yirong.iis.tp.tslt.trkd.service.ILtTrkdInterfaceService;
 
 /**
  * 加载数据,不管是否为单独微服务都会执行
