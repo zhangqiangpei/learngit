@@ -1,4 +1,4 @@
-package com.yirong.iis.constant;
+package com.yirong.iis.userweb.constant;
 
 import com.yirong.commons.sys.eif.SysParameterEif;
 

@@ -5,19 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>首页</title>
-    
+    <title>在线浏览</title>
+
     <link href="/frame/elementui/elementui.css" rel="stylesheet" />
     <link href="/common/css/reset.css" rel="stylesheet" />
     <link href="/common/css/com.css" rel="stylesheet" />
     <link href="/business/user/index/css/index.css" rel="stylesheet" />
 </head>
 <body>
-    
+
 <!---------------网页头部start----------------->
 <div id="header" class="header"></div>
 <!---------------网页头部end------------------->
-    
+
 <!---------------网页工具栏(如有)start----------
 <div id="toolbar" class="toolbar"></div>
 !---------------网页工具栏索(如有)end----------->
@@ -25,44 +25,34 @@
 <!---------------网页主体start----------------->
 <div id="main" class="main  clearfix">
     <el-row>
-        <el-col :span="6">&nbsp;</el-col>
-        <el-col :span="12">
-            <el-input v-model="searchData">
-                <el-button slot="append" icon="el-icon-search" @click="searchReport"></el-button>
-            </el-input>
+        <el-col :span="19">&nbsp;</el-col>
+        <el-col :span="5">
+            <el-button v-if="!isFavorite" @click="addFavorite" type="primary" size="small" icon="el-icon-star-on">&emsp;收&emsp;藏</el-button>
+            <el-button v-else @click="cancelFavorite" type="primary" size="small" icon="el-icon-star-off">取消收藏</el-button>
+            <el-button v-if="!isCare" @click="addCare" type="primary" size="small" icon="el-icon-star-on">&emsp;关&emsp;注</el-button>
+            <el-button v-else @click="cancelCare" type="primary" size="small" icon="el-icon-star-off">取消关注</el-button>
         </el-col>
-        <el-col :span="6">&nbsp;</el-col>
     </el-row>
-
-    <div id="category" style="margin-right: 160px; margin-top: 20px;">
-        <div v-for="(item, index) in typeData">
-            <el-col :span="11" style="margin-left: 16px;">
-                <el-tabs type="card">
-                    <el-tab-pane >
-                        <span slot="label">{{item[0].TYPE_NAME}}</span>
-                        <div v-for="(type, index) in item">
-                           <a :href="'forward.do?viewPath=business/user/online/onlineMain.html&kmId='+type.KM_ID+'&id='+type.ID">
-                               <el-col :span="19">{{type.REPORT_NAME}}</el-col>
-                               <el-col :span="5">{{type.CREATE_TIME}}</el-col>
-                           </a>
-                        </div>
-                        <el-button style="float: right; margin-right: 20px;" type="text" @click="moreTypeData(item)">更多...</el-button>
-                    </el-tab-pane>
-                </el-tabs>
-            </el-col>
+    <!-- ****************************************在线阅读部分*************************************** -->
+    <el-row style="margin-top: 19px;">
+        <div id="swf" style="height: 600px; overflow: auto; border: 1px solid #e0e0e0;"></div>
+        <div id="blank-div"
+             style="border: 1px solid #e0e0e0;text-align:center;padding:100px 0;font-size:24px; display: none">
+            抱歉！文本正在转换，暂不能在线浏览,请稍候...
         </div>
-    </div>
+    </el-row>
 </div>
 <!---------------网页主体end------------------->
- 
+
 <!---------------网页底部start----------------->
 <div id="footer" class="footer"></div>
 <!---------------网页底部end------------------->
-    
+
 </body>
 </html>
 <script src="/frame/jquery/jquery.min.js"></script>
 <script src="/frame/vue/vue.min.js"></script>
 <script src="/frame/elementui/elementui.js"></script>
 <script src="/common/js/com.js"></script>
-<script src="/business/user/index/js/index.js"></script>
+<script src="/frame/swfObject/swfobject.js"></script>
+<script src="/business/user/online/js/onlineMain.js"></script>

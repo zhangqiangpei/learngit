@@ -1,6 +1,6 @@
 package com.yirong.iis.user.service;
 
-import com.yirong.iis.user.userentity.IisUserAwakenAddFileUserEntity;
+import com.yirong.iis.user.userentity.KmUserAwakenAddFileUserEntity;
 
 import java.io.File;
 
@@ -16,7 +16,7 @@ import java.io.File;
  *         修改历史：(修改人，修改时间，修改原因/内容)
  *         </p>
  */
-public interface IisUserWebAwakenService {
+public interface KmUserWebAwakenService {
 
 	/**
 	 * 功能描述：上传文件
@@ -34,7 +34,7 @@ public interface IisUserWebAwakenService {
 	 * @return
 	 *
 	 */
-	String httpUploadFile(IisUserAwakenAddFileUserEntity ue, File file);
+	String httpUploadFile(KmUserAwakenAddFileUserEntity ue, File file);
 
 	/**
 	 * 功能描述：下载文件

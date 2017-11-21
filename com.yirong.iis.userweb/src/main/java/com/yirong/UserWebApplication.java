@@ -1,10 +1,15 @@
 package com.yirong;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
+import com.yirong.commons.web.eif.CommonsWebEif;
+import com.yirong.iis.userweb.constant.KmUserWebConstants;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +34,17 @@ public class UserWebApplication extends BaseApplication{
 		//获取配置信息awaken.properties
 		String configPath =  System.getProperty("user.dir") + File.separator + "config" + File.separator;
 		Map<String, String> map = PropertiesFileUtil.getPropertiesFileToMapFromOutFile(configPath + "yr-awaken.properties");
+
+		// 初始化过滤器及文件夹等配置
+		Map<String, String> resourceHandlerMap = new HashMap<String, String>();
+		KmUserWebConstants.FILE_DOCS_BASE_PATH = map.get("km.user.file.docs");
+		resourceHandlerMap.put("/docsFile/**", "file:" + KmUserWebConstants.FILE_DOCS_BASE_PATH);
+		CommonsWebEif.initResourceHandlers(resourceHandlerMap);
+		List<String> excludePathList = new ArrayList<String>();
+		excludePathList.add("/docs_file/*");
+		excludePathList.add("/file/onlineGetFile");
+		CommonsWebEif.initInterceptors(null, excludePathList);
+
 		//获取配置信息jdbc.properties
 		Map<String, String> jdbcMap = PropertiesFileUtil.getPropertiesFileToMapFromOutFile(configPath + "yr-awaken-jdbc.properties");
 				

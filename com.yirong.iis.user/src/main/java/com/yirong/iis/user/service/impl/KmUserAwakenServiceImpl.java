@@ -3,9 +3,9 @@ package com.yirong.iis.user.service.impl;
 import com.yirong.commons.akclient.Eif.AkClient;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
-import com.yirong.iis.user.service.IisUserAwakenService;
-import com.yirong.iis.user.userentity.IisUserAwakenFileUserEntity;
-import com.yirong.iis.user.userentity.IisUserAwakenOperUserEntity;
+import com.yirong.iis.user.service.KmUserAwakenService;
+import com.yirong.iis.user.userentity.KmUserAwakenFileUserEntity;
+import com.yirong.iis.user.userentity.KmUserAwakenOperUserEntity;
 import com.yirong.iis.user.util.IisUserWebManageMentUtil;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +24,12 @@ import java.util.Map;
  *         </p>
  */
 @Service("KmUserAwakenServiceImpl")
-public class IisUserAwakenServiceImpl implements IisUserAwakenService {
+public class KmUserAwakenServiceImpl implements KmUserAwakenService {
 
 	/**
 	 * 日志操作类
 	 */
-	private Logger logger = LoggerFactory.getLogger(IisUserAwakenServiceImpl.class);
+	private Logger logger = LoggerFactory.getLogger(KmUserAwakenServiceImpl.class);
 
 	/**
 	 * 功能描述：删除文件
@@ -48,7 +48,7 @@ public class IisUserAwakenServiceImpl implements IisUserAwakenService {
 	 *
 	 */
 	@Override
-	public boolean httpDeleteFile(IisUserAwakenOperUserEntity ue) {
+	public boolean httpDeleteFile(KmUserAwakenOperUserEntity ue) {
 		// 拼装参数
 		Map<String, Object> param = IisUserWebManageMentUtil.beanToMap(ue);
 		// 调用接口
@@ -83,7 +83,7 @@ public class IisUserAwakenServiceImpl implements IisUserAwakenService {
 	 *
 	 */
 	@Override
-	public String httpAddInfo(IisUserAwakenFileUserEntity ue) {
+	public String httpAddInfo(KmUserAwakenFileUserEntity ue) {
 		// 拼装参数
 		Map<String, Object> param = IisUserWebManageMentUtil.beanToMap(ue);
 		// 调用接口
@@ -118,7 +118,7 @@ public class IisUserAwakenServiceImpl implements IisUserAwakenService {
 	 *
 	 */
 	@Override
-	public boolean httpDeleteInfo(IisUserAwakenOperUserEntity ue) {
+	public boolean httpDeleteInfo(KmUserAwakenOperUserEntity ue) {
 		// 拼装参数
 		Map<String, Object> param = IisUserWebManageMentUtil.beanToMap(ue);
 		// 调用接口
@@ -153,7 +153,7 @@ public class IisUserAwakenServiceImpl implements IisUserAwakenService {
 	 *
 	 */
 	@Override
-	public boolean httpUpdateInfo(IisUserAwakenFileUserEntity ue) {
+	public boolean httpUpdateInfo(KmUserAwakenFileUserEntity ue) {
 		// 拼装参数
 		Map<String, Object> param = IisUserWebManageMentUtil.beanToMap(ue);
 		// 调用接口

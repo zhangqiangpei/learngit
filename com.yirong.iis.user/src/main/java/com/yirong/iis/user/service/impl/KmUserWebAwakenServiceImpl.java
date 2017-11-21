@@ -5,8 +5,8 @@ import com.yirong.commons.cache.eif.RedisCacheEif;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.commons.util.datatype.StringUtil;
-import com.yirong.iis.user.service.IisUserWebAwakenService;
-import com.yirong.iis.user.userentity.IisUserAwakenAddFileUserEntity;
+import com.yirong.iis.user.service.KmUserWebAwakenService;
+import com.yirong.iis.user.userentity.KmUserAwakenAddFileUserEntity;
 import com.yirong.iis.user.util.IisUserWebManageMentUtil;
 import org.springframework.stereotype.Service;
 
@@ -28,12 +28,12 @@ import java.util.Map;
  *         </p>
  */
 @Service("KmUserWebAwakenServiceImpl")
-public class IisUserWebAwakenServiceImpl implements IisUserWebAwakenService {
+public class KmUserWebAwakenServiceImpl implements KmUserWebAwakenService {
 
 	/**
 	 * 日志操作类
 	 */
-	private Logger logger = LoggerFactory.getLogger(IisUserWebAwakenServiceImpl.class);
+	private Logger logger = LoggerFactory.getLogger(KmUserWebAwakenServiceImpl.class);
 
 	/**
 	 * 功能描述：上传文件
@@ -52,7 +52,7 @@ public class IisUserWebAwakenServiceImpl implements IisUserWebAwakenService {
 	 *
 	 */
 	@Override
-	public String httpUploadFile(IisUserAwakenAddFileUserEntity ue, File file) {
+	public String httpUploadFile(KmUserAwakenAddFileUserEntity ue, File file) {
 		// 拼装参数
 		Map<String, Object> param = IisUserWebManageMentUtil.beanToMap(ue);
 		// 调用接口

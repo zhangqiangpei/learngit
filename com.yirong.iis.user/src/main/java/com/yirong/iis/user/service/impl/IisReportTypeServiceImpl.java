@@ -1,9 +1,11 @@
 package com.yirong.iis.user.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jdk.nashorn.internal.objects.NativeUint8Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -94,7 +96,7 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
 			param.add("%" + ue.getTypeName() + "%");
 		}
 		// 标准编码
-		if (StringUtil.isNotNullOrEmpty(ue.getIsOutside().toString())) {
+		if (null != ue.getIsOutside()) {
 			sql.append("AND IRT.IS_OUTSIDE = ? ");
 			param.add(ue.getIsOutside());
 		}
@@ -103,5 +105,43 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
 		return ResultUtil.newOk("操作成功")
 				.setData(mapList).toMap();
 	}
-	
+
+	/**
+	 * 功能描述：获取每个分类的五条记录
+	 *
+	 * @author 林明铁
+	 *         <p>
+	 *         创建时间 ：2017-11-09 10:00:09
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 * @return
+	 */
+	@Override
+	public Map queryIisReportTypeListFiveRecord() {
+        // 拼装查询sql
+        List<Object> param = new ArrayList<Object>();
+        StringBuffer sql = new StringBuffer();
+        sql.append("SELECT ID,REPORT_NAME,TYPE_ID,CREATE_TIME,REPORT_INFO,KM_ID,EOS_ID,");
+        sql.append("(SELECT TYPE_NAME FROM IIS_REPORT_TYPE WHERE ID = temp.TYPE_ID) AS TYPE_NAME ");
+        sql.append("FROM (");
+        sql.append("select ID,REPORT_NAME,TYPE_ID,TO_CHAR(CREATE_TIME,'YYYY-MM-DD') AS CREATE_TIME,REPORT_INFO,KM_ID,EOS_ID,rank() over ");
+        sql.append("(partition by TYPE_ID order by CREATE_TIME desc) rn FROM IIS_REPORT) temp ");
+        sql.append("where rn < 6");
+        List<Map<String, Object>> types = this.exeNativeQueryMap(sql.toString(), param);
+        Map<String, List<Map<String, Object>>> type = new HashMap<String, List<Map<String, Object>>>();
+        for (Map<String, Object> t : types ){
+            if (!type.containsKey(t.get("TYPE_ID"))){
+                List<Map<String, Object>> k = new ArrayList<Map<String, Object>>();
+                k.add(t);
+                type.put(t.get("TYPE_ID").toString(), k);
+            } else {
+                type.get(t.get("TYPE_ID")).add(t);
+            }
+        }
+        return ResultUtil.newOk("操作成功").setData(type).toMap();
+	}
+
 }

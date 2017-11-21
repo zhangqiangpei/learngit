@@ -4,6 +4,7 @@ package com.yirong.iis.userweb.service;
 import com.yirong.iis.userweb.userentity.IisUserAwakenAddFileUserEntity;
 
 import java.io.File;
+import java.io.InputStream;
 
 /**
  * 功能描述：知识管理平台调用awaken平台service接口
@@ -17,7 +18,7 @@ import java.io.File;
  *         修改历史：(修改人，修改时间，修改原因/内容)
  *         </p>
  */
-public interface IisUserWebAwakenService {
+public interface KmUserWebAwakenService {
 
 	/**
 	 * 功能描述：上传文件
@@ -54,5 +55,23 @@ public interface IisUserWebAwakenService {
 	 *
 	 */
 	Object[] httpDownFile(String eosId, String tokenId);
+
+	/**
+	 * 功能描述：在线浏览
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 *         创建时间 ：2017年9月26日 上午10:10:29
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 * @param ue
+	 * @return
+	 *
+	 */
+	InputStream httpGetOnlineFile(String fileId, String fileType, String tokenId);
 
 }

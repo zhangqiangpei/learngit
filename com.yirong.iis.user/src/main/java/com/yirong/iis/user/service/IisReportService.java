@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.yirong.awaken.core.service.IBaseService;
 import com.yirong.iis.user.entity.IisReport;
+import com.yirong.iis.user.userentity.IisReportShareUserEntity;
 import com.yirong.iis.user.userentity.IisReportUserEntity;
 
  /**
@@ -117,4 +118,4 @@ public interface IisReportService extends IBaseService<IisReport, String> {
 	  * @return
 	  */
 	 File reportToDocs(IisReport iisReport);
-}
+ }

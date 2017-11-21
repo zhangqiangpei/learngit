@@ -14,7 +14,7 @@ import java.io.Serializable;
  *         修改历史：(修改人，修改时间，修改原因/内容)
  *         </p>
  */
-public class IisUserAwakenAddFileUserEntity implements Serializable {
+public class KmUserAwakenAddFileUserEntity implements Serializable {
 
 	/**
 	 * 

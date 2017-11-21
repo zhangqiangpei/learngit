@@ -1,7 +1,7 @@
 package com.yirong.iis.user.service;
 
-import com.yirong.iis.user.userentity.IisUserAwakenFileUserEntity;
-import com.yirong.iis.user.userentity.IisUserAwakenOperUserEntity;
+import com.yirong.iis.user.userentity.KmUserAwakenFileUserEntity;
+import com.yirong.iis.user.userentity.KmUserAwakenOperUserEntity;
 
 /**
  * 功能描述：知识管理平台调用awaken平台service接口
@@ -15,7 +15,7 @@ import com.yirong.iis.user.userentity.IisUserAwakenOperUserEntity;
  *         修改历史：(修改人，修改时间，修改原因/内容)
  *         </p>
  */
-public interface IisUserAwakenService {
+public interface KmUserAwakenService {
 
 	/**
 	 * 功能描述：删除文件
@@ -33,7 +33,7 @@ public interface IisUserAwakenService {
 	 * @return
 	 *
 	 */
-	boolean httpDeleteFile(IisUserAwakenOperUserEntity ue);
+	boolean httpDeleteFile(KmUserAwakenOperUserEntity ue);
 
 	/**
 	 * 功能描述：新增知识信息
@@ -51,7 +51,7 @@ public interface IisUserAwakenService {
 	 * @return
 	 *
 	 */
-	String httpAddInfo(IisUserAwakenFileUserEntity ue);
+	String httpAddInfo(KmUserAwakenFileUserEntity ue);
 
 	/**
 	 * 功能描述：删除知识信息
@@ -69,7 +69,7 @@ public interface IisUserAwakenService {
 	 * @return
 	 *
 	 */
-	boolean httpDeleteInfo(IisUserAwakenOperUserEntity ue);
+	boolean httpDeleteInfo(KmUserAwakenOperUserEntity ue);
 
 	/**
 	 * 功能描述：更新知识信息
@@ -87,7 +87,7 @@ public interface IisUserAwakenService {
 	 * @return
 	 *
 	 */
-	boolean httpUpdateInfo(IisUserAwakenFileUserEntity ue);
+	boolean httpUpdateInfo(KmUserAwakenFileUserEntity ue);
 
 	
 

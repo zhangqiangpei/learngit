@@ -5,7 +5,7 @@ import com.yirong.commons.cache.eif.RedisCacheEif;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.commons.util.datatype.StringUtil;
-import com.yirong.iis.userweb.service.IisUserWebAwakenService;
+import com.yirong.iis.userweb.service.KmUserWebAwakenService;
 import com.yirong.iis.userweb.userentity.IisUserAwakenAddFileUserEntity;
 import com.yirong.iis.userweb.util.IisUserWebManageMentUtil;
 import org.springframework.stereotype.Service;
@@ -27,13 +27,13 @@ import java.util.Map;
  *         修改历史：(修改人，修改时间，修改原因/内容)
  *         </p>
  */
-@Service("KmUserWebAwakenServiceImpl")
-public class IisUserWebAwakenServiceImpl implements IisUserWebAwakenService {
+@Service("IisUserWebAwakenServiceImpl")
+public class KmUserWebAwakenServiceImpl implements KmUserWebAwakenService {
 
 	/**
 	 * 日志操作类
 	 */
-	private Logger logger = LoggerFactory.getLogger(IisUserWebAwakenServiceImpl.class);
+	private Logger logger = LoggerFactory.getLogger(KmUserWebAwakenServiceImpl.class);
 
 	/**
 	 * 功能描述：上传文件
@@ -66,6 +66,43 @@ public class IisUserWebAwakenServiceImpl implements IisUserWebAwakenService {
 			return msg;
 		} else {
 			logger.error("服务端返回失败，失败消息{0}", msg);
+			return null;
+		}
+	}
+
+	/**
+	 * 功能描述：在线浏览
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 *         创建时间 ：2017年9月26日 上午10:59:21
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 * @param ue
+	 * @return 文档路径
+	 *
+	 */
+	@Override
+	public InputStream httpGetOnlineFile(String fileId, String fileType, String tokenId) {
+		// 拼装参数
+		Map<String, Object> param = operGetParam(tokenId);
+		param.put("id", fileId);
+		param.put("fileType", fileType);
+		// 调用接口
+		Map<String, Object> resultMap = AkClient.getOnlineFile(param);
+		if (!check(resultMap)) {// 验证未通过
+			return null;
+		}
+		String code = resultMap.get("code").toString();
+		Object msg = resultMap.get("msg");
+		if ("0".equals(code)) { // 成功
+			return (InputStream) msg;
+		} else {
+			logger.error("服务端返回失败，失败消息：{0}", msg.toString());
 			return null;
 		}
 	}

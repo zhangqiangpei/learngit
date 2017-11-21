@@ -15,7 +15,7 @@ import java.util.List;
  *         修改历史：(修改人，修改时间，修改原因/内容)
  *         </p>
  */
-public class IisUserAwakenFileUserEntity implements Serializable {
+public class KmUserAwakenFileUserEntity implements Serializable {
 
 	/**
 	 * 

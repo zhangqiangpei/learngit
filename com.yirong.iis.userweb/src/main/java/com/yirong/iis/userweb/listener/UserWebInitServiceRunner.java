@@ -2,8 +2,12 @@ package com.yirong.iis.userweb.listener;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import com.yirong.commons.akclient.Eif.AkClient;
+import com.yirong.commons.web.constant.CommonsInitConstants;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -67,10 +71,17 @@ public class UserWebInitServiceRunner implements CommandLineRunner {
 			ElasticsearchCfg.initEsCfg(SysParameterEif.getValueByCode("awaken.es.host"), 
 					Integer.parseInt(SysParameterEif.getValueByCode("awaken.es.port")),  
 					SysParameterEif.getValueByCode("awaken.es.clusterName"));
-			
+
 			//07 初始化etl服务
 			//EtlEif.init(SysParameterEif.getValueByCode("iis.etl.url"));
-			
+
+            // 08 初始化awaken接口
+            String url = map.get("awaken.url");
+            String serviceName = map.get("awaken.service.name");
+            String account = map.get("awaken.username");
+            String secretKey = map.get("awaken.key");
+            AkClient.init(url, serviceName, account, secretKey);
+
 			logger.info("==============关联服务启动结束===============");
 			
 			//初始化EOS
