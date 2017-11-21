@@ -1,7 +1,7 @@
-package com.yirong.iis.tp.dao;
+package com.yirong.iis.tp.common.dao;
 
 import com.yirong.awaken.core.dao.IBaseDao;
-import com.yirong.iis.tp.entity.LtEtData;
+import com.yirong.iis.tp.common.entity.LtEtData;
 
 /**
  * 功能描述：elektron数据表dao接口

@@ -1,4 +1,4 @@
-package com.yirong.iis.tp.et.service.impl;
+package com.yirong.iis.tp.tslt.et.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,9 +7,9 @@ import com.yirong.awaken.core.dao.IBaseDao;
 import com.yirong.awaken.core.service.impl.BaseService;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
-import com.yirong.iis.tp.dao.LtEtCodeDao;
-import com.yirong.iis.tp.entity.LtEtCode;
-import com.yirong.iis.tp.et.service.LtEtCodeService;
+import com.yirong.iis.tp.common.dao.LtEtCodeDao;
+import com.yirong.iis.tp.common.entity.LtEtCode;
+import com.yirong.iis.tp.tslt.et.service.LtEtCodeService;
 
 /**
  * 功能描述：elektron代码表service实现类

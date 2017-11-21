@@ -1,4 +1,4 @@
-package com.yirong.iis.tp.entity;
+package com.yirong.iis.tp.common.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

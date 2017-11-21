@@ -1,7 +1,7 @@
-package com.yirong.iis.tp.et.service;
+package com.yirong.iis.tp.tslt.et.service;
 
 import com.yirong.awaken.core.service.IBaseService;
-import com.yirong.iis.tp.entity.LtEtField;
+import com.yirong.iis.tp.common.entity.LtEtField;
 
 /**
  * 功能描述：elektron字段表service接口
