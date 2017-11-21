@@ -1,4 +1,4 @@
-package com.yirong.iis.tp.tslt.trkd.service.impl;
+package com.yirong.iis.tp.tslt.trkd.service.impl.fundamentals;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package com.yirong.iis.tp.tslt.trkd.service.impl;
+package com.yirong.iis.tp.tslt.trkd.service.impl.token;
 
 import java.util.Date;
 import java.util.Map;

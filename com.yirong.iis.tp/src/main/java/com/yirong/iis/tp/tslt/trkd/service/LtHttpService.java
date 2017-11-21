@@ -40,8 +40,6 @@ public abstract class LtHttpService {
 		return exec(param);
 	}
 	
-	public abstract Map<String, Object> exec(Map<String, Object> param);
-	
 	/**
 	 * 组装http head 公共头部
 	 * @return
@@ -53,8 +51,20 @@ public abstract class LtHttpService {
 		return headMap;
 	}
 	
+	/**
+	 * 组装http url
+	 * @param code
+	 * @return
+	 */
 	public String getHttpUrl(String code){
 		return new StringBuffer("http://").append(SysParameterEif.getValueByCode("Trkd-Url")).append(LtConstant.trkdMap.get(code)).toString();
 	}
+	
+	/**
+	 * 执行请求，处理数据
+	 * @param param
+	 * @return
+	 */
+	public abstract Map<String, Object> exec(Map<String, Object> param);
 	
 }
