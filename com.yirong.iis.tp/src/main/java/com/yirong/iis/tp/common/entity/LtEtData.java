@@ -56,6 +56,30 @@ public class LtEtData implements Serializable {
 	public String fieldId;
 
 	/**
+	 * 字段中文名称
+	 */
+	@Column(name = "FIELD_NAME", nullable = false, length = 40)
+	public String fieldName;
+
+	/**
+	 * 字段英文名称
+	 */
+	@Column(name = "FIELD_ENGLISH_NAME", nullable = false, length = 40)
+	public String fieldEnglishName;
+
+	/**
+	 * 字段中文描述
+	 */
+	@Column(name = "FIELD_DESC", nullable = true, length = 400)
+	public String fieldDesc;
+
+	/**
+	 * 字段英文描述
+	 */
+	@Column(name = "FIELD_ENGLISH_DESC", nullable = true, length = 400)
+	public String fieldEnglishDesc;
+
+	/**
 	 * 字符串值
 	 */
 	@Column(name = "STRING_VALUE", nullable = true, length = 100)
@@ -147,6 +171,38 @@ public class LtEtData implements Serializable {
 
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+
+	public String getFieldName() {
+		return fieldName;
+	}
+
+	public void setFieldName(String fieldName) {
+		this.fieldName = fieldName;
+	}
+
+	public String getFieldEnglishName() {
+		return fieldEnglishName;
+	}
+
+	public void setFieldEnglishName(String fieldEnglishName) {
+		this.fieldEnglishName = fieldEnglishName;
+	}
+
+	public String getFieldDesc() {
+		return fieldDesc;
+	}
+
+	public void setFieldDesc(String fieldDesc) {
+		this.fieldDesc = fieldDesc;
+	}
+
+	public String getFieldEnglishDesc() {
+		return fieldEnglishDesc;
+	}
+
+	public void setFieldEnglishDesc(String fieldEnglishDesc) {
+		this.fieldEnglishDesc = fieldEnglishDesc;
 	}
 
 }

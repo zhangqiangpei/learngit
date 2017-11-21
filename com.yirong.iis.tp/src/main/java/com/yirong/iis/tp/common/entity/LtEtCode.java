@@ -45,8 +45,8 @@ public class LtEtCode implements Serializable {
 	/**
 	 * 国家英文名
 	 */
-	@Column(name = "ENGLISH_NAME", nullable = true, length = 100)
-	public String englishName;
+	@Column(name = "COUNTRY_ENGLISH_NAME", nullable = true, length = 100)
+	public String countryEnglishName;
 
 	/**
 	 * 路透代码(RIC)
@@ -104,12 +104,12 @@ public class LtEtCode implements Serializable {
 		this.id = id;
 	}
 
-	public String getEnglishName() {
-		return this.englishName;
+	public String getCountryEnglishName() {
+		return countryEnglishName;
 	}
 
-	public void setEnglishName(String englishName) {
-		this.englishName = englishName;
+	public void setCountryEnglishName(String countryEnglishName) {
+		this.countryEnglishName = countryEnglishName;
 	}
 
 	public String getRicCode() {
