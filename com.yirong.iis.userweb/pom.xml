@@ -98,7 +98,7 @@
 		<dependency>
 			<groupId>com.yirong.commons</groupId>
 			<artifactId>yr-commons-web</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>0.0.4-SNAPSHOT</version>
 		</dependency>
 
 		<!-- awaken 模块 -->

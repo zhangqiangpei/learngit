@@ -49,19 +49,6 @@ var editOnlineReportVue = new Vue({
         }
     },
     methods: {
-        //每页数据条数选择事件
-        reportTableSizeChange: function (val) {
-            //处理参数
-            var param = this.reportTableSearchModel;
-            param.currentPage = 1;
-            param.pageSize = val;
-            //请求后台
-            var result = z.msService("user", "IisReportApi/list", this.reportTableSearchModel);
-            if(result.code === 0){
-                this.reportTableTotal = result.data.totalCount;
-                this.reportData = result.data;
-            }
-        },
         //当前页选择事件
         reportTableCurrentChange: function (val) {
             //处理参数
@@ -71,32 +58,19 @@ var editOnlineReportVue = new Vue({
             var result = z.msService("user", "IisReportApi/list", this.reportTableSearchModel);
             if(result.code === 0){
                 this.reportTableTotal = result.data.totalCount;
-                this.reportData = result.data;
-            }
-        },
-        //每页数据条数选择事件
-        reportTemplateTableSizeChange: function (val) {
-            //处理参数
-            var param = this.reportTemplateTableSearchModel;
-            param.currentPage = 1;
-            param.pageSize = val;
-            //请求后台
-            var result = z.msService("user", "IisReportApi/list", this.reportTemplateTableSearchModel);
-            if(result.code === 0){
-                this.reportTemplateTableTotal = result.data.totalCount;
-                this.reportTemplateData = result.data;
+                this.reportData = result.data.data;
             }
         },
         //当前页选择事件
         reportTemplateTableCurrentChange: function (val) {
             //处理参数
-            var param = this.reportTableSearchModel;
+            var param = this.reportTemplateTableSearchModel;
             param.currentPage = val;
             //请求后台
             var result = z.msService("user", "IisReportTemplateApi/list", this.reportTemplateTableSearchModel);
             if(result.code === 0){
                 this.reportTemplateTableTotal = result.data.totalCount;
-                this.reportTemplateData = result.data;
+                this.reportTemplateData = result.data.data;
             }
         },
         // 点击报告模板表格
@@ -314,7 +288,7 @@ var editOnlineReportVue = new Vue({
             ue.setContent("");
             var result;
             // 初始化报告分类
-            result = z.msService("user","IisReportTypeApi/list",{typeName: ""});
+            result = z.msService("user","IisReportTypeApi/list",{typeName: "", isOutside: 0});
             if(result.code === 0){
                 this.reportTypeTreeData = result.data;
             }

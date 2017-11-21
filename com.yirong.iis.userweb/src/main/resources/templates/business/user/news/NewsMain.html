@@ -18,14 +18,50 @@
     <div id="header" class="header"></div>
     <!---------------网页头部end------------------->
         
-    <!---------------网页工具栏(如有)start---------->
+    <!---------------网页搜索工具栏(如有)start---------->
     <div id="toolbar" class="toolbar">
         
     </div>
-    <!---------------网页工具栏索(如有)end----------->
+    <!---------------网页搜索工具栏(如有)end----------->
     
     <!---------------网页主体start----------------->
-    <div id="main" class="main  clearfix">ddfadaf</div>
+    <div id="main" class="main  clearfix">
+        <el-row :gutter="20">
+            <el-col :span="4">
+                <el-form :model="searchCondition">
+                    <el-form-item>
+                        <el-select v-model="searchCondition.continent" size="medium" placeholder="选择洲">
+                            <el-option
+                                    v-for="item in continents"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-select v-model="searchCondition.country" size="medium" placeholder="选择国家">
+                            <el-option
+                                    v-for="item in countries"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-form>
+            </el-col>
+            <el-col :span="20">
+                <el-table  :data="tableData" @sort-change="tableSortChange"
+                           @selection-change="tableChange" ref="mytable" stripe border>
+                </el-table>
+                <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               :page-size="tableSearchModel.pageSize" @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper"></el-pagination>
+            </el-col>
+        </el-row>
+    </div>
     <!---------------网页主体end------------------->
      
     <!---------------网页底部start----------------->
@@ -38,4 +74,10 @@
 <script src="/frame/vue/vue.min.js"></script>
 <script src="/frame/elementui/elementui.js"></script>
 <script src="/common/js/com.js"></script>
+<script src="/frame/awaken/awaken.core.js"></script>
+<script src="/frame/awaken/awaken.table.js"></script>
+<script src="/frame/awaken/awaken.tree.js"></script>
+<script src="/frame/awaken/awaken.dialog.js"></script>
+<script src="/frame/awaken/awaken.common.js"></script>
+<script src="/frame/awaken/awaken.util.js"></script>
 <script src="/business/user/news/js/NewsMain.js"></script>

@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.yirong.awaken.core.BaseApplication;
 import com.yirong.commons.util.file.PropertiesFileUtil;
-import com.yirong.iis.tp.trkd.constant.LtConstant;
+import com.yirong.iis.tp.common.constant.LtConstant;
 
 @SpringBootApplication
 @EnableTransactionManagement

@@ -4,7 +4,8 @@ import com.yirong.commons.cache.eif.RedisCacheEif;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.commons.util.datatype.StringUtil;
-import com.yirong.iis.userweb.service.IisUserWebAwakenService;
+import com.yirong.iis.userweb.service.KmUserDocsService;
+import com.yirong.iis.userweb.service.KmUserWebAwakenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,7 +40,7 @@ public class FileController {
      * web用户操作类
      */
     @Autowired
-    private IisUserWebAwakenService iisUserWebAwakenService;
+    private KmUserWebAwakenService kmUserWebAwakenService;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -67,7 +68,7 @@ public class FileController {
         }
         InputStream is = null;
         String tokenId = this.getValidTokenId(request);
-        Object[] resultObj = iisUserWebAwakenService.httpDownFile(eosId, tokenId);
+        Object[] resultObj = kmUserWebAwakenService.httpDownFile(eosId, tokenId);
         if (null == resultObj) {
             return result;
         }
@@ -131,5 +132,37 @@ public class FileController {
             }
         }
         return tokenId;
+    }
+
+    @Autowired
+    private KmUserDocsService kmUserDocsService;
+
+    /**
+     * 功能描述：获取在线浏览路径
+     *
+     * @param request
+     * @author 王杰
+     *         <p>
+     *         创建时间 ：2017-10-10 14:41:00
+     *         </p>
+     *         <p>
+     *         修改历史：(修改人，修改时间，修改原因/内容)
+     *         </p>
+     */
+    @RequestMapping(value = "/onlineGetFile", method = RequestMethod.POST)
+    public Map onlineGetFile(@RequestParam("fileId") String fileId, @RequestParam("fileType") String fileType,
+                             HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        // 验证判断
+        if (StringUtil.isNullOrEmpty(fileId)) {
+            map.put("code", "1");
+            map.put("msg", "文件ID不能为空!");
+        }
+        String tokenId = this.getValidTokenId(request);
+        Object result = kmUserDocsService.onlineGetFile(fileId, fileType, tokenId);
+        map.put("code", "0");
+        map.put("msg", "查询成功");
+        map.put("data", result);
+        return map;
     }
 }

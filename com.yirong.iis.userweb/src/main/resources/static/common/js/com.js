@@ -624,7 +624,7 @@ $(function() {
         sHTML += '    </div>';
         sHTML += '    <div class="toolbar-search fl" id="toolbarSrh">';
         sHTML += '        <el-autocomplete class="inline-input" v-model="keyword" :fetch-suggestions="fnAutoSrh" ';
-        sHTML += '          placeholder="请输入关键字" :trigger-on-focus="false" @select="fnFullTextSrh"></el-autocomplete>';
+        sHTML += '          placeholder="请输入关键字" :trigger-on-focus="false" @select="fnFullTextSrh"><el-button slot="append" icon="el-icon-search"></el-button></el-autocomplete>';
         sHTML += '        <span class="hotkeyword-tit">搜索热词:</span>';
         sHTML += '        <ul class="hotkeyword-list">';
         sHTML += '            <li v-for="item in hotwords"><a @click="keyword=item.name;fnFullTextSrh()">{{item.name}}</a></li>';

@@ -37,7 +37,6 @@
                 </el-table>
             </el-row>
             <el-pagination class="pagination" :current-page="reportTemplateTableSearchModel.currentPage" :total="reportTemplateTableTotal"
-                           @size-change="reportTemplateTableSizeChange"
                            :page-size="reportTemplateTableSearchModel.pageSize" @current-change="reportTemplateTableCurrentChange"
                            layout="total,prev, pager, next"></el-pagination>
         </el-col>
@@ -64,8 +63,7 @@
                 <el-table :data="reportData" border @cell-click="reportCellClick" :highlight-current-row="true">
                 <el-table-column prop="REPORTNAME" label="我的报告"></el-table-column>
                 </el-table>
-                <el-pagination class="pagination" :current-page="reportTableSearchModel.currentPage" :total="reportTableTotal"
-            @size-change="reportTableSizeChange"
+                <el-pagination small class="pagination" :current-page="reportTableSearchModel.currentPage" :total="reportTableTotal"
             :page-size="reportTableSearchModel.pageSize" @current-change="reportTableCurrentChange"
             layout="total,prev, pager, next"></el-pagination>
             </el-col>

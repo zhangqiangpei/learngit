@@ -15,11 +15,9 @@ import java.util.Map;
 import com.yirong.awaken.core.util.BeanUtil;
 import com.yirong.commons.cache.eif.RedisCacheEif;
 import com.yirong.commons.util.error.ErrorPromptInfoUtil;
-import com.yirong.iis.user.service.IisUserAwakenService;
-import com.yirong.iis.user.service.IisUserWebAwakenService;
-import com.yirong.iis.user.userentity.IisUserAwakenAddFileUserEntity;
-import com.yirong.iis.user.userentity.IisUserAwakenFileUserEntity;
-import com.yirong.iis.user.userentity.IisUserAwakenOperUserEntity;
+import com.yirong.iis.user.service.KmUserAwakenService;
+import com.yirong.iis.user.service.KmUserWebAwakenService;
+import com.yirong.iis.user.userentity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -34,9 +32,8 @@ import com.yirong.commons.util.entity.PageEntiry;
 import com.yirong.iis.user.dao.IisReportDao;
 import com.yirong.iis.user.entity.IisReport;
 import com.yirong.iis.user.service.IisReportService;
-import com.yirong.iis.user.userentity.IisReportUserEntity;
 
- /**
+/**
  * 功能描述：报告表service实现类
  * 
  * @author 林明铁
@@ -66,10 +63,10 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 	private IisReportDao iisReportDao;
 
 	@Autowired
-    private IisUserWebAwakenService iisUserWebAwakenService;
+    private KmUserWebAwakenService kmUserWebAwakenService;
 
 	@Autowired
-    private IisUserAwakenService iisUserAwakenService;
+    private KmUserAwakenService iisUserAwakenService;
 
      @Autowired
      private Environment environment;
@@ -131,7 +128,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
                      return ResultUtil.newError("文件转成doc失败！").toMap();
                  }
                  // Eos上传文件
-                 IisUserAwakenAddFileUserEntity iaafue = new IisUserAwakenAddFileUserEntity();
+                 KmUserAwakenAddFileUserEntity iaafue = new KmUserAwakenAddFileUserEntity();
                  iaafue.setDocName(reportDocs.getName());
                  iaafue.setDocSize(Integer.parseInt(String.valueOf(reportDocs.length()/1024)));
                  iaafue.setOrgCode(createOrg);
@@ -140,7 +137,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
                  iaafue.setCreatorName(creatorName);
                  String eosId = null;
                  try {
-                     eosId = iisUserWebAwakenService.httpUploadFile(iaafue, reportDocs);
+                     eosId = kmUserWebAwakenService.httpUploadFile(iaafue, reportDocs);
                  } catch (Exception e){
                      logger.error(e);
                      logger.error("文件上传到Eos失败");
@@ -154,7 +151,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
                  if (null == eosId){
                      return ResultUtil.newError("文件上传到Eos失败").toMap();
                  }
-                 IisUserAwakenFileUserEntity iafue = new IisUserAwakenFileUserEntity();
+                 KmUserAwakenFileUserEntity iafue = new KmUserAwakenFileUserEntity();
                  iafue.setDocEosId(eosId);
                  String kmId = iisUserAwakenService.httpAddInfo(iafue);
                  if (null == kmId){
@@ -170,7 +167,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
                      return ResultUtil.newError("文件转成doc失败！").toMap();
                  }
                  // Eos上传文件
-                 IisUserAwakenAddFileUserEntity iaafue = new IisUserAwakenAddFileUserEntity();
+                 KmUserAwakenAddFileUserEntity iaafue = new KmUserAwakenAddFileUserEntity();
                  iaafue.setDocName(reportDocs.getName());
                  iaafue.setDocSize(Integer.parseInt(String.valueOf(reportDocs.length()/1024)));
                  iaafue.setOrgCode(createOrg);
@@ -179,7 +176,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
                  iaafue.setCreatorName(creatorName);
                  String eosId = null;
                  try {
-                     eosId = iisUserWebAwakenService.httpUploadFile(iaafue, reportDocs);
+                     eosId = kmUserWebAwakenService.httpUploadFile(iaafue, reportDocs);
                  } catch (Exception e){
                      logger.error(e);
                      logger.error("文件上传到Eos失败");
@@ -193,7 +190,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
                  if (null == eosId){
                      return ResultUtil.newError("文件上传到Eos失败").toMap();
                  }
-                 IisUserAwakenFileUserEntity iafue = new IisUserAwakenFileUserEntity();
+                 KmUserAwakenFileUserEntity iafue = new KmUserAwakenFileUserEntity();
                  iafue.setDocEosId(eosId);
 			 	String kmId = iisUserAwakenService.httpAddInfo(iafue);
 			 	if (null == kmId){
@@ -237,7 +234,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 			 return ResultUtil.newError(result).toMap();
 		 } else {// 有该数据
              // 删除EOS文件
-             IisUserAwakenOperUserEntity iuaoue = new IisUserAwakenOperUserEntity();
+             KmUserAwakenOperUserEntity iuaoue = new KmUserAwakenOperUserEntity();
              iuaoue.setId(iisReportTemp.getEosId());
              iuaoue.setOperationtor(iisReportTemp.getCreator());
              iuaoue.setOperationtorName(RedisCacheEif.hget(tokenId, "userDisplayName"));
@@ -289,7 +286,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 			 for (String id : ids) {
                  IisReport iisReport = this.iisReportDao.findOne(id);
                  // 删除EOS文件
-                 IisUserAwakenOperUserEntity iuaoue = new IisUserAwakenOperUserEntity();
+                 KmUserAwakenOperUserEntity iuaoue = new KmUserAwakenOperUserEntity();
                  iuaoue.setId(iisReport.getEosId());
                  iuaoue.setOperationtor(iisReport.getCreator());
                  iuaoue.setOperationtorName(RedisCacheEif.hget(tokenId, "userDisplayName"));
@@ -367,6 +364,8 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 		 sql.append("IR.REPORT_NAME AS reportName,");
 		 sql.append("IR.REPORT_INFO AS reportInfo,");
 		 sql.append("IR.KM_ID AS kmId,");
+		 sql.append("(SELECT TYPE_NAME FROM IIS_REPORT_TYPE WHERE ID = IR.TYPE_ID ) AS typeName,");
+		 sql.append("TO_CHAR(IR.CREATE_TIME, 'YYYY-MM-DD HH24:MI:SS') AS createTime,");
 		 sql.append("IR.EOS_ID AS eosId,");
 		 sql.append("IR.CREATOR AS creator ");
 		 sql.append("FROM IIS_REPORT IR ");
@@ -384,7 +383,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
           // 报告名
          if (StringUtil.isNotNullOrEmpty(ue.getTypeId())) {
              sql.append("AND IR.TYPE_ID = ? ");
-             param.add("%" + ue.getTypeId()+"%");
+             param.add(ue.getTypeId());
          }
 		 // 获取数据
 		 PageEntiry pageEntiry = this.findPageSQLMap(sql.toString(), param,
@@ -458,7 +457,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
          return reportDocs;
 	 }
 
-     /**
+	/**
       * 获取临时文件存放路径
       *
       * @return
