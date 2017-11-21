@@ -7,14 +7,14 @@ var vm = new Vue({
         itemTit:'',
         titDisplay:'1',
         editor:'',
-		datasourceURL:'',
+        defDatasource:'',
+		dataOptions:[{value:'/common/json/grid1.json',label:'国家数据'},{value:'/common/json/grid1.json',label:'企业数据'},{value:'/common/json/grid1.json',label:'项目数据'}],
 		checkedColumns:['id'],
 		columns:[],
 		gridData:[]
     },
     methods: {
         saveText:function(){
-            debugger;
             var sHTML = $('#keFrame').get(0).contentWindow.editor.html();
             top.curEditObj.innerHTML = sHTML;
             $('#keFrame').get(0).contentWindow.editor.html('<strong>请输入内容<strong>');
@@ -25,9 +25,9 @@ var vm = new Vue({
 			top.curEditObj.innerHTML = sHTML;
 			vm.dialogEditGridVisible = false;
 		},
-		handleSrhGrid:function(){
-			var sURL = 'data/grid1.json';
-			if(vm.datasourceURL!='')sURL = vm.datasourceURL;
+		handleSrhGrid:function(value){
+			var sURL = '/common/json/grid1.json';
+			if(value!='')sURL = value;
 			z.get(sURL,{},function(r){
 				if(r.code==0){
 					var jo = r.data.list[0];
@@ -61,7 +61,7 @@ var vm = new Vue({
 			for (var i=0; i<vm.gridData.length; i++){
 				tr  = oPar.insertRow(i+1);
 				for (var key in vm.gridData[i]){
-					if(isInArray(vm.checkedColumns,key)){
+					if(z.isInArray(vm.checkedColumns,key)){
 						tr.insertCell(-1).innerHTML = vm.gridData[i][key];
 					}
 				}

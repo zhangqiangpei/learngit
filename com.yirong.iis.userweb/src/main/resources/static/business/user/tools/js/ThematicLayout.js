@@ -5,6 +5,7 @@ if(typeof(window._)!='function'){
 		if(/^#([\w-\.]+)$/.test(expr)) return context.getElementById(expr.substr(1))||document.getElementsByName(expr.substr(1))[0];
     }
 } 
+
 ////////////////////////////
 var isIE=/msie/i.test(navigator.userAgent);
 //var isAdmin=true;
@@ -40,8 +41,7 @@ var arrTemplate=[
 	{'type':'text', 'title':'文本框', 'norepeat':false},
 	{'type':'table', 'title':'表格', 'norepeat':false},
 	{'type':'list', 'title':'列表','showCount':5, 'keyword':'', 'searchTitle':'', 'norepeat':false},
-	{'type':'chart', 'title':'图表', 'norepeat':false},
-	{'type':'tabs', 'title':'选项卡', 'tabs':['tab01','tab02','tab03'], 'norepeat':false}
+	{'type':'chart', 'title':'图表', 'norepeat':false}
 ];
 
 var arrItem_NoBorder=['uploadDoc'];//['unitRank','topics'];
@@ -235,19 +235,22 @@ function saveItem(idx){
 
 //删除Item
 function deleteItem(idx){
-	if (!confirm('确实要删除此模块？')) return;
-	for (var i=0; i<hJson.items.length; i++){
-		if (hJson.items[i].idx==idx) {
-			hJson.items.splice(i,1);
-			break;
-		}
-	}
-	var oDiv=_('#MainIndexItem_'+idx);
-	if (oDiv){
-		oDiv.parentNode.removeChild(oDiv);
-	}
-	saveJSON();
-	initTemplate_Item();
+    z.confirm('确实要删除此模块？',function(action, instance){
+        if(action=='confirm'){
+           for (var i=0; i<hJson.items.length; i++){
+                if (hJson.items[i].idx==idx) {
+                    hJson.items.splice(i,1);
+                    break;
+                }
+            }
+            var oDiv=_('#MainIndexItem_'+idx);
+            if (oDiv){
+                oDiv.parentNode.removeChild(oDiv);
+            }
+            saveJSON();
+            initTemplate_Item();
+        }
+    })
 }
 //
 function moveItemUp(idx){
@@ -279,6 +282,7 @@ function saveItemSite(){
 				item.tab=k;
 				item.col=i;
 				item.row=j;
+                item.height=divs[j].clientHeight;
 			}
 		}
 	}
@@ -346,6 +350,14 @@ function getItemHTML_Title(item,sMore,sCSS,rename){
 	sHTML += '</table></div>';
 	return sHTML;
 }
+
+//生成拖拽变化高度条
+function getItemHTML_ResizeH(){
+    var sHTML='';
+    sHTML += '<div class="miiResizeH" onmousedown="divResizeSrc=this.parentNode;startResizeH(event);">&nbsp;</div>';
+    return sHTML;
+}
+
 function getItemHTML_TabTitle(item,sMore,sCSS,iSyn){
 	sMore = sMore||'';
 	if(typeof(iSyn)!='boolean')iSyn = true;
@@ -381,53 +393,7 @@ function TabTitleSelect(obj,itemIdx,tabIdx,iSyn,item){
 	}
 }
 
-//生成编辑
-function getItemHTML_Edit(item,arr){
-	var sHTML='';
-	sHTML += '<div id="MainIndexItemEdit_'+item.idx+'" class="miiEdit" style="display:none;">';
-	sHTML += '<form onsubmit="saveItem('+item.idx+');return false;">';
-	for (var i=0; i<arr.length; i++){
-		sHTML += '<div class="miiEdit_item">';
-		sHTML += '<span class="cap">';
-		sHTML += arr[i][0];
-		sHTML += '</span>';
-		if (arr[i][1]=='title'){
-			sHTML += '<input name="title" value="' + item.title + '" class="input">';
-		}
-		if (arr[i][1]=='searchTitle'){
-			//sHTML += '<input name="searchTitle" value="' + item.searchTitle + '" class="input">';
-		}
-		if (arr[i][1]=='keyword'){
-			//sHTML += '<input name="keyword" value="' + item.keyword + '" class="input">';
-		}
-		if (arr[i][1]=='folderId'){
-			//sHTML += '<input name="folderId" id="folderId__'+item.idx+'" value="' + item.folderId + '" type="hidden">';
-			//sHTML += '<input name="folderName" id="folderName__'+item.idx+'" value="' + item.folderName + '" class="input" readonly="readonly" onclick="top.selectFlds(_(\'folderId__'+item.idx+'\'),_(\'folderName__'+item.idx+'\'),\'root\',\'\');">&nbsp;&nbsp;<font color="red">请点击输入框选择知识目录</font>';
-		}
-		if (arr[i][1]=='orgId'){
-			//sHTML += '<input name="orgId" id="orgId__'+item.idx+'" value="' + item.orgId + '" type="hidden">';
-			//sHTML += '<input name="orgName" id="orgName__'+item.idx+'" value="' + item.orgName + '" class="input" readonly="readonly" onclick="top.selectOrgs(_(\'orgId__'+item.idx+'\'),_(\'orgName__'+item.idx+'\'),\'\',\'org,area,corp,group,user\',\'org,area,corp,group,user\');">&nbsp;&nbsp;<font color="red">请点击输入框选择组织机构</font>';
-		}
-		//'folderId':'', 'folderName':'', 'orgId':'', 'orgName':''
-		if (arr[i][1]=='showCount'){
-			sHTML += '<select name="showCount">';
-			sHTML += '<option value="3"  '+(item.showCount==3?'selected':'')+'>3</option>';
-			sHTML += '<option value="5"  '+(item.showCount==5?'selected':'')+'>5</option>';
-			sHTML += '<option value="10" '+(item.showCount==10?'selected':'')+'>10</option>';
-			sHTML += '<option value="15" '+(item.showCount==15?'selected':'')+'>15</option>';
-			sHTML += '<option value="20" '+(item.showCount==20?'selected':'')+'>20</option>';
-			sHTML += '</select>';
-		}
-		sHTML += '</div>';
-	}
-	sHTML += '<div class="miiEdit_item" style="padding-left:50px;">';
-	sHTML += '<input type="submit" class="button" value=" 确定 " > ';
-	sHTML += '<input type="button" class="button" value=" 取消 " onclick="showItemEdit('+item.idx+')">';
-	sHTML += '</div>';
-	sHTML += '</form>';
-	sHTML += '</div>';
-	return sHTML
-}
+
 //获取URL
 function getItemURL(item,isMore){
 	if ((typeof(isMore)=='boolean') && (isMore)){
@@ -462,8 +428,8 @@ function reloadItem_Text(oDiv,item){
 	var sMore='<a href="javascript:void(0);" onclick="top.showDialog(\'公告信息\',\''+getItemURL(item,true)+'\',\'WinItemTask\',720,400);return false;">更多</a>'
 	sHTML += getItemHTML_Operation(item);
 	sHTML += getItemHTML_Title(item,sMore,'tit2');
-	sHTML += getItemHTML_Edit(item,[['标题','title']]);
 	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent"></div>';
+    sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
 	HttpToDiv(getItemURL(item),_('#MainIndexItemCnt_'+item.idx));
 }
@@ -473,8 +439,8 @@ function reloadItem_Table(oDiv,item){
 	var sHTML='';
 	sHTML += getItemHTML_Operation(item);
 	sHTML += getItemHTML_Title(item);
-	sHTML += getItemHTML_Edit(item,[['标题','title'],['显示条数','showCount']]);
 	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent">正在加载，请稍候...</div>';
+    sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
 }
 
@@ -484,8 +450,8 @@ function reloadItem_List(oDiv,item){
 	var sMore='<a href="javascript:void(0);" onclick="top.showDialog(\'排行信息\',\''+getItemURL(item,true)+'\',\'WinItemUnitRank\',800,540);return false;">更多</a>'
 	sHTML += getItemHTML_Operation(item);
 	sHTML += getItemHTML_Title(item,sMore,'tit2');
-	sHTML += getItemHTML_Edit(item,[['标题','title'],['显示条数','showCount']]);
 	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent">正在加载，请稍候...</div>';
+    sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
 	HttpToDiv(getItemURL(item),_('#MainIndexItemCnt_'+item.idx));
 }
@@ -495,30 +461,11 @@ function reloadItem_Chart(oDiv,item){
 	var sHTML='';
 	sHTML += getItemHTML_Operation(item);
 	sHTML += getItemHTML_Title(item);
-	sHTML += getItemHTML_Edit(item,[['标题','title']]);
 	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent">正在加载，请稍候...</div>';
+    sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
 	HttpToDiv(getItemURL(item),_('#MainIndexItemCnt_'+item.idx));
 }
-
-//选项卡
-function reloadItem_Tabs(oDiv,item){
-	var sHTML='';
-	var sMore='<a href="javascript:void(0);" onclick="top.showDialog(\'热点文档\',\''+getItemURL(item,true)+'\',\'WinItemHotDoc\',720,540);return false;">更多</a>'
-	// var sMore='<a href="javascript:void(0);" onclick="funMore(\''+item+'\')">更多</a>'
-	sHTML += getItemHTML_Operation(item);
-	sHTML += getItemHTML_TabTitle(item,sMore,'',false);
-	sHTML += getItemHTML_Edit(item,[['标题','title'],['显示条数','showCount']]);
-	for (var i=0; i<item.tabs.length; i++){
-		sHTML += '<div id="MainIndexItemCnt_'+item.idx+'_'+i+'" class="miiContent" style="'+(i>0?'display:none;':'')+';padding-top:3px;">正在加载，请稍候...</div>';
-	}
-	oDiv.innerHTML=sHTML;
-	//for (var i=0; i<item.tabs.length; i++){
-		HttpToDiv(getTabItemURL(item,0),_('#MainIndexItemCnt_'+item.idx+'_0'),true);
-	//}
-}
-
-
 
 //获取URL
 function getMoreURL(item,idx){
@@ -717,4 +664,53 @@ function Draw_Item_Temp(iX,iY){
 		oTab.rows[0].cells[iCol].insertBefore(divIndexItemTemp,divs[iRow]);
 	}
 	divIndexItemTemp.style.display='';
+}
+
+////////////////////////////高度拖拽变化/////////////////////////////
+var divResizeItem=null;
+var divResizeSrc=null;
+var iTop=0;//记录拖拽初始位置
+function startResizeH(e){
+	divResizeItem=document.getElementById('divResizeItem');
+	if (!divResizeItem){
+		divResizeItem = document.createElement("div");
+		divResizeItem.id='divResizeItem';
+		divResizeItem.name='divResizeItem';
+		divResizeItem.className='divResizeItem';
+		document.body.appendChild(divResizeItem);
+	}
+	e = e || event;
+	chaLeft = (e.offsetX||10); 
+	chaTop = (e.offsetY||10);
+	if (divResizeSrc.className=='miiResizeH') chaTop=chaTop-22
+	divResizeItem.style.left = (e.clientX||0) - chaLeft;
+	divResizeItem.style.top  = (e.clientY||0)  - chaTop + document.body.scrollTop;
+    iTop = parseInt(divResizeItem.style.top)-divResizeSrc.clientHeight;
+	divResizeItem.style.display='';
+	divResizeItem.style.width = divResizeSrc.offsetWidth;
+	if(divResizeItem.setCapture)
+		divResizeItem.setCapture();
+	else if(window.captureEvents)
+		window.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);
+
+	document.onselectstart = function(){return false;};
+	document.onmousemove = funResizeH;
+	document.onmouseup   = endResizeH;
+}
+function funResizeH(e){
+	e = e || event;
+	var eX=e.clientX;//+10;
+	var eY=e.clientY;//+15;
+    //divResizeItem.style.left=eX+document.body.scrollLeft - chaLeft;
+	divResizeItem.style.top=eY+document.body.scrollTop - chaTop;
+	divResizeSrc.style.height= eY - parseInt(iTop);
+}
+function endResizeH(){
+	if(divResizeItem.releaseCapture)
+		divResizeItem.releaseCapture();
+	else if(window.captureEvents)
+		window.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);
+	document.onmousemove = document.onmouseup = document.onselectstart = null;
+	divResizeItem.style.display='none';
+	saveItemSite();
 }

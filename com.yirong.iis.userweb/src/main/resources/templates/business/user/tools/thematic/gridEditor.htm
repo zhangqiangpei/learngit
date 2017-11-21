@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>表格编辑</title>
+	<link href="/frame/elementui/elementui.css" rel="stylesheet" />
+    <link href="/common/css/reset.css" rel="stylesheet" />
+    <link href="/common/css/com.css" rel="stylesheet" />
+    <link href="/business/user/tools/css/ThematicCustomizationOpt.css" rel="stylesheet" />
+	<style>
+		
+		.divDesc{margin:10px 0;display:none;}
+	</style>
+</head>
+<body scroll="no" style="width:100%;height:100%;overflow:hidden;">   
+<div id="wrap">
+    <template>
+        <el-select v-model="defDatasource" placeholder="请选择数据源" @change="handleSrhGrid" style="width:350px;">
+            <el-option v-for="item in dataOptions" :key="item.value" :label="item.label"  :value="item.value">
+            </el-option>
+        </el-select>
+    </template>
+
+    
+	<div id="divDesc" class="divDesc">
+		<span>可选字段：</span>
+	</div>
+	<template>
+	  <el-checkbox-group v-model="checkedColumns"  @change="handleCheckedChange">
+		 <el-checkbox v-for="column in columns" :label="column" :key="column">{{column}}</el-checkbox>
+	  </el-checkbox-group>
+	</template>
+	<br>
+	<div id="divGrid"></div>
+ </div> 
+	
+</body>
+</html>
+<script src="/frame/jquery/jquery.min.js"></script>
+<script src="/frame/vue/vue.min.js"></script>
+<script src="/frame/elementui/elementui.js"></script>
+<script src="/common/js/com.js"></script>
+<script src="/business/user/tools/js/ThematicMoudleEdit.js"></script>
+

@@ -2,9 +2,8 @@ html,body {width: 955px; min-width: 955px;}
 
 .MainIndexItem{
 	min-height:100px;
-	height:auto !important;
-	height:100px;
-	margin:5px;
+	height:auto;
+	margin:10px 5px;
 	border:1px solid #ddd;
 	padding:3px;
     background: #fff;
@@ -12,6 +11,7 @@ html,body {width: 955px; min-width: 955px;}
     -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     text-align:center;
+    position: relative;
 }
 /*.miiTitle{height:25px;background:url('bgx.png') repeat-x 0px -150px; padding:3px; font-weight:bold; color:#054C4D;}*/
 .miiTitle td{height:24px; padding:4px 3px 3px 15px;}
@@ -41,9 +41,14 @@ html,body {width: 955px; min-width: 955px;}
 .miiTabItem{ background-color:Transparent; float:left; height:19px !important; height:24px; padding:4px 15px 3px;}
 .miiTabItemSel{ background-color:#ddd;  float:left; height:19px !important; height:24px; padding:4px 14px 3px; border-left:1px solid #ccc; border-right:1px solid #ccc; cursor:default;}
 
+.miiResizeH{height: 2px;position: absolute; bottom: 0;width: 100%;cursor:row-resize;}
+
+
 #divTemplateLayout div{width:36px; padding:3px; display:inline-block !important; display:inline; cursor:pointer;}
 #divTemplateLayout table{border-collapse:collapse;height:20px; width:30px; table-layout:fixed;}
-
+#divResizeItem{
+	height:2px;background-color:transparent; float:left; text-align:center;padding:0px; position:absolute;  cursor:move;
+}
 
 #divDragItem{
 	height:100px;background-color:#FFFFFF; border:1px dotted #AACBEE; float:left; text-align:center;padding:0px; position:absolute;  cursor:move;
@@ -61,6 +66,6 @@ html,body {width: 955px; min-width: 955px;}
 #divDragItem .miiOperation{margin-left:0px !important; margin-left:0px;}
 
 
-.Grid{width:100%;border-color:#ddd;table-layout: fixed;border-collapse:collapse;}
+.Grid{width:95%;border-color:#ddd;table-layout: fixed;border-collapse:collapse;}
 .Grid td{width:auto;height:40px;line-height:40px;padding:0 14px;border:1px solid #dfe6ec;text-align:center;white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
 .GridHead{width:auto;height:40px;line-height:40px;padding:0 14px;background:#eef1f6;border:none;}
