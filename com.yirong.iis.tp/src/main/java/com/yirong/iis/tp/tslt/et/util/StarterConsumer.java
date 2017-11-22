@@ -66,7 +66,7 @@ public class StarterConsumer {
 	/**
 	 * 数据客户端
 	 */
-	private DataClient dataClient;
+	private MsgClient dataClient;
 
 	/**
 	 * omm客户端
@@ -101,26 +101,8 @@ public class StarterConsumer {
 	 *         </p>
 	 */
 	public StarterConsumer(CommandLine commondLine) {
-		this.commondLine = commondLine;
-	}
-
-	/**
-	 * 功能描述：初始化
-	 *
-	 * @author 刘捷(liujie)
-	 *         <p>
-	 *         创建时间 ：2017年11月21日 下午3:44:39
-	 *         </p>
-	 *
-	 *         <p>
-	 *         修改历史：(修改人，修改时间，修改原因/内容)
-	 *         </p>
-	 *
-	 * @return
-	 *
-	 */
-	public boolean init() {
 		logger.info("==================路透elektron产品初始化开始======================= ");
+		this.commondLine = commondLine;
 		Context.initialize();
 		// 处理会话
 		String sessionName = commondLine.getVariable("session");
@@ -128,7 +110,6 @@ public class StarterConsumer {
 		if (null == session) {
 			logger.error("session创建异常！");
 			Context.uninitialize();
-			return false;
 		}
 		logger.info("RFA Version: " + Context.getRFAVersionInfo().getProductVersion());
 		// 处理事件队列
@@ -141,7 +122,7 @@ public class StarterConsumer {
 		// 初始化登录客户端
 		loginClient = new LoginClient(this);
 		// 初始化数据客户端
-		dataClient = new DataClient(this);
+		dataClient = new MsgClient(this);
 		// 创建omm客户端
 		ommConsumer = (OMMConsumer) session.createEventSource(EventSource.OMM_CONSUMER, "myOMMConsumer", true);
 		// 创建omm链接
@@ -154,7 +135,6 @@ public class StarterConsumer {
 		// 发送登录请求
 		loginClient.sendRequest();
 		logger.info("==================路透elektron产品初始化结束（成功）======================= ");
-		return true;
 	}
 
 	/**
@@ -242,7 +222,7 @@ public class StarterConsumer {
 		return loginClient;
 	}
 
-	public DataClient getDataClient() {
+	public MsgClient getDataClient() {
 		return dataClient;
 	}
 

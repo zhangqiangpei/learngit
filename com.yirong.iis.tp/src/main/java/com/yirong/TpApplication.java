@@ -26,7 +26,6 @@ public class TpApplication extends BaseApplication {
 		SpringApplication.run(TpApplication.class, args);
 		CommandLine commondLine = new CommandLine("Demo::SESS_Demo", "ELEKTRON_DD", "user2", "EUR=");
 		StarterConsumer sc = new StarterConsumer(commondLine);
-		sc.init();
 		sc.run();
 	}
 
