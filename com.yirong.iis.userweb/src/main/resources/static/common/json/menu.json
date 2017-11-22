@@ -50,14 +50,8 @@
       "id": "3",
       "name": "企业",
       "ico": "el-icon-menu",
-      "url": "",
-      "children": [
-        {
-          "id": "31",
-          "name": "关注企业",
-          "url": "form1.html"
-        }
-      ]
+      "url": "business/user/company/CompanyMain.html"
+       
     },
     {
       "id": "4",
