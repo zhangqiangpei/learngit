@@ -7,10 +7,14 @@ import java.util.Map;
 import com.yirong.iis.user.dao.IisCountryInfoDao;
 import com.yirong.iis.user.entity.IisCountryInfo;
 import com.yirong.iis.user.service.IisCountryInfoService;
+import com.yirong.iis.user.userentity.IisCountryInfoUserEntity;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yirong.awaken.core.dao.IBaseDao;
+import com.yirong.awaken.core.dao.specification.RestrictionNames;
+import com.yirong.awaken.core.dao.specification.SimpleSpecificationBuilder;
 import com.yirong.commons.util.entity.PageEntiry;
 import com.yirong.awaken.core.service.impl.BaseService;
 import com.yirong.awaken.core.util.BeanUtil;
@@ -65,4 +69,28 @@ public class IisCountryInfoServiceImpl extends BaseService<IisCountryInfo, Strin
     public IBaseDao<IisCountryInfo, String> getBaseDao() {
         return iisCountryInfoDao;
     }
+
+	@Override
+	public Map queryList(IisCountryInfoUserEntity para) {
+		
+		List<Object> param = new ArrayList<Object>();
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT t.ISO2CODE \"iso2code\",t.ISOCODE \"isocode\",t.ENGLISH_NAME \"englishName\",t.CHINESE_NAME \"chineseName\",t.CONTINENT_CODE \"continentCode\"");
+		sql.append(" FROM IIS_COUNTRY_INFO t ");
+		sql.append("where 1=1 ");
+		if(StringUtil.isNotNullOrEmpty(para.getChineseName())){
+			sql.append(" and ( t.ENGLISH_NAME LIKE ? OR t.CHINESE_NAME LIKE ? )");
+			param.add("%"+para.getEnglishName()+"%");
+			param.add("%"+para.getChineseName()+"%");
+		}
+		if(StringUtil.isNotNullOrEmpty(para.getContinentCode())){
+			sql.append(" and t.CONTINENT_CODE = ?");
+			param.add(para.getContinentCode());
+		}
+		// 获取数据
+		PageEntiry pageEntiry = this.findPageSQLMapAdapt(sql.toString(), param,
+				null, para);
+		
+		return ResultUtil.newOk("查询成功!").setData(pageEntiry).toMap();
+	}
 }

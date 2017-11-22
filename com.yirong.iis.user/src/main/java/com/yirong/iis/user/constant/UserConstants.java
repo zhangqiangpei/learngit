@@ -13,6 +13,7 @@ package com.yirong.iis.user.constant;
  *         </p>
  */
 public abstract class UserConstants {
-
+	//微服务api传递参数名称（固定）
+	public static final String API_PARAM_NAME = "context";
 	
 }

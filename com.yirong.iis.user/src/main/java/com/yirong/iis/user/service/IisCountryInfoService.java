@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.yirong.awaken.core.service.IBaseService;
 import com.yirong.iis.user.entity.IisCountryInfo;
+import com.yirong.iis.user.userentity.IisCountryInfoUserEntity;
 
 /**
  * 功能描述：国家信息表service接口
@@ -19,4 +20,6 @@ import com.yirong.iis.user.entity.IisCountryInfo;
  */
 @SuppressWarnings("rawtypes")
 public interface IisCountryInfoService extends IBaseService<IisCountryInfo, String> {
+
+	Map queryList(IisCountryInfoUserEntity para);
 }

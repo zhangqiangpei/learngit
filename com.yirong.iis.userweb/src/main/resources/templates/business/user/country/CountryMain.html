@@ -16,9 +16,9 @@
     <!---------------网页头部start----------------->
     <div id="header" class="header"></div>
     <!---------------网页头部end------------------->
-        
+    <div id="main">
     <!---------------网页搜索(如有)start------------>
-    <div id="search" class="search">
+    <div class="search">
         <div class="search-wrap">
             <div class="search-bar">
                 查找国家
@@ -26,7 +26,7 @@
                     <el-select v-model="continentName" slot="prepend" placeholder="请选择大洲">
                         <el-option v-for="item in continentList" :label="item.name" :value="item.id"></el-option>
                     </el-select>
-                    <el-button slot="append" icon="el-icon-search"></el-button>
+                    <el-button @click="searchClick" slot="append" icon="el-icon-search"></el-button>
                 </el-input>
             </div>
         </div>
@@ -38,27 +38,29 @@
     !---------------网页工具栏索(如有)end---------->
     
     <!---------------网页主体start----------------->
-    <div id="main" class="main">
+    <div  class="main">
         <el-tabs v-model="activeName" type="card" class="tab-country">
             <el-tab-pane :label="labelName" name="first">
                 <ul>
-                    <li v-for="item in countryList" v-if="item.children&&item.children.length!=0" class="country-group clearfix">
+                    <li v-for="item in countryList" class="country-group clearfix">
                         <h3>{{item.name}}</h3>
-                        <ul>
+                        <ul v-if="item.children&&item.children.length!=0">
                             <li v-for="subItem in item.children" class="fl">
-                                <a href="javascript:void(0);" @click="showCountryDetail(item.id)">{{subItem.name}}</a>
+                                <a href="javascript:void(0);" @click="showCountryDetail(subItem.englishName)">{{subItem.chineseName}}</a>
+                            </li>
+                        </ul>
+                        <ul v-else>
+                            <li class="fl">
+                                <a href="javascript:void(0);">无</a>
                             </li>
                         </ul> 
-                    </li>
-                    <li v-else class="country-item fl">
-                        <a href="javascript:void(0);" @click="showCountryDetail(item.id)">{{item.name}}</a>
                     </li>
                 </ul>
             </el-tab-pane>
         </el-tabs>
     </div>
     <!---------------网页主体end------------------->
-     
+     </div>
     <!---------------网页底部start----------------->
     <div id="footer" class="footer"></div>
     <!---------------网页底部end------------------->
@@ -68,5 +70,7 @@
 <script src="/frame/jquery/jquery.min.js"></script>
 <script src="/frame/vue/vue.min.js"></script>
 <script src="/frame/elementui/elementui.js"></script>
+<script src="/frame/awaken/awaken.core.js"></script>
+<script src="/frame/awaken/awaken.common.js"></script>
 <script src="/common/js/com.js"></script>
 <script src="/business/user/country/js/CountryMain.js"></script>

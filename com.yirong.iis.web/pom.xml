@@ -103,13 +103,13 @@
 		<dependency>
 			<groupId>com.yirong.awaken</groupId>
 			<artifactId>yr-awaken-pm</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.yirong.awaken</groupId>
 			<artifactId>yr-awaken-ct</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.yirong.awaken.km</groupId>

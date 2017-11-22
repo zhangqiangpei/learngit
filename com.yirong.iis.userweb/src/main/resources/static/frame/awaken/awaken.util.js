@@ -31,6 +31,7 @@ function getUtilMergeAttr(attrs){
 				var pathName = "sysDictionaryApi/getCodeName";
 				var param = {"code" : code};
 				var result = ak.msService(serviceName,pathName,param);
+				console.log(result);
 				if(0 == result.code){
 					return result.data;
 				}
