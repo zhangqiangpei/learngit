@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>任务管理</title>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+        <el-form :inline="true"
+                  :model="tableSearchModel"
+                  ref="tableSearchModel">
+           	 <el-row>
+ 
+ 				<el-row  id="divSrhBox"> 
+		           	<el-form-item label="任务名称" prop="databaseName"> 
+		           	<el-input v-model="tableSearchModel.databaseName" placeholder="请输入数据库名称" size="small"></el-input> 
+		        </el-form-item>
+		           
+ 	
+                <el-form-item>
+                    <el-button type="primary" @click="onSearch" size="small" name="per_sys_user_view">查 询</el-button>
+                    <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+                </el-form-item>
+            </el-row>
+              <el-row>
+                  <el-form-item> 
+                      <el-button type="primary" @click="addClick" icon="plus" size="small" name="per_task_add">新 增</el-button>
+                      <!-- <el-button type="primary" @click="delClick" icon="delete" size="small" name="per_sys_user_del">删 除</el-button> -->
+                     
+                  </el-form-item>
+              </el-row>
+			</el-form>
+                <el-table :data="tableData"
+                          @sort-change="tableSortChange"
+                          @selection-change="tableChange"
+                          ref="mytable" stripe
+                          border id="tableId" height=100% >
+		              <el-table-column type="selection"
+						               align="center"
+						               width="45">
+		              </el-table-column>
+ 
+                    <el-table-column prop="JOB_NAME"
+                                     label="任务名称" sortable="custom">
+                    </el-table-column>
+                   
+                   <el-table-column prop="JOB_GROUP"
+                                     label="任务所在组"  sortable="custom" width="130">
+                    </el-table-column>
+                   <el-table-column prop="JOB_CLASS_NAME"
+                                     label="任务类名"   sortable="custom">
+                    </el-table-column>
+           			<el-table-column prop="CRON_EXPRESSION"
+                                     label="表达式"   >
+                    </el-table-column>
+                    <el-table-column prop="START_TIME"
+                                     label="开始时间"  :formatter="formatDateFromTime">
+                    </el-table-column>
+                    
+  					<el-table-column prop="NEXT_FIRE_TIME"
+                                     label="下次启动时间"  :formatter="formatDateFromTime">
+                    </el-table-column>
+                    
+                    <el-table-column prop="TRIGGER_STATE"
+                                     label="状态"   :formatter="formatTaskState">
+                    </el-table-column>
+  
+                     <el-table-column label="操作"
+	                             align="center"
+	                             width="200">
+	                	<template scope="scope" >
+	               	 		<el-button size="small" @click="handlePause(scope.$index, scope.row)" name="per_task_push" type="warning">暂停</el-button>
+	               	 		<el-button size="small" @click="handleResume(scope.$index, scope.row)" name="per_task_do" type="info">恢复</el-button>
+	               	 		<el-button size="small" @click="handleDel(scope.$index, scope.row)" name="per_task_del" type="danger">删除</el-button>
+	               	 	</template>
+	            	</el-table-column>
+                </el-table>
+
+
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :page-size= "tableSearchModel.pageSize"
+                               :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+            </el-col>
+        </el-row>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/km/KmTaskManage/js/KmTaskManageMain.js"></script>
+</body>
+</html>
