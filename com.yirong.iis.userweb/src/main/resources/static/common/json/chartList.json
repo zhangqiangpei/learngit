@@ -1,0 +1,24 @@
+{
+  "code": 0,
+  "msg": "获取数据成功",
+  "data": {
+    "total": 3,
+    "list": [
+      {
+        "id": "1",
+        "name": "柱状图",
+        "icon": "/business/user/tools/css/img/zz.png"
+      },
+      {
+        "id": "2",
+        "name": "折线图",
+        "icon": "/business/user/tools/css/img/zx.png"
+      },
+      {
+        "id": "3",
+        "name": "饼图",
+        "icon": "/business/user/tools/css/img/bt.png"
+      }
+    ]
+  }
+}

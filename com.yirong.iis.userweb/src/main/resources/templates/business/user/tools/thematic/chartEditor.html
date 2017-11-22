@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>图表编辑</title>
+
+    <link href="/frame/elementui/elementui.css" rel="stylesheet" />
+    <link href="/common/css/reset.css" rel="stylesheet" />
+    <link href="/common/css/com.css" rel="stylesheet" />
+    <link href="/business/user/tools/css/ThematicChartEdit.css" rel="stylesheet" />
+
+</head>
+<body scroll="no" style="width:100%;height:100%;overflow:hidden;">   
+<div id="chartMain">
+    <div class="optStep">
+        <el-steps :active="curStep" align-center>
+            <el-step title="步骤1" description="选择图表类型"></el-step>
+            <el-step title="步骤2" description="编辑图表"></el-step>
+            <el-step title="步骤3" description="完成"></el-step>
+        </el-steps>
+    </div>
+    <div class="optContent content_0">
+        <template>
+            <div class="col-xs-3 cs-thumbnail-listing ng-scope cs-chart-outer-layer-v2" v-for="(item,index) in chartList" :id="item.id"  @click="fnSelChart(item.id)">
+                <div class="cs-a cs-chart-inner-layer" >
+                    <div class="cs-chart-basic-associator">
+                        <img :class="index==0?'nav-img cs-img active':'nav-img cs-img'" alt="item.name" :src="item.icon">
+                        <p class="cs-img-nameblock ng-binding">{{item.name}}</p>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+    <div class="optContent content_1">
+        <div class="left" style="border-right:0px;">
+            <div class="panel panel-default m-b-none">
+                <div class="panel-head">
+                    <h4 class="panel-title" style="font-size: 12px">图表数据</h4>
+                </div>
+                <div class="panel-body" id="divLeftBody" style="background:#f1f5f8">
+                    <div id="divDataSourceSel" style="padding:15px 15px 0;">
+                         <template>
+                              <el-select v-model="dataBaseSourceDef" placeholder="请选择" style="width:100%;" @change="fnSelDatabase">
+                                <el-option  v-for="item in dataBaseSourceOption" :key="item.value"
+                                  :label="item.label" :value="item.value">
+                                </el-option>
+                              </el-select>
+                        </template>
+                    </div>
+                    <div id="divDataByDatabase">
+                        <el-row :gutter="0">
+                            <el-col  :span="12" class="divDataFieldTree">
+                                <el-tree :data="treeData" :props="fieldTreeProps"  default-expand-all
+                                         :render-content="fnRenderTreeNode">
+                                </el-tree>
+                            </el-col>
+                            <el-col  :span="12"  class="divDataConfig" id="divDataConfig">
+                                <div class="tit">X轴</div>
+                                <div class="divFieldInput xFieldInput">
+                                    <span class="tip">请拖入数据</span>
+                                </div>
+                                <div class="tit">Y轴</div>
+                                <div class="divFieldInput yFieldInput">
+                                    <span class="tip">请拖入数据</span>
+                                </div>
+                            </el-col>
+                        </el-row>
+                        
+                    </div>
+                </div>
+                <div class="panel-bottom text-center panel-bottom-left">
+                    <button class="btn m-b-xs w-xs btn-default cs-btn cs-btn-exp" @click="fnShowChart()">生成图表</button>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div  class="panel panel-default panel-body-center" id="divCenterBody">
+                <div id="divChartContent" style="height:100%;width:100%;"></div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="optContent content_2">
+        步骤3
+    </div>
+    <div>
+        <el-button style="margin-top:12px;" @click="fnNextStep">下一步</el-button>
+    </div>
+    
+</div> 
+</body>
+</html>
+<script src="/frame/jquery/jquery.min.js"></script>
+<script src="/frame/jqueryui/jquery-ui.min.js"></script>
+<script src="/frame/vue/vue.min.js"></script>
+<script src="/frame/elementui/elementui.js"></script>
+<script src="/common/js/com.js"></script>
+<script src="/business/user/tools/js/ThematicChartEdit.js"></script>

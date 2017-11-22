@@ -162,7 +162,8 @@ function initHomeDoc(){
 		var showBorder=!z.isInArray(arrItem_NoBorder,hJson.items[i].type);
 		var iCol=hJson.items[i].col;
 		if (iCol>=oTab.rows[0].cells.length) iCol=oTab.rows[0].cells.length-1;
-		oTab.rows[0].cells[iCol].innerHTML+='<div id="MainIndexItem_'+i.toString()+'" class="MainIndexItem"  onmouseover="showOperation('+i+')" onmouseout="hideOperation('+i+')" style="'+(showBorder?'':'border:none;padding:0px;')+'">'+hJson.items[i].title+'</div>';
+        var iH = hJson.items[i].height;
+		oTab.rows[0].cells[iCol].innerHTML+='<div id="MainIndexItem_'+i.toString()+'" class="MainIndexItem"  onmouseover="showOperation('+i+')" onmouseout="hideOperation('+i+')" style="'+(showBorder?'':'border:none;padding:0px;')+' '+(iH?'height:'+iH+'':'')+'">'+hJson.items[i].title+'</div>';
 	}
 	hJsonIdxMax=hJson.items.length;
 	for (var i=0; i<hJson.items.length; i++) reloadItem(i);
@@ -340,7 +341,7 @@ function getItemHTML_Title(item,sMore,sCSS,rename){
 	var sTit = rename||item.title;
 	sMore = sMore||'';
 	var sHTML='';
-	sHTML += '<div class="miiTitle" style="width:100%;"><table width="100%" border="0" cellspacing="0" cellpadding="0">';
+	sHTML += '<div class="miiTitle" id="miiTitle_'+item.idx+'" style="width:100%;"><table width="100%" border="0" cellspacing="0" cellpadding="0">';
 	sHTML += '	<tr>';
 	sHTML += '		<td>'+sTit+'</td>';
 	if (sMore!=''){
@@ -425,9 +426,8 @@ function getTabItemURL(item,idx,isMore){
 //文本
 function reloadItem_Text(oDiv,item){
 	var sHTML='';
-	var sMore='<a href="javascript:void(0);" onclick="top.showDialog(\'公告信息\',\''+getItemURL(item,true)+'\',\'WinItemTask\',720,400);return false;">更多</a>'
 	sHTML += getItemHTML_Operation(item);
-	sHTML += getItemHTML_Title(item,sMore,'tit2');
+	sHTML += getItemHTML_Title(item);
 	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent"></div>';
     sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
@@ -439,7 +439,7 @@ function reloadItem_Table(oDiv,item){
 	var sHTML='';
 	sHTML += getItemHTML_Operation(item);
 	sHTML += getItemHTML_Title(item);
-	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent">正在加载，请稍候...</div>';
+	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent"></div>';
     sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
 }
@@ -447,10 +447,9 @@ function reloadItem_Table(oDiv,item){
 //列表
 function reloadItem_List(oDiv,item){
 	var sHTML='';
-	var sMore='<a href="javascript:void(0);" onclick="top.showDialog(\'排行信息\',\''+getItemURL(item,true)+'\',\'WinItemUnitRank\',800,540);return false;">更多</a>'
 	sHTML += getItemHTML_Operation(item);
-	sHTML += getItemHTML_Title(item,sMore,'tit2');
-	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent">正在加载，请稍候...</div>';
+	sHTML += getItemHTML_Title(item);
+	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent"></div>';
     sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
 	HttpToDiv(getItemURL(item),_('#MainIndexItemCnt_'+item.idx));
@@ -461,7 +460,7 @@ function reloadItem_Chart(oDiv,item){
 	var sHTML='';
 	sHTML += getItemHTML_Operation(item);
 	sHTML += getItemHTML_Title(item);
-	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent">正在加载，请稍候...</div>';
+	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent"></div>';
     sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
 	HttpToDiv(getItemURL(item),_('#MainIndexItemCnt_'+item.idx));
@@ -507,12 +506,12 @@ function showItemEdit(idx){
 	top.curEditObj = oDiv;
     vm.curItemIdx = idx;
 	var item = getJsonItem(idx);
+    vm.itemTit = item.title;
+    vm.titDisplay = '1';
+    if(_('#miiTitle_'+idx).style.display=='none')vm.titDisplay = '0';
 	//文本框
 	if (item.type=='text'){
 		vm.dialogEditTextVisible = true;
-        vm.itemTit = item.title;
-        vm.titDisplay = '1';
-        if(z.isNullOrEmpty(item.title))vm.titDisplay = '0';
 		var sHTML = oDiv.innerHTML;
         if(sHTML)setTimeout(function(){$('#keFrame').get(0).contentWindow.editor.html(sHTML)},100);
 	}
@@ -523,11 +522,35 @@ function showItemEdit(idx){
 	//列表
 	if (item.type=='list') reloadItem_List(oDiv,item);
 	//图表
-	if (item.type=='chart') reloadItem_Chart(oDiv,item);
+	if (item.type=='chart'){
+        vm.dialogEditChartVisible = true;
+    }
 	//选项卡
 	if (item.type=='tabs') reloadItem_Tabs(oDiv,item);
 }
 
+function fnAfterSaveEdit(){
+    var idx = vm.curItemIdx;
+    var oDiv=_('#MainIndexItemCnt_'+idx);
+    var item = getJsonItem(idx);
+	if(vm.titDisplay=='0'){
+        _('#miiTitle_'+idx).style.display='none';
+    }else{
+        item.title = vm.itemTit;
+        _('#miiTitle_'+idx).style.display='';
+        
+    }
+    //文本框
+	if (item.type=='text'||item.type=='table'){
+        oDiv.innerHTML = vm.curItemCnt;
+    }
+}
+
+//重置外层iframe高度
+function resizeOutFrameHeight(){
+    top.$('#iframeThematicOpt').parent().height($(document.body).height()+'px');
+    top.$('#iframeThematicOpt').height($(document.body).height()+'px');
+}
 
 var chaLeft=0;
 var chaTop=0;
@@ -611,6 +634,7 @@ function endDrag(){
 	}
 	document.body.appendChild(divIndexItemTemp);
 	divIndexItemTemp.style.display='none';
+    resizeOutFrameHeight();
 	saveItemSite();
 	initTemplate_Item();
 }
@@ -712,5 +736,6 @@ function endResizeH(){
 		window.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);
 	document.onmousemove = document.onmouseup = document.onselectstart = null;
 	divResizeItem.style.display='none';
+    resizeOutFrameHeight();
 	saveItemSite();
 }
