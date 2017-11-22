@@ -7,12 +7,15 @@ import org.springframework.stereotype.Service;
 
 import com.yirong.awaken.core.dao.IBaseDao;
 import com.yirong.awaken.core.service.impl.BaseService;
-import com.yirong.commons.cache.eif.RedisCacheEif;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.iis.tp.common.dao.LtEtDataDao;
+import com.yirong.iis.tp.common.entity.LtEtCode;
 import com.yirong.iis.tp.common.entity.LtEtData;
+import com.yirong.iis.tp.common.entity.LtEtField;
+import com.yirong.iis.tp.tslt.et.service.LtEtCodeService;
 import com.yirong.iis.tp.tslt.et.service.LtEtDataService;
+import com.yirong.iis.tp.tslt.et.service.LtEtFieldService;
 import com.yirong.iis.tp.tslt.et.userentity.LtEtDataUserEntity;
 
 /**
@@ -33,13 +36,25 @@ public class LtEtDataServiceImpl extends BaseService<LtEtData, String> implement
 	/**
 	 * 日志操作类
 	 */
-	private Logger logger = LoggerFactory.getLogger(LtEtDataServiceImpl.class);
+	private final static Logger logger = LoggerFactory.getLogger(LtEtDataServiceImpl.class);
 
 	/**
 	 * dao注入
 	 */
 	@Autowired
 	private LtEtDataDao ltEtDataDao;
+
+	/**
+	 * 代码service注入
+	 */
+	@Autowired
+	private LtEtCodeService ltEtCodeService;
+
+	/**
+	 * 字段service注入
+	 */
+	@Autowired
+	private LtEtFieldService ltEtFieldService;
 
 	/**
 	 * 功能描述：获取dao操作类
@@ -76,19 +91,26 @@ public class LtEtDataServiceImpl extends BaseService<LtEtData, String> implement
 	public void doLtEtData(List<LtEtDataUserEntity> ueList) {
 		if (null != ueList && ueList.size() > 0) {
 			for (LtEtDataUserEntity ue : ueList) {
-				// 从缓存获取编码信息
-				String codeId = RedisCacheEif.hget(ue.getRicCode() + ue.getCodeType(), "id");
-				String fieldId = RedisCacheEif.hget(ue.getFleldId(), "id");
-				String fieldType = RedisCacheEif.hget(ue.getFleldId(), "type");
+				// 获取基本信息
+				LtEtCode ltEtCode = ltEtCodeService.cacheFindByRicCode(ue.getRicCode());
+				LtEtField ltEtField = ltEtFieldService.cacheFindByFieldId(String.valueOf(ue.getFleldId()));
+				if (null == ltEtCode || null == ltEtField) {
+					logger.error("ltEtCode或者ltEtField为空，ricCode:" + ue.getRicCode() + ",fleldId:" + ue.getFleldId());
+					continue;
+				}
 				// 从数据库获取数据
-				LtEtData ltEtData = this.ltEtDataDao.findByCodeIdAndFieldId(codeId, fieldId);
-				if (null == ltEtData) {
+				LtEtData ltEtData = this.ltEtDataDao.findByCodeIdAndFieldId(ltEtCode.getId(), ltEtField.getId());
+				if (null == ltEtData) {// 无数据需新增
 					ltEtData = new LtEtData();
-					ltEtData.setCodeId(codeId);
-					ltEtData.setFieldId(fieldId);
+					ltEtData.setCodeId(ltEtCode.getId());
+					ltEtData.setFieldId(ltEtField.getId());
+					ltEtData.setFieldDesc(ltEtField.getFieldDesc());
+					ltEtData.setFieldEnglishDesc(ltEtField.getFieldEnglishDesc());
+					ltEtData.setFieldName(ltEtField.getFieldName());
+					ltEtData.setFieldEnglishName(ltEtField.getFieldEnglishName());
 				}
 				// 判断类型
-				switch (fieldType) {
+				switch (ltEtField.getFieldType()) {
 				default:
 					ltEtData.setStringValue(ue.getValue());
 					break;

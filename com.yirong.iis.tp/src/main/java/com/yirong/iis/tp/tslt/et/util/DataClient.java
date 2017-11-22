@@ -1,7 +1,9 @@
 package com.yirong.iis.tp.tslt.et.util;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 import com.reuters.rfa.ansipage.Page;
@@ -21,6 +23,7 @@ import com.reuters.rfa.omm.OMMVector;
 import com.reuters.rfa.omm.OMMVectorEntry;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
+import com.yirong.iis.tp.tslt.et.userentity.LtEtDataUserEntity;
 
 /**
  * 功能描述：数据客户端
@@ -82,23 +85,24 @@ public class DataClient {
 	 * @param data
 	 *
 	 */
-	public void doData(OMMData data) {
+	public Object doData(OMMData data, String itemName) {
 		short type = data.getType();
 		if (data.isBlank()) {
 			logger.info("无数据");
 		} else if (OMMTypes.isAggregate(type)) {// 获取到字段ID及字段名称
-			doDataList(data);
+			return doDataList(data, itemName);
 		} else if ((type == OMMTypes.RMTES_STRING) && ((OMMDataBuffer) data).hasPartialUpdates()) {
 			logger.error("数据异常,type:" + data.getType());
 		} else if (type == OMMTypes.ANSI_PAGE) {
-			doDataAnsiPage(data);
+			return doDataAnsiPage(data, itemName);
 		} else if (type == OMMTypes.BUFFER || data.getType() == OMMTypes.OPAQUE_BUFFER) {
 			logger.error("数据异常,type:" + data.getType());
 		} else if (type == OMMTypes.MSG) {
 			logger.error("数据异常,type:" + data.getType());
 		} else {// 获取到数据值
-			System.out.println(data);
+			return data;
 		}
+		return null;
 	}
 
 	/**
@@ -116,12 +120,17 @@ public class DataClient {
 	 * @param data
 	 *
 	 */
-	private void doDataList(OMMData data) {
-		doDataListHeader(data);
+	private Object doDataList(OMMData data, String itemName) {
+		doDataListHeader(data, itemName);
+		List<Object> result = new ArrayList<Object>();
 		for (Iterator<?> iter = ((OMMIterable) data).iterator(); iter.hasNext();) {
 			OMMEntry entry = (OMMEntry) iter.next();
-			doDataEntry(entry);
+			Object obj = doDataEntry(entry, itemName);
+			if (null != obj) {
+				result.add(obj);
+			}
 		}
+		return result;
 	}
 
 	/**
@@ -141,30 +150,28 @@ public class DataClient {
 	 * @param tabLevel
 	 *
 	 */
-	private void doDataListHeader(OMMData data) {
+	private Object doDataListHeader(OMMData data, String itemName) {
 		short dataType = data.getType();
 		switch (dataType) {
 		case OMMTypes.FIELD_LIST:
-			break;
+			return null;
 		case OMMTypes.SERIES:
 			OMMSeries series = (OMMSeries) data;
 			if (series.has(OMMSeries.HAS_SUMMARY_DATA)) {
-				doData(series.getSummaryData());
+				return doData(series.getSummaryData(), itemName);
 			}
-			break;
 		case OMMTypes.MAP:
 			OMMMap map = (OMMMap) data;
 			if (map.has(OMMMap.HAS_SUMMARY_DATA)) {
-				doData(map.getSummaryData());
+				return doData(map.getSummaryData(), itemName);
 			}
-			break;
 		case OMMTypes.VECTOR:
 			OMMVector vector = (OMMVector) data;
 			if (vector.has(OMMVector.HAS_SUMMARY_DATA)) {
-				doData(vector.getSummaryData());
+				return doData(vector.getSummaryData(), itemName);
 			}
-			break;
 		}
+		return null;
 	}
 
 	/**
@@ -182,7 +189,7 @@ public class DataClient {
 	 * @param entry
 	 *
 	 */
-	private void doDataEntry(OMMEntry entry) {
+	private Object doDataEntry(OMMEntry entry, String itemName) {
 		switch (entry.getType()) {
 		case OMMTypes.FIELD_ENTRY: // 字段信息
 			OMMFieldEntry fe = (OMMFieldEntry) entry;
@@ -195,38 +202,39 @@ public class DataClient {
 					data = fe.getData();
 				}
 				if (data.getType() != OMMTypes.ENUM) {
-					System.out.println(fiddef.getFieldId());
-					System.out.println(fiddef.getName());
-					doData(data);
+					LtEtDataUserEntity ue = new LtEtDataUserEntity();
+					ue.setFleldId(fiddef.getFieldId());
+					ue.setRicCode(itemName);
+					Object obj = doData(data, itemName);
+					if (null != obj) {
+						ue.setValue(doData(data, itemName).toString());
+					}
+					return ue;
 				}
 			} else {
 				logger.error("字段在字典表中不存在，请确认字典表");
 			}
 			break;
 		case OMMTypes.ELEMENT_ENTRY:
-			doData(entry.getData());
-			break;
+			return doData(entry.getData(), itemName);
 		case OMMTypes.MAP_ENTRY:
 			if ((((OMMMapEntry) entry).getAction() != OMMMapEntry.Action.DELETE)
 					&& entry.getDataType() != OMMTypes.NO_DATA) {
-				doData(entry.getData());
+				return doData(entry.getData(), itemName);
 			}
-			break;
 		case OMMTypes.VECTOR_ENTRY:
 			if ((((OMMVectorEntry) entry).getAction() != OMMVectorEntry.Action.DELETE)
 					&& (((OMMVectorEntry) entry).getAction() != OMMVectorEntry.Action.CLEAR)) {
-				doData(entry.getData());
+				return doData(entry.getData(), itemName);
 			}
-			break;
 		case OMMTypes.FILTER_ENTRY:
 			if (((OMMFilterEntry) entry).getAction() != OMMFilterEntry.Action.CLEAR) {
-				doData(entry.getData());
+				return doData(entry.getData(), itemName);
 			}
-			break;
 		default:
-			doData(entry.getData());
-			break;
+			return doData(entry.getData(), itemName);
 		}
+		return null;
 	}
 
 	/**
@@ -244,7 +252,7 @@ public class DataClient {
 	 * @param data
 	 *
 	 */
-	private void doDataAnsiPage(OMMData data) {
+	private Object doDataAnsiPage(OMMData data, String itemName) {
 		boolean newPage = false;
 		if (null == currentPage) {
 			currentPage = new Page();
@@ -263,10 +271,11 @@ public class DataClient {
 					buf.append(currentPage.getChar(u.getRow(), k));
 				}
 				if (!(buf.toString()).equalsIgnoreCase("")) {
-					System.out.println("流数据" + buf.toString());
+					return buf.toString();
 				}
 			}
 		}
+		return null;
 	}
 
 	public void setCurrentPage(Page currentPage) {

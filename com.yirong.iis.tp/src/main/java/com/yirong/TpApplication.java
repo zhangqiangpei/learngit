@@ -14,8 +14,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.yirong.awaken.core.BaseApplication;
 import com.yirong.commons.util.file.PropertiesFileUtil;
 import com.yirong.iis.tp.common.constant.LtConstant;
-import com.yirong.iis.tp.tslt.et.util.CommandLine;
-import com.yirong.iis.tp.tslt.et.util.StarterConsumer;
+import com.yirong.iis.tp.tslt.et.ief.LtEtIef;
 
 @SpringBootApplication
 @EnableTransactionManagement
@@ -24,9 +23,8 @@ public class TpApplication extends BaseApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TpApplication.class, args);
-		CommandLine commondLine = new CommandLine("Demo::SESS_Demo", "ELEKTRON_DD", "user2", "EUR=");
-		StarterConsumer sc = new StarterConsumer(commondLine);
-		sc.run();
+		// 运行路透elektron产品
+		LtEtIef.run();
 	}
 
 	// destroy-method="close"的作用是当数据库连接不使用的时候,就把该连接重新放到数据池中,方便下次使用调用.

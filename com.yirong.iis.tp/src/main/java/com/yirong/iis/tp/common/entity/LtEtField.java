@@ -1,7 +1,6 @@
 package com.yirong.iis.tp.common.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -47,7 +46,7 @@ public class LtEtField implements Serializable {
 	 * 字段唯一标识
 	 */
 	@Column(name = "FIELD_ID", nullable = false, length = 22)
-	public BigDecimal fieldId;
+	public String fieldId;
 
 	/**
 	 * 字段编码
@@ -117,11 +116,11 @@ public class LtEtField implements Serializable {
 		this.id = id;
 	}
 
-	public BigDecimal getFieldId() {
+	public String getFieldId() {
 		return this.fieldId;
 	}
 
-	public void setFieldId(BigDecimal fieldId) {
+	public void setFieldId(String fieldId) {
 		this.fieldId = fieldId;
 	}
 

@@ -20,15 +20,10 @@ public class LtEtDataUserEntity {
 	private String ricCode;
 
 	/**
-	 * 编码类型
-	 */
-	private String codeType;
-
-	/**
 	 * 字段ID
 	 */
-	private String fleldId;
-	
+	private short fleldId;
+
 	/**
 	 * 数据
 	 */
@@ -50,19 +45,11 @@ public class LtEtDataUserEntity {
 		this.ricCode = ricCode;
 	}
 
-	public String getCodeType() {
-		return codeType;
-	}
-
-	public void setCodeType(String codeType) {
-		this.codeType = codeType;
-	}
-
-	public String getFleldId() {
+	public short getFleldId() {
 		return fleldId;
 	}
 
-	public void setFleldId(String fleldId) {
+	public void setFleldId(short fleldId) {
 		this.fleldId = fleldId;
 	}
 

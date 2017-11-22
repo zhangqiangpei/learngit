@@ -2,6 +2,7 @@ package com.yirong.iis.tp.tslt.et.util;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import com.reuters.rfa.common.Client;
@@ -23,6 +24,8 @@ import com.reuters.rfa.session.omm.OMMItemIntSpec;
 import com.reuters.rfa.utility.HexDump;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
+import com.yirong.iis.tp.tslt.et.ief.LtEtIef;
+import com.yirong.iis.tp.tslt.et.userentity.LtEtDataUserEntity;
 
 /**
  * 功能描述：消息客户端
@@ -152,6 +155,7 @@ public class MsgClient implements Client {
 	 * @param arg0
 	 *
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void processEvent(Event event) {
 		/** 验证 **/
@@ -169,8 +173,12 @@ public class MsgClient implements Client {
 		/** 处理业务 **/
 		OMMItemEvent ie = (OMMItemEvent) event;
 		OMMMsg respMsg = ie.getMsg();
-		System.out.println(event.getClosure().toString());
-		doMsg(respMsg);
+		Object obj = doMsg(respMsg, event.getClosure().toString());
+		/** 处理数据库 **/
+		if (null != obj) {
+			List<LtEtDataUserEntity> ueList = (List<LtEtDataUserEntity>) obj;
+			LtEtIef.doData(ueList);
+		}
 	}
 
 	/**
@@ -212,7 +220,7 @@ public class MsgClient implements Client {
 	 * @param respMsg
 	 *
 	 */
-	private void doMsg(OMMMsg msg) {
+	private Object doMsg(OMMMsg msg, String itemName) {
 		/** 提示相关信息 **/
 		logger.info("Msg Type: " + OMMMsg.MsgType.toString(msg.getMsgType()));
 		logger.info("Msg Model Type: " + RDMMsgTypes.toString(msg.getMsgModelType()));
@@ -311,15 +319,16 @@ public class MsgClient implements Client {
 			}
 			if (ai.has(OMMAttribInfo.HAS_ATTRIB)) {
 				logger.info("Attrib");
-				dataClient.doData(ai.getAttrib());
+				return dataClient.doData(ai.getAttrib(), itemName);
 			}
 		}
 		if (msg.getDataType() != OMMTypes.NO_DATA) {
 			logger.info(msg.getPayload().getEncodedLength() + " bytes");
-			dataClient.doData(msg.getPayload());
+			return dataClient.doData(msg.getPayload(), itemName);
 		} else {
 			logger.info("None");
 		}
+		return null;
 	}
 
 	/**

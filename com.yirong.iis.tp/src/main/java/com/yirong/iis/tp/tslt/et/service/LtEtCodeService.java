@@ -1,5 +1,7 @@
 package com.yirong.iis.tp.tslt.et.service;
 
+import java.util.List;
+
 import com.yirong.awaken.core.service.IBaseService;
 import com.yirong.iis.tp.common.entity.LtEtCode;
 
@@ -16,5 +18,39 @@ import com.yirong.iis.tp.common.entity.LtEtCode;
  *         </p>
  */
 public interface LtEtCodeService extends IBaseService<LtEtCode, String> {
+
+	/**
+	 * 功能描述：根据路透编码获取代码信息（缓存）
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 *         创建时间 ：2017年11月22日 下午8:06:25
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 * @return
+	 *
+	 */
+	LtEtCode cacheFindByRicCode(String ricCode);
+
+	/**
+	 * 功能描述：查询所有编码信息
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 * 		创建时间 ：2017年11月22日 下午8:41:19
+	 *         </p>
+	 *
+	 *         <p>
+	 * 		修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 * @return
+	 *
+	 */
+	List<LtEtCode> findAll();
 
 }
