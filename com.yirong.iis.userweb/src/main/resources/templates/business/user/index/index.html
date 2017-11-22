@@ -23,7 +23,36 @@
 !---------------网页工具栏索(如有)end----------->
 
 <!---------------网页主体start----------------->
-<div id="main" class="main  clearfix">ddfadaf</div>
+<div id="main" class="main  clearfix">
+    <el-row>
+        <el-col :span="6">&nbsp;</el-col>
+        <el-col :span="12">
+            <el-input v-model="searchData">
+                <el-button slot="append" icon="el-icon-search" @click="searchReport"></el-button>
+            </el-input>
+        </el-col>
+        <el-col :span="6">&nbsp;</el-col>
+    </el-row>
+
+    <div id="category" style="margin-right: 160px; margin-top: 20px;">
+        <div v-for="(item, index) in typeData">
+            <el-col :span="11" style="margin-left: 16px;">
+                <el-tabs type="card">
+                    <el-tab-pane >
+                        <span slot="label">{{item[0].TYPE_NAME}}</span>
+                        <div v-for="(type, index) in item">
+                           <a :href="'forward.do?viewPath=business/user/online/onlineMain.html&kmId='+type.KM_ID+'&id='+type.ID">
+                               <el-col :span="19">{{type.REPORT_NAME}}</el-col>
+                               <el-col :span="5">{{type.CREATE_TIME}}</el-col>
+                           </a>
+                        </div>
+                        <el-button style="float: right; margin-right: 20px;" type="text" @click="moreTypeData(item)">更多...</el-button>
+                    </el-tab-pane>
+                </el-tabs>
+            </el-col>
+        </div>
+    </div>
+</div>
 <!---------------网页主体end------------------->
  
 <!---------------网页底部start----------------->

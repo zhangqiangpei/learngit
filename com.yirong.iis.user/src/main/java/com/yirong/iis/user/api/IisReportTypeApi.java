@@ -66,7 +66,28 @@ public class IisReportTypeApi {
 				 .StringToObject(param, IisReportTypeUserEntity.class,calssMap);
 		 // 处理业务
 		 Map map = iisReportTypeService.queryIisReportTypeList(psue);
-		 return JsonUtil.ObjectToString(map);
+		 return JsonUtil.ObjectToStringClob(map);
 	 }
+
+	/**
+	 * 功能描述：查询报告分类表列表信息
+	 *
+	 * @author 林明铁
+	 *         <p>
+	 *         创建时间 ：2017-11-09 10:00:09
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 * @param paramAll
+	 * @return
+	 */
+	@RequestMapping(value = "listFiveRecord", method = RequestMethod.POST)
+	public String listFiveRecord(@RequestBody String paramAll) {
+		// 处理业务
+		Map map = iisReportTypeService.queryIisReportTypeListFiveRecord();
+		return JsonUtil.ObjectToStringClob(map);
+	}
 
 }

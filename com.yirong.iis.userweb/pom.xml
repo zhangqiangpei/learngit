@@ -98,7 +98,7 @@
 		<dependency>
 			<groupId>com.yirong.commons</groupId>
 			<artifactId>yr-commons-web</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>0.0.4-SNAPSHOT</version>
 		</dependency>
 
 		<!-- awaken 模块 -->
@@ -127,6 +127,13 @@
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc14</artifactId>
 			<version>10.2.0.4.0</version>
+		</dependency>
+
+		<!-- awaken接口客户端 -->
+		<dependency>
+			<groupId>com.yirong.commons</groupId>
+			<artifactId>yr-commons-akclient</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		 
 	</dependencies>

@@ -4,6 +4,8 @@ package com.yirong.iis.user.api;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.yirong.commons.cache.eif.RedisCacheEif;
+import com.yirong.iis.user.constant.UserConstants;
 import com.yirong.iis.user.entity.IisReport;
 import com.yirong.iis.user.service.IisReportService;
 import com.yirong.iis.user.userentity.IisReportUserEntity;
@@ -63,9 +65,12 @@ public class IisReportApi {
 		// 实体转换
 		IisReport iisReport = (IisReport) JsonUtil.StringToObject(param,
 				IisReport.class);
+		String tokenId = JsonUtil.getJsonStrByAttrName(paramAll, "sessionId");
+		String creator = RedisCacheEif.hget(tokenId, "id");
+		iisReport.setCreator(creator);
 		// 业务处理
-		Map map = this.iisReportService.saveIisReport(iisReport);
-		return JsonUtil.ObjectToString(map);
+		Map map = this.iisReportService.saveIisReport(iisReport, tokenId);
+		return JsonUtil.ObjectToStringClob(map);
 	}
 
 	/**
@@ -90,9 +95,10 @@ public class IisReportApi {
 		// 实体转换
 		IisReport iisReport = (IisReport) JsonUtil.StringToObject(param,
 				IisReport.class);
+        String tokenId = JsonUtil.getJsonStrByAttrName(paramAll, "sessionId");
 		// 业务处理
-		Map map = this.iisReportService.updateIisReport(iisReport);
-		return JsonUtil.ObjectToString(map);
+		Map map = this.iisReportService.updateIisReport(iisReport, tokenId);
+		return JsonUtil.ObjectToStringClob(map);
 	}
 
 	/**
@@ -116,7 +122,7 @@ public class IisReportApi {
 		String id = JsonUtil.getJsonStrByAttrName(paramAll, pathName);
 		// 处理业务
 		Map map = iisReportService.queryIisReportById(id);
-		return JsonUtil.ObjectToString(map);
+		return JsonUtil.ObjectToStringClob(map);
 	}
 
 	/**
@@ -136,11 +142,12 @@ public class IisReportApi {
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	public String delete(@RequestBody String paramAll) {
 		// 获取参数信息
-		String pathName = "context/ids";
-		String ids = JsonUtil.getJsonStrByAttrName(paramAll, pathName);
+		String pathName = "context/id";
+		String id = JsonUtil.getJsonStrByAttrName(paramAll, pathName);
+		String tokenId = JsonUtil.getJsonStrByAttrName(paramAll, "sessionId");
 		// 处理业务
-		Map map = iisReportService.delIisReport(ids.replace("[","").replace("]","").replace("\"",""));
-		return JsonUtil.ObjectToString(map);
+		Map map = iisReportService.delIisReport(id.replace("[","").replace("]","").replace("\"",""), tokenId);
+		return JsonUtil.ObjectToStringClob(map);
 	}
 
 	/**
@@ -170,7 +177,7 @@ public class IisReportApi {
 				.StringToObject(param, IisReportUserEntity.class,calssMap);
 		// 处理业务
 		Map map = iisReportService.queryIisReportList(psue);
-		return JsonUtil.ObjectToString(map);
+		return JsonUtil.ObjectToStringClob(map);
 	}
 
 }
