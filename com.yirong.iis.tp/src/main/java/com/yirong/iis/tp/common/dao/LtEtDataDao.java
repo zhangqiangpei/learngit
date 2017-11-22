@@ -17,4 +17,21 @@ import com.yirong.iis.tp.common.entity.LtEtData;
  */
 public interface LtEtDataDao extends IBaseDao<LtEtData, String> {
 
+	/**
+	 * 功能描述：根据编码ID及字段ID获取数据
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 *         创建时间 ：2017年11月22日 下午1:59:27
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 * @param codeId
+	 * @param fieldId
+	 *
+	 */
+	LtEtData findByCodeIdAndFieldId(String codeId, String fieldId);
 }

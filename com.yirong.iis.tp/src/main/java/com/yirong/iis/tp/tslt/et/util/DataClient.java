@@ -47,7 +47,7 @@ public class DataClient implements Client {
 	/**
 	 * 日志操作类
 	 */
-	private final static Logger logger = LoggerFactory.getLogger(LoginClient.class);
+	private final static Logger logger = LoggerFactory.getLogger(DataClient.class);
 
 	/**
 	 * 客户端操作类
@@ -335,9 +335,11 @@ public class DataClient implements Client {
 	 */
 	@SuppressWarnings("rawtypes")
 	private void doData(OMMData data) {
+		short type = data.getType();
+		System.out.println("==========" + type);
 		if (data.isBlank()) {
 			logger.info("无数据");
-		} else if (OMMTypes.isAggregate(data.getType())) {// 获取到字段ID及字段名称
+		} else if (OMMTypes.isAggregate(type)) {// 获取到字段ID及字段名称
 			for (Iterator iter = ((OMMIterable) data).iterator(); iter.hasNext();) {
 				OMMEntry entry = (OMMEntry) iter.next();
 				switch (entry.getType()) {
@@ -356,13 +358,13 @@ public class DataClient implements Client {
 					break;
 				}
 			}
-		} else if ((data.getType() == OMMTypes.RMTES_STRING) && ((OMMDataBuffer) data).hasPartialUpdates()) {
+		} else if ((type == OMMTypes.RMTES_STRING) && ((OMMDataBuffer) data).hasPartialUpdates()) {
 			logger.error("数据异常,type:" + data.getType());
-		} else if (data.getType() == OMMTypes.ANSI_PAGE) {
+		} else if (type == OMMTypes.ANSI_PAGE) {
 			logger.error("数据异常,type:" + data.getType());
-		} else if (data.getType() == OMMTypes.BUFFER || data.getType() == OMMTypes.OPAQUE_BUFFER) {
+		} else if (type == OMMTypes.BUFFER || data.getType() == OMMTypes.OPAQUE_BUFFER) {
 			logger.error("数据异常,type:" + data.getType());
-		} else if (data.getType() == OMMTypes.MSG) {
+		} else if (type == OMMTypes.MSG) {
 			logger.error("数据异常,type:" + data.getType());
 		} else {// 获取到数据值
 			System.out.println(data);
