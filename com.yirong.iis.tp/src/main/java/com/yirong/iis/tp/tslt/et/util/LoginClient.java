@@ -82,7 +82,7 @@ public class LoginClient implements Client {
 	 * @return
 	 *
 	 */
-	public boolean sendLogin() {
+	public boolean sendRequest() {
 		OMMMsg ommmsg = encodeLoginReqMsg();
 		OMMItemIntSpec ommItemIntSpec = new OMMItemIntSpec();
 		ommItemIntSpec.setMsg(ommmsg);
@@ -146,6 +146,7 @@ public class LoginClient implements Client {
 	 */
 	@Override
 	public void processEvent(Event event) {
+		/** 验证 **/
 		int type = event.getType();
 		if (type == Event.COMPLETION_EVENT) {// 完成
 			logger.info("事件已完成");
@@ -166,7 +167,7 @@ public class LoginClient implements Client {
 			starterConsumer.stop();
 			return;
 		}
-
+		/** 处理业务 **/
 		OMMItemEvent ie = (OMMItemEvent) event;
 		OMMMsg respMsg = ie.getMsg();
 		if (respMsg.getMsgModelType() != RDMMsgTypes.LOGIN) {
@@ -183,12 +184,37 @@ public class LoginClient implements Client {
 		if (respMsg.has(OMMMsg.HAS_STATE) && (respMsg.getState().getStreamState() == OMMState.Stream.OPEN)
 				&& (respMsg.getState().getDataState() == OMMState.Data.OK)) {
 			logger.error("收到登录成功信息");
-			starterConsumer.send();
+			starterConsumer.sendRequestData();
 			;
 		} else {
 			logger.error("登录失败，提示:" + OMMMsg.MsgType.toString(respMsg.getMsgType()));
 		}
 
+	}
+
+	/**
+	 * 功能描述：关闭请求
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 *         创建时间 ：2017年11月22日 上午9:12:00
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 *
+	 */
+	public void closeRequest() {
+		if (null != loginHandle) {
+			starterConsumer.getOmmConsumer().unregisterClient(loginHandle);
+			loginHandle = null;
+		}
+	}
+
+	public Handle getLoginHandle() {
+		return loginHandle;
 	}
 
 }

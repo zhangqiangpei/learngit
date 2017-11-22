@@ -79,6 +79,11 @@ public class StarterConsumer {
 	private Handle connIntSpecHandle;
 
 	/**
+	 * 是否继续获取数据
+	 */
+	private boolean Continue = true;
+
+	/**
 	 * 功能描述：初始化
 	 *
 	 * @author 刘捷(liujie)
@@ -125,8 +130,8 @@ public class StarterConsumer {
 		FieldDictionary dictionary = FieldDictionary.create();
 		FieldDictionary.readRDMFieldDictionary(dictionary, commondLine.getVariable("rdmFieldDictionary"));
 		FieldDictionary.readEnumTypeDef(dictionary, commondLine.getVariable("enumType"));
-		// 发送登录消息
-		loginClient.sendLogin();
+		// 发送登录请求
+		loginClient.sendRequest();
 		logger.info("==================路透elektron产品初始化结束（成功）======================= ");
 		return true;
 	}
@@ -146,7 +151,8 @@ public class StarterConsumer {
 	 * @return
 	 *
 	 */
-	public boolean send() {
+	public boolean sendRequestData() {
+		dataClient.sendRequest();
 		return true;
 	}
 
@@ -165,8 +171,14 @@ public class StarterConsumer {
 	 * @return
 	 *
 	 */
-	public boolean run() {
-		return true;
+	public void run() {
+		while (Continue) {
+			try {
+				eventQueue.dispatch(1000);
+			} catch (Exception e) {
+				logger.error("调度异常", e);
+			}
+		}
 	}
 
 	/**
@@ -185,7 +197,24 @@ public class StarterConsumer {
 	 *
 	 */
 	public void stop() {
-
+		logger.info("==============路透elektron产品关闭线程开始=================");
+		Continue = false;
+		if (null != connIntSpecHandle) {
+			ommConsumer.unregisterClient(connIntSpecHandle);
+		}
+		if (null != dataClient) {
+			dataClient.closeRequest();
+		}
+		if (null != loginClient) {
+			loginClient.closeRequest();
+		}
+		if (null != ommConsumer) {
+			ommConsumer.destroy();
+		}
+		eventQueue.deactivate();
+		session.release();
+		Context.uninitialize();
+		logger.info("==============路透elektron产品关闭线程结束=================");
 	}
 
 	public CommandLine getCommondLine() {
@@ -208,4 +237,7 @@ public class StarterConsumer {
 		return ommConsumer;
 	}
 
+	public LoginClient getLoginClient() {
+		return loginClient;
+	}
 }
