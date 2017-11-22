@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据</title>
+
+    <link href="/frame/elementui/elementui.css" rel="stylesheet" />
+    <link href="/common/css/reset.css" rel="stylesheet" />
+    <link href="/common/css/com.css" rel="stylesheet" />
+    <link href="/business/user/data/css/DataMain.css" rel="stylesheet" />
+</head>
+
+<body>
+    
+    <!---------------网页头部start----------------->
+    <div id="header" class="header"></div>
+    <!---------------网页头部end------------------->
+        
+	    
+    <!---------------网页主体start----------------->
+    <div id="main"  class="main  clearfix">
+    	<template>
+    		<el-row :gutter="20">
+    			<el-col :span="16">
+				  	<el-tabs v-model="activeTab"   @tab-click="handleClick">
+					    <el-tab-pane :label="item.name" :name="item.id"  v-for="(item,index) in category">
+					    </el-tab-pane>
+				  	</el-tabs>
+				</el-col>
+				<el-col :span="8" >
+					<el-input v-model="searchData" placeholder="请输入内容" style="margin-top:-5px;
+					padding-left:20px;">
+			                <el-button slot="append" icon="el-icon-search" @click="searchReport"></el-button>
+			        </el-input>
+				</el-col>
+			</el-row>
+		</template>
+    	
+		<el-row :gutter="20">
+		  <el-col :span="4" v-for="(secondFl,index_se) in currentTabInfo">
+		  	<div class="secondClassify">{{secondFl.name}}</div>
+    		<div class="indicators" v-for="(info,index_info) in secondFl.info" @click="infoClick(info.infoId)">{{info.infoName}}</div>
+		  </el-col>
+		</el-row>
+		
+    </div>
+    <!---------------网页主体end------------------->
+     
+    <!---------------网页底部start----------------->
+    <div id="footer" class="footer"></div>
+    <!---------------网页底部end------------------->
+    
+</body>
+</html>
+<script src="/frame/jquery/jquery.min.js"></script>
+<script src="/frame/vue/vue.min.js"></script>
+<script src="/frame/elementui/elementui.js"></script>
+<script src="/common/js/com.js"></script>
+<script src="/frame/awaken/awaken.core.js"></script>
+<script src="/frame/awaken/awaken.table.js"></script>
+<script src="/frame/awaken/awaken.tree.js"></script>
+<script src="/frame/awaken/awaken.dialog.js"></script>
+<script src="/frame/awaken/awaken.common.js"></script>
+<script src="/frame/awaken/awaken.util.js"></script>
+<script src="/business/user/data/js/DataMain.js"></script>

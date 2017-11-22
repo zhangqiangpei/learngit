@@ -1,7 +1,10 @@
 package com.yirong.iis.tp.tslt.et.service;
 
+import java.util.List;
+
 import com.yirong.awaken.core.service.IBaseService;
 import com.yirong.iis.tp.common.entity.LtEtData;
+import com.yirong.iis.tp.tslt.et.userentity.LtEtDataUserEntity;
 
 /**
  * 功能描述：elektron数据表service接口
@@ -31,6 +34,6 @@ public interface LtEtDataService extends IBaseService<LtEtData, String> {
 	 * @param ltEtData
 	 * @return
 	 */
-	boolean doLtEtData(LtEtData ltEtData);
+	void doLtEtData(List<LtEtDataUserEntity> ueList);
 
 }

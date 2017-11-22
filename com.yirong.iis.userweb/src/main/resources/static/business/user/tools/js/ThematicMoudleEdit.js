@@ -3,7 +3,9 @@ var vm = new Vue({
     data: {       
         dialogEditTextVisible:false,
 		dialogEditGridVisible:false,
+        dialogEditChartVisible:false,
         curItemIdx:'',//当前编辑对象index
+        curItemCnt:'',//当前编辑对象内容
         itemTit:'',
         titDisplay:'1',
         editor:'',
@@ -16,15 +18,20 @@ var vm = new Vue({
     methods: {
         saveText:function(){
             var sHTML = $('#keFrame').get(0).contentWindow.editor.html();
-            top.curEditObj.innerHTML = sHTML;
+            this.curItemCnt = sHTML;
             $('#keFrame').get(0).contentWindow.editor.html('<strong>请输入内容<strong>');
-            vm.dialogEditTextVisible = false;
+            this.dialogEditTextVisible = false;
+            if(typeof(fnAfterSaveEdit)=='function')fnAfterSaveEdit();
         },
 		saveGrid:function(){
 			var sHTML = $('#gdFrame').get(0).contentWindow.$('#divGrid').html();
-			top.curEditObj.innerHTML = sHTML;
-			vm.dialogEditGridVisible = false;
+            this.curItemCnt = sHTML;
+			this.dialogEditGridVisible = false;
+            if(typeof(fnAfterSaveEdit)=='function')fnAfterSaveEdit();
 		},
+        saveChart:function(){
+            
+        },
 		handleSrhGrid:function(value){
 			var sURL = '/common/json/grid1.json';
 			if(value!='')sURL = value;
@@ -44,7 +51,7 @@ var vm = new Vue({
 			})
 		},
 		handleShowGrid:function(){
-			if(vm.gridData.length==0)return;
+			if(this.gridData.length==0)return;
 			$('#divGrid').html('');
 			var oPar = document.createElement('table');
 			oPar.id = 'grid';
@@ -58,11 +65,11 @@ var vm = new Vue({
 			}
 
 
-			for (var i=0; i<vm.gridData.length; i++){
+			for (var i=0; i<this.gridData.length; i++){
 				tr  = oPar.insertRow(i+1);
 				for (var key in vm.gridData[i]){
-					if(z.isInArray(vm.checkedColumns,key)){
-						tr.insertCell(-1).innerHTML = vm.gridData[i][key];
+					if(z.isInArray(this.checkedColumns,key)){
+						tr.insertCell(-1).innerHTML = this.gridData[i][key];
 					}
 				}
 				
@@ -70,7 +77,7 @@ var vm = new Vue({
 			$('#divGrid').append(oPar);
 		},
 		handleCheckedChange:function(){
-			vm.handleShowGrid();
+			this.handleShowGrid();
 		}
 	},
     mounted: function () {
