@@ -1,0 +1,37 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div id="saveEs" class="main">
+	<el-dialog title="创建ES索引" 
+                   :visible.sync="dialogVisible">
+            <el-form :model="saveEsModel"
+                     :rules="saveEsRules"
+                     ref="saveEsModel"
+                     label-width="100px" >
+                <el-form-item label="索引名称" prop="esIndex">
+                    <el-input v-model="saveEsModel.esIndex" placeholder="请输入索引名称(长度：1-100)"></el-input>
+                </el-form-item>
+                <el-form-item label="索引类型" prop="esType">
+                    <el-input v-model="saveEsModel.esType" placeholder="请输入索引类型(长度：1-100)"></el-input>
+                </el-form-item>
+                  <el-form-item label="setting" prop="esSetting">
+                    <el-input type="textarea" rows="5" v-model="saveEsModel.esSetting" placeholder="请输入setting(长度：0-1000)"></el-input>
+                </el-form-item>
+                
+                 <el-form-item label="mapping" prop="esMapping">
+                    <el-input type="textarea" rows="5" v-model="saveEsModel.esMapping" placeholder="请输入mapping(长度：0-1000)"></el-input>
+                </el-form-item>
+ 
+               <el-form-item style="text-align:center">
+                    <el-button type="primary" @click="saveSubmit" size="small">确定</el-button>
+                    <el-button @click="saveReset" size="small">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/km/KmIntegratetAppCfg/js/KmIntegratetAppCfgSaveEs.js"></script>

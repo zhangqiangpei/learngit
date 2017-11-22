@@ -142,12 +142,12 @@
       "id": "7",
       "name": "数据",
       "ico": "el-icon-menu",
-      "url": "",
+      "url": "business/user/data/DataMain.html",
       "children": [
         {
           "id": "71",
           "name": "宏观数据",
-          "ico": "el-icon-menu"
+          "url": "business/user/data/DataMain.html"
         },
         {
           "id": "72",
