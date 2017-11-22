@@ -79,9 +79,30 @@ public class StarterConsumer {
 	private Handle connIntSpecHandle;
 
 	/**
+	 * 字段字典操作类
+	 */
+	private FieldDictionary dictionary;
+
+	/**
 	 * 是否继续获取数据
 	 */
 	private boolean Continue = true;
+
+	/**
+	 * 功能描述：构造函数
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 *         创建时间 ：2017年11月22日 上午9:33:09
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 */
+	public StarterConsumer(CommandLine commondLine) {
+		this.commondLine = commondLine;
+	}
 
 	/**
 	 * 功能描述：初始化
@@ -127,32 +148,12 @@ public class StarterConsumer {
 		OMMConnectionIntSpec connIntSpec = new OMMConnectionIntSpec();
 		connIntSpecHandle = ommConsumer.registerClient(eventQueue, connIntSpec, loginClient, null);
 		// 初始化代码表文件
-		FieldDictionary dictionary = FieldDictionary.create();
+		dictionary = FieldDictionary.create();
 		FieldDictionary.readRDMFieldDictionary(dictionary, commondLine.getVariable("rdmFieldDictionary"));
 		FieldDictionary.readEnumTypeDef(dictionary, commondLine.getVariable("enumType"));
 		// 发送登录请求
 		loginClient.sendRequest();
 		logger.info("==================路透elektron产品初始化结束（成功）======================= ");
-		return true;
-	}
-
-	/**
-	 * 功能描述：发送请求
-	 *
-	 * @author 刘捷(liujie)
-	 *         <p>
-	 *         创建时间 ：2017年11月21日 下午8:10:19
-	 *         </p>
-	 *
-	 *         <p>
-	 *         修改历史：(修改人，修改时间，修改原因/内容)
-	 *         </p>
-	 *
-	 * @return
-	 *
-	 */
-	public boolean sendRequestData() {
-		dataClient.sendRequest();
 		return true;
 	}
 
@@ -239,5 +240,13 @@ public class StarterConsumer {
 
 	public LoginClient getLoginClient() {
 		return loginClient;
+	}
+
+	public DataClient getDataClient() {
+		return dataClient;
+	}
+
+	public FieldDictionary getDictionary() {
+		return dictionary;
 	}
 }

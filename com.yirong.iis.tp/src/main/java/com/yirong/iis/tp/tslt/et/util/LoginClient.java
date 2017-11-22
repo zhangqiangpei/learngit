@@ -44,7 +44,7 @@ public class LoginClient implements Client {
 	/**
 	 * 配置信息
 	 */
-	private CommandLine commandLine = starterConsumer.getCommondLine();
+	private CommandLine commandLine;
 
 	/**
 	 * 登录操作类
@@ -65,6 +65,7 @@ public class LoginClient implements Client {
 	 */
 	public LoginClient(StarterConsumer starterConsumer) {
 		this.starterConsumer = starterConsumer;
+		commandLine = starterConsumer.getCommondLine();
 	}
 
 	/**
@@ -82,13 +83,14 @@ public class LoginClient implements Client {
 	 * @return
 	 *
 	 */
-	public boolean sendRequest() {
+	public void sendRequest() {
+		logger.info("================发送登录请求开始==================");
 		OMMMsg ommmsg = encodeLoginReqMsg();
 		OMMItemIntSpec ommItemIntSpec = new OMMItemIntSpec();
 		ommItemIntSpec.setMsg(ommmsg);
 		loginHandle = starterConsumer.getOmmConsumer().registerClient(starterConsumer.getEventQueue(), ommItemIntSpec,
 				this, null);
-		return true;
+		logger.info("================发送登录请求结束==================");
 	}
 
 	/**
@@ -162,7 +164,7 @@ public class LoginClient implements Client {
 			return;
 		}
 		logger.info("收到登录响应");
-		if (type == Event.OMM_ITEM_EVENT) {// 非项目事件
+		if (type != Event.OMM_ITEM_EVENT) {// 非项目事件
 			logger.error("非项目事件类型");
 			starterConsumer.stop();
 			return;
@@ -184,8 +186,7 @@ public class LoginClient implements Client {
 		if (respMsg.has(OMMMsg.HAS_STATE) && (respMsg.getState().getStreamState() == OMMState.Stream.OPEN)
 				&& (respMsg.getState().getDataState() == OMMState.Data.OK)) {
 			logger.error("收到登录成功信息");
-			starterConsumer.sendRequestData();
-			;
+			starterConsumer.getDataClient().sendRequest();
 		} else {
 			logger.error("登录失败，提示:" + OMMMsg.MsgType.toString(respMsg.getMsgType()));
 		}

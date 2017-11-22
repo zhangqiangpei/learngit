@@ -1,5 +1,6 @@
 package com.yirong.iis.tp.tslt.et.util;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
@@ -75,9 +76,11 @@ public class CommandLine {
 		// DACS application ID for login
 		defaultOptions.put("application", "256");
 		// RDMFieldDictionary filename
-		defaultOptions.put("rdmFieldDictionary", "/var/triarch/RDMFieldDictionary");
+		String basePath = System.getProperty("user.dir") + File.separator + "config" + File.separator + "RDM"
+				+ File.separator;
+		defaultOptions.put("rdmFieldDictionary", basePath + "RDMFieldDictionary");
 		// enumtype.def filename
-		defaultOptions.put("enumType", "/var/triarch/enumtype.def");
+		defaultOptions.put("enumType", basePath + "enumtype.def");
 		// How long application should run before exiting (in seconds)
 		defaultOptions.put("runTime", 600);
 	}
@@ -102,6 +105,7 @@ public class CommandLine {
 			options.put(key, obj);
 		}
 		/** 处理新参数 **/
+		ConfigDb = new ConfigDb();
 		// 处理会话
 		addVariable("session", session);
 		// 处理服务名
