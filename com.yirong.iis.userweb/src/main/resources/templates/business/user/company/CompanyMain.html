@@ -22,8 +22,11 @@
     <div id="main" class="main  clearfix">
     	 <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel">
            	 <el-row>
+           	 <el-form-item>
+           	 		<el-lable>关注公司财务总览&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</el-lable>
+           	 </el-form-item>
            	  <el-form-item>
-                 <el-select v-model="tableSearchModel.continentCode"  size="small" placeholder="选择洲">
+                 <el-select v-model="tableSearchModel.continentCode" style="width:158px;" size="small" placeholder="选择洲">
                      <el-option
                              v-for="item in continents"
                              :key="item.value"
@@ -34,7 +37,7 @@
              </el-form-item>
                 
 			<el-form-item>
-                 <el-select v-model="tableSearchModel.countryEngName" size="small" placeholder="选择国家">
+                 <el-select v-model="tableSearchModel.countryEngName" style="width:132px;" size="small" placeholder="选择国家">
                      <el-option
                              v-for="item in countrys"
                              :key="item.value"
@@ -45,7 +48,7 @@
              </el-form-item>
              
              <el-form-item>
-                 <el-select v-model="tableSearchModel.industryCode" size="small" placeholder="选择行业">
+                 <el-select v-model="tableSearchModel.industryCode" style="width:132px;" size="small" placeholder="选择行业">
                      <el-option
                              v-for="item in industrys"
                              :key="item.value"
@@ -54,7 +57,7 @@
                      </el-option>
                  </el-select>
              </el-form-item>
-             
+             <el-form-item>
               <el-date-picker
 			      v-model="startAndEnd"
 			      type="daterange"
@@ -64,11 +67,12 @@
 			      start-placeholder="开始日期"
 			      end-placeholder="结束日期"
 			      size="small"
+			      style="width:200px;"
 			      :picker-options="pickerOptions2">
 			    </el-date-picker>
-    
+     		  </el-form-item>
               <el-form-item>
-                 <el-select v-model="tableSearchModel.frequency" size="small" placeholder="频度">
+                 <el-select v-model="tableSearchModel.frequency" style="width:132px;" size="small" placeholder="频度">
                      <el-option
                              v-for="item in frequencys"
                              :key="item.value"
@@ -77,11 +81,16 @@
                      </el-option>
                  </el-select>
              </el-form-item>
+             <el-form-item>
+	             <el-input placeholder="输入公司名称/关键字" v-model="tableSearchModel.keyWord" style="width:210px;" size="small" class="input-with-select">
+				      <el-button slot="append" icon="el-icon-search" @click="searchClick"></el-button>
+				  </el-input>
+			  </el-form-item>
              
-              <el-form-item>
+       <!--        <el-form-item>
                   <el-button type="primary" @click="searchClick" size="small" name="per_km_docInfo_show">查 询</el-button>
                   <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
-              </el-form-item>
+              </el-form-item> -->
     
  
                
@@ -89,9 +98,7 @@
 		   </el-form>
           <el-table :data="tableData" @sort-change="tableSortChange" @selection-change="tableChange"
                     ref="mytable" stripe border id="tableId" height=100%>
-          <el-table-column type="index" align="center" label="序号" width="50">
-               
-          </el-table-column>
+             <el-table-column type="index" align="center" label="序号" width="50"  fixed="left"> </el-table-column>
 
              <el-table-column prop="COMPANY_NAME" width="250"   show-overflow-tooltip label="公司名称"  fixed="left"></el-table-column>
              
