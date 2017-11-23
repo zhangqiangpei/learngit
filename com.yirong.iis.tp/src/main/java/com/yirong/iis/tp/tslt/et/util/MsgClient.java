@@ -1,5 +1,6 @@
 package com.yirong.iis.tp.tslt.et.util;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,6 +25,7 @@ import com.reuters.rfa.session.omm.OMMItemIntSpec;
 import com.reuters.rfa.utility.HexDump;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
+import com.yirong.commons.util.datatype.StringUtil;
 import com.yirong.iis.tp.tslt.et.ief.LtEtIef;
 import com.yirong.iis.tp.tslt.et.userentity.LtEtDataUserEntity;
 
@@ -67,6 +69,11 @@ public class MsgClient implements Client {
 	private DataClient dataClient;
 
 	/**
+	 * 已发送请求的代码信息
+	 */
+	private List<String> requestTiemList = new ArrayList<String>();
+
+	/**
 	 * 功能描述：构造函数
 	 *
 	 * @author 刘捷(liujie)
@@ -81,7 +88,7 @@ public class MsgClient implements Client {
 	public MsgClient(StarterConsumer starterConsumer) {
 		this.starterConsumer = starterConsumer;
 		commandLine = starterConsumer.getCommondLine();
-		dataClient = new DataClient(starterConsumer);
+		dataClient = new DataClient(starterConsumer, this);
 	}
 
 	/**
@@ -99,10 +106,15 @@ public class MsgClient implements Client {
 	 * @return
 	 *
 	 */
-	public void sendRequest() {
+	public void sendRequest(String itemNameTemp) {
 		/** 获取参数信息 **/
 		String serviceName = commandLine.getVariable("serviceName");
-		String itemNames = commandLine.getVariable("itemName");
+		String itemNames = null;
+		if (StringUtil.isNullOrEmpty(itemNameTemp)) {// 为空的时候获取配置的信息
+			itemNames = commandLine.getVariable("itemName");
+		} else {
+			itemNames = itemNameTemp;
+		}
 		String mmt = commandLine.getVariable("mmt");
 		short capability = RDMMsgTypes.msgModelType(mmt);
 		// 多个ric code用逗号隔开
@@ -129,13 +141,18 @@ public class MsgClient implements Client {
 			ommmsg.setIndicationFlags(OMMMsg.Indication.REFRESH);
 		}
 		dataHandles = new LinkedList<Handle>();
+		/** 循环发送 **/
 		while (iter.hasNext()) {
 			String itemName = (String) iter.next();
+			if (requestTiemList.contains(itemName)) {// 之前已发送过请求，无需发送
+				continue;
+			}
 			ommmsg.setAttribInfo(serviceName, itemName, RDMInstrument.NameType.RIC);
 			ommItemIntSpec.setMsg(ommmsg);
 			Handle itemHandle = starterConsumer.getOmmConsumer().registerClient(starterConsumer.getEventQueue(),
 					ommItemIntSpec, this, itemName);
 			dataHandles.add(itemHandle);
+			requestTiemList.add(itemName);
 		}
 		pool.releaseMsg(ommmsg);
 	}
@@ -177,6 +194,7 @@ public class MsgClient implements Client {
 		/** 处理数据库 **/
 		if (null != obj) {
 			List<LtEtDataUserEntity> ueList = (List<LtEtDataUserEntity>) obj;
+			// 处理数据
 			LtEtIef.doData(ueList);
 		}
 	}
@@ -203,6 +221,7 @@ public class MsgClient implements Client {
 			starterConsumer.getOmmConsumer().unregisterClient(dataHandle);
 		}
 		dataHandles.clear();
+		requestTiemList.clear();
 	}
 
 	/**

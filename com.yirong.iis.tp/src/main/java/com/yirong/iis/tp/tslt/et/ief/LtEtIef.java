@@ -65,7 +65,7 @@ public class LtEtIef {
 					codeStrs.append(ltEtCode.getRicCode() + ",");
 				}
 			}
-			CommandLine commondLine = new CommandLine("Demo::SESS_Demo", "ELEKTRON_DD", "user2", codeStrs.toString() + ",EUR=");
+			CommandLine commondLine = new CommandLine("Demo::SESS_Demo", "ELEKTRON_DD", "user2", codeStrs.toString());
 			StarterConsumer sc = new StarterConsumer(commondLine);
 			sc.run();
 		}
@@ -89,6 +89,28 @@ public class LtEtIef {
 		if (null != ueList && ueList.size() > 0) {
 			dataService.doLtEtData(ueList);
 		}
+	}
+
+	/**
+	 * 功能描述：新增代码表
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 *         创建时间 ：2017年11月23日 下午9:05:03
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 * @param code
+	 * @param pcode
+	 * @param isLink
+	 * @return
+	 *
+	 */
+	public static LtEtCode doLtEtCode(String code, String pcode, boolean isLink) {
+		return ltEtCodeService.doLtEtCode(code, pcode, isLink);
 	}
 
 	@Autowired(required = true)

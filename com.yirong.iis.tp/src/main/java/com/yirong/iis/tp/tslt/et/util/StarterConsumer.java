@@ -66,7 +66,7 @@ public class StarterConsumer {
 	/**
 	 * 数据客户端
 	 */
-	private MsgClient dataClient;
+	private MsgClient msgClient;
 
 	/**
 	 * omm客户端
@@ -121,8 +121,8 @@ public class StarterConsumer {
 		ommEncoder.initialize(OMMTypes.MSG, 5000);
 		// 初始化登录客户端
 		loginClient = new LoginClient(this);
-		// 初始化数据客户端
-		dataClient = new MsgClient(this);
+		// 初始化消息客户端
+		msgClient = new MsgClient(this);
 		// 创建omm客户端
 		ommConsumer = (OMMConsumer) session.createEventSource(EventSource.OMM_CONSUMER, "myOMMConsumer", true);
 		// 创建omm链接
@@ -183,8 +183,8 @@ public class StarterConsumer {
 		if (null != connIntSpecHandle) {
 			ommConsumer.unregisterClient(connIntSpecHandle);
 		}
-		if (null != dataClient) {
-			dataClient.closeRequest();
+		if (null != msgClient) {
+			msgClient.closeRequest();
 		}
 		if (null != loginClient) {
 			loginClient.closeRequest();
@@ -222,8 +222,8 @@ public class StarterConsumer {
 		return loginClient;
 	}
 
-	public MsgClient getDataClient() {
-		return dataClient;
+	public MsgClient getMsgClient() {
+		return msgClient;
 	}
 
 	public FieldDictionary getDictionary() {

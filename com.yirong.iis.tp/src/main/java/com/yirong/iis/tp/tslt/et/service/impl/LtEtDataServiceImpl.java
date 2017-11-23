@@ -1,6 +1,7 @@
 package com.yirong.iis.tp.tslt.et.service.impl;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -100,8 +101,7 @@ public class LtEtDataServiceImpl extends BaseService<LtEtData, String> implement
 				// 获取基本信息
 				LtEtCode ltEtCode = ltEtCodeService.cacheFindByRicCode(ue.getRicCode());
 				LtEtField ltEtField = ltEtFieldService.cacheFindByFieldId(String.valueOf(ue.getFleldId()));
-				if (null == ltEtCode || null == ltEtField) {// 多出来的字段为冗余字段，跟本系统无关
-					logger.info("ltEtCode或者ltEtField为空，ricCode:" + ue.getRicCode() + ",fleldId:" + ue.getFleldId());
+				if (null == ltEtField) {// 多出来的字段为冗余字段，跟本系统无关
 					continue;
 				}
 				// 从数据库获取数据
@@ -122,7 +122,7 @@ public class LtEtDataServiceImpl extends BaseService<LtEtData, String> implement
 						ltEtData.setStringValue(ue.getValue());
 						break;
 					case "017002":// 整型
-						ltEtData.setIntgerValue(Integer.valueOf(ue.getValue()));
+						ltEtData.setIntgerValue(BigInteger.valueOf(Long.valueOf(ue.getValue())));
 						break;
 					case "017004":// date型
 						SimpleDateFormat sdf = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH);

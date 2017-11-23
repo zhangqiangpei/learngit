@@ -186,7 +186,7 @@ public class LoginClient implements Client {
 		if (respMsg.has(OMMMsg.HAS_STATE) && (respMsg.getState().getStreamState() == OMMState.Stream.OPEN)
 				&& (respMsg.getState().getDataState() == OMMState.Data.OK)) {
 			logger.error("收到登录成功信息");
-			starterConsumer.getDataClient().sendRequest();
+			starterConsumer.getMsgClient().sendRequest(null);
 		} else {
 			logger.error("登录失败，提示:" + OMMMsg.MsgType.toString(respMsg.getMsgType()));
 		}

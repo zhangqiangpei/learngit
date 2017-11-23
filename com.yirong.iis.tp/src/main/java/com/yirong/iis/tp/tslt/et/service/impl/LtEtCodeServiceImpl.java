@@ -1,6 +1,7 @@
 package com.yirong.iis.tp.tslt.et.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,12 +75,33 @@ public class LtEtCodeServiceImpl extends BaseService<LtEtCode, String> implement
 		if (StringUtil.isNotNullOrEmpty(id)) {// 缓存有数据，直接使用
 			ltEtCode = new LtEtCode();
 			ltEtCode.setId(id);
-			ltEtCode.setRicCode(RedisCacheEif.hget(redisId, "code"));
+			Map<String, String> map = RedisCacheEif.hgetall(redisId);
+			ltEtCode.setRicCode(map.get("code"));
+			ltEtCode.setParentRicCode(map.get("pcode"));
+			ltEtCode.setCodeDesc(map.get("desc"));
+			ltEtCode.setCodeName(map.get("name"));
+			ltEtCode.setCodeType(map.get("codeType"));
+			ltEtCode.setCountryEnglishName(map.get("countryEnglishName"));
 		} else {// 缓存没有数据，需查询数据库
 			ltEtCode = this.ltEtCodeDao.findByRicCode(ricCode);
 			if (null != ltEtCode) {// 数据库有数据，同时保存一份至缓存
 				RedisCacheEif.hset(redisId, "id", ltEtCode.getId());
 				RedisCacheEif.hset(redisId, "code", ricCode);
+				String parentRicCode = ltEtCode.getParentRicCode();
+				if (StringUtil.isNotNullOrEmpty(parentRicCode)) {
+					RedisCacheEif.hset(redisId, "pcode", ltEtCode.getParentRicCode());
+				}
+				String desc = ltEtCode.getCodeDesc();
+				if (StringUtil.isNotNullOrEmpty(desc)) {
+					RedisCacheEif.hset(redisId, "desc", desc);
+				}
+				RedisCacheEif.hset(redisId, "name", ltEtCode.getCodeName());
+				RedisCacheEif.hset(redisId, "codeType", ltEtCode.getCodeType());
+				String countryEnglishName = ltEtCode.getCountryEnglishName();
+				if (StringUtil.isNotNullOrEmpty(countryEnglishName)) {
+					RedisCacheEif.hset(redisId, "countryEnglishName", countryEnglishName);
+				}
+
 			}
 		}
 		return ltEtCode;
@@ -103,6 +125,38 @@ public class LtEtCodeServiceImpl extends BaseService<LtEtCode, String> implement
 	@Override
 	public List<LtEtCode> findAll() {
 		return this.ltEtCodeDao.findAll();
+	}
+
+	/**
+	 * 功能描述：新增路透编码
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 *         创建时间 ：2017年11月23日 下午8:58:48
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 * @param ltEtCode
+	 * @return
+	 *
+	 */
+	@Override
+	public LtEtCode doLtEtCode(String code, String pcode, boolean isLink) {
+		LtEtCode ltEtCode = cacheFindByRicCode(code);
+		if (null == ltEtCode) {// 不存在需新增
+			ltEtCode = new LtEtCode();
+			LtEtCode pLtEtCode = cacheFindByRicCode(pcode);
+			ltEtCode.setCodeName(pLtEtCode.getCodeName() + "-" + code);
+			ltEtCode.setCodeType(pLtEtCode.getCodeType());
+			ltEtCode.setCountryEnglishName(pLtEtCode.getCountryEnglishName());
+			ltEtCode.setRicCode(code);
+			ltEtCode.setParentRicCode(pcode);
+			this.save(ltEtCode);
+		}
+		return ltEtCode;
 	}
 
 }
