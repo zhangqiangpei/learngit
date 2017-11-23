@@ -576,6 +576,10 @@ $(function() {
                 selFirstNav:function(jo){
                     var sURL = 'index.html';
                     if(z.isNotNullOrEmpty(jo))sURL = 'forward.do?viewPath='+jo.url+'&idx='+jo.id;
+                    if(z.isNullOrEmpty(jo.target)&&jo.target=='_blank'){
+                        window.open(sURL);
+                        return;
+                    }
                     window.location.href = sURL;
                 },
                 setPwd:function(){
