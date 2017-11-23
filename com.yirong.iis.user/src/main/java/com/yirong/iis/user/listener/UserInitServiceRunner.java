@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.yirong.commons.akclient.Eif.AkClient;
+import com.yirong.iis.user.constant.esConstants;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -88,7 +89,10 @@ public class UserInitServiceRunner implements CommandLineRunner {
 			String account = map.get("awaken.username");
 			String secretKey = map.get("awaken.key");
 			AkClient.init(url, serviceName, account, secretKey);
-
+			esConstants.INDEX_NEWS_NAME= map.get("elasticsearch.indexNewsName");
+			esConstants.TYPE_NEWS_NAME = map.get("elasticsearch.typeNewsName");
+			esConstants.INDEX_REPORT_NAME= map.get("elasticsearch.indexReportName");
+			esConstants.TYPE_REPORT_NAME = map.get("elasticsearch.typeReportName");
 			logger.info("==============关联服务启动结束===============");		
 		} 
 		

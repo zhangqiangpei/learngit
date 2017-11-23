@@ -7,6 +7,7 @@ import java.util.Map;
 
 import jdk.nashorn.internal.objects.NativeUint8Array;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.yirong.awaken.core.dao.IBaseDao;
@@ -50,6 +51,10 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
 	@Autowired
 	private IisReportTypeDao iisReportTypeDao;
 
+
+    @Autowired
+    private Environment environment;
+
 	 /**
 	 * 功能描述：获取dao操作类
 	 * 
@@ -87,6 +92,7 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
 		List<Object> param = new ArrayList<Object>();
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT IRT.ID AS id,");
+		sql.append(" IRT.IS_OUTSIDE AS isOutside,");
 		sql.append("IRT.TYPE_NAME AS typeName ");
 		sql.append("FROM IIS_REPORT_TYPE IRT ");
 		sql.append("WHERE 1=1 ");
@@ -129,7 +135,13 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
         sql.append("FROM (");
         sql.append("select ID,REPORT_NAME,TYPE_ID,TO_CHAR(CREATE_TIME,'YYYY-MM-DD') AS CREATE_TIME,REPORT_INFO,KM_ID,EOS_ID,rank() over ");
         sql.append("(partition by TYPE_ID order by CREATE_TIME desc) rn FROM IIS_REPORT) temp ");
-        sql.append("where rn < 6");
+        sql.append("where rn < 6 ");
+        String insiderReport = environment.getProperty("insider.report");
+        // 是否显示内部报告
+        if (!"1".equals(insiderReport)){
+            // 只显示外部报告
+            sql.append("AND temp.TYPE_ID IN (SELECT ID FROM IIS_REPORT_TYPE WHERE IS_OUTSIDE = 1) ");
+        }
         List<Map<String, Object>> types = this.exeNativeQueryMap(sql.toString(), param);
         Map<String, List<Map<String, Object>>> type = new HashMap<String, List<Map<String, Object>>>();
         for (Map<String, Object> t : types ){
@@ -142,6 +154,36 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
             }
         }
         return ResultUtil.newOk("操作成功").setData(type).toMap();
+	}
+
+    @Override
+    public Map queryIisReportTypeListThreeRecord() {
+        // 拼装查询sql
+        List<Object> param = new ArrayList<Object>();
+        StringBuffer sql = new StringBuffer();
+        sql.append("SELECT ID,IS_OUTSIDE,TYPE_NAME,DOCS_NUM,IS_SYSTEM,CREATE_TIME ");
+        sql.append("FROM IIS_REPORT_TYPE WHERE 1=1 ");
+        String insiderReport = environment.getProperty("insider.report");
+        // 是否显示内部报告
+        if (!"1".equals(insiderReport)){
+            // 只显示外部报告
+            sql.append("AND IS_OUTSIDE = 1 ");
+        }
+        List<Map<String, Object>> result = this.exeNativeQueryMap(sql.toString(), param);
+        for (Map<String, Object> t : result){
+            t.put("reports", this.getReports(t.get("ID").toString()));
+        }
+        return ResultUtil.newOk("操作成功").setData(result).toMap();
+    }
+
+    private List<Map<String, Object>> getReports(String id) {
+        List<Object> param = new ArrayList<Object>();
+        StringBuffer sql = new StringBuffer();
+	    sql.append("SELECT ID,TYPE_ID,REPORT_NAME,KM_ID,EOS_ID,CREATOR,TO_CHAR(CREATE_TIME,'YYYY-MM-DD') AS CREATE_TIME ");
+	    sql.append("FROM IIS_REPORT ");
+	    sql.append("WHERE TYPE_ID = ? AND rownum<=3 order by CREATE_TIME desc ");
+	    param.add(id);
+	    return this.exeNativeQueryMap(sql.toString(), param);
 	}
 
 }

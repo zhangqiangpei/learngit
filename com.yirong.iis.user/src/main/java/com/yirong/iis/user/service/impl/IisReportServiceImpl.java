@@ -2,6 +2,7 @@ package com.yirong.iis.user.service.impl;
 
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -14,7 +15,14 @@ import java.util.Map;
 
 import com.yirong.awaken.core.util.BeanUtil;
 import com.yirong.commons.cache.eif.RedisCacheEif;
+import com.yirong.commons.es.constant.EsMatchNames;
+import com.yirong.commons.es.eif.EsClientEif;
 import com.yirong.commons.util.error.ErrorPromptInfoUtil;
+import com.yirong.commons.util.order.EsSelect;
+import com.yirong.commons.util.order.Where;
+import com.yirong.iis.user.constant.esConstants;
+import com.yirong.iis.user.entity.IisReportType;
+import com.yirong.iis.user.service.IisReportTypeService;
 import com.yirong.iis.user.service.KmUserAwakenService;
 import com.yirong.iis.user.service.KmUserWebAwakenService;
 import com.yirong.iis.user.userentity.*;
@@ -70,6 +78,8 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 
      @Autowired
      private Environment environment;
+     @Autowired
+     private IisReportTypeService iisReportTypeService;
 
 	 /**
 	 * 功能描述：获取dao操作类
@@ -198,8 +208,9 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
                 }
 			 	iisReport.setKmId(kmId);
 			 	iisReport.setEosId(eosId);
-				 this.save(iisReport);
-			 }
+			 	this.save(iisReport);
+			 	this.reportTypeDocsNumAddOne(iisReport.getTypeId());
+             }
 			 return ResultUtil.newOk("操作成功").toMap();
 		 } else {// 该名称及父类ID已存在
 			 String result = ErrorPromptInfoUtil.getErrorInfo("00101");
@@ -208,7 +219,26 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 		 }
 	 }
 
-	 /**
+    /**
+     * 功能描述：文档数目加一
+     *
+     * @author 林明铁
+     *         <p>
+     *         创建时间 ：2017-11-09 10:00:09
+     *         </p>
+     *
+     *         <p>
+     *         修改历史：(修改人，修改时间，修改原因/内容)
+     *         </p>
+     * @return
+     */
+    private void reportTypeDocsNumAddOne(String typeId) {
+        IisReportType iisReportType = this.iisReportTypeService.get(typeId);
+        iisReportType.setDocsNum(iisReportType.getDocsNum().add(new BigDecimal(1)));
+        this.iisReportTypeService.save(iisReportType);
+    }
+
+    /**
 	  * 功能描述：修改报告表
 	  *
 	  * @author 林明铁
@@ -370,6 +400,12 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 		 sql.append("IR.CREATOR AS creator ");
 		 sql.append("FROM IIS_REPORT IR ");
 		 sql.append("WHERE 1=1 ");
+         String insiderReport = environment.getProperty("insider.report");
+         // 是否显示内部报告
+         if (!"1".equals(insiderReport)){
+             // 只显示外部报告
+             sql.append("AND IR.TYPE_ID IN (SELECT ID FROM IIS_REPORT_TYPE WHERE IS_OUTSIDE = 1) ");
+         }
 		 // 创建人
 		 if (StringUtil.isNotNullOrEmpty(ue.getCreator())) {
 			 sql.append("AND IR.CREATOR = ? ");
@@ -380,7 +416,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
              sql.append("AND IR.REPORT_NAME LIKE ? ");
              param.add("%" + ue.getReportName()+"%");
          }
-          // 报告名
+          // 报告分类
          if (StringUtil.isNotNullOrEmpty(ue.getTypeId())) {
              sql.append("AND IR.TYPE_ID = ? ");
              param.add(ue.getTypeId());
@@ -457,7 +493,47 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
          return reportDocs;
 	 }
 
-	/**
+    /**
+     * 功能描述：搜索报告
+     *
+     * @author 林明铁
+     *         <p>
+     *         创建时间 ：2017-11-09 10:00:09
+     *         </p>
+     *
+     *         <p>
+     *         修改历史：(修改人，修改时间，修改原因/内容)
+     *         </p>
+     * @return
+     */
+    @Override
+    public Map esSearch(IisReportUserEntity ue, String tokenId) {
+        /** 查询条件 **/
+        List<Where> whereList = new ArrayList<Where>();
+        if (StringUtil.isNotNullOrEmpty(ue.getReportInfo())){
+            Where where = new Where();
+            // 报告内容
+            where.setFieldName(esConstants.CONTENT);
+            where.setFieldValue(ue.getReportInfo());
+            where.setOperationType(EsMatchNames.LIKENC);
+            whereList.add(where);
+        }
+        /** 返回结果 **/
+        EsSelect select = new EsSelect();
+        if (StringUtil.isNotNullOrEmpty(ue.getKeywords())) {
+            select.setKeyword(ue.getKeywords().trim());
+            select.setKeywordFields(new String[]{esConstants.TITLE});
+        }
+        select.setAnalyzer("ik_max_word");
+        select.setIsHighlight(true);
+        select.setIncludes(new String[]{esConstants.TITLE});
+        // 获取数据
+        PageEntiry page = EsClientEif.textSearch(esConstants.INDEX_REPORT_NAME, esConstants.TYPE_REPORT_NAME, ue,
+                whereList, select, esConstants.class);
+        return ResultUtil.newOk("操作成功").setData(page).toMap();
+    }
+
+    /**
       * 获取临时文件存放路径
       *
       * @return

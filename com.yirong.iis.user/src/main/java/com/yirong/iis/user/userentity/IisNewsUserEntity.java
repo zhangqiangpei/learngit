@@ -21,166 +21,152 @@ import com.yirong.commons.util.entity.PageEntiry;
 public class IisNewsUserEntity extends PageEntiry implements Serializable {
 
     /**
-     * serialVersionUID
+     *
      */
     private static final long serialVersionUID = 1L;
 
-
     /**
-     * 新闻ID
+     * 关键字
      */
-    private String id;
-
-
-    /**
-     * 所属国家ID
-     */
-    private String countryId;
-
-
+    private String keywords;
     /**
      * 标题
      */
     private String title;
-
-
+    /**
+     * 中文标题
+     */
+    private String titleCn;
     /**
      * 内容
      */
     private String content;
-
-
+    /**
+     * 中文内容
+     */
+    private String contentCn;
+    /**
+     * 概要
+     */
+    private String summary;
     /**
      * 来源
      */
     private String source;
-
-
     /**
      * 类型
      */
     private String type;
-
-
     /**
      * 发布时间
      */
-    private Date releaseTime;
-
-
+    private String releaseTime;
     /**
-     * 采集时间
+     * 国家ID
      */
-    private Date collectionTime;
-
-
+    private String countryId;
     /**
-     * 创建人
+     * 国家名称
      */
-    private String creator;
-
-
+    private String countryName;
     /**
-     * 创建时间
+     * 所属洲编码
      */
-    private Date createTime;
+    private String continentCode;
 
-
-    /**
-     * 修改人
-     */
-    private String modifier;
-
-
-    /**
-     * 修改时间
-     */
-    private Date modifyTime;
-
-
-    public String getId(){
-        return this.id;
+    public String getKeywords() {
+        return keywords;
     }
 
-    public void setId (String id){
-        this.id=id;
-    }
-    public String getCountryId(){
-        return this.countryId;
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
     }
 
-    public void setCountryId (String countryId){
-        this.countryId=countryId;
-    }
-    public String getTitle(){
-        return this.title;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitle (String title){
-        this.title=title;
-    }
-    public String getContent(){
-        return this.content;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setContent (String content){
-        this.content=content;
-    }
-    public String getSource(){
-        return this.source;
+    public String getTitleCn() {
+        return titleCn;
     }
 
-    public void setSource (String source){
-        this.source=source;
-    }
-    public String getType(){
-        return this.type;
+    public void setTitleCn(String titleCn) {
+        this.titleCn = titleCn;
     }
 
-    public void setType (String type){
-        this.type=type;
-    }
-    public Date getReleaseTime(){
-        return this.releaseTime;
+    public String getContent() {
+        return content;
     }
 
-    public void setReleaseTime (Date releaseTime){
-        this.releaseTime=releaseTime;
-    }
-    public Date getCollectionTime(){
-        return this.collectionTime;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public void setCollectionTime (Date collectionTime){
-        this.collectionTime=collectionTime;
-    }
-    public String getCreator(){
-        return this.creator;
+    public String getContentCn() {
+        return contentCn;
     }
 
-    public void setCreator (String creator){
-        this.creator=creator;
-    }
-    public Date getCreateTime(){
-        return this.createTime;
+    public void setContentCn(String contentCn) {
+        this.contentCn = contentCn;
     }
 
-    public void setCreateTime (Date createTime){
-        this.createTime=createTime;
-    }
-    public String getModifier(){
-        return this.modifier;
+    public String getSummary() {
+        return summary;
     }
 
-    public void setModifier (String modifier){
-        this.modifier=modifier;
-    }
-    public Date getModifyTime(){
-        return this.modifyTime;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
-    public void setModifyTime (Date modifyTime){
-        this.modifyTime=modifyTime;
+    public String getSource() {
+        return source;
     }
 
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getReleaseTime() {
+        return releaseTime;
+    }
+
+    public void setReleaseTime(String releaseTime) {
+        this.releaseTime = releaseTime;
+    }
+
+    public String getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(String countryId) {
+        this.countryId = countryId;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public String getContinentCode() {
+        return continentCode;
+    }
+
+    public void setContinentCode(String continentCode) {
+        this.continentCode = continentCode;
+    }
 }

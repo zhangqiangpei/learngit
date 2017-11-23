@@ -24,6 +24,15 @@ public class IisReportUserEntity extends PageEntiry implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+     /**
+      * 关键字
+      */
+	private String keywords;
+
+	 /**
+	  * 外部报告
+	  */
+	private  String isOutside;
 	
 	/**
 	* 报告ID
@@ -59,99 +68,81 @@ public class IisReportUserEntity extends PageEntiry implements Serializable {
 	* 文件ID
 	*/
 	private String eosId;
-	
-	
-	/**
-	* 是否开放(1是、0否)
-	*/
-	private BigDecimal isOpen;
-	
-	
+
 	/**
 	* 创建人
 	*/
 	private String creator;
 
+     public String getKeywords() {
+         return keywords;
+     }
 
-	public String getId() {
+     public void setKeywords(String keywords) {
+         this.keywords = keywords;
+     }
+
+     public String getIsOutside() {
+		 return isOutside;
+	 }
+
+	 public void setIsOutside(String isOutside) {
+		 this.isOutside = isOutside;
+	 }
+
+	 public String getId() {
 		return id;
 	}
-
 
 	public void setId(String id) {
 		this.id = id;
 	}
 
-
 	public String getTypeId() {
 		return typeId;
 	}
-
 
 	public void setTypeId(String typeId) {
 		this.typeId = typeId;
 	}
 
-
 	public String getReportName() {
 		return reportName;
 	}
-
 
 	public void setReportName(String reportName) {
 		this.reportName = reportName;
 	}
 
-
 	public String getReportInfo() {
 		return reportInfo;
 	}
-
 
 	public void setReportInfo(String reportInfo) {
 		this.reportInfo = reportInfo;
 	}
 
-
 	public String getKmId() {
 		return kmId;
 	}
-
 
 	public void setKmId(String kmId) {
 		this.kmId = kmId;
 	}
 
-
 	public String getEosId() {
 		return eosId;
 	}
-
 
 	public void setEosId(String eosId) {
 		this.eosId = eosId;
 	}
 
-
-	public BigDecimal getIsOpen() {
-		return isOpen;
-	}
-
-
-	public void setIsOpen(BigDecimal isOpen) {
-		this.isOpen = isOpen;
-	}
-
-
 	public String getCreator() {
 		return creator;
 	}
 
-
 	public void setCreator(String creator) {
 		this.creator = creator;
 	}
-	
-	
-
 }

@@ -1,17 +1,13 @@
-var mainAttr={
+var mainAttr = {
     el:"#main",
     data:{
-        //查询对象
         tableSearchModel:{
-            continent:null,
-            country:null
+            keywords:null,
         },
-        continents:[],
-        countries:[]
     },
     methods:{
-        //查询按钮
-        searchClick: function () {
+        // 搜索报告
+        searchReport:function () {
             var param = this.tableSearchModel;
             // 当前页切换成第一页
             param.currentPage = 1;
@@ -20,13 +16,20 @@ var mainAttr={
         }
     },
     mounted:function () {
-        //初始化table
-        this.tableInit("user", "IisReportApi/list");
-        //默认排序
+        //外部链接传参
+        try {
+            var search = z.url().search;
+            if (z.isNotNullOrEmpty(search)) {
+                this.search.keywords = search;
+            }
+        } catch (e) {
+        }
+        this.tableInit("user","IisUserSearchApi/searchReports");
         this.tableInitSort("createTime", "desc");
-        // this.searchClick();
+        this.searchReport();
     }
 };
+
 // 添加工具
 var utilAttr = getUtilMergeAttr({});
 //获取table属性

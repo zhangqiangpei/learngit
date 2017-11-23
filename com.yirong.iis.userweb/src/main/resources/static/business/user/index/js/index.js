@@ -2,16 +2,16 @@ var mainVue = new Vue({
     el :"#main",
     data :{
         typeData:null,
-        searchData:null
+        search:null,
     },
     methods:{
         // 更多
         moreTypeData: function (item) {
-            window.open("forward.do?viewPath=business/user/index/MoreReport.html&typeId=" + item[0].TYPE_ID);
+            window.open("forward.do?viewPath=business/user/report/MoreReport.html&typeId=" + item[0].TYPE_ID);
         },
         // 搜索报告
         searchReport:function () {
-            window.open("forward.do?viewPath=business/user/search/searchResult.html&search=" +this.searchData)
+            window.open("forward.do?viewPath=business/user/report/searchResult.html&search=" +this.search)
         }
     },
     mounted:function () {

@@ -28,9 +28,9 @@
     <div id="main" class="main  clearfix">
         <el-row :gutter="20">
             <el-col :span="4">
-                <el-form :model="searchCondition">
+                <el-form :model="tableSearchModel">
                     <el-form-item>
-                        <el-select v-model="searchCondition.continent" size="medium" placeholder="选择洲">
+                        <el-select v-model="tableSearchModel.continent" size="medium" placeholder="选择洲">
                             <el-option
                                     v-for="item in continents"
                                     :key="item.value"
@@ -40,7 +40,7 @@
                         </el-select>
                     </el-form-item>
                     <el-form-item>
-                        <el-select v-model="searchCondition.country" size="medium" placeholder="选择国家">
+                        <el-select v-model="tableSearchModel.country" size="medium" placeholder="选择国家">
                             <el-option
                                     v-for="item in countries"
                                     :key="item.value"
