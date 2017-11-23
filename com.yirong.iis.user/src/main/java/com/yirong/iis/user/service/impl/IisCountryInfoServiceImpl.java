@@ -9,6 +9,7 @@ import com.yirong.iis.user.entity.IisCountryInfo;
 import com.yirong.iis.user.service.IisCountryInfoService;
 import com.yirong.iis.user.userentity.IisCountryInfoUserEntity;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.commons.util.datatype.StringUtil;
 import com.yirong.commons.util.error.ErrorPromptInfoUtil;
+import com.yirong.commons.util.order.Order;
 
 /**
  * 功能描述：国家信息表service实现类
@@ -92,5 +94,27 @@ public class IisCountryInfoServiceImpl extends BaseService<IisCountryInfo, Strin
 				null, para);
 		
 		return ResultUtil.newOk("查询成功!").setData(pageEntiry).toMap();
+	}
+
+	/**
+	 * 
+	 * @Title: queryCountryS 
+	 * @Description: TODO(查询国家列表) 
+	 * @param para
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map queryCountrys(IisCountryInfoUserEntity para) {
+		
+		SimpleSpecificationBuilder simpbuilder = new SimpleSpecificationBuilder();
+		
+		if(StringUtil.isNotNullOrEmpty(para.getContinentCode())){
+			simpbuilder.add("continentCode", RestrictionNames.EQ, para.getContinentCode());
+		}
+ 
+		List<IisCountryInfo>  list = this.findByProperty(simpbuilder.getOpers(), Order.asc("englishName"));
+ 
+		return ResultUtil.newOk("查询成功!").setData(list).toMap();
 	}
 }

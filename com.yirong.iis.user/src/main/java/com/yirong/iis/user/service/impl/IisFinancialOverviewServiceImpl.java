@@ -103,11 +103,11 @@ public class IisFinancialOverviewServiceImpl extends BaseService<IisFinancialOve
 		
 		if (StringUtil.isNotNullOrEmpty(ue.getKeyWord())) {
 			sql.append(" AND C.COMPANY_NAME like ?");
-			param.add(ue.getKeyWord());
+			param.add("%"+ue.getKeyWord()+"%");
 		}
 		
 		if (StringUtil.isNotNullOrEmpty(ue.getFrequency())) {
-			sql.append(" AND C.FREQUENCY =?");
+			sql.append(" AND O.FREQUENCY =?");
 			param.add(ue.getFrequency());
 		}
 		

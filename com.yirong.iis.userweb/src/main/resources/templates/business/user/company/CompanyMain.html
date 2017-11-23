@@ -10,7 +10,7 @@
     <link href="/frame/elementui/elementui.css" rel="stylesheet" />
     <link href="/common/css/reset.css" rel="stylesheet" />
     <link href="/common/css/com.css" rel="stylesheet" />
- 
+    <link href="/business/user/company/css/CompanyMain.css" rel="stylesheet" />
 </head>
 <body>
     
@@ -26,7 +26,7 @@
            	 		<el-lable>关注公司财务总览&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</el-lable>
            	 </el-form-item>
            	  <el-form-item>
-                 <el-select v-model="tableSearchModel.continentCode" style="width:158px;" size="small" placeholder="选择洲">
+                 <el-select v-model="tableSearchModel.continentCode"  clearable  style="width:158px;" size="small" @change="continentChange" placeholder="选择洲">
                      <el-option
                              v-for="item in continents"
                              :key="item.value"
@@ -37,18 +37,18 @@
              </el-form-item>
                 
 			<el-form-item>
-                 <el-select v-model="tableSearchModel.countryEngName" style="width:132px;" size="small" placeholder="选择国家">
+                 <el-select v-model="tableSearchModel.countryEngName" clearable  style="width:132px;" size="small"   placeholder="选择国家">
                      <el-option
                              v-for="item in countrys"
-                             :key="item.value"
-                             :label="item.label"
-                             :value="item.value">
+                             :key="item.englishName"
+                             :label="item.chineseName"
+                             :value="item.englishName">
                      </el-option>
                  </el-select>
              </el-form-item>
              
              <el-form-item>
-                 <el-select v-model="tableSearchModel.industryCode" style="width:132px;" size="small" placeholder="选择行业">
+                 <el-select v-model="tableSearchModel.industryCode" clearable style="width:132px;" size="small" placeholder="选择行业">
                      <el-option
                              v-for="item in industrys"
                              :key="item.value"
@@ -61,6 +61,7 @@
               <el-date-picker
 			      v-model="startAndEnd"
 			      type="daterange"
+			      value-format="yyyyMMdd"
 			      align="right"
 			      unlink-panels
 			      range-separator="至"
@@ -72,7 +73,7 @@
 			    </el-date-picker>
      		  </el-form-item>
               <el-form-item>
-                 <el-select v-model="tableSearchModel.frequency" style="width:132px;" size="small" placeholder="频度">
+                 <el-select v-model="tableSearchModel.frequency" clearable style="width:132px;" size="small" placeholder="频度">
                      <el-option
                              v-for="item in frequencys"
                              :key="item.value"
@@ -87,20 +88,20 @@
 				  </el-input>
 			  </el-form-item>
              
-       <!--        <el-form-item>
-                  <el-button type="primary" @click="searchClick" size="small" name="per_km_docInfo_show">查 询</el-button>
+              <!-- <el-form-item>
                   <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
               </el-form-item> -->
-    
- 
-               
             </el-row>
 		   </el-form>
-          <el-table :data="tableData" @sort-change="tableSortChange" @selection-change="tableChange"
-                    ref="mytable" stripe border id="tableId" height=100%>
+          <el-table :data="tableData" @sort-change="tableSortChange" @selection-change="tableChange"  height="345" 
+                    ref="mytable" stripe border id="tableId" height=100% >
              <el-table-column type="index" align="center" label="序号" width="50"  fixed="left"> </el-table-column>
 
-             <el-table-column prop="COMPANY_NAME" width="250"   show-overflow-tooltip label="公司名称"  fixed="left"></el-table-column>
+             <el-table-column prop="COMPANY_NAME" width="250"   show-overflow-tooltip label="公司名称"  fixed="left">
+             	<template slot-scope="scope">
+			        <el-button @click="handleClick(scope.row)" type="text" size="small">{{scope.row.COMPANY_NAME}}</el-button>
+			    </template>
+             </el-table-column>
              
              <el-table-column prop="GROSS_INCOME"   show-overflow-tooltip label="总收入"></el-table-column>
  
@@ -138,6 +139,28 @@
                          @current-change="tableCurrentChange"
                          layout="total, sizes, prev, pager, next, jumper">
           </el-pagination>
+          
+          <!-- 关注公司动态资讯 -->
+          <el-row style="margin-top: 10px;">
+          		<span>关注公司动态资讯</span>
+          </el-row>
+          <el-table id="infoTableId" height=100% :data="inFoData"   :show-header="false">
+          	 <el-table-column prop="address"    show-overflow-tooltip label="标题">
+          	 	<template slot-scope="scope">
+			        <el-button @click="detalClick(scope.row)" type="text" size="small">{{scope.row.title1}}</el-button>
+			    </template>
+          	 </el-table-column>
+             
+             <el-table-column prop="createTime1" :formatter="formatDate"  show-overflow-tooltip label="发布时间"></el-table-column>
+             
+            <el-table-column prop="address"    show-overflow-tooltip label="标题">
+          	 	<template slot-scope="scope">
+			        <el-button @click="detalClick(scope.row)" type="text" size="small">{{scope.row.title2}}</el-button>
+			    </template>
+          	 </el-table-column>
+             
+             <el-table-column prop="createTime2" :formatter="formatDate"  show-overflow-tooltip label="发布时间"></el-table-column>     
+          </el-table>
     </div>
     <!---------------网页主体end------------------->
      
