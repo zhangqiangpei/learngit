@@ -514,7 +514,7 @@ $(function() {
         sHTML += '                  <a :href=\'"forward.do?viewPath="+item.url+"&idx="+item.id\'>{{subitem.name}}</a></el-menu-item>';
         sHTML += '              </el-submenu>';
         sHTML += '              <el-menu-item v-else :index="item.id" :key="item.id" class="menu-item-nosubs">';
-        sHTML += '              <a :href=\'"forward.do?viewPath="+item.url+"&idx="+item.id\'>{{item.name}}</a></el-menu-item>';
+        sHTML += '              <a :href=\'"forward.do?viewPath="+item.url+"&idx="+item.id\' :target="item.target">{{item.name}}</a></el-menu-item>';
         sHTML += '          </el-menu>';
         sHTML += '      </div>';
         sHTML += '      <div class="info">';
@@ -576,10 +576,6 @@ $(function() {
                 selFirstNav:function(jo){
                     var sURL = 'index.html';
                     if(z.isNotNullOrEmpty(jo))sURL = 'forward.do?viewPath='+jo.url+'&idx='+jo.id;
-                    if(z.isNullOrEmpty(jo.target)&&jo.target=='_blank'){
-                        window.open(sURL);
-                        return;
-                    }
                     window.location.href = sURL;
                 },
                 setPwd:function(){
