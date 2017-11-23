@@ -100,8 +100,8 @@ public class LtEtDataServiceImpl extends BaseService<LtEtData, String> implement
 				// 获取基本信息
 				LtEtCode ltEtCode = ltEtCodeService.cacheFindByRicCode(ue.getRicCode());
 				LtEtField ltEtField = ltEtFieldService.cacheFindByFieldId(String.valueOf(ue.getFleldId()));
-				if (null == ltEtCode || null == ltEtField) {
-					logger.error("ltEtCode或者ltEtField为空，ricCode:" + ue.getRicCode() + ",fleldId:" + ue.getFleldId());
+				if (null == ltEtCode || null == ltEtField) {// 多出来的字段为冗余字段，跟本系统无关
+					logger.info("ltEtCode或者ltEtField为空，ricCode:" + ue.getRicCode() + ",fleldId:" + ue.getFleldId());
 					continue;
 				}
 				// 从数据库获取数据
@@ -111,11 +111,11 @@ public class LtEtDataServiceImpl extends BaseService<LtEtData, String> implement
 					ltEtData.setCodeId(ltEtCode.getId());
 					ltEtData.setFieldId(ltEtField.getId());
 				}
-				// 处理数据值
+				// 判断类型
+				String code = LtEtConstant.FIELD_TYPE_MAP.get(ltEtField.getFieldType());
+				ltEtData.setFieldType(code);
+				// 处理值
 				if (StringUtil.isNotNullOrEmpty(ue.getValue())) {
-					// 判断类型
-					String code = LtEtConstant.FIELD_TYPE_MAP.get(ltEtField.getFieldType());
-					ltEtData.setFieldType(code);
 					// 处理数据
 					switch (code) {
 					case "017001":// 字符型
@@ -136,7 +136,7 @@ public class LtEtDataServiceImpl extends BaseService<LtEtData, String> implement
 						ltEtData.setFloatValue(new BigDecimal(ue.getValue()));
 						break;
 					default:// 无任何匹配，直接存入String
-						ltEtData.setStringValue(ue.getValue());
+						ltEtData.setStringValue(code + "   " + ue.getValue());
 						break;
 					}
 				}

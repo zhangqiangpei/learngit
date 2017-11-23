@@ -64,7 +64,7 @@ public class LtEtData implements Serializable {
 	/**
 	 * 整型值
 	 */
-	@Column(name = "INTGER_VALUE", nullable = true, length = 10)
+	@Column(name = "INTGER_VALUE", nullable = true, length = 15)
 	public Integer intgerValue;
 
 	/**
