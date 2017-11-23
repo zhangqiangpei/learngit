@@ -65,7 +65,7 @@ public class LtEtIef {
 					codeStrs.append(ltEtCode.getRicCode() + ",");
 				}
 			}
-			CommandLine commondLine = new CommandLine("Demo::SESS_Demo", "ELEKTRON_DD", "user2", codeStrs.toString());
+			CommandLine commondLine = new CommandLine("Demo::SESS_Demo", "ELEKTRON_DD", "user2", codeStrs.toString() + ",EUR=");
 			StarterConsumer sc = new StarterConsumer(commondLine);
 			sc.run();
 		}

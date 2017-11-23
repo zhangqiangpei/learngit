@@ -1,6 +1,10 @@
 package com.yirong.iis.tp.tslt.et.service.impl;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +13,12 @@ import com.yirong.awaken.core.dao.IBaseDao;
 import com.yirong.awaken.core.service.impl.BaseService;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
+import com.yirong.commons.util.datatype.StringUtil;
 import com.yirong.iis.tp.common.dao.LtEtDataDao;
 import com.yirong.iis.tp.common.entity.LtEtCode;
 import com.yirong.iis.tp.common.entity.LtEtData;
 import com.yirong.iis.tp.common.entity.LtEtField;
+import com.yirong.iis.tp.tslt.et.constant.LtEtConstant;
 import com.yirong.iis.tp.tslt.et.service.LtEtCodeService;
 import com.yirong.iis.tp.tslt.et.service.LtEtDataService;
 import com.yirong.iis.tp.tslt.et.service.LtEtFieldService;
@@ -104,16 +110,35 @@ public class LtEtDataServiceImpl extends BaseService<LtEtData, String> implement
 					ltEtData = new LtEtData();
 					ltEtData.setCodeId(ltEtCode.getId());
 					ltEtData.setFieldId(ltEtField.getId());
-					ltEtData.setFieldDesc(ltEtField.getFieldDesc());
-					ltEtData.setFieldEnglishDesc(ltEtField.getFieldEnglishDesc());
-					ltEtData.setFieldName(ltEtField.getFieldName());
-					ltEtData.setFieldEnglishName(ltEtField.getFieldEnglishName());
 				}
-				// 判断类型
-				switch (ltEtField.getFieldType()) {
-				default:
-					ltEtData.setStringValue(ue.getValue());
-					break;
+				// 处理数据值
+				if (StringUtil.isNotNullOrEmpty(ue.getValue())) {
+					// 判断类型
+					String code = LtEtConstant.FIELD_TYPE_MAP.get(ltEtField.getFieldType());
+					ltEtData.setFieldType(code);
+					// 处理数据
+					switch (code) {
+					case "017001":// 字符型
+						ltEtData.setStringValue(ue.getValue());
+						break;
+					case "017002":// 整型
+						ltEtData.setIntgerValue(Integer.valueOf(ue.getValue()));
+						break;
+					case "017004":// date型
+						SimpleDateFormat sdf = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH);
+						try {
+							ltEtData.setDateValue(sdf.parse(ue.getValue()));
+						} catch (ParseException e) {
+							logger.error("时间转换异常", e);
+						}
+						break;
+					case "017005":// 浮点型
+						ltEtData.setFloatValue(new BigDecimal(ue.getValue()));
+						break;
+					default:// 无任何匹配，直接存入String
+						ltEtData.setStringValue(ue.getValue());
+						break;
+					}
 				}
 				this.save(ltEtData);
 			}
