@@ -1,0 +1,31 @@
+<div id="rule901" class="main">
+	<el-dialog :title="checkObjectName" :visible.sync="dialogVisible" size="large">
+		<el-row>
+			<el-col :span="12">
+		        <template>
+					<el-transfer v-model="rule901Model" :data="rule901Data" :titles="['可选字段','参与提取的字段']"></el-transfer>
+				</template>
+			</el-col>
+			<el-col :span="12">
+				<el-table :data="tableData" ref="mytable" stripe  border height="250">
+		            <el-table-column prop="code" label="字段英文名称"></el-table-column>
+		            <el-table-column prop="name" label="字段中文名称"></el-table-column>
+		        </el-table>
+			</el-col>
+		</el-row>
+		<!-- 按扭区 -->
+        <el-row style="margin-top:10px;text-align:center;">
+        	<el-col :span="24">
+	        	<el-button type="primary" @click="rule901Submit">确定</el-button>
+	            <el-button @click="rule901Cancel">取消</el-button>
+	            <el-popover ref="popover" placement="right" width="400" trigger="click" @show="getPopoverInfo">
+					<el-input type="textarea" v-model="elementRemark" disabled="true"></el-input>
+				</el-popover>
+	            <el-button type="warning" v-popover:popover>帮助说明</el-button>
+            </el-col>
+        </el-row>
+     </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/pm/PmFlow/js/PmFlowRule901.js"></script>

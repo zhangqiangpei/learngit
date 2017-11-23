@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>文档信息</title>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+        <el-form :inline="true"
+                  :model="tableSearchModel"
+                  ref="tableSearchModel">
+           	 <el-row>
+           	 
+           	   <el-form-item label="" prop="integratetAppId">
+                    <el-select v-model="tableSearchModel.integratetAppId" filterable  placeholder="请选择应用" @change="" size="small">
+					    <el-option
+					        v-for="item in appsOptions"
+					        :key="item.id"
+					        :label="item.appName"
+					        :value="item.id">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                
+           	  <el-form-item label="" prop="docName">
+                   <el-input v-model="tableSearchModel.docName" placeholder="请输入文档名称" size="small"></el-input>
+               </el-form-item>
+ 
+  				<el-form-item label="" prop="docType">
+                    <el-select v-model="tableSearchModel.docType" filterable  placeholder="请选择文档类型" @change="" size="small">
+                        <el-option
+					        v-for="item in docTypeOptions"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="" prop="extractState">
+                    <el-select v-model="tableSearchModel.extractState" filterable  placeholder="请选择文档抽取状态" @change="" size="small">
+                        <el-option
+					        v-for="item in stateOptions"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                
+                 <el-form-item label="" prop="transforPdfState">
+                    <el-select v-model="tableSearchModel.transforPdfState" filterable  placeholder="请选择转换状态(pdf)" @change="" size="small">
+                        <el-option
+					        v-for="item in stateOptions"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                
+               <el-form-item label="" prop="transforSwfState">
+                    <el-select v-model="tableSearchModel.transforSwfState" filterable  placeholder="请选择转换状态(swf)" @change="" size="small">
+                        <el-option
+					        v-for="item in stateOptions"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                
+ 
+                <el-form-item>
+                    <el-button type="primary" @click="onSearch" size="small" name="per_km_knowledgeInfo_show">查 询</el-button>
+                    <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+                </el-form-item>
+            </el-row>
+              <el-row>
+                  <el-form-item>
+                      <el-button type="warning"  @click="redoExtract"  size="small" name="per_km_knowledgeInfo_redoEt">重处理文本抽取</el-button>
+                      <el-button type="warning"  @click="redoTransforPdf"  size="small" name="per_km_knowledgeInfo_redoTPdf">重处理转换pdf</el-button>  
+                      <el-button type="warning"  @click="redoTransforSwf"  size="small" name="per_km_knowledgeInfo_redoTSwf">重处理转换swf</el-button>    
+                  </el-form-item>
+              </el-row>
+			</el-form>
+                <el-table :data="tableData"
+                          @sort-change="tableSortChange"
+                          @selection-change="tableChange"
+                          ref="mytable" stripe
+                          border id="tableId" height=100%>
+		              <el-table-column type="selection"
+						               align="center"
+						               width="45">
+		              </el-table-column>
+ 
+                    <el-table-column prop="docName"  width="200"  show-overflow-tooltip
+                                     label="文档名称" >
+                    </el-table-column>
+                   
+                   <el-table-column prop="docSize" width="150"  show-overflow-tooltip
+                                     label="文档大小(Kb)"  >
+                    </el-table-column>
+                   <el-table-column prop="docType" width="100"  show-overflow-tooltip
+                                     label="文档类型"   >
+                    </el-table-column>
+                    <el-table-column prop="orgName" width="100"  show-overflow-tooltip
+                                     label="机构名称"   >
+                    </el-table-column>
+                    <el-table-column prop="classifyPathName" width="100"  show-overflow-tooltip
+                                     label="分类路径"   >
+                    </el-table-column>
+                    <el-table-column prop="topicNames" width="100"  show-overflow-tooltip
+                                     label="主题"   >
+                    </el-table-column>
+                    
+                    <el-table-column prop="onlinePdfDocId" width="150" show-overflow-tooltip
+                                     label="转换文档id(pdf)"   >
+                    </el-table-column>
+                    
+                     <el-table-column prop="onlinePdfDocName" width="150" show-overflow-tooltip
+                                     label="转换文档名(pdf)"   >
+                    </el-table-column>
+                    
+                    <el-table-column prop="onlineSwfDocId" width="150"  show-overflow-tooltip
+                                     label="转换文档id(swf)"   >
+                    </el-table-column>
+                    
+                     <el-table-column prop="onlineSwfDocName" width="150"  show-overflow-tooltip
+                                     label="转换文档名(swf)"   >
+                    </el-table-column>
+   
+                    
+                    <el-table-column prop="extractState" width="150" show-overflow-tooltip
+                                     label="文档抽取状态">
+                    </el-table-column>
+                    
+                    <el-table-column prop="extractTime" width="150" show-overflow-tooltip
+                                     label="文档抽取次数">
+                    </el-table-column>
+                    
+                    <el-table-column prop="transforPdfState" width="150" show-overflow-tooltip
+                                     label="转换状态(pdf)">
+                    </el-table-column>
+                    
+                    <el-table-column prop="transforPdfTime" width="150" show-overflow-tooltip
+                                     label="转换次数(pdf)">
+                    </el-table-column>
+                    
+                     <el-table-column prop="transforSwfState" width="150" show-overflow-tooltip
+                                     label="转换状态(swf)">
+                    </el-table-column>
+                    
+                     <el-table-column prop="transforSwfTime" width="150" show-overflow-tooltip
+                                     label="转换次数(swf)">
+                    </el-table-column>
+                 
+                    <el-table-column prop="createTime" sortable="custom" show-overflow-tooltip
+                                     label="创建时间" :formatter="formatDate"
+                                     width="180">
+                    </el-table-column>
+                    <el-table-column prop="creator" width="100" show-overflow-tooltip
+                                     label="创建人" sortable="custom"> 
+                    </el-table-column>  
+ 
+                     <!-- <el-table-column label="操作"
+	                             align="center"
+	                             width="100">
+	                	<template scope="scope">
+	                    	<el-button size="small"
+	                               @click="handleEdit(scope.$index, scope.row)" name="per_km_app_edit">编辑</el-button>
+	 
+	               	 	</template>
+	            	</el-table-column>  -->
+                </el-table>
+
+
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :page-size= "tableSearchModel.pageSize"
+                               :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+          
+  
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/km/KmKnowledgeInfo/js/KmKnowledgeInfoMain.js"></script>
+</body>
+</html>

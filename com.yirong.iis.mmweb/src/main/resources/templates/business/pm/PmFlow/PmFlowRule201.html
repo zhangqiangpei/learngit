@@ -1,0 +1,40 @@
+<div id="rule201" class="main">
+	<el-dialog :title="checkObjectName" :visible.sync="dialogVisible">
+		<el-form :model="rule201Model" :rules="rule201Rules" ref="rule201Model" label-width="140px" style="width:600px;">
+            <el-row>
+	            <el-form-item label="转换字段" prop="field">
+	               <el-select v-model="rule201Model.field" placeholder="请选择字段" @change="fieldChange">
+                        <el-option :label="field.name" :value="field.code" v-for="field in fieldList"></el-option>
+                    </el-select>
+	            </el-form-item>
+            	<el-form-item label="标准分类" prop="standardTypeName">
+                	<el-input v-model="standardTypeName" placeholder="请选择标准分类" icon="search" :on-icon-click="changeClick" :disabled="true"></el-input>
+            	</el-form-item>
+            	<el-form-item label="关联字段英文名" prop="relationFieldCode">
+                	<el-input v-model="rule201Model.relationFieldCode" placeholder="请输入关联字段英文名(长度：1-20)"></el-input>
+            	</el-form-item>
+            	<el-form-item label="关联字段中文名" prop="relationFieldName">
+                	<el-input v-model="rule201Model.relationFieldName" placeholder="请输入关联字段中文名(长度：1-40)"></el-input>
+            	</el-form-item>
+            	<el-form-item label="转换后字段英文名" prop="convertFieldCode">
+                	<el-input v-model="rule201Model.convertFieldCode" placeholder="请输入转换后字段英文名(长度：1-20)"></el-input>
+            	</el-form-item>
+            	<el-form-item label="转换后字段中文名" prop="convertFieldName">
+                	<el-input v-model="rule201Model.convertFieldName" placeholder="请输入转换后字段中文名(长度：1-40)"></el-input>
+            	</el-form-item>
+            </el-row>
+            <!-- 按扭区 -->
+	        <el-row style="margin-top:10px;text-align:center;">
+	        	<el-button type="primary" @click="rule201Submit">确定</el-button>
+	            <el-button @click="rule201Cancel">取消</el-button>
+	            <el-popover ref="popover" placement="right" width="400" trigger="click" @show="getPopoverInfo">
+					<el-input type="textarea" v-model="elementRemark" disabled="true"></el-input>
+				</el-popover>
+	            <el-button type="warning" v-popover:popover>帮助说明</el-button>
+	        </el-row>
+        </el-form>
+     </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/pm/PmFlow/js/PmFlowRule201.js"></script>

@@ -1,0 +1,23 @@
+<div id="update" class="main">
+	<el-dialog title="修改流程" :visible.sync="dialogVisible">
+        <el-form :model="updateModel" :rules="updateRules" ref="updateModel" label-width="120px">
+            <el-row>
+	            <el-form-item label="流程名称" prop="flowName">
+	                <el-input v-model="updateModel.flowName" placeholder="请输入流程名称(长度：1-40)"></el-input>
+	            </el-form-item>
+            </el-row>
+            <el-row>
+            	<el-form-item label="流程说明" prop="flowRemark">
+                	<el-input v-model="updateModel.flowRemark" placeholder="请输入流程说明(长度：1-100)" type="textarea" :rows="2"></el-input>
+            	</el-form-item>
+            </el-row>
+            <el-row style="text-align:center">
+                <el-button type="primary" @click="updateSubmit" size="small">确定</el-button>
+                <el-button @click="updateCancel" size="small">取消</el-button>
+            </el-row>
+        </el-form>
+     </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/pm/PmFlow/js/PmFlowUpdate.js"></script>

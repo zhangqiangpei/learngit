@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+		           <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel"> 
+		           <el-row>
+		           	<el-form-item label="名称" prop="wsMetadataName"> 
+		           	<el-input v-model="tableSearchModel.wsMetadataName" placeholder="请输入元数据名称" size="small"></el-input> 
+		           </el-form-item>
+                      <el-form-item> 
+		           	<el-button type="primary" @click="searchClick"  size="small" name="per_ct_wsdata_show">查 询</el-button> 
+		           	<el-button type="default" @click="tableResetCondition"  size="small">重 置</el-button> 
+		           	</el-form-item>
+		           </el-row> 
+		           <el-row> 
+		           <el-form-item> 
+		           	<el-button type="primary" @click="addClick" icon="plus" size="small" name="per_ct_wsdata_add">新 增</el-button> 
+		           	<el-button type="primary" @click="updateClick" icon="edit" size="small" name="per_ct_wsdata_edit">修改</el-button> 
+		           	<el-button type="primary" @click="delClick" icon="delete" size="small" name="per_ct_wsdata_del">删 除</el-button> 
+		           </el-form-item> 
+		           </el-row>
+		           </el-form> 
+		           <el-table id="tableId" height=100% :data="tableData" @sort-change="tableSortChange" @selection-change="tableChange" ref="mytable" stripe border> 
+		           <el-table-column type="selection" align="center" width="45">
+		           </el-table-column> 
+		           <el-table-column prop="wsMetadataName" label="元数据名称" sortable>
+		           </el-table-column> 
+		           <el-table-column prop="website_group_id" label="网址组名称" width="150"> 
+		           </el-table-column>
+		           <el-table-column prop="dataItemCount" label="数据项总数" width="120">
+		           </el-table-column> 
+		           <el-table-column prop="create_time" label="创建时间" width="180"> 
+		           </el-table-column> 
+		           </el-table>
+		           <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"  @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize"  @current-change="tableCurrentChange" layout="total, sizes, prev, pager, next, jumper"> 
+		           </el-pagination>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/ct/CtWsMetadata/js/CtWsMetadataMain.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<style>
+#edit_org_html .el-dialog__body {
+    padding: 10px 20px;
+    color: #48576a;
+    font-size: 14px;
+}
+
+#edit_org_html .el-dialog{
+  top:5% !important;
+  height:90%;
+  overflow:auto;
+}
+#edit_org_html .el-form-item{
+  float: left;
+}
+</style>
+<div id="update" class="main">
+	<el-dialog title="修改元数据" :visible.sync="dialogVisible" id="edit_org_html">
+            <el-form :model="updateModel"
+                     :rules="updateRules"
+                     ref="updateModel"
+                     label-width="100px"
+                      >
+                <el-form-item label="名称" prop="dbMetadataName" style="width:50%">
+	                    <el-input v-model="updateModel.dbMetadataName" placeholder="请输入元数据名称(长度：1-64)"></el-input>
+	                </el-form-item>
+			          <el-form-item label="采集方式" prop="ctWay" style="width:50%" > 
+			           	<el-select v-model="updateModel.ctWay" placeholder="数据库类型" :disabled="true">
+	                        <el-option label="全量" value="002001"></el-option>
+	                        <el-option label="增量" value="002002"></el-option>
+	                    </el-select>
+			          </el-form-item>
+			          <!-- <el-form-item label="目录名称" prop="catalogId"> 
+						  <el-input v-model="catalogName" placeholder="请选择目录类型" icon="search" :on-icon-click="changeClick" :disabled="true"></el-input>
+			         </el-form-item> -->
+			         <el-form-item label="数据库名称" prop="databaseId" style="width:50%">
+	                    <el-input :disabled="true" v-model="databaseName" placeholder="数据库名称"></el-input>
+	                    <!-- <el-button type="primary" @click="connectDB">连 接</el-button> -->
+	                </el-form-item>
+			         <el-form-item label="表名" prop="tableName" v-if="DBShow" style="width:50%">
+	                     <el-input :disabled="true" v-model="updateModel.tableName" placeholder="请输入说明(长度：1-64)"></el-input>
+	                </el-form-item>
+	                <el-form-item label="SQL" prop="runSql" v-if="SQLShow" style="width:100%">
+	                    <el-input :disabled="true" type="textarea" :rows="2" v-model="updateModel.runSql" placeholder="请输入sql语句"></el-input>
+	                </el-form-item>
+	                 <el-form-item label="说明" prop="dbMetadataRemark" style="width:100%">
+	                    <el-input type="textarea" :rows="2" v-model="updateModel.dbMetadataRemark" placeholder="请输入说明(长度：1-64)"></el-input>
+	                </el-form-item>
+			        <el-table :data="colData" height="250"  stripe border ref="colDataTable" @selection-change="colSelect"> 
+			        	<el-table-column type="selection" align="center" width="45" > 
+			           	</el-table-column>
+			           	<el-table-column prop="fieldCode" label="字段名称" sortable> 
+			           	</el-table-column>
+			           	<el-table-column prop="fieldName" label="字段注释" sortable>
+			           	<template scope="scope">
+			           		<el-input v-model="scope.row.fieldName" placeholder="请输入中文名称"></el-input>
+			           		</template>
+			           	</el-table-column>
+			           	<el-table-column prop="fieldType" label="类型">
+	                		<template scope="scope">
+	                    	<el-select v-model="scope.row.fieldType" placeholder="请选择">
+		                        <el-option label="string" value="008001"></el-option>
+		                        <el-option label="date" value="008002"></el-option>
+		                        <el-option label="boolean" value="008003"></el-option>
+		                        <el-option label="long" value="008004"></el-option>
+		                        <el-option label="integer" value="008005"></el-option>
+		                        <el-option label="short" value="008006"></el-option>
+		                        <el-option label="byte" value="008007"></el-option>
+		                        <el-option label="double" value="008008"></el-option>
+		                        <el-option label="float" value="008009"></el-option>
+	                    	</el-select>
+	                		</template>
+	            		</el-table-column>
+			        </el-table>
+                <el-form-item>
+                    <el-button type="primary" @click="updateSubmit" >确定</el-button>
+                    <el-button @click="updateCancel" >取消</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/ct/CtDbMetadata/js/CtDbMetadataUpdate.js"></script>

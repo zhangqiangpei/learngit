@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- 公用方法 -->
+		<script src="/frame/jquery/jquery.min.js"></script>
+		<script src="/frame/awaken/awaken.init.js"></script>
+		<script>
+			//初始化头部
+			initHeadConfig();
+		</script>
+	</head>
+	<body>
+		 <div id="main" class="main">
+			 <!-- 查询条件 -->
+	         <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel">
+	            <el-row>
+	            	<el-form-item label="预处理任务名称" prop="taskName">
+	                    <el-input v-model="tableSearchModel.taskName" placeholder="请输入预处理任务名称"></el-input>
+	                </el-form-item>
+	                <el-form-item label="运行开始日期" prop="startDateStart">
+	                    <el-date-picker v-model="tableSearchModel.startDateStart" type="date" placeholder="选择开始日期"></el-date-picker>
+	                </el-form-item>
+	                <el-form-item label="至" prop="startDateEnd">
+	                    <el-date-picker v-model="tableSearchModel.startDateEnd" type="date" placeholder="选择结束日期"></el-date-picker>
+                	</el-form-item>
+	            </el-row>
+	            <el-row>
+	                <el-form-item>
+	                    <el-button type="primary" @click="searchClick"  size="small" name="per_pm_tasklog_show">查 询</el-button>
+	                    <el-button type="default" @click="tableResetCondition"  size="small">重 置</el-button>
+	                </el-form-item>
+	            </el-row>
+	        </el-form>
+	
+			<!-- 数据 -->
+	        <el-table :data="tableData" id="tableId" height=100% @sort-change="tableSortChange"  ref="mytable" stripe border>
+	            <el-table-column prop="task_name" label="预处理任务名称" sortable="custom"></el-table-column>
+	            <el-table-column prop="start_time" label="运行开始时间" sortable="custom" width="170" ></el-table-column>
+	            <el-table-column prop="end_time" label="运行结束时间" sortable="custom" width="170" ></el-table-column>
+	            <el-table-column prop="diff_minute" label="运行时间(分钟)" sortable="custom" width="160" ></el-table-column>
+	            <!--<el-table-column prop="data_count" label="数据量(条)" sortable="custom" width="140" ></el-table-column>-->
+	            <el-table-column prop="run_state_name" label="当前运行状态" sortable="custom" width="150" ></el-table-column>
+	            <el-table-column prop="is_success" label="运行结果" sortable="custom" width="120" :formatter="resultFormatter"></el-table-column>
+	            <!--<el-table-column prop="fail_msg" label="运行结果提示" sortable="custom" width="150" ></el-table-column>-->
+	            <el-table-column label="操作" align="center" width="100">
+		            <template scope="scope">
+	                	<el-button size="small" type="primary" @click="queryDataClick(scope.$index, scope.row)" name="per_pm_tasklog_data">查看数据</el-button>
+	                </template>
+                </el-table-column>
+	        </el-table>
+	
+			<!-- 分页 -->
+	        <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"
+	        	 @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize"  @current-change="tableCurrentChange" layout="total, sizes, prev, pager, next, jumper">
+	        </el-pagination>
+	    </div>
+	    
+		<!-- 本页面js -->
+		<script src="/frame/awaken/awaken.table.field.js"></script>
+		<script src="/business/pm/PmTaskLog/js/PmTaskLogMain.js"></script>
+	</body>
+</html>

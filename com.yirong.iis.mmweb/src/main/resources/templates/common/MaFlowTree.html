@@ -1,0 +1,40 @@
+<style>
+.el-dialog__body {
+    padding: 10px 20px;
+    color: #48576a;
+    font-size: 14px;
+}
+
+.el-dialog{
+	top:5% !important;
+	height:90%;
+	overflow:auto;
+}
+</style>
+<div id="MaFlowTree" class="main">
+	<el-dialog title="流程选择器"  :visible.sync="dialogVisible" >
+    	<!-- <el-tree node-key="id" ref="tree" :data="treeData" :props="treeProps" :expand-on-click-node="false" 
+    		:highlight-current="true" :default-expand-all="true" @node-click="treeNodeClick"></el-tree> -->
+    	<el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel">
+            <el-row>
+                <el-form-item label="流程名称" prop="flowName">
+                    <el-input v-model="tableSearchModel.flowName" placeholder="请输入流程名称" size="small"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="searchClick" size="small">查 询</el-button>
+                    <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+                </el-form-item>
+            </el-row>
+        </el-form>
+    	<el-table :data="tableData" @sort-change="tableSortChange"  @selection-change="tableChange" ref="mytable" 
+    	 @row-dblclick="rowSelect" stripe  border>
+            <el-table-column prop="flow_name" label="流程名称" sortable="custom"  ></el-table-column>
+            <el-table-column prop="ct_object_name" sortable="custom" label="输入对象名称" ></el-table-column>
+        </el-table>
+        <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal" @size-change="tableSizeChange" @current-change="tableCurrentChange" layout="total, sizes, prev, pager, next, jumper"> 
+		</el-pagination>
+    </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/common/js/MaFlowTree.js"></script>

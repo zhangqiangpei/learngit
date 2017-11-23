@@ -1,0 +1,52 @@
+<div id="config" class="main">
+	<el-dialog title="配置流程" :visible.sync="dialogVisible" size="full">
+		<!-- 要素及流程图区 -->
+		<el-row>
+	    	<!-- 要素区 -->
+	    	<el-col :span="4" id="left_el" class="flow" >
+	    		<!-- 手风琴，同一时间展开一个 -->
+		    	<el-collapse accordion>
+					<el-collapse-item title="输入" name="1">
+					  	<el-tree node-key="id" ref="tree" :data="treeData" :props="treeProps" :expand-on-click-node="false" 
+					  		:render-content="treeRender" :highlight-current="true" :default-expand-all="true"></el-tree>
+				    </el-collapse-item>
+				    <el-collapse-item title="规则" name="2">
+				    	<el-tree node-key="ruleId" ref="ruleTree" :data="ruleTreeData" :props="ruleTreeProps" :expand-on-click-node="false" 
+					  		:render-content="ruleTreeRender" :highlight-current="true" :default-expand-all="true"></el-tree>
+				    </el-collapse-item>
+				  	<el-collapse-item title="输出" name="3">
+					  	<el-tree node-key="id" ref="outputTree" :data="outputTreeData" :props="outputTreeProps" :expand-on-click-node="false" 
+					  		:render-content="outputTreeRender" :highlight-current="true" :default-expand-all="true"></el-tree>
+				  	</el-collapse-item>
+				</el-collapse>
+	    	</el-col>
+	    	<!-- 流程图区 -->
+	    	<el-col :span="20">
+				<div class="flow" id="flow"></div>
+	    	</el-col>
+        </el-row>
+        <!-- 按扭区 -->
+        <el-row style="margin-top:10px;">
+        	<el-popover ref="popover1" placement="top-start" title="温馨提示" width="200" trigger="hover" 
+        	content="确定按钮，必须测试成功后才会将流程图及流程测试结果均会保存至服务器"></el-popover>
+        	<el-popover ref="popover2" placement="top-start" title="温馨提示" width="200" trigger="hover" 
+        	content="保存流程按钮，会将流程图保存至服务器，下次进行本页面直接显示"></el-popover>
+        	<el-popover ref="popover3" placement="top-start" title="温馨提示" width="200" trigger="hover" 
+        	content="流程测试按钮，仅对界面流程进行测试，不会将流程图及测试结果保存至服务器"></el-popover>
+        	<el-button type="primary" size="small" @click="configSubmit" v-popover:popover1>确定</el-button>
+        	<el-button type="primary" size="small" @click="configSave(true)" v-popover:popover2>保存流程</el-button>
+        	<el-button type="primary" size="small" @click="testSubmit(true)" v-popover:popover3>流程测试</el-button>
+            <el-button size="small" @click="configCancel">取消</el-button>
+        </el-row>
+     </el-dialog>
+</div>
+
+<!-- 本页面css -->
+<link href="/business/pm/PmFlow/css/PmFlowConfig.css" rel="stylesheet" />
+<link href="/frame/smartMenu/smartMenu.css" rel="stylesheet" />
+
+<!-- 本页面js -->
+<script src="/frame/jqueryui/jquery-ui.min.js"></script>
+<script src="/frame/jsplumb/jsplumb.min.js"></script>
+<script src="/business/pm/PmFlow/js/PmFlowConfig.js"></script>
+<script src="/frame/smartMenu/jquery-smartMenu.js"></script>
