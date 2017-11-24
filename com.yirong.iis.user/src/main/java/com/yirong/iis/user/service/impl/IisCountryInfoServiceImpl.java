@@ -77,7 +77,7 @@ public class IisCountryInfoServiceImpl extends BaseService<IisCountryInfo, Strin
 		
 		List<Object> param = new ArrayList<Object>();
 		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT t.ISO2CODE \"iso2code\",t.ISOCODE \"isocode\",t.ENGLISH_NAME \"englishName\",t.CHINESE_NAME \"chineseName\",t.CONTINENT_CODE \"continentCode\"");
+		sql.append("SELECT t.ID \"id\", t.ISO2CODE \"iso2code\",t.ISOCODE \"isocode\",t.ENGLISH_NAME \"englishName\",t.CHINESE_NAME \"chineseName\",t.CONTINENT_CODE \"continentCode\"");
 		sql.append(" FROM IIS_COUNTRY_INFO t ");
 		sql.append("where 1=1 ");
 		if(StringUtil.isNotNullOrEmpty(para.getChineseName())){

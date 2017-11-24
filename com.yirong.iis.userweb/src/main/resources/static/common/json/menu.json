@@ -166,7 +166,8 @@
         },
         {
           "id": "82",
-          "name": "在线报告编辑"
+          "name": "在线报告编辑",
+          "url": "business/user/tools/editOnlineReport.html"
         }
       ]
     },

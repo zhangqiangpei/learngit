@@ -1,4 +1,46 @@
+.sudiInfo{
+    padding-top: 13px;
+    width:100px;
+    height:30px;
+    font-family:'MicrosoftYaHei', 'Microsoft YaHei';
+    font-weight:400;
+    font-size:14px;
+    color:#646E7C;
+}
 
+.sp{
+    border-width:1px;
+    border-style:solid;
+    border-left:0px;
+    border-top:0px;
+    border-right: 0px;
+    border-color:rgba(224, 224, 224, 1);
+}
+.newsInfo{
+    margin-bottom: 9px;
+    border-width:1px;
+    border-style:solid;
+    border-color:rgba(224, 224, 224, 1);
+    border-left:0px;
+    border-top:0px;
+    border-bottom:0px;
+    border-radius:0px;
+    width:100px;
+    height:14px;
+    font-family:'MicrosoftYaHei', 'Microsoft YaHei';
+    font-weight:400;
+    font-size:12px;
+    color:#646E7C;
+}
+#newsTitle{
+    height:33px;
+    padding-top: 20px;
+    background:inherit;
+    background-color:rgba(255, 255, 255, 0);
+    font-size:18px;
+    color:#00253E;
+    text-align:left;
+}
 .slider {
     overflow: hidden;
     height: 342px;
@@ -202,7 +244,7 @@
 
 .row-l {
     float: left;
-    width: 1202px;
+    width: 100%;
     border: 1px solid #e0e0e0;
 }
 
@@ -306,7 +348,7 @@
 
 .category {
     padding: 0 20px;
-    min-height: 260px;
+    /*min-height: 260px;*/
 }
 
 .category .item {

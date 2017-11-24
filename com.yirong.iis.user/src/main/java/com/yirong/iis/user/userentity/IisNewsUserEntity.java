@@ -38,6 +38,10 @@ public class IisNewsUserEntity extends PageEntiry implements Serializable {
      */
     private String titleCn;
     /**
+     * 英文标题
+     */
+    private String titleEn;
+    /**
      * 内容
      */
     private String content;
@@ -45,6 +49,10 @@ public class IisNewsUserEntity extends PageEntiry implements Serializable {
      * 中文内容
      */
     private String contentCn;
+    /**
+     * 英文内容
+     */
+    private String contentEn;
     /**
      * 概要
      */
@@ -58,21 +66,41 @@ public class IisNewsUserEntity extends PageEntiry implements Serializable {
      */
     private String type;
     /**
-     * 发布时间
+     * 国家英文名称
      */
-    private String releaseTime;
+    private String countryEngName;
     /**
-     * 国家ID
+     * 国家中文名称
      */
-    private String countryId;
-    /**
-     * 国家名称
-     */
-    private String countryName;
+    private String countryChnName;
     /**
      * 所属洲编码
      */
     private String continentCode;
+    /**
+     * 发布时间
+     */
+    private String releaseTime;
+    /**
+     * 采集时间
+     */
+    private String collectionTime;
+    /**
+     * 创建人
+     */
+    private String creator;
+    /**
+     * 创建时间
+     */
+    private String createTime;
+    /**
+     * 修改人
+     */
+    private String modifier;
+    /**
+     * 修改时间
+     */
+    private String modifyTime;
 
     public String getKeywords() {
         return keywords;
@@ -146,20 +174,76 @@ public class IisNewsUserEntity extends PageEntiry implements Serializable {
         this.releaseTime = releaseTime;
     }
 
-    public String getCountryId() {
-        return countryId;
+    public String getTitleEn() {
+        return titleEn;
     }
 
-    public void setCountryId(String countryId) {
-        this.countryId = countryId;
+    public void setTitleEn(String titleEn) {
+        this.titleEn = titleEn;
     }
 
-    public String getCountryName() {
-        return countryName;
+    public String getContentEn() {
+        return contentEn;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setContentEn(String contentEn) {
+        this.contentEn = contentEn;
+    }
+
+    public String getCountryEngName() {
+        return countryEngName;
+    }
+
+    public void setCountryEngName(String countryEngName) {
+        this.countryEngName = countryEngName;
+    }
+
+    public String getCountryChnName() {
+        return countryChnName;
+    }
+
+    public void setCountryChnName(String countryChnName) {
+        this.countryChnName = countryChnName;
+    }
+
+    public String getCollectionTime() {
+        return collectionTime;
+    }
+
+    public void setCollectionTime(String collectionTime) {
+        this.collectionTime = collectionTime;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getModifier() {
+        return modifier;
+    }
+
+    public void setModifier(String modifier) {
+        this.modifier = modifier;
+    }
+
+    public String getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(String modifyTime) {
+        this.modifyTime = modifyTime;
     }
 
     public String getContinentCode() {

@@ -30,7 +30,7 @@
             <el-col :span="4">
                 <el-form :model="tableSearchModel">
                     <el-form-item>
-                        <el-select v-model="tableSearchModel.continent" size="medium" placeholder="选择洲">
+                        <el-select v-model="tableSearchModel.continent" size="medium" :clearable="true" @change="setContinentsCode" placeholder="选择洲">
                             <el-option
                                     v-for="item in continents"
                                     :key="item.value"
@@ -40,12 +40,12 @@
                         </el-select>
                     </el-form-item>
                     <el-form-item>
-                        <el-select v-model="tableSearchModel.country" size="medium" placeholder="选择国家">
+                        <el-select v-model="tableSearchModel.country" size="medium" :clearable="true" @change="setCountryCode" placeholder="选择国家">
                             <el-option
                                     v-for="item in countries"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
+                                    :key="item.id"
+                                    :label="item.chineseName"
+                                    :value="item.id">
                             </el-option>
                         </el-select>
                     </el-form-item>
@@ -73,11 +73,11 @@
 <script src="/frame/jquery/jquery.min.js"></script>
 <script src="/frame/vue/vue.min.js"></script>
 <script src="/frame/elementui/elementui.js"></script>
-<script src="/common/js/com.js"></script>
 <script src="/frame/awaken/awaken.core.js"></script>
 <script src="/frame/awaken/awaken.table.js"></script>
 <script src="/frame/awaken/awaken.tree.js"></script>
 <script src="/frame/awaken/awaken.dialog.js"></script>
 <script src="/frame/awaken/awaken.common.js"></script>
 <script src="/frame/awaken/awaken.util.js"></script>
+<script src="/common/js/com.js"></script>
 <script src="/business/user/news/js/NewsMain.js"></script>

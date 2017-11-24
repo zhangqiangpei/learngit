@@ -402,7 +402,12 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 		 sql.append("WHERE 1=1 ");
          String insiderReport = environment.getProperty("insider.report");
          // 是否显示内部报告
-         if (!"1".equals(insiderReport)){
+         if ("1".equals(insiderReport)){
+             if (StringUtil.isNotNullOrEmpty(ue.getIsOutside())){
+                 sql.append("AND IR.TYPE_ID IN (SELECT ID FROM IIS_REPORT_TYPE WHERE IS_OUTSIDE = ? ) ");
+                 param.add(ue.getIsOutside());
+             }
+         } else {
              // 只显示外部报告
              sql.append("AND IR.TYPE_ID IN (SELECT ID FROM IIS_REPORT_TYPE WHERE IS_OUTSIDE = 1) ");
          }

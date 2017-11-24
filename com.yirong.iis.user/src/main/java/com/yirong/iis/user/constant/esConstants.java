@@ -3,9 +3,14 @@ package com.yirong.iis.user.constant;
 /**
  * @author MingTie
  * CreateDate：2017/11/21
- * Description：
+ * Description：es查询字段
  */
 public class esConstants {
+
+    /**
+     * 字段名称--ID
+     */
+    public final static String ID="id";
 
     /**
      * 字段名称--标题
@@ -18,6 +23,11 @@ public class esConstants {
     public final static String TITLE_CN= "title_cn";
 
     /**
+     * 字段名称--标题--英文
+     */
+    public final static String TITLE_EN= "title_en";
+
+    /**
      * 字段名称--内容
      */
     public final static String CONTENT = "content";
@@ -26,6 +36,11 @@ public class esConstants {
      * 字段名称--内容--中文
      */
     public final static String CONTENT_CN = "content_cn";
+
+    /**
+     * 字段名称--内容--英文
+     */
+    public final static String CONTENT_EN = "content_en";
 
     /**
      * 字段名称--概要
@@ -43,14 +58,14 @@ public class esConstants {
     public final static String SOURCE = "source";
 
     /**
-     * 字段名称--国家ID
+     * 字段名称--国家名称--中文
      */
-    public final static String COUNTRY_ID="country_id";
+    public final static String COUNTRY_CHN_NAME ="country_chn_name";
 
     /**
-     * 字段名称--国家名称
+     * 字段名称--国家名称--英文
      */
-    public final static String COUNTRY_NAME="country_name";
+    public final static String COUNTRY_ENG_NAME ="country_eng_name";
 
     /**
      * 字段名称--所属洲编码
@@ -61,6 +76,32 @@ public class esConstants {
      * 字段名称--发布时间
      */
     public final static String RELEASE_TIME="release_time";
+
+    /**
+     * 字段名称--采集时间
+     */
+    public final static String COLLECTION_TIME="collection_time";
+
+    /**
+     * 字段名称--创建人
+     */
+    public final static String CREATOR="creator";
+
+    /**
+     * 字段名称--创建时间
+     */
+    public final static String CREATE_TIME="create_time";
+
+    /**
+     * 字段名称--修改人
+     */
+    public final static String MODIFIER="modifier";
+
+    /**
+     * 字段名称--修改时间
+     */
+    public final static String MODIFY_TIME="modify_time";
+
     /**
      * 字段名称--新闻索引名称
      */

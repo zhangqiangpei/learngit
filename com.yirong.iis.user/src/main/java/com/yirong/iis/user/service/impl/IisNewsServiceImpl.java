@@ -91,7 +91,10 @@ public class IisNewsServiceImpl extends BaseService<IisNews, String>
         EsSelect select = new EsSelect();
         if (StringUtil.isNotNullOrEmpty(ue.getKeywords())) {
             select.setKeyword(ue.getKeywords().trim());
-            select.setKeywordFields(new String[]{esConstants.TITLE, esConstants.TITLE_CN,esConstants.CONTENT,esConstants.CONTENT_CN});
+            select.setKeywordFields(new String[]{esConstants.TITLE, esConstants.TITLE_CN,esConstants.TITLE_EN,
+                    esConstants.CONTENT, esConstants.CONTENT_CN,esConstants.CONTENT_EN,
+            esConstants.COUNTRY_CHN_NAME,esConstants.COUNTRY_ENG_NAME,
+            esConstants.SUMMARY});
         }
         select.setAnalyzer("ik_max_word");
         select.setIsHighlight(true);
@@ -143,19 +146,26 @@ public class IisNewsServiceImpl extends BaseService<IisNews, String>
             whereList.add(where);
         }
         // 来源
-        // 国家ID
-        if (StringUtil.isNotNullOrEmpty(ue.getCountryId())){
+        if (StringUtil.isNotNullOrEmpty(ue.getSource())){
             Where where = new Where();
-            where.setFieldName(esConstants.COUNTRY_ID);
-            where.setFieldValue(ue.getCountryId());
+            where.setFieldName(esConstants.SOURCE);
+            where.setFieldValue(ue.getSource());
             where.setOperationType(EsMatchNames.EQC);
             whereList.add(where);
         }
-        // 国家名称
-        if (StringUtil.isNotNullOrEmpty(ue.getCountryName())){
+        // 国家英文名称
+        if (StringUtil.isNotNullOrEmpty(ue.getCountryEngName())){
             Where where = new Where();
-            where.setFieldName(esConstants.COUNTRY_NAME);
-            where.setFieldValue(ue.getCountryName());
+            where.setFieldName(esConstants.COUNTRY_ENG_NAME);
+            where.setFieldValue(ue.getCountryEngName());
+            where.setOperationType(EsMatchNames.EQC);
+            whereList.add(where);
+        }
+        // 国家中文名称
+        if (StringUtil.isNotNullOrEmpty(ue.getCountryChnName())){
+            Where where = new Where();
+            where.setFieldName(esConstants.COUNTRY_CHN_NAME);
+            where.setFieldValue(ue.getCountryChnName());
             where.setOperationType(EsMatchNames.EQC);
             whereList.add(where);
         }

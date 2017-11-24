@@ -64,6 +64,7 @@ public interface IisReportTypeService extends IBaseService<IisReportType, String
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
 	 * @return
+     * @param reportName
 	 */
-    Map queryIisReportTypeListThreeRecord();
+    Map queryIisReportTypeListThreeRecord(String reportName);
 }
