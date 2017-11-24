@@ -93,12 +93,6 @@
 
 	<!-- 本工程依赖包 -->
 	<dependencies>
-		<!-- web基础包 -->
-		<dependency>
-			<groupId>com.yirong.commons</groupId>
-			<artifactId>yr-commons-web</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
-		</dependency>
 		<dependency>
 			<groupId>com.yirong.awaken</groupId>
 			<artifactId>yr-awaken-core</artifactId>
