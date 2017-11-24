@@ -499,46 +499,6 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 	 }
 
     /**
-     * 功能描述：搜索报告
-     *
-     * @author 林明铁
-     *         <p>
-     *         创建时间 ：2017-11-09 10:00:09
-     *         </p>
-     *
-     *         <p>
-     *         修改历史：(修改人，修改时间，修改原因/内容)
-     *         </p>
-     * @return
-     */
-    @Override
-    public Map esSearch(IisReportUserEntity ue, String tokenId) {
-        /** 查询条件 **/
-        List<Where> whereList = new ArrayList<Where>();
-        if (StringUtil.isNotNullOrEmpty(ue.getReportInfo())){
-            Where where = new Where();
-            // 报告内容
-            where.setFieldName(esConstants.CONTENT);
-            where.setFieldValue(ue.getReportInfo());
-            where.setOperationType(EsMatchNames.LIKENC);
-            whereList.add(where);
-        }
-        /** 返回结果 **/
-        EsSelect select = new EsSelect();
-        if (StringUtil.isNotNullOrEmpty(ue.getKeywords())) {
-            select.setKeyword(ue.getKeywords().trim());
-            select.setKeywordFields(new String[]{esConstants.TITLE});
-        }
-        select.setAnalyzer("ik_max_word");
-        select.setIsHighlight(true);
-        select.setIncludes(new String[]{esConstants.TITLE});
-        // 获取数据
-        PageEntiry page = EsClientEif.textSearch(esConstants.INDEX_REPORT_NAME, esConstants.TYPE_REPORT_NAME, ue,
-                whereList, select, esConstants.class);
-        return ResultUtil.newOk("操作成功").setData(page).toMap();
-    }
-
-    /**
       * 获取临时文件存放路径
       *
       * @return

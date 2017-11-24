@@ -53,7 +53,7 @@ var mainAttr={
             this.countries = countryResult.data.data;
         }
         //初始化table
-        this.tableInit("user", "IisUserSearchApi/searchNews");
+        this.tableInit("user", "IisEsSearchApi/searchNews");
         //默认排序
         this.tableInitSort("release_time", "desc");
         this.tableSearch(this.tableSearchModel);

@@ -13,6 +13,11 @@ public class esConstants {
     public final static String ID="id";
 
     /**
+     * 字段名称--公司名称
+     */
+    public final static String COMPANY_NAME = "company_name";
+
+    /**
      * 字段名称--标题
      */
     public final static String TITLE = "title";
