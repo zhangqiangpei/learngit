@@ -1,52 +1,32 @@
 var mainAttr={
     el:"#main",
     data:{
-        insiderReportList:[],
-        externalReportList:[],
-        categoryReports:[],
-        hasInsiderReport:false,
-        hasExternalReport:false,
-        search:""
+        newsId:"",
+        news:"",
+        newsType:[]
     },
     methods:{
-        // 搜索报告
-        searchReport:function () {
-            var result = z.msService("user","IisReportTypeApi/listThreeRecord",{reportName:this.search});
-            if (result.code === 0){
-                this.insiderReportList = [];
-                this.externalReportList=[];
-                for (var i = 0; i<result.data.length; i++){
-                    if (result.data[i].IS_OUTSIDE === 0){
-                        this.hasInsiderReport = true;
-                        this.insiderReportList.push(result.data[i]);
-                    } else {
-                        this.hasExternalReport = true;
-                        this.externalReportList.push(result.data[i]);
-                    }
-                }
-            }
-        }
+
     },
     mounted:function () {
-        var result = z.msService("user","IisReportTypeApi/listThreeRecord",{typeId:""});
-        if (result.code === 0){
-            this.list = result.data;
-            for (var i = 0; i<result.data.length; i++){
-                if (result.data[i].IS_OUTSIDE === 0){
-                    this.hasInsiderReport = true;
-                    this.insiderReportList.push(result.data[i]);
-                } else {
-                    this.hasExternalReport = true;
-                    this.externalReportList.push(result.data[i]);
-                }
-            }
-        }
         //外部链接传参
         try {
-            if (z.isNotNullOrEmpty(z.url().typeId)) {
-                this.tableSearchModel.typeId = z.url().typeId;
+            if (z.isNotNullOrEmpty(z.url().id)) {
+                this.newsId = z.url().id;
             }
         } catch (e) {
+        }
+        var result = z.msService("user", "IisEsSearchApi/getReportById", {id:this.newsId});
+        if (result.code === 0){
+            this.news=result.data;
+        }
+        this.selectInit("user");
+        this.newsTypes = this.selectSearch("024");
+        for (var j = 0; j<this.newsTypes.length; j++){
+            if (this.news.TYPE === this.newsTypes[j].value){
+                this.news.TYPE = this.newsTypes[j].label;
+                break;
+            }
         }
     }
 };

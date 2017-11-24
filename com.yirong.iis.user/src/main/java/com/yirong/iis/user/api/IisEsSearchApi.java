@@ -97,6 +97,14 @@ public class IisEsSearchApi {
                 IisNewsUserEntity.class, calssMap);
         // 处理业务
         Map map = iisEsSearchService.esSearchNews(ue, tokenId);
-        return JsonUtil.ObjectToString(map);
+        return JsonUtil.ObjectToStringClob(map);
+    }
+
+    @RequestMapping(value = "getReportById", method = RequestMethod.POST)
+    public String getReportById(@RequestBody String paramAll){
+        String idParamPath = "context/id";
+        String id = JsonUtil.getJsonStrByAttrName(paramAll, idParamPath);
+        Map map = iisEsSearchService.getNewsById(id);
+        return JsonUtil.ObjectToStringClob(map);
     }
 }

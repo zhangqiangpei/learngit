@@ -110,18 +110,18 @@ public class esConstants {
     /**
      * 字段名称--新闻索引名称
      */
-    public static String INDEX_NAME;
+    public static String NEWS_INDEX_NAME;
     /**
      * 字段名称--新闻类型名称
      */
-    public static String TYPE_NAME;
+    public static String NEWS_TYPE_NAME;
 
     /**
      * 字段名称--报告索引名称
      */
-//    public static String INDEX_REPORT_NAME ;
+    public static String REPORT_INDEX_NAME;
     /**
      * 字段名称--报告类型名称
      */
-//    public static String TYPE_REPORT_NAME ;
+    public static String REPORT_TYPE_NAME;
 }

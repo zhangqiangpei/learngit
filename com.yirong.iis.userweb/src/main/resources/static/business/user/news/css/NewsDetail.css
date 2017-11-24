@@ -1,6 +1,30 @@
+.divListContent{
+    padding:0px 0px;
+}
+
+.divListContent span{
+    font-size:12px;
+    line-height:24px;
+    color:#646E7C;
+}
+
+.divListContent a{
+    border-right: 1px solid #ddd;
+    padding-right:10px;
+    margin-right:10px;
+}
+.divListContent, .el-button--mini, .el-button--mini.is-round{
+    padding: 0 3px;
+}
+.content{
+    padding-top: 20px;
+    background:inherit;
+    background-color:rgba(255, 255, 255, 0);
+    font-size:14px;
+    color:#646E7C;
+}
 .sudiInfo{
     padding-top: 13px;
-    width:100px;
     height:30px;
     font-family:'MicrosoftYaHei', 'Microsoft YaHei';
     font-weight:400;
@@ -25,7 +49,7 @@
     border-top:0px;
     border-bottom:0px;
     border-radius:0px;
-    width:100px;
+    width:100%;
     height:14px;
     font-family:'MicrosoftYaHei', 'Microsoft YaHei';
     font-weight:400;

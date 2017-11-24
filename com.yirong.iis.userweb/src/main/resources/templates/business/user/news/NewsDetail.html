@@ -24,25 +24,39 @@
 
 <!---------------网页主体start----------------->
 <div id="main" class="main  clearfix">
-    <el-row>
-        <el-col :span="6">&nbsp;</el-col>
-        <el-col :span="12">
-            <el-input v-model="search" size="medium"></el-input>
-        </el-col>
-        <el-col :span="6">
-            <el-col :span="2">&nbsp;</el-col>
-            <el-button size="medium" icon="el-icon-search" type="primary" @click="searchReport">搜索</el-button>
-        </el-col>
-    </el-row>
+    <!--<el-row>-->
+        <!--<el-col :span="6">&nbsp;</el-col>-->
+        <!--<el-col :span="12">-->
+            <!--<el-input v-model="search" size="medium"></el-input>-->
+        <!--</el-col>-->
+        <!--<el-col :span="6">-->
+            <!--<el-col :span="2">&nbsp;</el-col>-->
+            <!--<el-button size="medium" icon="el-icon-search" type="primary" @click="searchReport">搜索</el-button>-->
+        <!--</el-col>-->
+    <!--</el-row>-->
     <el-row :gutter="30">
         <el-col :span="16">
             <div class="row clearfix">
                 <div class="row-l">
                     <div class="title">速递详情</div>
                     <div class="content category" style="min-height: 399px;">
-                        <div id="newsTitle">【国家】新闻标题</div>
-                        <div class="newsInfo">来源：娃哈哈</div>
+                        <div id="newsTitle">【{{news.COUNTRY_CHN_NAME}}】{{news.TITLE}}</div>
+                        <div class="divListContent">
+                            <span>来源：<a>{{news.SOURCE}}</a></span>
+                            <span>国家：<a>{{news.COUNTRY_CHN_NAME}}</a></span>
+                            <span>类型：<a>{{news.TYPE}}</a></span>
+                            <span><a>{{news.RELEASE_TIME}}</a></span>
+                            <div style="float: right;">
+                                <span><a><el-button type="text" size="mini">收藏</el-button></a></span>
+                                <span><a>打印</a></span>
+                                <span><a>分享</a></span>
+                                <span><a><el-button type="text" size="mini">跟踪</el-button></a></span>
+                            </div>
+                        </div>
                         <div class="sp"></div>
+                        <div class="content">
+                            {{news.CONTENT}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -53,7 +67,9 @@
                     <div class="row-l">
                         <div class="title">速递信息</div>
                         <div class="content category" style="min-height: 163px;">
-                            <div class="sudiInfo">来源：娃哈哈</div>
+                            <div class="sudiInfo"><span>来源：</span><a>{{news.SOURCE}}</a></div>
+                            <div class="sudiInfo"><span>国家：</span><a>{{news.COUNTRY_CHN_NAME}}</a></div>
+                            <div class="sudiInfo"><span>类型：</span><a>{{news.TYPE}}</a></div>
                         </div>
                     </div>
                 </div>

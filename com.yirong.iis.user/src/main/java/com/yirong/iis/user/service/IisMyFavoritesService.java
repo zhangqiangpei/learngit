@@ -32,7 +32,7 @@ public interface IisMyFavoritesService {
      *         </p>
      * @return
      */
-    Map saveIisMyFavorites(IisMyFavorites iisMyFavorites, String tokenId);
+    Map saveIisMyFavorites(IisMyFavorites iisMyFavorites);
 
     /**
      * 功能描述：根据ID查询我的收藏

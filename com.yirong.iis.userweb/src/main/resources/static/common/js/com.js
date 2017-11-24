@@ -663,12 +663,16 @@ $(function() {
                     }
                 },
                 searchNews:function () {
-                    currentUseToolbarVue.tableSearchModel.keywords = this.keyword;
-                    currentUseToolbarVue.searchClick();
+                    if (null !== currentUseToolbarVue) {
+                        currentUseToolbarVue.tableSearchModel.keywords = this.keyword;
+                        currentUseToolbarVue.searchClick();
+                    }
                 },
                 showContentByCategory:function(idx){
-                    currentUseToolbarVue.tableSearchModel.type = this.category[idx].key;
-                    currentUseToolbarVue.currentNewsTypeName = this.category[idx].name;
+                    if (null !== currentUseToolbarVue) {
+                        currentUseToolbarVue.tableSearchModel.type = this.category[idx].key;
+                        currentUseToolbarVue.currentNewsTypeName = this.category[idx].name;
+                    }
                 },
                 fnAutoSrh:function(keyword,cb){
                     cb([{value:'智能匹配结果'},{value:'智能匹配结果'},{value:'智能匹配结果'}]);

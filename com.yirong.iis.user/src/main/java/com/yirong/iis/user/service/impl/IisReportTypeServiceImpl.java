@@ -91,12 +91,12 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT IRT.ID AS id,");
 		sql.append(" IRT.IS_OUTSIDE AS isOutside,");
-		sql.append("IRT.TYPE_NAME AS typeName ");
+		sql.append("IRT.NEWS_TYPE_NAME AS typeName ");
 		sql.append("FROM IIS_REPORT_TYPE IRT ");
 		sql.append("WHERE 1=1 ");
 		// 标准编码
 		if (StringUtil.isNotNullOrEmpty(ue.getTypeName())) {
-			sql.append("AND IRT.TYPE_NAME LIKE ? ");
+			sql.append("AND IRT.NEWS_TYPE_NAME LIKE ? ");
 			param.add("%" + ue.getTypeName() + "%");
 		}
 		// 标准编码
@@ -129,7 +129,7 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
         List<Object> param = new ArrayList<Object>();
         StringBuffer sql = new StringBuffer();
         sql.append("SELECT ID,REPORT_NAME,TYPE_ID,CREATE_TIME,REPORT_INFO,KM_ID,EOS_ID,");
-        sql.append("(SELECT TYPE_NAME FROM IIS_REPORT_TYPE WHERE ID = temp.TYPE_ID) AS TYPE_NAME ");
+        sql.append("(SELECT NEWS_TYPE_NAME FROM IIS_REPORT_TYPE WHERE ID = temp.TYPE_ID) AS NEWS_TYPE_NAME ");
         sql.append("FROM (");
         sql.append("select ID,REPORT_NAME,TYPE_ID,TO_CHAR(CREATE_TIME,'YYYY-MM-DD') AS CREATE_TIME,REPORT_INFO,KM_ID,EOS_ID,rank() over ");
         sql.append("(partition by TYPE_ID order by CREATE_TIME desc) rn FROM IIS_REPORT) temp ");

@@ -54,6 +54,21 @@
             <el-col :span="20">
                 <el-table  :data="tableData" @sort-change="tableSortChange"
                            @selection-change="tableChange" ref="mytable" stripe border>
+                    <el-table-column :render-header="renderHeader">
+                        <template scope="scope">
+                            <div id="newsTitle">
+                                <a :href="'/forward.do?viewPath=business/user/news/NewsDetail.html&id=' + scope.row.id">
+                                    【{{scope.row.COUNTRY_CHN_NAME}}】{{scope.row.TITLE}}</a>
+                            </div>
+                            <div >摘要：{{scope.row.SUMMARY}}</div>
+                            <div class="divListContent">
+                                <span>来源：<a>{{scope.row.SOURCE}}</a></span>
+                                <span>国家：<a>{{scope.row.COUNTRY_CHN_NAME}}</a></span>
+                                <span>类型：<a>{{scope.row.TYPE}}</a></span>
+                                <span><a>{{scope.row.RELEASE_TIME}}</a></span>
+                            </div>
+                        </template>
+                    </el-table-column>
                 </el-table>
                 <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"
                                @size-change="tableSizeChange"
