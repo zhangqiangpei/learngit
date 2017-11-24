@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>新闻详情</title>
+    <link href="/frame/elementui/elementui.css" rel="stylesheet"/>
+    <link href="/frame/jqcloud/jqcloud.css" rel="stylesheet"/>
+    <link href="/common/css/reset.css" rel="stylesheet"/>
+    <link href="/common/css/com.css" rel="stylesheet"/>
+    <link href="/business/user/news/css/NewsDetail.css" rel="stylesheet" />
+</head>
+<body>
+
+<!---------------网页头部start----------------->
+<div id="header" class="header"></div>
+<!---------------网页头部end------------------->
+
+<!---------------网页工具栏(如有)start----------
+<div id="toolbar" class="toolbar"></div>
+!---------------网页工具栏索(如有)end----------->
+
+<!---------------网页主体start----------------->
+<div id="main" class="main  clearfix">
+    <el-row>
+        <el-col :span="6">&nbsp;</el-col>
+        <el-col :span="12">
+            <el-input v-model="search" size="medium"></el-input>
+        </el-col>
+        <el-col :span="6">
+            <el-col :span="2">&nbsp;</el-col>
+            <el-button size="medium" icon="el-icon-search" type="primary" @click="searchReport">搜索</el-button>
+        </el-col>
+    </el-row>
+    <el-row :gutter="30">
+        <el-col :span="16">
+            <div class="row clearfix">
+                <div class="row-l">
+                    <div class="title">速递详情</div>
+                    <div class="content category" style="min-height: 399px;">
+                        <div id="newsTitle">【国家】新闻标题</div>
+                        <div class="newsInfo">来源：娃哈哈</div>
+                        <div class="sp"></div>
+                    </div>
+                </div>
+            </div>
+        </el-col>
+        <el-col :span="8">
+            <el-row>
+                <div class="row clearfix">
+                    <div class="row-l">
+                        <div class="title">速递信息</div>
+                        <div class="content category" style="min-height: 163px;">
+                            <div class="sudiInfo">来源：娃哈哈</div>
+                        </div>
+                    </div>
+                </div>
+            </el-row>
+            <el-row style="margin-top: -9px;">
+                <div class="row clearfix">
+                    <div class="row-l">
+                        <div class="title">关联文档</div>
+                        <div class="content category" style="min-height: 163px;">
+                            关联文档
+                        </div>
+                    </div>
+                </div>
+            </el-row>
+        </el-col>
+    </el-row>
+
+</div>
+<!---------------网页主体end------------------->
+
+<!---------------网页底部start----------------->
+<div id="footer" class="footer"></div>
+<!---------------网页底部end------------------->
+
+</body>
+</html>
+<script src="/frame/jquery/jquery.min.js"></script>
+<script src="/frame/vue/vue.min.js"></script>
+<script src="/frame/elementui/elementui.js"></script>
+<script src="/frame/awaken/awaken.core.js"></script>
+<script src="/frame/awaken/awaken.table.js"></script>
+<script src="/frame/awaken/awaken.tree.js"></script>
+<script src="/frame/awaken/awaken.dialog.js"></script>
+<script src="/frame/awaken/awaken.common.js"></script>
+<script src="/frame/awaken/awaken.util.js"></script>
+<script src="/common/js/com.js"></script>
+<script src="/common/js/common.js"></script>
+<script src="/business/user/news/js/NewsDetail.js"></script>

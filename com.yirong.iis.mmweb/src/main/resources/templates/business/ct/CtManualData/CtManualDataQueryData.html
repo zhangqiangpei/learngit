@@ -1,0 +1,49 @@
+<div id="queryData" class="main">
+	<el-dialog title="查看数据" :visible.sync="dialogVisible" size="large">
+		<!-- 查询条件 -->
+        <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel">
+          	<el-row v-for="(dync,index) in tableSearchModel.dynamicList" v-if="tableSearchModel.dynamicList.length != 0">
+                <el-form-item label="动态条件" prop="field">
+                    <el-select v-model="dync[0]" placeholder="请选择字段" clearable>
+                        <el-option :label="field.fieldName" :value="field.fieldCode" v-for="field in fieldList"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item prop="condition">
+                    <el-select v-model="dync[1]" placeholder="请选择条件" clearable>
+                        <el-option :key="rs.key" :label="rs.label" :value="rs.value" v-for="rs in conditionList"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item prop="queryValue">
+                   	<el-input v-model="dync[2]" placeholder="请输入条件值"></el-input>
+                </el-form-item>
+                <el-form-item prop="buttion">
+                   	<template scope="scope">
+			        	<el-button size="small" type="primary" @click="addCondition(dync)" v-if="dync[3] == true">添加条件</el-button>
+			        	<el-button size="small" type="primary" @click="deleteCondition(index)">删除条件</el-button>
+			      	</template>
+                </el-form-item>
+            </el-row>
+          	<el-row>
+              	<el-form-item>
+                  	<el-button type="primary" @click="searchClick" size="small">查 询</el-button>
+                  	<el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+              	</el-form-item>
+          	</el-row>
+      	</el-form>
+
+		<!-- 数据 -->
+      	<el-table :data="tableData" @sort-change="tableSortChange" @current-change="tableCurrentRowChange"  ref="mytable" stripe border highlight-current-row height="300">
+        	<!-- 动态列 -->
+        	<el-table-column v-for="field in fieldList" :prop="field.fieldCode" sortable="custom" :label="field.fieldName" :formatter="columnFormatter" show-overflow-tooltip></el-table-column>
+      	</el-table>
+
+		<!-- 分页 -->
+      	<el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"
+      		 @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize"  @current-change="tableCurrentChange" layout="total, sizes, prev, pager, next, jumper">
+      	</el-pagination>
+      </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/frame/awaken/awaken.table.field.js"></script>
+<script src="/business/ct/CtManualData/js/CtManualDataQueryData.js"></script>

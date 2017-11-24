@@ -166,15 +166,16 @@
         },
         {
           "id": "82",
-          "name": "在线报告编辑"
+          "name": "在线报告编辑",
+          "url": "business/user/tools/editOnlineReport.html"
         }
       ]
     },
     {
-      "id": "9",
-      "name": "采集管理端",
+       "id": "9",
+      "name": "后台管理",
       "ico": "el-icon-menu",
-      "url": "",
+      "url": "http://127.0.0.1:10180/forward.do?viewPath=common/index.html&iis1",
       "target":"_blank",
       "children": []
     }

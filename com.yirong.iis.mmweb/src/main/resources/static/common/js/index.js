@@ -14,6 +14,7 @@
         applicationIds:'',
         userRoleIds:'',
         applicationId:'',
+        appName:'',
         websocketUtl:null
     },
     methods: {
@@ -69,7 +70,7 @@
         },
         initMenuTop:function(){
         	this.divLeftWidth = $('#left').width();
-        	var sText = '系统管理子系统';
+        	var sText = this.appName;
         	var sHTML = '';
         	sHTML +='<div style="clear:both;height:30px;"><div class="divMenuText">'+sText+'</div>';
         	sHTML +='<div class="divMenuOpt">';
@@ -269,24 +270,29 @@
         //加载头部的各个子项目的链接地址
         loadApps:function(){
 			//加载应用数据
+        	var result = null; 
 			var appData = ak.msService('sys','loginApi/getApp',{appIds : this.applicationIds}); 
-			if(null != appData && appData.code == 0){//操作成功
+			if(null != appData && appData.code == 0){
 				var html = '';
-				$.each(appData.data, function(idx, bean) {
-					if(location.href.indexOf(bean.domain) != -1){
+				for(var i = 0;i<appData.data.length;i++){
+					var bean = appData.data[i];
+					if(this.applicationId ==  bean.id){
+						//返回当前系统信息
+						result = bean;
 						var url = bean.domain + 'forward.do?viewPath=' + bean.custom_index_view;
 						html += '<a href="#" title="'+bean.name+'"  class="cur" >';
 						html += '<img src="'+bean.logo+'" />';
 						html += '</a>';
 					}else{
-						var url = bean.domain + 'forward.do?viewPath=' + bean.custom_index_view+ '&' + bean.id;
+						var url = bean.domain + 'forward.do?viewPath=' + bean.custom_index_view + '&' + bean.id;
 						html += '<a href="'+url+'" title="'+bean.name+'" target="_blank">';
 						html += '<img src="'+bean.logo+'" />';
 						html += '</a>';
 					}
-				});
+				}
 				$("#headDiv").html(html); 
 			}
+			return result;
         },
         //加载菜单
         loadMenu:function(){
@@ -336,36 +342,43 @@
     	var query = location.search.substring(1);  
     	var values= query.split("&"); 
     	this.applicationId = values[1];
- 
+    	//设置全局applicationId
+    	$("#applicationId").val(this.applicationId);
+    	
+    	//01加载登陆用户信息
     	var data = this.loadLoginUser();
 		//用户拥有权限的应用系统
 		this.applicationIds = data.applicationIds;
 		this.loginUser = data.userName;
 		this.userRoleIds = data.userRoleIds
- 
-    	this.loadApps(); 
-		//加载菜单
+		
+		//02加载用户拥有权限的应用系统
+    	var bean = this.loadApps(); 
+		//设置系统名称
+		this.appName = bean.name;
+		
+		//03加载菜单
 		this.menuList = this.loadMenu();
 			
-			
+		//04加载在线用户数
     	this.loadCount();
-    	//导航头部动态加入收缩展开图表
-    	setTimeout(function () {vm.initMenuTop();},100);
-    	//查询未读消息
+    	
+    	//05 查询未读消息
     	var data = this.loadUnreadMsg();
     	if(null != data){
     		this.msgnum = data.totalCount;
     		this.msgData = data.data;
     	}
 		
-		
-    	//消息系统初始化
-		var configJson = ak.msService('sys','sysConfigApi/getWebsocketUrl',null); 
+    	//06消息系统初始化
+    	var configJson = ak.msService('sys','sysConfigApi/getWebsocketUrl',null); 
 		if(null != configJson && configJson.code == 0){//操作成功
 			this.websocketUtl = configJson.data.url;
 			this.initWebSocket();
 		}
     	
+    	//07导航头部动态加入收缩展开图表
+    	setTimeout(function () {vm.initMenuTop();},100);
     }	
 });
  

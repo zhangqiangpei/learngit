@@ -1,5 +1,7 @@
 package com.yirong.iis.tp.tslt.et.service.impl;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,31 +69,34 @@ public class LtEtFieldServiceImpl extends BaseService<LtEtField, String> impleme
 	 */
 	@Override
 	public LtEtField cacheFindByFieldId(String fieldId) {
-		String redisId = "lt" + fieldId;
-		String id = RedisCacheEif.hget(redisId, "id");
-		LtEtField ltEtField = new LtEtField();
-		if (StringUtil.isNotNullOrEmpty(id)) {// 缓存有数据，直接使用缓存
-			ltEtField.setId(id);
-			ltEtField.setFieldCode(RedisCacheEif.hget(redisId, "code"));
-			ltEtField.setFieldDesc(RedisCacheEif.hget(redisId, "desc"));
-			ltEtField.setFieldEnglishDesc(RedisCacheEif.hget(redisId, "englishDesc"));
-			ltEtField.setFieldEnglishName(RedisCacheEif.hget(redisId, "englishName"));
-			ltEtField.setFieldId(RedisCacheEif.hget(redisId, "fieldId"));
-			ltEtField.setFieldName(RedisCacheEif.hget(redisId, "name"));
-			ltEtField.setFieldType(RedisCacheEif.hget(redisId, "type"));
-		} else {
-			ltEtField = this.ltEtFieldDao.findByFieldId(fieldId);
-			if (null != ltEtField) {// 有数据，保存一份至缓存
-				RedisCacheEif.hset(redisId, "id", ltEtField.getId());
-				RedisCacheEif.hset(redisId, "code", ltEtField.getFieldCode());
-				RedisCacheEif.hset(redisId, "englishDesc", ltEtField.getFieldEnglishDesc());
-				RedisCacheEif.hset(redisId, "englishName", ltEtField.getFieldEnglishName());
-				RedisCacheEif.hset(redisId, "fieldId", fieldId);
-				RedisCacheEif.hset(redisId, "name", ltEtField.getFieldName());
-				RedisCacheEif.hset(redisId, "type", ltEtField.getFieldType());
+		synchronized (fieldId) {// 防止多线程并发
+			String redisId = "lt" + fieldId;
+			String id = RedisCacheEif.hget(redisId, "id");
+			LtEtField ltEtField = new LtEtField();
+			if (StringUtil.isNotNullOrEmpty(id)) {// 缓存有数据，直接使用缓存
+				ltEtField.setId(id);
+				Map<String, String> map = RedisCacheEif.hgetall(redisId);
+				ltEtField.setFieldCode(map.get("code"));
+				ltEtField.setFieldDesc(map.get("desc"));
+				ltEtField.setFieldEnglishDesc(map.get("englishDesc"));
+				ltEtField.setFieldEnglishName(map.get("englishName"));
+				ltEtField.setFieldId(map.get("fieldId"));
+				ltEtField.setFieldName(map.get("name"));
+				ltEtField.setFieldType(map.get("type"));
+			} else {
+				ltEtField = this.ltEtFieldDao.findByFieldId(fieldId);
+				if (null != ltEtField) {// 有数据，保存一份至缓存
+					RedisCacheEif.hset(redisId, "code", ltEtField.getFieldCode());
+					RedisCacheEif.hset(redisId, "englishDesc", ltEtField.getFieldEnglishDesc());
+					RedisCacheEif.hset(redisId, "englishName", ltEtField.getFieldEnglishName());
+					RedisCacheEif.hset(redisId, "fieldId", fieldId);
+					RedisCacheEif.hset(redisId, "name", ltEtField.getFieldName());
+					RedisCacheEif.hset(redisId, "type", ltEtField.getFieldType());
+					RedisCacheEif.hset(redisId, "id", ltEtField.getId());// 由于是识别标志，必须放最后SET（防止并发）
+				}
 			}
+			return ltEtField;
 		}
-		return ltEtField;
 	}
 
 }

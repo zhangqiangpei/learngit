@@ -400,16 +400,21 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 		 sql.append("IR.CREATOR AS creator ");
 		 sql.append("FROM IIS_REPORT IR ");
 		 sql.append("WHERE 1=1 ");
-         String insiderReport = environment.getProperty("insider.report");
+         String insiderReport = environment.getProperty("show.insider.report");
          // 是否显示内部报告
-         if (!"1".equals(insiderReport)){
+         if ("1".equals(insiderReport)){
+             if (StringUtil.isNotNullOrEmpty(ue.getIsOutside())){
+                 sql.append("AND IR.TYPE_ID IN (SELECT ID FROM IIS_REPORT_TYPE WHERE IS_OUTSIDE = ? ) ");
+                 param.add(ue.getIsOutside());
+             }
+         } else {
              // 只显示外部报告
              sql.append("AND IR.TYPE_ID IN (SELECT ID FROM IIS_REPORT_TYPE WHERE IS_OUTSIDE = 1) ");
          }
 		 // 创建人
 		 if (StringUtil.isNotNullOrEmpty(ue.getCreator())) {
 			 sql.append("AND IR.CREATOR = ? ");
-			 param.add("%" + ue.getCreator()+"%");
+			 param.add(ue.getCreator());
 		 }
 		 // 类型
          if (StringUtil.isNotNullOrEmpty(ue.getReportName())) {
@@ -492,46 +497,6 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
          logger.info("报告转成docs结束。");
          return reportDocs;
 	 }
-
-    /**
-     * 功能描述：搜索报告
-     *
-     * @author 林明铁
-     *         <p>
-     *         创建时间 ：2017-11-09 10:00:09
-     *         </p>
-     *
-     *         <p>
-     *         修改历史：(修改人，修改时间，修改原因/内容)
-     *         </p>
-     * @return
-     */
-    @Override
-    public Map esSearch(IisReportUserEntity ue, String tokenId) {
-        /** 查询条件 **/
-        List<Where> whereList = new ArrayList<Where>();
-        if (StringUtil.isNotNullOrEmpty(ue.getReportInfo())){
-            Where where = new Where();
-            // 报告内容
-            where.setFieldName(esConstants.CONTENT);
-            where.setFieldValue(ue.getReportInfo());
-            where.setOperationType(EsMatchNames.LIKENC);
-            whereList.add(where);
-        }
-        /** 返回结果 **/
-        EsSelect select = new EsSelect();
-        if (StringUtil.isNotNullOrEmpty(ue.getKeywords())) {
-            select.setKeyword(ue.getKeywords().trim());
-            select.setKeywordFields(new String[]{esConstants.TITLE});
-        }
-        select.setAnalyzer("ik_max_word");
-        select.setIsHighlight(true);
-        select.setIncludes(new String[]{esConstants.TITLE});
-        // 获取数据
-        PageEntiry page = EsClientEif.textSearch(esConstants.INDEX_REPORT_NAME, esConstants.TYPE_REPORT_NAME, ue,
-                whereList, select, esConstants.class);
-        return ResultUtil.newOk("操作成功").setData(page).toMap();
-    }
 
     /**
       * 获取临时文件存放路径

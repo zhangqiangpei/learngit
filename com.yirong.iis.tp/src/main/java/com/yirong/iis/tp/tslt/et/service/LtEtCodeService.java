@@ -20,6 +20,23 @@ import com.yirong.iis.tp.common.entity.LtEtCode;
 public interface LtEtCodeService extends IBaseService<LtEtCode, String> {
 
 	/**
+	 * 功能描述：新增路透编码
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 *         创建时间 ：2017年11月23日 下午8:58:29
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 * @param ltEtCode
+	 *
+	 */
+	LtEtCode doLtEtCode(String code, String pcode, boolean isLink);
+
+	/**
 	 * 功能描述：根据路透编码获取代码信息（缓存）
 	 *
 	 * @author 刘捷(liujie)
@@ -37,20 +54,20 @@ public interface LtEtCodeService extends IBaseService<LtEtCode, String> {
 	LtEtCode cacheFindByRicCode(String ricCode);
 
 	/**
-	 * 功能描述：查询所有编码信息
+	 * 功能描述：根据代码类型获取代码信息
 	 *
 	 * @author 刘捷(liujie)
 	 *         <p>
-	 * 		创建时间 ：2017年11月22日 下午8:41:19
+	 *         创建时间 ：2017年11月22日 下午8:41:19
 	 *         </p>
 	 *
 	 *         <p>
-	 * 		修改历史：(修改人，修改时间，修改原因/内容)
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
 	 *
 	 * @return
 	 *
 	 */
-	List<LtEtCode> findAll();
+	List<LtEtCode> findByCodeType(String codeType);
 
 }

@@ -1,0 +1,54 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div id="update" class="main">
+	<el-dialog title="修改用户" 
+                   :visible.sync="dialogVisible">
+            <el-form :model="updateModel"
+                     :rules="updateRules"
+                     ref="updateModel"
+                     label-width="100px"
+                      >
+                     
+			    <el-form-item label="用户名" prop="userName">
+                    <el-input v-model="updateModel.userName" placeholder="请输入用户名（长度：1-32）" size="small"></el-input>
+                </el-form-item>
+                <el-form-item label="中文名称" prop="userDisplayName">
+                    <el-input v-model="updateModel.userDisplayName" placeholder="请输入中文名称（长度：1-128）" size="small"></el-input>
+                </el-form-item>
+                
+                <el-form-item label="所属机构" prop="organizationName">     
+                   		<el-input v-model="updateModel.organizationName" placeholder="请选择所属机构" :disabled="true" size="small"></el-input>
+                </el-form-item>  
+                
+                <el-form-item label="电话" prop="phone">
+                    <el-input v-model="updateModel.phone" placeholder="请输入电话" size="small"></el-input>
+                </el-form-item>
+                <el-form-item label="邮箱" prop="email">
+                    <el-input v-model="updateModel.email" placeholder="请输入邮箱" size="small"></el-input>
+                </el-form-item>
+               
+                <el-form-item label="地址" prop="userAddress">
+                    <el-input v-model="updateModel.userAddress" placeholder="请输入地址（长度：0-256）" size="small"></el-input>
+                </el-form-item>
+                
+                <el-form-item label="状态" prop="userStatus">
+	                <el-switch v-model="updateModel.userStatus" 
+				      on-text="启用" off-text="禁用"
+					  on-value="000000" off-value="999999" size="small"> 
+					</el-switch>
+         		</el-form-item>
+ 
+                <el-form-item align="center">
+                    <el-button type="primary" @click="updateSubmit" size="small">确定</el-button>
+                    <el-button @click="updateCancel" size="small">取消</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/km/KmTaskManage/js/KmTaskManageUpdate.js"></script>

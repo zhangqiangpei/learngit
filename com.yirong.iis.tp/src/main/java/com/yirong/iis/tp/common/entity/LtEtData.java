@@ -2,6 +2,7 @@ package com.yirong.iis.tp.common.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -56,28 +57,16 @@ public class LtEtData implements Serializable {
 	public String fieldId;
 
 	/**
-	 * 字段中文名称
+	 * 字段类型
 	 */
-	@Column(name = "FIELD_NAME", nullable = false, length = 40)
-	public String fieldName;
+	@Column(name = "FIELD_TYPE", nullable = true, length = 6)
+	public String fieldType;
 
 	/**
-	 * 字段英文名称
+	 * 整型值
 	 */
-	@Column(name = "FIELD_ENGLISH_NAME", nullable = false, length = 40)
-	public String fieldEnglishName;
-
-	/**
-	 * 字段中文描述
-	 */
-	@Column(name = "FIELD_DESC", nullable = true, length = 400)
-	public String fieldDesc;
-
-	/**
-	 * 字段英文描述
-	 */
-	@Column(name = "FIELD_ENGLISH_DESC", nullable = true, length = 400)
-	public String fieldEnglishDesc;
+	@Column(name = "INTGER_VALUE", nullable = true, length = 15)
+	public BigInteger intgerValue;
 
 	/**
 	 * 字符串值
@@ -108,6 +97,14 @@ public class LtEtData implements Serializable {
 	 */
 	@Column(name = "MODIFY_TIME", nullable = true)
 	public Date modifyTime;
+
+	public String getFieldType() {
+		return fieldType;
+	}
+
+	public void setFieldType(String fieldType) {
+		this.fieldType = fieldType;
+	}
 
 	public String getId() {
 		return this.id;
@@ -173,36 +170,11 @@ public class LtEtData implements Serializable {
 		this.modifyTime = modifyTime;
 	}
 
-	public String getFieldName() {
-		return fieldName;
+	public BigInteger getIntgerValue() {
+		return intgerValue;
 	}
 
-	public void setFieldName(String fieldName) {
-		this.fieldName = fieldName;
+	public void setIntgerValue(BigInteger intgerValue) {
+		this.intgerValue = intgerValue;
 	}
-
-	public String getFieldEnglishName() {
-		return fieldEnglishName;
-	}
-
-	public void setFieldEnglishName(String fieldEnglishName) {
-		this.fieldEnglishName = fieldEnglishName;
-	}
-
-	public String getFieldDesc() {
-		return fieldDesc;
-	}
-
-	public void setFieldDesc(String fieldDesc) {
-		this.fieldDesc = fieldDesc;
-	}
-
-	public String getFieldEnglishDesc() {
-		return fieldEnglishDesc;
-	}
-
-	public void setFieldEnglishDesc(String fieldEnglishDesc) {
-		this.fieldEnglishDesc = fieldEnglishDesc;
-	}
-
 }

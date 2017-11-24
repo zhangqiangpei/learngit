@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+		 <!-- 查询条件 -->
+         <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel">
+            <el-row>
+                <el-form-item label="数据库元数据名称" prop="ctDbMetadataName" size="small">
+                    <el-input v-model="ctDbMetadataName" placeholder="请选择" icon="search" :on-icon-click="changeClick" :disabled="true" size="small"></el-input>
+                </el-form-item>
+            </el-row>
+            <!-- <el-row v-for="(dync,index) in tableSearchModel.dynamicList" v-if="tableSearchModel.dynamicList.length != 0">
+                <el-form-item label="动态条件" prop="field">
+                    <el-select v-model="dync[0]" placeholder="请选择字段" clearable>
+                        <el-option :label="field.fieldName" :value="field.fieldCode" v-for="field in fieldList"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item prop="queryValue">
+                   	<el-input v-model="dync[2]" placeholder="请输入条件值"></el-input>
+                </el-form-item>
+                <el-form-item prop="buttion">
+                   	<template scope="scope">
+			        	<el-button size="small" type="primary" @click="addCondition(dync)" v-if="dync[3] == true">添加条件</el-button>
+			        	<el-button size="small" type="danger" @click="deleteCondition(index)">删除条件</el-button>
+			      	</template>
+                </el-form-item>
+            </el-row> -->
+            <el-row>
+                <el-form-item>
+                    <el-button type="primary" @click="searchClick" size="small" name="per_ct_ctdbdata_show">查 询</el-button>
+                    <el-button type="default" @click="psdTableResetCondition" size="small">重 置</el-button>
+                </el-form-item>
+            </el-row>
+        </el-form>
+
+		<!-- 数据 -->
+        <el-table id="tableId" height=100% :data="tableData" @sort-change="tableSortChange" ref="mytable" stripe border>
+           <!-- 动态列 -->
+           <el-table-column v-for="field in fieldList" :prop="field.fieldCode" sortable="custom" :label="field.fieldName" :formatter="columnFormatter">
+            </el-table-column>
+        </el-table>
+
+		<!-- 分页 -->
+        <el-pagination class="pagination"
+                       :current-page="tableSearchModel.currentPage"
+                       :total="tableTotal"
+                        @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize" 
+                       @current-change="tableCurrentChange"
+                       layout="total, sizes, prev, pager, next, jumper">
+        </el-pagination>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/frame/awaken/awaken.table.field.js"></script>
+	<script src="/business/ct/CtDbData/js/CtDbDataMain.js"></script>
+</body>
+</html>

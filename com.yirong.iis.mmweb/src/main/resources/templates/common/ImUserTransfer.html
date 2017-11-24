@@ -1,0 +1,23 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div id="showUser" class="main">
+	<el-dialog title="用户选择器" :visible.sync="dialogVisible">
+		<el-row>
+	        <template>
+				<el-transfer v-model="showUserModel" :data="showUserData" :titles="['未选择用户','已选择用户']"></el-transfer>
+			</template>
+		<el-row>
+		<!-- 按扭区 -->
+        <el-row style="margin-top:10px;text-align:center;">
+        	<el-button type="primary" @click="showUserSubmit">确定</el-button>
+            <el-button @click="showUserCancel">取消</el-button>
+        </el-row>
+     </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/common/js/ImUserTransfer.js"></script>

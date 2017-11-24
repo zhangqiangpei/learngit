@@ -490,7 +490,8 @@ window.z = top.z || {
 
 /********************************************网页公共部分加载start*********************************************************/
 var vm_head = null;
-var vm_toolbar = null;
+var vm_toolbarVue = null;
+var currentUseToolbarVue = null;
 //加载头部导航条,工具栏,网站底部
 $(function() {
     if($('#header').length){
@@ -624,7 +625,8 @@ $(function() {
         sHTML += '    </div>';
         sHTML += '    <div class="toolbar-search fl" id="toolbarSrh">';
         sHTML += '        <el-autocomplete class="inline-input" v-model="keyword" :fetch-suggestions="fnAutoSrh" ';
-        sHTML += '          placeholder="请输入关键字" :trigger-on-focus="false" @select="fnFullTextSrh"><el-button slot="append" icon="el-icon-search"></el-button></el-autocomplete>';
+        sHTML += '          placeholder="请输入关键字" :trigger-on-focus="false" @select="fnFullTextSrh">' +
+            '<el-button slot="append" icon="el-icon-search" @click="searchNews"></el-button></el-autocomplete>';
         sHTML += '        <span class="hotkeyword-tit">搜索热词:</span>';
         sHTML += '        <ul class="hotkeyword-list">';
         sHTML += '            <li v-for="item in hotwords"><a @click="keyword=item.name;fnFullTextSrh()">{{item.name}}</a></li>';
@@ -632,28 +634,41 @@ $(function() {
         sHTML += '    </div>';
         sHTML += '</div>';
         $('#toolbar').html(sHTML);
-        
-        vm_toolbar = new Vue({
+        vm_toolbarVue = new Vue({
             el: '#toolbar',
             data: {
                 defNav:'0',
                 category:[{}],
                 keyword:'',
+                searchNewsResult:null,
                 hotwords:[{name:'美元汇率',id:'1'},{name:'阿根廷大选',id:'2'},{name:'长江基建',id:'3'}]
             },
             methods: {
                 initCategory:function(){
                     if(z.isNullOrEmpty(idx))return;
                     var data = vm_head.$data.menuList;
+                    var result = z.msService("user","sysDictionaryApi/getCodeList",{"code":"024"});
+                    if (result.code === 0){
+                        result = result.data;
+                    }
+                    for (var i = 0; i<result.length; i++){
+                        result[i].name = result[i].label;
+                    }
                     for(var i=0;i<data.length;i++){
                         if(data[i].id==idx){
+                            data[i].children = result;
                             this.category = data[i].children;
                             $('#toolbarTit').html(data[i].name);
                         }
                     }
                 },
+                searchNews:function () {
+                    currentUseToolbarVue.tableSearchModel.keywords = this.keyword;
+                    currentUseToolbarVue.searchClick();
+                },
                 showContentByCategory:function(idx){
-                    alert(this.category[idx].name);
+                    currentUseToolbarVue.tableSearchModel.type = this.category[idx].key;
+                    currentUseToolbarVue.currentNewsTypeName = this.category[idx].name;
                 },
                 fnAutoSrh:function(keyword,cb){
                     cb([{value:'智能匹配结果'},{value:'智能匹配结果'},{value:'智能匹配结果'}]);
@@ -663,10 +678,10 @@ $(function() {
                 }
             },
             mounted: function() {
-                setTimeout(function(){vm_toolbar.initCategory();},100);
+                setTimeout(function(){vm_toolbarVue.initCategory();},100);
             }
         })
-        
+
     }
     
     if($('#footer').length>0){

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>应用管理</title>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+        <el-form :inline="true"
+                  :model="tableSearchModel"
+                  ref="tableSearchModel">
+           	 <el-row>
+           	  <el-form-item label="应用名称" prop="appName">
+                   <el-input v-model="tableSearchModel.appName" placeholder="请输入应用名称" size="small"></el-input>
+               </el-form-item>
+
+                <el-form-item label="应用状态" prop="state">
+                    <el-select v-model="tableSearchModel.state" filterable  placeholder="请选择状态" size="small" >
+                        <!--启用/禁用 下拉框参数(值固定为000000和999999)与新增修改switch开关对应，不自定义值  -->
+                        <el-option  label="启用" value="000000"> </el-option>
+                        <el-option  label="禁用" value="999999"> </el-option>
+                    </el-select>
+                </el-form-item>
+                
+     		<!-- 	<el-form-item label=""  prop="startTime">
+                    <el-date-picker v-model="tableSearchModel.startTime"
+                                    type="date"
+                                    placeholder="选择开始日期">
+                    </el-date-picker>
+                </el-form-item>
+                <el-form-item label="至" prop="endTime">
+                    <el-date-picker v-model="tableSearchModel.endTime"
+                                    type="date"
+                                    placeholder="选择结束日期">
+                    </el-date-picker>
+                </el-form-item> -->
+                
+                <el-form-item>
+                    <el-button type="primary" @click="onSearch" size="small" name="per_km_app_show">查 询</el-button>
+                    <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+                </el-form-item>
+            </el-row>
+              <el-row>
+                  <el-form-item>
+                      <el-button type="primary" @click="addClick"  icon="plus" size="small" name="per_km_app_add">新 增</el-button>
+                      <el-button type="primary" @click="delClick" icon="delete" size="small" name="per_km_app_del">删 除</el-button>
+                  	  <el-button type="warning" @click="addEsIndexClick"   size="small" name="per_km_es_add">创建索引</el-button> 
+                  	  <el-button type="warning" @click="addBucketClick"   size="small" name="per_km_bucket_add">创建桶</el-button>   
+                  </el-form-item>
+              </el-row>
+			</el-form>
+                <el-table :data="tableData"
+                          @sort-change="tableSortChange"
+                          @selection-change="tableChange"
+                          ref="mytable" stripe
+                          border id="tableId" height=100%>
+		              <el-table-column type="selection"
+						               align="center"
+						               width="45">
+		              </el-table-column>
+ 
+                    <el-table-column prop="appName"
+                                     label="应用名称" >
+                    </el-table-column>
+                   
+                   <el-table-column prop="account"
+                                     label="帐号"  >
+                    </el-table-column>
+                   <el-table-column prop="secretKey"
+                                     label="密钥"   >
+                    </el-table-column>
+                    <el-table-column prop="bucket"
+                                     label="桶信息"   >
+                    </el-table-column>
+                    <el-table-column prop="esIndex"
+                                     label="es索引"   >
+                    </el-table-column>
+                    <el-table-column prop="esType"
+                                     label="es类型"   >
+                    </el-table-column>
+   
+                    <el-table-column prop="createTime" sortable="custom"
+                                     label="创建时间" :formatter="formatDate"
+                                     width="180">
+                    </el-table-column>
+                <!--      <el-table-column prop="creator"
+                                     label="创建人" sortable="custom"  > 
+                    </el-table-column>  -->
+
+					<el-table-column prop="state" label="状态"  :formatter="formatSelect" width="100">
+                     	<template scope="scope">
+	                        <el-switch v-model="scope.row.state" @change="onOrOff(scope.row)"
+	                        on-text="启用" off-text="禁用" 
+	                        on-value="000000" off-value="999999"></el-switch>
+		                </template>
+                    </el-table-column>
+                    
+                     <el-table-column label="操作"
+	                             align="center"
+	                             width="100">
+	                	<template scope="scope">
+	                    	<el-button size="small"
+	                               @click="handleEdit(scope.$index, scope.row)" name="per_km_app_edit">编辑</el-button>
+	 
+	               	 	</template>
+	            	</el-table-column> 
+                </el-table>
+
+
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :page-size= "tableSearchModel.pageSize"
+                               :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+            </el-col>
+        </el-row>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/km/KmIntegratetAppCfg/js/KmIntegratetAppCfgMain.js"></script>
+</body>
+</html>

@@ -24,7 +24,7 @@ var mainAttr = {
             }
         } catch (e) {
         }
-        this.tableInit("user","IisUserSearchApi/searchReports");
+        this.tableInit("user","IisEsSearchApi/searchReports");
         this.tableInitSort("createTime", "desc");
         this.searchReport();
     }

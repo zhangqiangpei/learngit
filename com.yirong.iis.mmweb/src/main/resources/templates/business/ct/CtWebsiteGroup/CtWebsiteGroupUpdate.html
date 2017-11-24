@@ -1,0 +1,26 @@
+<div id="update" class="main">
+	<el-dialog title="修改网址组" 
+                   :visible.sync="dialogVisible">
+            <el-form :model="updateModel"
+                     :rules="updateRules"
+                     ref="updateModel"
+                     label-width="100px"
+                      >
+                <el-form-item label="名称" prop="catalogName">
+                   <el-select v-model="updateModel.websiteGroupName" placeholder="请选择爬虫模板" :disabled="true">
+                        <el-option :label="app.spiderName" :value="app.spiderName" v-for="app in appList"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="说明" prop="catalogRemark">
+                    <el-input type="textarea" :rows="2" v-model="updateModel.websiteGroupRemark" placeholder="请输入说明(长度：1-64)"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="updateSubmit" size="small">确定</el-button>
+                    <el-button @click="updateCancel" size="small">取消</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/ct/CtWebsiteGroup/js/CtWebsiteGroupUpdate.js"></script>

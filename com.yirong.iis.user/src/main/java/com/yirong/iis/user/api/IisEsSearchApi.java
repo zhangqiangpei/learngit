@@ -2,8 +2,7 @@ package com.yirong.iis.user.api;
 
 import com.yirong.commons.util.datatype.JsonUtil;
 import com.yirong.commons.util.order.Order;
-import com.yirong.iis.user.service.IisNewsService;
-import com.yirong.iis.user.service.IisReportService;
+import com.yirong.iis.user.service.IisEsSearchService;
 import com.yirong.iis.user.userentity.IisNewsUserEntity;
 import com.yirong.iis.user.userentity.IisReportUserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +29,12 @@ import java.util.Map;
  */
 @SuppressWarnings("rawtypes")
 @Controller
-@RequestMapping("IisUserSearchApi")
+@RequestMapping("IisEsSearchApi")
 @ResponseBody
-public class IisUserSearchApi {
-
-    /**
-     * 文档service注入
-     */
-    @Autowired
-    private IisNewsService iisNewsService;
+public class IisEsSearchApi {
 
     @Autowired
-    private IisReportService iisReportService;
+    private IisEsSearchService iisEsSearchService;
 
     /**
      * 功能描述：搜索新闻
@@ -71,7 +64,7 @@ public class IisUserSearchApi {
         IisReportUserEntity ue = (IisReportUserEntity) JsonUtil.StringToObject(param,
                 IisReportUserEntity.class, calssMap);
         // 处理业务
-        Map map = iisReportService.esSearch(ue, tokenId);
+        Map map = iisEsSearchService.esSearchReport(ue, tokenId);
         return JsonUtil.ObjectToString(map);
     }
 
@@ -103,7 +96,7 @@ public class IisUserSearchApi {
         IisNewsUserEntity ue = (IisNewsUserEntity) JsonUtil.StringToObject(param,
                 IisNewsUserEntity.class, calssMap);
         // 处理业务
-        Map map = iisNewsService.esSearch(ue, tokenId);
+        Map map = iisEsSearchService.esSearchNews(ue, tokenId);
         return JsonUtil.ObjectToString(map);
     }
 }

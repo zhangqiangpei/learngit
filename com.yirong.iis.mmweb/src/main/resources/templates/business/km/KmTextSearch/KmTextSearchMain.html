@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>全文检索</title>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<style>
+.contentdiv {
+	overflow: hidden;
+	max-width: 100%;
+	background-color: #fff;
+	border: 1px solid rgb(223, 234, 236);
+	font-size: 14px;
+	color: rgb(31, 55, 61);
+	padding: 5px 20px 20px 20px;
+	min-height: 100px;
+}
+
+.search-result-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  /*   white-space: nowrap; */
+    font-size:20px;
+    color:#1A1A1A;
+}
+p span{
+	margin-left:5px;
+	font-size:12px;
+}
+
+p{
+	margin-top:5px;
+}
+</style>
+<body>
+	 <div id="main" class="main">
+        <el-form :inline="true"
+                  :model="tableSearchModel"
+                  ref="tableSearchModel">
+                  
+                  <el-form-item label="应用" prop="integratetAppId">
+                    <el-select v-model="tableSearchModel.integratetAppId" filterable  placeholder="请选择应用" @change="" size="small">
+					    <el-option
+					        v-for="item in appsOptions"
+					        :key="item.id"
+					        :label="item.appName"
+					        :value="item.id">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                
+           	 	<el-form-item label="关键字" prop="keyword">
+              	  <el-input v-model="tableSearchModel.keyword" placeholder="请输入关键字" size="small"></el-input>
+            	</el-form-item>
+            	<el-form-item>
+                    <el-button type="primary" @click="onSearch" size="small" >查 询</el-button>
+                    <el-button type="primary" @click="advancedSearch" size="small" >高级搜索</el-button>
+                </el-form-item>
+		</el-form>
+   		
+   		 <el-row class="contentdiv" style="height:450px;position:relative;">
+          	<div id="divcontent" style="height:100%;overflow:hidden;">
+          		<div>
+	           		<div v-for="item in tableData">
+			              <a> 
+			               <span class="search-result-title"  v-if="item.titleNg != '' && item.titleNg != null" v-html="item.titleNg"></span> 
+			               <span class="search-result-title" v-else v-html="item.title"> </span>
+			              </a>
+			              
+			              <p>
+			                <span>上传人：{{ item.creatorName }}</span><span>&nbsp|&nbsp</span>
+			                <span>上传时间：{{ ak.date.format("yyyy-MM-dd hh:mm:ss",item.createTime) }}</span><span>&nbsp|&nbsp</span>
+			                <span>所属分类路径：{{item.classify_path_name}}</span><span>&nbsp|&nbsp</span>
+			                <span>文件类型：{{item.docType}}
+			               <!--  <span>
+			                    <span>权限：{{ item.OpenAuthority  }}</span><span>&nbsp|&nbsp</span>
+			                   
+ 
+			                	<el-button type="primary" @click="onSearch" size="small" >下载</el-button>
+			                	<el-button type="primary" @click="onSearch" size="small" >详情</el-button>
+			 				</span> -->
+			              </p>
+			              <p>   
+			              	  <span v-if="item.contentNg != '' && item.contentNg != null" v-html="item.contentNg"> </span>
+			                  <span v-else  v-html="item.summary"> </span>
+			              </p>
+			               <hr/>
+	        		</div>
+        		</div>
+        	</div>
+      	</el-row>
+ 
+    <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"  @size-change="tableSizeChange"
+                   :page-size="tableSearchModel.pageSize"	@current-change="tableCurrentChange" layout="total, sizes, prev, pager, next, jumper"></el-pagination>
+ 
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/frame/iscroll/iscroll.js"></script>
+	<script src="/business/km/KmTextSearch/js/KmTextSearchMain.js"></script>
+</body>
+</html>
