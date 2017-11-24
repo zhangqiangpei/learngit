@@ -1,4 +1,3 @@
-document.write('<script src="/frame/awaken/awaken.util.js"><\/script>')
 window.z = top.z || {
     // 统一的ajax请求
 	ajax : function(opts) {
@@ -493,7 +492,6 @@ window.z = top.z || {
 var vm_head = null;
 var vm_toolbarVue = null;
 var currentUseToolbarVue = null;
-var util = getUtilMergeAttr({});
 //加载头部导航条,工具栏,网站底部
 $(function() {
     if($('#header').length){
@@ -636,7 +634,7 @@ $(function() {
         sHTML += '    </div>';
         sHTML += '</div>';
         $('#toolbar').html(sHTML);
-        vm_toolbar = {
+        vm_toolbarVue = new Vue({
             el: '#toolbar',
             data: {
                 defNav:'0',
@@ -649,8 +647,10 @@ $(function() {
                 initCategory:function(){
                     if(z.isNullOrEmpty(idx))return;
                     var data = vm_head.$data.menuList;
-                    this.selectInit("user");
-                    var result = this.selectSearch("024");
+                    var result = z.msService("user","sysDictionaryApi/getCodeList",{"code":"024"});
+                    if (result.code === 0){
+                        result = result.data;
+                    }
                     for (var i = 0; i<result.length; i++){
                         result[i].name = result[i].label;
                     }
@@ -680,8 +680,7 @@ $(function() {
             mounted: function() {
                 setTimeout(function(){vm_toolbarVue.initCategory();},100);
             }
-        }
-        vm_toolbarVue = ak.getMergeVue(util, vm_toolbar);
+        })
 
     }
     

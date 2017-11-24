@@ -400,7 +400,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 		 sql.append("IR.CREATOR AS creator ");
 		 sql.append("FROM IIS_REPORT IR ");
 		 sql.append("WHERE 1=1 ");
-         String insiderReport = environment.getProperty("insider.report");
+         String insiderReport = environment.getProperty("show.insider.report");
          // 是否显示内部报告
          if ("1".equals(insiderReport)){
              if (StringUtil.isNotNullOrEmpty(ue.getIsOutside())){
@@ -414,7 +414,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 		 // 创建人
 		 if (StringUtil.isNotNullOrEmpty(ue.getCreator())) {
 			 sql.append("AND IR.CREATOR = ? ");
-			 param.add("%" + ue.getCreator()+"%");
+			 param.add(ue.getCreator());
 		 }
 		 // 类型
          if (StringUtil.isNotNullOrEmpty(ue.getReportName())) {
