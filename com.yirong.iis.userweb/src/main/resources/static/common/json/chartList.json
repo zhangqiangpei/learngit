@@ -5,17 +5,17 @@
     "total": 3,
     "list": [
       {
-        "id": "1",
+        "id": "0",
         "name": "柱状图",
         "icon": "/business/user/tools/css/img/zz.png"
       },
       {
-        "id": "2",
+        "id": "1",
         "name": "折线图",
         "icon": "/business/user/tools/css/img/zx.png"
       },
       {
-        "id": "3",
+        "id": "2",
         "name": "饼图",
         "icon": "/business/user/tools/css/img/bt.png"
       }

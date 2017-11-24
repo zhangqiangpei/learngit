@@ -40,7 +40,6 @@ var cstURL_tabs_more = '';
 var arrTemplate=[
 	{'type':'text', 'title':'文本框', 'norepeat':false},
 	{'type':'table', 'title':'表格', 'norepeat':false},
-	{'type':'list', 'title':'列表','showCount':5, 'keyword':'', 'searchTitle':'', 'norepeat':false},
 	{'type':'chart', 'title':'图表', 'norepeat':false}
 ];
 
@@ -140,17 +139,6 @@ function initHomeDoc(){
 		sHTML+='	</tr>';
 		sHTML+='</table>';
 	}
-	/*
-	sHTML+='<table id="tabMain" style="table-layout:fixed;border:1px dotted #EEEEEE;" width="100%" border="1" cellspacing="0" cellpadding="0">';
-	var arrTem=hJson.cols.split(',')
-	for (var i=0; i<arrTem.length; i++) sHTML+='	<col width="'+arrTem[i]+'">';
-	sHTML+='	<tr valign="top">';
-	for (var i=0; i<arrTem.length; i++){
-		sHTML+='		<td style="min-height:30px;"></td>';
-	}
-	sHTML+='	</tr>';
-	sHTML+='</table>';
-	*/
 
 	_('#divMain').innerHTML=sHTML;
 	//var oTab=_('#tabMain');
@@ -428,7 +416,7 @@ function reloadItem_Text(oDiv,item){
 	var sHTML='';
 	sHTML += getItemHTML_Operation(item);
 	sHTML += getItemHTML_Title(item);
-	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent"></div>';
+	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent">待编辑内容</div>';
     sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
 	HttpToDiv(getItemURL(item),_('#MainIndexItemCnt_'+item.idx));
@@ -439,7 +427,7 @@ function reloadItem_Table(oDiv,item){
 	var sHTML='';
 	sHTML += getItemHTML_Operation(item);
 	sHTML += getItemHTML_Title(item);
-	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent"></div>';
+	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent">待编辑内容</div>';
     sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
 }
@@ -449,7 +437,7 @@ function reloadItem_List(oDiv,item){
 	var sHTML='';
 	sHTML += getItemHTML_Operation(item);
 	sHTML += getItemHTML_Title(item);
-	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent"></div>';
+	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent">待编辑内容</div>';
     sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
 	HttpToDiv(getItemURL(item),_('#MainIndexItemCnt_'+item.idx));
@@ -460,7 +448,7 @@ function reloadItem_Chart(oDiv,item){
 	var sHTML='';
 	sHTML += getItemHTML_Operation(item);
 	sHTML += getItemHTML_Title(item);
-	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent"></div>';
+	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent">待编辑内容</div>';
     sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
 	HttpToDiv(getItemURL(item),_('#MainIndexItemCnt_'+item.idx));
@@ -540,16 +528,47 @@ function fnAfterSaveEdit(){
         _('#miiTitle_'+idx).style.display='';
         
     }
-    //文本框
+    //文本框、表格
 	if (item.type=='text'||item.type=='table'){
         oDiv.innerHTML = vm.curItemCnt;
     }
+    //图表
+    if(item.type=='chart'){
+        vm.dialogEditChartVisible = false;
+        document.getElementById('chartFrame').contentWindow.vm_chart.curStep=0;
+        resizeItemCntHeight(idx);
+        fnShowChart(oDiv,vm.curItemCnt);
+    }
+    resizeOutFrameHeight();
+}
+
+//显示图表
+function fnShowChart(obj,chartData){
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(obj);
+    if(typeof(myChart.clear)=='function')myChart.clear();
+    myChart.setOption(chartData);
+}
+
+//重载图表
+function fnReloadChart(idx){
+    var obj=_('#MainIndexItemCnt_'+idx);
+    var myChart = echarts.getInstanceByDom(obj);
+    myChart.resize();
 }
 
 //重置外层iframe高度
 function resizeOutFrameHeight(){
     top.$('#iframeThematicOpt').parent().height($(document.body).height()+'px');
     top.$('#iframeThematicOpt').height($(document.body).height()+'px');
+}
+
+//重置模块内容区高度
+function resizeItemCntHeight(idx){
+    var oDiv = _('#MainIndexItem_'+idx);
+    var oTit = _('#miiTitle_'+idx);
+    var oCnt = _('#MainIndexItemCnt_'+idx);
+    oCnt.style.height = oDiv.clientHeight - (oTit.style.display == 'none'?0:oTit.clientHeight);
 }
 
 var chaLeft=0;
@@ -634,6 +653,12 @@ function endDrag(){
 	}
 	document.body.appendChild(divIndexItemTemp);
 	divIndexItemTemp.style.display='none';
+    try{
+        var idx = divDragSrc.id.replace(/[^0-9]/ig,"");
+        if(getJsonItem(idx).type=='chart'){
+            fnReloadChart(idx);
+        }
+    }catch(e){}
     resizeOutFrameHeight();
 	saveItemSite();
 	initTemplate_Item();
@@ -727,7 +752,7 @@ function funResizeH(e){
 	var eY=e.clientY;//+15;
     //divResizeItem.style.left=eX+document.body.scrollLeft - chaLeft;
 	divResizeItem.style.top=eY+document.body.scrollTop - chaTop;
-	divResizeSrc.style.height= eY - parseInt(iTop);
+	divResizeSrc.style.minHeight= eY - parseInt(iTop);
 }
 function endResizeH(){
 	if(divResizeItem.releaseCapture)
@@ -736,6 +761,11 @@ function endResizeH(){
 		window.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);
 	document.onmousemove = document.onmouseup = document.onselectstart = null;
 	divResizeItem.style.display='none';
+    var idx = divResizeSrc.id.replace(/[^0-9]/ig,"");
+    if(getJsonItem(idx).type=='chart'){
+        resizeItemCntHeight(idx);
+        fnReloadChart(idx);
+    }
     resizeOutFrameHeight();
 	saveItemSite();
 }

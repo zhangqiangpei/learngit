@@ -3,7 +3,7 @@
     "msg": "获取数据成功",
     "data": [
         {
-            "id":"297e49065d1ca822015d1cde12aa0000",
+            "id":"0",
             "name":"双向柱图",
             "title": {
                 "text": "双向柱图",
@@ -122,28 +122,13 @@
                 }
             ]
         },
+        
         {
-            "title": {
+            "id":"1",
+            "name":"堆叠折线图",
+            "title":{
                 "text": "折线图堆叠",
                 "textStyle":{}
-            },
-            "tooltip": {
-                "trigger": "axis"
-            },
-            "legend": {
-                "data": [
-                    "邮件营销",
-                    "联盟广告",
-                    "视频广告",
-                    "直接访问",
-                    "搜索引擎"
-                ]
-            },
-            "grid": {
-                "left": "3%",
-                "right": "4%",
-                "bottom": "3%",
-                "containLabel": true
             },
             "toolbox": {
                 "show": true,
@@ -155,17 +140,29 @@
                     "saveAsImage" : {"show": false}  
                 }
             },
+            "tooltip": {
+                "trigger": "item"
+            },
+            "legend": {
+                "data": [
+                    "序号",
+                    "成绩"
+                ]
+            },
+            "grid": {
+                "left": "3%",
+                "right": "4%",
+                "bottom": "3%",
+                "containLabel": true
+            },
             "xAxis": {
                 "type": "category",
                 "boundaryGap": false,
                 "data": [
-                    "周一",
-                    "周二",
-                    "周三",
-                    "周四",
-                    "周五",
-                    "周六",
-                    "周日"
+                    "张三",
+                    "李四",
+                    "王五",
+                    "赵六"
                 ]
             },
             "yAxis": {
@@ -173,79 +170,31 @@
             },
             "series": [
                 {
-                    "name": "邮件营销",
+                    "name": "成绩",
                     "type": "line",
-                    "stack": "总量",
+                    "stack": "分数",
                     "data": [
-                        120,
-                        132,
-                        101,
-                        134,
-                        90,
-                        230,
-                        210
+                        100,
+                        69,
+                        88,
+                        91
                     ]
                 },
                 {
-                    "name": "联盟广告",
+                    "name": "序号",
                     "type": "line",
-                    "stack": "总量",
+                    "stack": "序号",
                     "data": [
-                        220,
-                        182,
-                        191,
-                        234,
-                        290,
-                        330,
-                        310
-                    ]
-                },
-                {
-                    "name": "视频广告",
-                    "type": "line",
-                    "stack": "总量",
-                    "data": [
-                        150,
-                        232,
-                        201,
-                        154,
-                        190,
-                        330,
-                        410
-                    ]
-                },
-                {
-                    "name": "直接访问",
-                    "type": "line",
-                    "stack": "总量",
-                    "data": [
-                        320,
-                        332,
-                        301,
-                        334,
-                        390,
-                        330,
-                        320
-                    ]
-                },
-                {
-                    "name": "搜索引擎",
-                    "type": "line",
-                    "stack": "总量",
-                    "data": [
-                        820,
-                        932,
-                        901,
-                        934,
-                        1290,
-                        1330,
-                        1320
+                        1,
+                        5,
+                        2,
+                        8
                     ]
                 }
             ]
         },
         {
-            "id":"297e49065d1ca822015d1cde7c7c0002",
+            "id":"2",
             "name":"传统饼图",
             "title": {
                 "text": "某站点用户访问来源",
@@ -316,76 +265,6 @@
                             "shadowColor": "rgba(0, 0, 0, 0.5)"
                         }
                     }
-                }
-            ]
-        },
-        {
-            "id":"297e49065d0d6997015d0d83eb290000",
-            "name":"堆叠折线图",
-            "title": {
-                "text": "折线图堆叠",
-                "textStyle":{}
-            },
-            "toolbox": {
-                "show": true,
-                "feature": {
-                    "dataView": {
-                        "show":true,
-                        "readOnly": false
-                    },
-                    "saveAsImage" : {"show": false}  
-                }
-            },
-            "tooltip": {
-                "trigger": "item"
-            },
-            "legend": {
-                "data": [
-                    "序号",
-                    "成绩"
-                ]
-            },
-            "grid": {
-                "left": "3%",
-                "right": "4%",
-                "bottom": "3%",
-                "containLabel": true
-            },
-            "xAxis": {
-                "type": "category",
-                "boundaryGap": false,
-                "data": [
-                    "张三",
-                    "李四",
-                    "王五",
-                    "赵六"
-                ]
-            },
-            "yAxis": {
-                "type": "value"
-            },
-            "series": [
-                {
-                    "name": "成绩",
-                    "type": "line",
-                    "stack": "分数",
-                    "data": [
-                        100,
-                        69,
-                        88,
-                        91
-                    ]
-                },
-                {
-                    "name": "序号",
-                    "type": "line",
-                    "stack": "序号",
-                    "data": [
-                        1,
-                        5,
-                        2,
-                        8
-                    ]
                 }
             ]
         }

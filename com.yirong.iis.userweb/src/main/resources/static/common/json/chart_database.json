@@ -1,0 +1,37 @@
+{
+  "code": 0,
+  "msg": "获取数据成功",
+  "data": [
+                {
+                    "id":"1",
+                    "name":"堆叠折线图",
+                    "data":[
+                        {"name":"张三","score":"100","no":"1"},
+                        {"name":"李四","score":"69","no":"5"},
+                        {"name":"王五","score":"88","no":"2"},
+                        {"name":"赵六","score":"91","no":"8"}
+                    ]
+                
+                },
+                {
+                   "id":"0",
+                   "name":"双向柱图",
+                   "data":[
+                        {"date":"周一","profit":"200","income":"320","expenditure":"-120"},
+                        {"date":"周二","profit":"170","income":"302","expenditure":"-132"},
+                        {"date":"周三","profit":"240","income":"341","expenditure":"-101"},
+                        {"date":"周四","profit":"244","income":"374","expenditure":"-134"},
+                        {"date":"周五","profit":"200","income":"390","expenditure":"-190"},
+                        {"date":"周六","profit":"220","income":"450","expenditure":"-230"},
+                        {"date":"周日","profit":"210","income":"420","expenditure":"-210"}
+                    ]
+                },
+                {
+                   "id":"2",
+                   "name":"传统饼图",
+                   "data":[
+                        {"directAccess":"335","emailMarketing":"310","unionAd":"234","videoAd":"135","srhEngine":"1548"}
+                    ]
+                }
+            ]
+}
