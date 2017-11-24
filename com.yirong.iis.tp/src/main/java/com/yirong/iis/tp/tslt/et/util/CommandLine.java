@@ -97,13 +97,15 @@ public class CommandLine {
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
 	 */
-	public CommandLine(String session, String serviceName, String user, String iteamName) {
+	public CommandLine(String session, String serviceName, String user, String iteamName, String eventQueueName) {
 		/** 初始化默认参数 **/
 		options = new HashMap<String, Object>();
 		for (String key : defaultOptions.keySet()) {
 			Object obj = defaultOptions.get(key);
 			options.put(key, obj);
 		}
+		// 与db无关，直接单独添加
+		options.put("eventQueueName", eventQueueName);
 		/** 处理新参数 **/
 		ConfigDb = new ConfigDb();
 		// 处理会话
@@ -138,7 +140,7 @@ public class CommandLine {
 	}
 
 	/**
-	 * 功能描述：获取变量
+	 * 功能描述：获取db变量
 	 *
 	 * @author 刘捷(liujie)
 	 *         <p>
@@ -155,5 +157,25 @@ public class CommandLine {
 	 */
 	public String getVariable(String key) {
 		return ConfigDb.variable(null, key, options.get(key).toString());
+	}
+
+	/**
+	 * 功能描述：获取选项参数
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 *         创建时间 ：2017年11月24日 上午9:00:33
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 * @param key
+	 * @return
+	 *
+	 */
+	public Object getOption(String key) {
+		return options.get(key);
 	}
 }

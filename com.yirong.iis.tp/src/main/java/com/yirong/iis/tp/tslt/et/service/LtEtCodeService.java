@@ -54,7 +54,7 @@ public interface LtEtCodeService extends IBaseService<LtEtCode, String> {
 	LtEtCode cacheFindByRicCode(String ricCode);
 
 	/**
-	 * 功能描述：查询所有编码信息
+	 * 功能描述：根据代码类型获取代码信息
 	 *
 	 * @author 刘捷(liujie)
 	 *         <p>
@@ -68,6 +68,6 @@ public interface LtEtCodeService extends IBaseService<LtEtCode, String> {
 	 * @return
 	 *
 	 */
-	List<LtEtCode> findAll();
+	List<LtEtCode> findByCodeType(String codeType);
 
 }

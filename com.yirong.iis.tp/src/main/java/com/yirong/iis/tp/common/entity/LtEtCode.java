@@ -63,7 +63,7 @@ public class LtEtCode implements Serializable {
 	/**
 	 * 代码名称
 	 */
-	@Column(name = "CODE_NAME", nullable = false, length = 100)
+	@Column(name = "CODE_NAME", nullable = false, length = 200)
 	public String codeName;
 
 	/**

@@ -69,46 +69,47 @@ public class LtEtCodeServiceImpl extends BaseService<LtEtCode, String> implement
 	 */
 	@Override
 	public LtEtCode cacheFindByRicCode(String ricCode) {
-		String redisId = "lt" + ricCode;
-		String id = RedisCacheEif.hget(redisId, "id");
-		LtEtCode ltEtCode = null;
-		if (StringUtil.isNotNullOrEmpty(id)) {// 缓存有数据，直接使用
-			ltEtCode = new LtEtCode();
-			ltEtCode.setId(id);
-			Map<String, String> map = RedisCacheEif.hgetall(redisId);
-			ltEtCode.setRicCode(map.get("code"));
-			ltEtCode.setParentRicCode(map.get("pcode"));
-			ltEtCode.setCodeDesc(map.get("desc"));
-			ltEtCode.setCodeName(map.get("name"));
-			ltEtCode.setCodeType(map.get("codeType"));
-			ltEtCode.setCountryEnglishName(map.get("countryEnglishName"));
-		} else {// 缓存没有数据，需查询数据库
-			ltEtCode = this.ltEtCodeDao.findByRicCode(ricCode);
-			if (null != ltEtCode) {// 数据库有数据，同时保存一份至缓存
-				RedisCacheEif.hset(redisId, "id", ltEtCode.getId());
-				RedisCacheEif.hset(redisId, "code", ricCode);
-				String parentRicCode = ltEtCode.getParentRicCode();
-				if (StringUtil.isNotNullOrEmpty(parentRicCode)) {
-					RedisCacheEif.hset(redisId, "pcode", ltEtCode.getParentRicCode());
+		synchronized (ricCode) {//防止并发
+			String redisId = "lt" + ricCode;
+			String id = RedisCacheEif.hget(redisId, "id");
+			LtEtCode ltEtCode = null;
+			if (StringUtil.isNotNullOrEmpty(id)) {// 缓存有数据，直接使用
+				ltEtCode = new LtEtCode();
+				ltEtCode.setId(id);
+				Map<String, String> map = RedisCacheEif.hgetall(redisId);
+				ltEtCode.setRicCode(map.get("code"));
+				ltEtCode.setParentRicCode(map.get("pcode"));
+				ltEtCode.setCodeDesc(map.get("desc"));
+				ltEtCode.setCodeName(map.get("name"));
+				ltEtCode.setCodeType(map.get("codeType"));
+				ltEtCode.setCountryEnglishName(map.get("countryEnglishName"));
+			} else {// 缓存没有数据，需查询数据库
+				ltEtCode = this.ltEtCodeDao.findByRicCode(ricCode);
+				if (null != ltEtCode) {// 数据库有数据，同时保存一份至缓存
+					RedisCacheEif.hset(redisId, "code", ricCode);
+					String parentRicCode = ltEtCode.getParentRicCode();
+					if (StringUtil.isNotNullOrEmpty(parentRicCode)) {
+						RedisCacheEif.hset(redisId, "pcode", ltEtCode.getParentRicCode());
+					}
+					String desc = ltEtCode.getCodeDesc();
+					if (StringUtil.isNotNullOrEmpty(desc)) {
+						RedisCacheEif.hset(redisId, "desc", desc);
+					}
+					RedisCacheEif.hset(redisId, "name", ltEtCode.getCodeName());
+					RedisCacheEif.hset(redisId, "codeType", ltEtCode.getCodeType());
+					String countryEnglishName = ltEtCode.getCountryEnglishName();
+					if (StringUtil.isNotNullOrEmpty(countryEnglishName)) {
+						RedisCacheEif.hset(redisId, "countryEnglishName", countryEnglishName);
+					}
+					RedisCacheEif.hset(redisId, "id", ltEtCode.getId());// 由于是识别标志，必须放最后SET（防止并发）
 				}
-				String desc = ltEtCode.getCodeDesc();
-				if (StringUtil.isNotNullOrEmpty(desc)) {
-					RedisCacheEif.hset(redisId, "desc", desc);
-				}
-				RedisCacheEif.hset(redisId, "name", ltEtCode.getCodeName());
-				RedisCacheEif.hset(redisId, "codeType", ltEtCode.getCodeType());
-				String countryEnglishName = ltEtCode.getCountryEnglishName();
-				if (StringUtil.isNotNullOrEmpty(countryEnglishName)) {
-					RedisCacheEif.hset(redisId, "countryEnglishName", countryEnglishName);
-				}
-
 			}
+			return ltEtCode;
 		}
-		return ltEtCode;
 	}
 
 	/**
-	 * 功能描述：查询所有编码信息
+	 * 功能描述：根据代码类型获取代码信息
 	 *
 	 * @author 刘捷(liujie)
 	 *         <p>
@@ -123,8 +124,8 @@ public class LtEtCodeServiceImpl extends BaseService<LtEtCode, String> implement
 	 *
 	 */
 	@Override
-	public List<LtEtCode> findAll() {
-		return this.ltEtCodeDao.findAll();
+	public List<LtEtCode> findByCodeType(String codeType) {
+		return this.ltEtCodeDao.findByCodeType(codeType);
 	}
 
 	/**

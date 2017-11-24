@@ -48,7 +48,7 @@ public class DataClient {
 	/**
 	 * 客户端操作类
 	 */
-	private StarterConsumer starterConsumer;
+	private ConsumerClient starterConsumer;
 
 	/**
 	 * 消息操作客户端
@@ -72,7 +72,7 @@ public class DataClient {
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
 	 */
-	public DataClient(StarterConsumer starterConsumer, MsgClient msgClient) {
+	public DataClient(ConsumerClient starterConsumer, MsgClient msgClient) {
 		this.starterConsumer = starterConsumer;
 		this.msgClient = msgClient;
 	}

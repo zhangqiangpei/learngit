@@ -51,7 +51,7 @@ public class MsgClient implements Client {
 	/**
 	 * 客户端操作类
 	 */
-	private StarterConsumer starterConsumer;
+	private ConsumerClient starterConsumer;
 
 	/**
 	 * 配置信息
@@ -85,14 +85,14 @@ public class MsgClient implements Client {
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
 	 */
-	public MsgClient(StarterConsumer starterConsumer) {
+	public MsgClient(ConsumerClient starterConsumer) {
 		this.starterConsumer = starterConsumer;
 		commandLine = starterConsumer.getCommondLine();
 		dataClient = new DataClient(starterConsumer, this);
 	}
 
 	/**
-	 * 功能描述：发送消息
+	 * 功能描述：发送消息（使用锁控制并发）
 	 *
 	 * @author 刘捷(liujie)
 	 *         <p>
@@ -106,7 +106,7 @@ public class MsgClient implements Client {
 	 * @return
 	 *
 	 */
-	public void sendRequest(String itemNameTemp) {
+	public synchronized void sendRequest(String itemNameTemp) {
 		/** 获取参数信息 **/
 		String serviceName = commandLine.getVariable("serviceName");
 		String itemNames = null;
