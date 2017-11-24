@@ -141,7 +141,19 @@ public class IisCompanySurveyServiceImpl extends BaseService<IisCompanySurvey, S
 		return ResultUtil.newOk("操作成功").setData(companySurvey).toMap();
 	}
 
- 
+	/**
+	 * 
+	 * @Title: queryIisCompanySurveyByCompanyId 
+	 * @Description: TODO(根据企业ID查询企业概况表信息) 
+	 * @param companyId
+	 * @return
+	 */
+	@Override
+	public Map queryIisCompanySurveyByCompanyId(String companyId) {
+		IisCompanySurvey companySurvey = this.findByProperty("companyId", companyId);
+		return ResultUtil.newOk("操作成功").setData(companySurvey).toMap();
+	}
+	
 	/**
 	 * 
 	 * @Title: queryIisCompanySurveyList 
@@ -167,5 +179,7 @@ public class IisCompanySurveyServiceImpl extends BaseService<IisCompanySurvey, S
 	 
 		return ResultUtil.newOk("操作成功").setData(pageEntiry).toMap();
 	}
+
+	
 
 }

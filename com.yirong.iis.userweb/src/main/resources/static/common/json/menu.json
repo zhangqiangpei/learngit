@@ -119,7 +119,7 @@
       "id": "6",
       "name": "报告",
       "ico": "el-icon-menu",
-      "url": "",
+      "url": "business/user/company/CompanySurvey.html",
       "children": [
         {
           "id": "61",

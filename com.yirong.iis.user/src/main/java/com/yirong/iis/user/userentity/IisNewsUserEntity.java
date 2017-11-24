@@ -65,6 +65,12 @@ public class IisNewsUserEntity extends PageEntiry implements Serializable {
      * 类型
      */
     private String type;
+    
+	/**
+	* 企业名称
+	*/
+	private String companyName;
+	
     /**
      * 国家英文名称
      */
@@ -253,4 +259,14 @@ public class IisNewsUserEntity extends PageEntiry implements Serializable {
     public void setContinentCode(String continentCode) {
         this.continentCode = continentCode;
     }
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+    
+    
 }
