@@ -5,10 +5,10 @@ import com.yirong.iis.user.userentity.IisReportUserEntity;
 
 import java.util.Map;
 
-/**
+ /**
  * @author MingTie
  * CreateDate：2017/11/24
- * Description：
+ * Description：Es搜索API
  */
 public interface IisEsSearchService {
     /**

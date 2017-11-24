@@ -51,12 +51,12 @@ public class IisEsSearchServiceImpl implements IisEsSearchService {
                     esConstants.COUNTRY_CHN_NAME,esConstants.COUNTRY_ENG_NAME,
                     esConstants.SUMMARY});
         }
-        select.setAnalyzer("ik_max_word");
+//        select.setAnalyzer("ik_max_word");
         select.setIsHighlight(true);
         select.setIncludes(new String[]{esConstants.TITLE, esConstants.TITLE_CN, esConstants.COMPANY_NAME,
                 esConstants.CONTENT,esConstants.CONTENT_CN, esConstants.SUMMARY});
         // 获取数据
-        PageEntiry page = EsClientEif.textSearch(esConstants.INDEX_NEWS_NAME, esConstants.TYPE_NEWS_NAME, ue,
+        PageEntiry page = EsClientEif.textSearch(esConstants.INDEX_NAME, esConstants.TYPE_NAME, ue,
                 whereList, select, esConstants.class);
         return ResultUtil.newOk("操作成功").setData(page).toMap();
     }
@@ -83,8 +83,9 @@ public class IisEsSearchServiceImpl implements IisEsSearchService {
         select.setIsHighlight(true);
         select.setIncludes(new String[]{esConstants.TITLE});
         // 获取数据
-        PageEntiry page = EsClientEif.textSearch(esConstants.INDEX_REPORT_NAME, esConstants.TYPE_REPORT_NAME, ue,
-                whereList, select, esConstants.class);
+        PageEntiry page = null;
+//        EsClientEif.textSearch(esConstants.INDEX_REPORT_NAME, esConstants.TYPE_REPORT_NAME, ue,
+//                whereList, select, esConstants.class);
         return ResultUtil.newOk("操作成功").setData(page).toMap();
     }
 
