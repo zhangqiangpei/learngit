@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yirong.commons.util.datatype.JsonUtil;
+import com.yirong.commons.util.datatype.StringUtil;
 import com.yirong.commons.util.order.Order;
+import com.yirong.iis.user.constant.UserConstants;
 import com.yirong.iis.user.entity.IisCountrySurvey;
 import com.yirong.iis.user.service.IisCountrySurveyService;
 import com.yirong.iis.user.userentity.IisCountrySurveyUserEntity;
@@ -169,7 +171,40 @@ public class IisCountrySurveyApi {
 				.StringToObject(param, IisCountrySurveyUserEntity.class,calssMap);
 		// 处理业务
 		Map map = iisCountrySurveyService.queryIisCountrySurveyList(psue);
-		return JsonUtil.ObjectToString(map);
+		return JsonUtil.ObjectToStringClob(map);
+	}
+	
+	/**
+	 * 满足条件的所有,不分页
+	 * @param paramAll
+	 * @return
+	 */
+	@RequestMapping(value = "queryList", method = RequestMethod.POST)
+	public String queryList(@RequestBody String paramAll) {
+		
+		IisCountrySurveyUserEntity psue = this.getUserEntity(paramAll);
+		
+		// 处理业务
+		Map map = iisCountrySurveyService.queryList(psue);
+		return JsonUtil.ObjectToStringClob(map);
+	}
+	
+	 @SuppressWarnings("rawtypes")
+	private IisCountrySurveyUserEntity getUserEntity(String context){
+		// 获取参数信息
+		String param =  JsonUtil.getJsonStrByAttrName(context,UserConstants.API_PARAM_NAME);
+		
+		 // 定义转换对象属性类
+	    Map<String, Class> calssMap = new HashMap<String, Class>();
+	    calssMap.put("orders", Order.class);
+	  
+	    IisCountrySurveyUserEntity para = null;
+		if(StringUtil.isNotNullOrEmpty(param)){
+			para  = (IisCountrySurveyUserEntity) JsonUtil.StringToObject(param, IisCountrySurveyUserEntity.class,calssMap);
+		}else{
+			para = new IisCountrySurveyUserEntity();
+		}
+		return para;
 	}
 
 }

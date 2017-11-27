@@ -89,12 +89,12 @@ public class UserInitServiceRunner implements CommandLineRunner {
 			String account = map.get("awaken.username");
 			String secretKey = map.get("awaken.key");
 			AkClient.init(url, serviceName, account, secretKey);
-			esConstants.INDEX_NAME = map.get("elasticsearch.newsIndexName");
-			esConstants.TYPE_NAME = map.get("elasticsearch.newsTypeName");
-//			esConstants.INDEX_REPORT_NAME= map.get("elasticsearch.indexReportName");
-//			esConstants.TYPE_REPORT_NAME = map.get("elasticsearch.typeReportName");
+			esConstants.NEWS_INDEX_NAME = map.get("elasticsearch.newsIndexName");
+			esConstants.NEWS_TYPE_NAME = map.get("elasticsearch.newsTypeName");
+			esConstants.REPORT_INDEX_NAME = map.get("elasticsearch.reportIndexName");
+			esConstants.REPORT_TYPE_NAME = map.get("elasticsearch.reportTypeName");
 			logger.info("==============关联服务启动结束===============");		
-		} 
+		}
 		
 		catch (Exception e) {
 			logger.error("关联服务启动异常", e);

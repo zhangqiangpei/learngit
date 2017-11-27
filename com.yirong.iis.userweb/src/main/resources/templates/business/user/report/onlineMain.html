@@ -25,10 +25,10 @@
 <!---------------网页主体start----------------->
 <div id="main" class="main  clearfix">
     <el-row>
-        <el-col :span="19">&nbsp;</el-col>
+        <el-col :span="19">内部报告 > {{reportData.reportName}}</el-col>
         <el-col :span="5">
-            <el-button v-if="!isFavorite" @click="addFavorite" type="primary" size="small" icon="el-icon-star-on">&emsp;收&emsp;藏</el-button>
-            <el-button v-else @click="cancelFavorite" type="primary" size="small" icon="el-icon-star-off">取消收藏</el-button>
+            <el-button v-if="!isMyReport" @click="addMyReport" type="primary" size="small" icon="el-icon-star-on">&emsp;收&emsp;藏</el-button>
+            <el-button v-else @click="cancelMyReport" type="primary" size="small" icon="el-icon-star-off">取消收藏</el-button>
             <el-button v-if="!isCare" @click="addCare" type="primary" size="small" icon="el-icon-star-on">&emsp;关&emsp;注</el-button>
             <el-button v-else @click="cancelCare" type="primary" size="small" icon="el-icon-star-off">取消关注</el-button>
         </el-col>

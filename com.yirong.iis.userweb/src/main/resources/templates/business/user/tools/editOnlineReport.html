@@ -33,7 +33,7 @@
             </el-row>
             <el-row style="margin-top: 9px;">
                 <el-table :data="reportTemplateData" border @cell-click="reportTemplateCellClick" :highlight-current-row="true">
-                    <el-table-column prop="TEMPLATENAME" label="我的报告模板"></el-table-column>
+                    <el-table-column show-overflow-tooltip prop="TEMPLATENAME" label="我的报告模板"></el-table-column>
                 </el-table>
             </el-row>
             <el-pagination class="pagination" :current-page="reportTemplateTableSearchModel.currentPage" :total="reportTemplateTableTotal"
@@ -62,7 +62,7 @@
         </el-col>
             <el-col :span="4">
                 <el-table :data="reportData" border @cell-click="reportCellClick" :highlight-current-row="true">
-                <el-table-column prop="REPORTNAME" label="我的报告"></el-table-column>
+                <el-table-column show-overflow-tooltip prop="REPORTNAME" label="我的报告"></el-table-column>
                 </el-table>
                 <el-pagination small class="pagination" :current-page="reportTableSearchModel.currentPage" :total="reportTableTotal"
             :page-size="reportTableSearchModel.pageSize" @current-change="reportTableCurrentChange"

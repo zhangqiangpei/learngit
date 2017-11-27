@@ -52,6 +52,15 @@ public interface IisCompanySurveyService extends IBaseService<IisCompanySurvey, 
 	 * @return Map
 	 */
 	Map queryIisCompanySurveyById(String id);
+	
+	/**
+	 * 
+	 * @Title: queryIisCompanySurveyByCompanyId 
+	 * @Description: TODO(根据企业ID查询企业概况表信息) 
+	 * @param companyId
+	 * @return Map
+	 */
+	Map queryIisCompanySurveyByCompanyId(String companyId);
 
 	/**
 	 * 

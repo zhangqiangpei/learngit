@@ -26,7 +26,7 @@ import java.util.Map;
 @Service("IisEsSearchServiceImpl")
 public class IisEsSearchServiceImpl implements IisEsSearchService {
     /**
-     * 功能描述：搜索
+     * 功能描述：搜索新闻
      *
      * @author 林明铁
      *         <p>
@@ -46,21 +46,58 @@ public class IisEsSearchServiceImpl implements IisEsSearchService {
         EsSelect select = new EsSelect();
         if (StringUtil.isNotNullOrEmpty(ue.getKeywords())) {
             select.setKeyword(ue.getKeywords().trim());
-            select.setKeywordFields(new String[]{esConstants.TITLE, esConstants.TITLE_CN,esConstants.TITLE_EN,
-                    esConstants.CONTENT, esConstants.CONTENT_CN,esConstants.CONTENT_EN,
-                    esConstants.COUNTRY_CHN_NAME,esConstants.COUNTRY_ENG_NAME,
-                    esConstants.SUMMARY});
+            select.setKeywordFields(new String[]{esConstants.SUMMARY});
         }
 //        select.setAnalyzer("ik_max_word");
         select.setIsHighlight(true);
-        select.setIncludes(new String[]{esConstants.TITLE, esConstants.TITLE_CN, esConstants.COMPANY_NAME,
-                esConstants.CONTENT,esConstants.CONTENT_CN, esConstants.SUMMARY});
+        select.setIncludes(new String[]{esConstants.TITLE, esConstants.TITLE_CN, esConstants.TITLE_EN,
+                esConstants.COMPANY_NAME, esConstants.SUMMARY,esConstants.SOURCE,
+                esConstants.RELEASE_TIME,esConstants.NEWS_TYPE,esConstants.COUNTRY_CHN_NAME,
+        esConstants.COUNTRY_ENG_NAME});
         // 获取数据
-        PageEntiry page = EsClientEif.textSearch(esConstants.INDEX_NAME, esConstants.TYPE_NAME, ue,
-                whereList, select, esConstants.class);
+        PageEntiry page = EsClientEif.textSearch(esConstants.NEWS_INDEX_NAME, esConstants.NEWS_TYPE_NAME, ue,
+                whereList, select);
         return ResultUtil.newOk("操作成功").setData(page).toMap();
     }
 
+
+    /**
+     * 功能描述：根据ID搜索新闻
+     *
+     * @author 林明铁
+     *         <p>
+     *         创建时间 ：2017-11-09 10:00:09
+     *         </p>
+     *
+     *         <p>
+     *         修改历史：(修改人，修改时间，修改原因/内容)
+     *         </p>
+     * @return
+     */
+    @Override
+    public Map getNewsById(String id) {
+        if (StringUtil.isNotNullOrEmpty(id)){
+            Map<String, Object> news =
+                    EsClientEif.getById(esConstants.NEWS_INDEX_NAME, esConstants.NEWS_TYPE_NAME, id);
+            return ResultUtil.newOk("操作成功").setData(news).toMap();
+        } else {
+            return ResultUtil.newError("传入的新闻ID为空").toMap();
+        }
+    }
+
+    /**
+     * 功能描述：搜索报告
+     *
+     * @author 林明铁
+     *         <p>
+     *         创建时间 ：2017-11-09 10:00:09
+     *         </p>
+     *
+     *         <p>
+     *         修改历史：(修改人，修改时间，修改原因/内容)
+     *         </p>
+     * @return
+     */
     @Override
     public Map esSearchReport(IisReportUserEntity ue, String tokenId) {
         /** 查询条件 **/
@@ -84,8 +121,8 @@ public class IisEsSearchServiceImpl implements IisEsSearchService {
         select.setIncludes(new String[]{esConstants.TITLE});
         // 获取数据
         PageEntiry page = null;
-//        EsClientEif.textSearch(esConstants.INDEX_REPORT_NAME, esConstants.TYPE_REPORT_NAME, ue,
-//                whereList, select, esConstants.class);
+        EsClientEif.textSearch(esConstants.REPORT_INDEX_NAME, esConstants.REPORT_TYPE_NAME, ue,
+                whereList, select);
         return ResultUtil.newOk("操作成功").setData(page).toMap();
     }
 

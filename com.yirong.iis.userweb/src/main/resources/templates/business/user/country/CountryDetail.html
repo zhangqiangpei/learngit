@@ -30,7 +30,7 @@
                         <span>{{item.name}}</span>
                     </template>
                     <el-menu-item-group>
-                        <el-menu-item v-for="subItem in item.children" :index="subItem.id" :key="item.id" :id="'item_'+subItem.id" @click="loadPageToIFrame(subItem.name)" >
+                        <el-menu-item v-for="subItem in item.children" :index="subItem.id" :key="item.id" :id="'item_'+subItem.id" @click="loadPageToIFrame(subItem.url)" >
                             {{subItem.name}}
                         </el-menu-item>
                     </el-menu-item-group>
@@ -50,18 +50,17 @@
                 国家导航
             </div>
             <div class="nav-search">
-                <el-input placeholder="请输入国家" suffix-icon="el-icon-search" :on-icon-click="fnSrhCountry" v-model="countryName">
-                </el-input>
+                <el-input v-model="countryName" placeholder="请输入国家" suffix-icon="el-icon-search" :on-icon-click="querySerch" ></el-input>
             </div>
             <div class="nav-select">
-                <el-select v-model="defContinent" placeholder="请选择">
+                <el-select v-model="defContinent" placeholder="请选择" @change="continentChange">
                     <el-option  v-for="item in continentList"  :key="item.id" :label="item.name"  :value="item.id">
                     </el-option>
                 </el-select>
             </div>
             <div class="nav-list">
                 <ul>
-                    <li v-for="item in countryList"><a>{{item.name}}</a></li>
+                    <li v-for="item in countryList"><a style="font-family: PingFangSC-Regular, ">{{item.chineseName}}</a></li>
                 </ul>
             </div>
         </div>
@@ -73,10 +72,12 @@
     <!---------------网页底部end------------------->
     
 </body>
-</html>
 <script src="/frame/jquery/jquery.min.js"></script>
 <script src="/frame/vue/vue.min.js"></script>
 <script src="/frame/elementui/elementui.js"></script>
+<script src="/frame/awaken/awaken.core.js"></script>
+<script src="/frame/awaken/awaken.common.js"></script>
 <script src="/frame/awaken/awaken.util.js"></script>
 <script src="/common/js/com.js"></script>
 <script src="/business/user/country/js/CountryDetail.js"></script>
+</html>

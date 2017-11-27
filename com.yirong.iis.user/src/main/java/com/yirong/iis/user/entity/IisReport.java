@@ -63,6 +63,12 @@ public class IisReport implements Serializable {
 	*/
 	@Column(name="KM_ID",nullable=true,length=32)
 	public String kmId;
+
+	 /**
+	  * 分类名称
+	  */
+	 @Column(name="REPORT_SOURCE",nullable=false,length=200)
+	 public String reportSource;
 	
 	/**
 	* 文件ID
@@ -101,7 +107,16 @@ public class IisReport implements Serializable {
 	public void setId (String id){
 		this.id=id;
 	}
-	public String getTypeId(){
+
+	 public String getReportSource() {
+		 return reportSource;
+	 }
+
+	 public void setReportSource(String reportSource) {
+		 this.reportSource = reportSource;
+	 }
+
+	 public String getTypeId(){
 		return this.typeId;
 	}
 		

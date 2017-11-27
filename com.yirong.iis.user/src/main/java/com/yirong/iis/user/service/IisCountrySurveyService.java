@@ -101,4 +101,6 @@ public interface IisCountrySurveyService extends IBaseService<IisCountrySurvey, 
 	 */
 	Map queryIisCountrySurveyList(IisCountrySurveyUserEntity ue);
 
+	Map queryList(IisCountrySurveyUserEntity psue);
+
 }

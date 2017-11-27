@@ -90,10 +90,29 @@ public class IisCountryInfoServiceImpl extends BaseService<IisCountryInfo, Strin
 			param.add(para.getContinentCode());
 		}
 		// 获取数据
-		PageEntiry pageEntiry = this.findPageSQLMapAdapt(sql.toString(), param,
-				null, para);
+		List<Map<String,Object>> result =   this.exeNativeQueryMap(sql.toString(), param);
 		
-		return ResultUtil.newOk("查询成功!").setData(pageEntiry).toMap();
+		return ResultUtil.newOk("查询成功!").setData(result).toMap();
+	}
+
+	@Override
+	public Map queryIisCountryInfo(IisCountryInfoUserEntity para) {
+		if(StringUtil.isNullOrEmpty(para.getEnglishName()) && StringUtil.isNullOrEmpty(para.getId())){
+			return ResultUtil.newError("参数错误!").toMap();
+		}
+		List<Object> param = new ArrayList<Object>();
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT t.ISO2CODE \"iso2code\",t.ISOCODE \"isocode\",t.ENGLISH_NAME \"englishName\",t.CHINESE_NAME \"chineseName\",t.CONTINENT_CODE \"continentCode\",");
+		sql.append("DATE_FORMAT(t.MODIFY_TIME,'%Y-%m-%d %H:%i:%s') \"modifyTime\",");
+		sql.append(" (SELECT d.NAME FROM SYS_DiCTIONARY d WHERE t.CONTINENT_CODE = d.code) \"continentName\"");
+		sql.append(" FROM IIS_COUNTRY_INFO t ");
+		sql.append("where 1=1 ");
+		if(StringUtil.isNotNullOrEmpty(para.getEnglishName())){
+			sql.append(" and t.ENGLISH_NAME  = ?");
+			param.add(para.getEnglishName());
+		}
+		Map<String,Object> result = this.exeSqlMap(sql.toString(), param);
+		return ResultUtil.newOk("查询成功!").setData(result).toMap();
 	}
 
 	/**

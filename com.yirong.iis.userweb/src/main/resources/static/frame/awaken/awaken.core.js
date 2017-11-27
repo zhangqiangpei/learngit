@@ -16,7 +16,7 @@ window.ak = {
 			// 默认不启用缓存
 			cache : false,
 			// 默认全屏遮盖
-			notice : true
+			notice : false
 		}, opts);
 		// 遮盖
 		if (opts.notice) {
@@ -48,6 +48,7 @@ window.ak = {
 	},
 	// 微服务请求
 	msService : function msService(serviceName, methodName, param) {
+		debugger;
 		var result = null;
 		if(this.isNotNullOrEmpty(param)){
 			param = JSON.stringify(param);

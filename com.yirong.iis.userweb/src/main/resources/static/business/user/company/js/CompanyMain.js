@@ -82,7 +82,8 @@ var mainAttr={
         //跳转到详情页面
         handleClick:function(row){
         	var idx = z.getUrlParam('idx');
-        	window.location.href = "/forward.do?viewPath=business/user/company/CompanyDetail.html&idx="+idx;
+        	var id = row.ID;
+        	window.location.href = "/forward.do?viewPath=business/user/company/CompanyDetail.html&id="+id+"&idx="+idx;
         },
         detalClick:function(row){
         	
@@ -90,14 +91,10 @@ var mainAttr={
         //动态资讯
         getInfoData:function(){
         	//查询后台数据
-        	this.infoSearchModel.orders = [];
-        	this.infoSearchModel.orders.push({
-    			orderField : "createTime",
-    			orderType : "desc"
-    		});
+        	 
         	this.infoSearchModel.pageSize=6;
         	var param = this.infoSearchModel;
-            var result = ak.msService("user", "IisCompanyInformationApi/list",param);
+            var result = ak.msService("user", "IisNewsApi/companyNews",param);
             
             //两条合并一条
             function entity(title1,createTime1,title2,createTime2) //声明对象
@@ -111,8 +108,8 @@ var mainAttr={
         		var data = result.data.data;
         		var title1,tiitle2,createTime1,createTime2;
         		for(var i = 0;i<data.length;i++){
-        			var title = data[i].title;
-        			var createTime = data[i].createTime;
+        			var title = data[i].TITLE;
+        			var createTime = data[i].CREATE_TIME;
         			if(i % 2 == 0){
         				title1 = title;
         				createTime1 = createTime;

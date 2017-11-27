@@ -11,36 +11,38 @@ var mainAttr={
     methods:{
         // 搜索报告
         searchReport:function () {
-            var result = z.msService("user","IisReportTypeApi/listThreeRecord",{reportName:this.search});
-            if (result.code === 0){
-                this.insiderReportList = [];
-                this.externalReportList=[];
-                for (var i = 0; i<result.data.length; i++){
-                    if (result.data[i].IS_OUTSIDE === 0){
-                        this.hasInsiderReport = true;
-                        this.insiderReportList.push(result.data[i]);
-                    } else {
-                        this.hasExternalReport = true;
-                        this.externalReportList.push(result.data[i]);
+            z.msServiceAsync("user","IisReportTypeApi/listThreeRecord",{reportName:mainVue.search},function(result){
+                if (result.code === 0){
+                    mainVue.insiderReportList = [];
+                    mainVue.externalReportList=[];
+                    for (var i = 0; i<result.data.length; i++){
+                        if (result.data[i].IS_OUTSIDE === 0){
+                            mainVue.hasInsiderReport = true;
+                            mainVue.insiderReportList.push(result.data[i]);
+                        } else {
+                            mainVue.hasExternalReport = true;
+                            mainVue.externalReportList.push(result.data[i]);
+                        }
                     }
                 }
-            }
+            });
         }
     },
     mounted:function () {
-        var result = z.msService("user","IisReportTypeApi/listThreeRecord",{typeId:""});
-        if (result.code === 0){
-            this.list = result.data;
-            for (var i = 0; i<result.data.length; i++){
-                if (result.data[i].IS_OUTSIDE === 0){
-                    this.hasInsiderReport = true;
-                    this.insiderReportList.push(result.data[i]);
-                } else {
-                    this.hasExternalReport = true;
-                    this.externalReportList.push(result.data[i]);
+        z.msServiceAsync("user","IisReportTypeApi/listThreeRecord",{typeId:""},function (result) {
+            if (result.code === 0){
+                mainVue.list = result.data;
+                for (var i = 0; i<result.data.length; i++){
+                    if (result.data[i].IS_OUTSIDE === 0){
+                        mainVue.hasInsiderReport = true;
+                        mainVue.insiderReportList.push(result.data[i]);
+                    } else {
+                        mainVue.hasExternalReport = true;
+                        mainVue.externalReportList.push(result.data[i]);
+                    }
                 }
             }
-        }
+        });
         //外部链接传参
         try {
             if (z.isNotNullOrEmpty(z.url().typeId)) {

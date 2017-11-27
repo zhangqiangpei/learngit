@@ -96,7 +96,7 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
 		sql.append("WHERE 1=1 ");
 		// 标准编码
 		if (StringUtil.isNotNullOrEmpty(ue.getTypeName())) {
-			sql.append("AND IRT.TYPE_NAME LIKE ? ");
+			sql.append("AND IRT.NEWS_TYPE_NAME LIKE ? ");
 			param.add("%" + ue.getTypeName() + "%");
 		}
 		// 标准编码
@@ -134,7 +134,7 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
         sql.append("select ID,REPORT_NAME,TYPE_ID,TO_CHAR(CREATE_TIME,'YYYY-MM-DD') AS CREATE_TIME,REPORT_INFO,KM_ID,EOS_ID,rank() over ");
         sql.append("(partition by TYPE_ID order by CREATE_TIME desc) rn FROM IIS_REPORT) temp ");
         sql.append("where rn < 6 ");
-        String insiderReport = environment.getProperty("insider.report");
+        String insiderReport = environment.getProperty("show.insider.report");
         // 是否显示内部报告
         if (!"1".equals(insiderReport)){
             // 只显示外部报告
@@ -154,6 +154,19 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
         return ResultUtil.newOk("操作成功").setData(type).toMap();
 	}
 
+	/**
+	 * 功能描述：获取每个分类的三条记录
+	 *
+	 * @author 林明铁
+	 *         <p>
+	 *         创建时间 ：2017-11-09 10:00:09
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 * @return
+	 */
     @Override
     public Map queryIisReportTypeListThreeRecord(String reportName) {
         // 拼装查询sql
@@ -161,7 +174,7 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
         StringBuffer sql = new StringBuffer();
         sql.append("SELECT ID,IS_OUTSIDE,TYPE_NAME,DOCS_NUM,IS_SYSTEM,CREATE_TIME ");
         sql.append("FROM IIS_REPORT_TYPE WHERE 1=1 ");
-        String insiderReport = environment.getProperty("insider.report");
+        String insiderReport = environment.getProperty("show.insider.report");
         // 是否显示内部报告
         if (!"1".equals(insiderReport)){
             // 只显示外部报告
@@ -174,10 +187,23 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
         return ResultUtil.newOk("操作成功").setData(result).toMap();
     }
 
+    /**
+     * 功能描述：根据分类id获取该分类下的三条记录
+     *
+     * @author 林明铁
+     *         <p>
+     *         创建时间 ：2017-11-09 10:00:09
+     *         </p>
+     *
+     *         <p>
+     *         修改历史：(修改人，修改时间，修改原因/内容)
+     *         </p>
+     * @return
+     */
     private List<Map<String, Object>> getReports(String id, String reportName) {
         List<Object> param = new ArrayList<Object>();
         StringBuffer sql = new StringBuffer();
-	    sql.append("SELECT ID,TYPE_ID,REPORT_NAME,KM_ID,EOS_ID,CREATOR,TO_CHAR(CREATE_TIME,'YYYY-MM-DD') AS CREATE_TIME ");
+	    sql.append("SELECT ID,TYPE_ID,REPORT_SOURCE,REPORT_NAME,KM_ID,EOS_ID,CREATOR,TO_CHAR(CREATE_TIME,'YYYY-MM-DD') AS CREATE_TIME ");
 	    sql.append("FROM IIS_REPORT ");
 	    sql.append("WHERE TYPE_ID = ? ");
 	    param.add(id);

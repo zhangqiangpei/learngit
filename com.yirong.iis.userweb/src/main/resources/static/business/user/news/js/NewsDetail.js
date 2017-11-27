@@ -1,52 +1,65 @@
 var mainAttr={
     el:"#main",
     data:{
-        insiderReportList:[],
-        externalReportList:[],
-        categoryReports:[],
-        hasInsiderReport:false,
-        hasExternalReport:false,
-        search:""
+        newsId:"",
+        news:"",
+        newsType:[],
+        isFavorite:"",
+        myFavorite:{
+            objId:null
+        }
     },
     methods:{
-        // 搜索报告
-        searchReport:function () {
-            var result = z.msService("user","IisReportTypeApi/listThreeRecord",{reportName:this.search});
+        print:function () {
+            
+        },
+        // 添加我的收藏
+        addFavorite:function () {
+            var result = z.msService("user", "IisMyFavoritesApi/save", this.myFavorite);
             if (result.code === 0){
-                this.insiderReportList = [];
-                this.externalReportList=[];
-                for (var i = 0; i<result.data.length; i++){
-                    if (result.data[i].IS_OUTSIDE === 0){
-                        this.hasInsiderReport = true;
-                        this.insiderReportList.push(result.data[i]);
-                    } else {
-                        this.hasExternalReport = true;
-                        this.externalReportList.push(result.data[i]);
-                    }
-                }
+                this.isFavorite = true;
+                z.success(result.msg);
             }
-        }
+        },
+        // 取消收藏
+        cancelFavorite:function () {
+            var result = z.msService("user", "IisMyFavoritesApi/delete", {id: this.newsId});
+            if (result.code === 0){
+                this.isFavorite = false;
+                z.success(result.msg);
+            }
+        },
     },
     mounted:function () {
-        var result = z.msService("user","IisReportTypeApi/listThreeRecord",{typeId:""});
-        if (result.code === 0){
-            this.list = result.data;
-            for (var i = 0; i<result.data.length; i++){
-                if (result.data[i].IS_OUTSIDE === 0){
-                    this.hasInsiderReport = true;
-                    this.insiderReportList.push(result.data[i]);
-                } else {
-                    this.hasExternalReport = true;
-                    this.externalReportList.push(result.data[i]);
-                }
-            }
-        }
         //外部链接传参
         try {
-            if (z.isNotNullOrEmpty(z.url().typeId)) {
-                this.tableSearchModel.typeId = z.url().typeId;
+            var id = z.url().id;
+            if (z.isNotNullOrEmpty(id)) {
+                this.newsId = id;
+                this.myFavorite.objId = id;
             }
         } catch (e) {
+        }
+        var result;
+        result = z.msService("user", "IisEsSearchApi/getReportById", {id:this.newsId});
+        if (result.code === 0){
+            this.news=result.data;
+        }
+        result = z.msService("user", "IisMyFavoritesApi/getByObjIdAndCreator", {id: this.newsId});
+        if (result.code === 0){
+            if (result.data.length === 0){
+                this.isFavorite = false;
+            } else {
+                this.isFavorite = true;
+            }
+        }
+        this.selectInit("user");
+        this.newsTypes = this.selectSearch("024");
+        for (var j = 0; j<this.newsTypes.length; j++){
+            if (this.news.TYPE === this.newsTypes[j].value){
+                this.news.TYPE = this.newsTypes[j].label;
+                break;
+            }
         }
     }
 };

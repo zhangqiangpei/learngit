@@ -37,8 +37,6 @@
     <div class="row clearfix">
     <div class="row-l"  v-if="hasInsiderReport">
         <div class="title">内部报告
-            <!--<a href="/forward.do?viewPath=business/mm/DocWarehouse/DocWarehouseMain.html"-->
-                                   <!--class="more">更多</a>-->
         </div>
         <div class="content category">
             <div class="item" v-for="(item, index) in insiderReportList" style="height: 130px">
@@ -48,7 +46,7 @@
                     </div>
                     <div>
                         <el-row v-for="item1 in item.reports">
-                            <a  :href="'forward.do?viewPath=business/user/report/onlineMain.html&kmId='+item1.KM_ID+'&id='+item1.ID">
+                            <a  :href="'forward.do?viewPath=business/user/report/onlineMain.html&kmId='+item1.KM_ID+'&id='+item1.ID+'&reportName='+item1.REPORT_NAME">
                                 <el-col :span="18">{{item1.REPORT_NAME}}</el-col>
                                 <el-col :span="6">{{item1.CREATE_TIME}}</el-col>
                             </a>
@@ -64,19 +62,18 @@
 
         <div class="row-l"  v-if="hasExternalReport">
             <div class="title">外部报告
-                <!--<a href="/forward.do?viewPath=business/mm/DocWarehouse/DocWarehouseMain.html"-->
-                <!--class="more">更多</a>-->
             </div>
             <div class="content category">
-                <div class="item" v-for="(item, index) in externalReportList" style="height: 130px">
-                    <div class="panel" style="height: 130px">
+                <div class="item" v-for="(item, index) in externalReportList" style="height: 160px">
+                    <div class="panel" >
                         <div class="title">{{item.TYPE_NAME}}<img src="/business/user/index/css/img/u216.svg">
                             <span style="float: right">共{{item.DOCS_NUM}}文档&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         </div>
                         <div>
                             <el-row v-for="item1 in item.reports">
-                                <a  :href="'forward.do?viewPath=business/user/report/onlineMain.html&kmId='+item1.KM_ID+'&id='+item1.ID">
-                                    <el-col :span="18">{{item1.REPORT_NAME}}</el-col>
+                                <a  :href="'forward.do?viewPath=business/user/report/onlineMain.html&kmId='+item1.KM_ID+'&id='+item1.ID+'&reportName='+item1.REPORT_NAME">
+                                    <el-col :span="24">{{item1.REPORT_NAME}}</el-col>
+                                    <el-col :span="18">来源：{{item1.REPORT_SOURCE}}</el-col>
                                     <el-col :span="6">{{item1.CREATE_TIME}}</el-col>
                                 </a>
                             </el-row>

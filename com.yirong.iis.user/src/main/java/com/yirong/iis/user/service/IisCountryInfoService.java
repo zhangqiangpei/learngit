@@ -22,6 +22,8 @@ import com.yirong.iis.user.userentity.IisCountryInfoUserEntity;
 public interface IisCountryInfoService extends IBaseService<IisCountryInfo, String> {
 
 	Map queryList(IisCountryInfoUserEntity para);
+
+	Map queryIisCountryInfo(IisCountryInfoUserEntity para);
 	
 	Map queryCountrys(IisCountryInfoUserEntity para);
 }

@@ -626,7 +626,7 @@ $(function() {
         sHTML += '    <div class="toolbar-search fl" id="toolbarSrh">';
         sHTML += '        <el-autocomplete class="inline-input" v-model="keyword" :fetch-suggestions="fnAutoSrh" ';
         sHTML += '          placeholder="请输入关键字" :trigger-on-focus="false" @select="fnFullTextSrh">' +
-            '<el-button slot="append" icon="el-icon-search" @click="searchNews"></el-button></el-autocomplete>';
+            '<el-button slot="append" icon="el-icon-search" @click="fnFullTextSrh"></el-button></el-autocomplete>';
         sHTML += '        <span class="hotkeyword-tit">搜索热词:</span>';
         sHTML += '        <ul class="hotkeyword-list">';
         sHTML += '            <li v-for="item in hotwords"><a @click="keyword=item.name;fnFullTextSrh()">{{item.name}}</a></li>';
@@ -647,6 +647,7 @@ $(function() {
                 initCategory:function(){
                     if(z.isNullOrEmpty(idx))return;
                     var data = vm_head.$data.menuList;
+                    // 获取新闻类型编码表
                     var result = z.msService("user","sysDictionaryApi/getCodeList",{"code":"024"});
                     if (result.code === 0){
                         result = result.data;
@@ -662,23 +663,33 @@ $(function() {
                         }
                     }
                 },
-                searchNews:function () {
-                    currentUseToolbarVue.tableSearchModel.keywords = this.keyword;
-                    currentUseToolbarVue.searchClick();
-                },
                 showContentByCategory:function(idx){
-                    currentUseToolbarVue.tableSearchModel.type = this.category[idx].key;
-                    currentUseToolbarVue.currentNewsTypeName = this.category[idx].name;
+                    if (null !== currentUseToolbarVue) {
+                        console.log(idx);
+                        console.log(this.category);
+                        // 设置当前选中的类型
+                        currentUseToolbarVue.tableSearchModel.type = this.category[idx].key;
+                        // 设置当前选中的新闻类型名称
+                        currentUseToolbarVue.currentNewsTypeName = this.category[idx].name;
+                        this.fnFullTextSrh();
+                    }
                 },
                 fnAutoSrh:function(keyword,cb){
                     cb([{value:'智能匹配结果'},{value:'智能匹配结果'},{value:'智能匹配结果'}]);
                 },
                 fnFullTextSrh:function(){
-                    alert(this.keyword);
+                    // alert(this.keyword);
+                    if (null !== currentUseToolbarVue) {
+                        currentUseToolbarVue.tableSearchModel.keywords = this.keyword;
+                        if (typeof (currentUseToolbarVue.searchClick) === 'function') {
+                            currentUseToolbarVue.searchClick();
+                        }
+                    }
                 }
             },
             mounted: function() {
                 setTimeout(function(){vm_toolbarVue.initCategory();},100);
+                // this.showContentByCategory(0);
             }
         })
 

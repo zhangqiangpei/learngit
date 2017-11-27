@@ -15,9 +15,13 @@ var mainAttr={
             continentCode:"",
             pageSize: 300
         },
-        currentNewsTypeName:""
+        currentNewsTypeName:"",
+        newsTypes:[]
     },
     methods:{
+        renderHeader:function (createElement, { column }) {
+            return createElement('a', ['新闻 > ' + searchNewsVue.currentNewsTypeName], {});
+        },
         setContinentsCode:function (code) {
             this.tableSearchModel.continentCode = code;
         },
@@ -41,22 +45,34 @@ var mainAttr={
             param.currentPage = 1;
             //查询后台
             this.tableSearch(param);
+            // 新闻类型名称替换新闻类型编码
+            for (var i = 0; i < this.tableData.length; i++){
+                for (var j = 0; j<this.newsTypes.length; j++){
+                    if (this.tableData[i].TYPE === this.newsTypes[j].value){
+                        this.tableData[i].TYPE = this.newsTypes[j].label;
+                        break;
+                    }
+                }
+            }
         },
     },
     mounted:function () {
         // 初始化洲
         this.selectInit("user");
         this.continents = this.selectSearch("021");
+        this.newsTypes = this.selectSearch("024");
         // 初始化国家选项
-        var countryResult = z.msService("user", "IisCountryInfoApi/queryList", this.countriesParam);
-        if (countryResult.code === 0){
-            this.countries = countryResult.data.data;
-        }
+        z.msServiceAsync("user","IisCountryInfoApi/queryList", this.countriesParam, function (result) {
+            if (result.code === 0){
+                searchNewsVue.countries = result.data.data;
+            }
+        });
         //初始化table
         this.tableInit("user", "IisEsSearchApi/searchNews");
         //默认排序
-        this.tableInitSort("release_time", "desc");
+        this.tableInitSort("RELEASE_TIME", "desc");
         this.tableSearch(this.tableSearchModel);
+        this.searchClick();
         currentUseToolbarVue = this;
     }
 };

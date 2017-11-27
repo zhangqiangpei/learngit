@@ -79,7 +79,7 @@ public class IisMyFavoritesServiceImpl extends BaseService<IisMyFavorites, Strin
      * @return
      */
     @Override
-    public Map saveIisMyFavorites(IisMyFavorites iisMyFavorites, String tokenId) {
+    public Map saveIisMyFavorites(IisMyFavorites iisMyFavorites) {
         // 根据编码及分类ID获取数据（唯一键）
         IisMyFavorites iisMyFavoritesTemp = this.iisMyFavoritesDao
                 .findByCreatorAndObjId(iisMyFavorites.getCreator(), iisMyFavorites.getObjId());

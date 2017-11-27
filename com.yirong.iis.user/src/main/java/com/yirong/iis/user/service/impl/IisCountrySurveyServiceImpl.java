@@ -9,12 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.yirong.awaken.core.dao.IBaseDao;
 import com.yirong.awaken.core.service.impl.BaseService;
-import com.yirong.awaken.core.util.BeanUtil;
 import com.yirong.awaken.core.util.ResultUtil;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.commons.util.datatype.StringUtil;
-import com.yirong.commons.util.entity.PageEntiry;
 import com.yirong.commons.util.error.ErrorPromptInfoUtil;
 import com.yirong.iis.user.dao.IisCountrySurveyDao;
 import com.yirong.iis.user.entity.IisCountrySurvey;
@@ -243,6 +241,26 @@ public class IisCountrySurveyServiceImpl extends BaseService<IisCountrySurvey, S
 //		return ResultUtil.newOk("操作成功")
 //				.setData(pageEntiry).toMap();
 		return null;
+	}
+
+	@Override
+	public Map queryList(IisCountrySurveyUserEntity psue) {
+		if(null == psue ){
+			return ResultUtil.newError("参数错误!").toMap();
+		}
+		List<Object> param = new ArrayList<Object>();
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT ID \"id\",COUNTRY_ENG_NAME \"countryEngName\",FIELD_NAME \"fieldName\",FIELD_VALUE \"fieldValue\",DATE_FORMAT(MODIFY_TIME,'%Y-%m-%d %H:%i:%s') \"modifyTime\"");
+		sql.append(" FROM IIS_COUNTRY_SURVEY");
+		sql.append(" WHERE 1=1");
+		if(StringUtil.isNotNullOrEmpty(psue.getCountryEngName())){
+			sql.append(" AND COUNTRY_ENG_NAME = ?");
+			param.add(psue.getCountryEngName());
+		}
+		logger.info("查询成功");
+		List<Map<String,Object>> result =  this.exeNativeQueryMap(sql.toString(), param);
+		
+		return ResultUtil.newOk("查询成功!").setData(result).toMap();	
 	}
 
 }
