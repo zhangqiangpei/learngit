@@ -13,7 +13,9 @@ var vm = new Vue({
 		dataOptions:[{value:'/common/json/grid1.json',label:'国家数据'},{value:'/common/json/grid1.json',label:'企业数据'},{value:'/common/json/grid1.json',label:'项目数据'}],
 		checkedColumns:['id'],
 		columns:[],
-		gridData:[]
+		gridData:[],
+        thematicTit:'',//专题名称
+        thematicItemData:[]//专题模块数据
     },
     methods: {
         saveText:function(){
@@ -78,7 +80,31 @@ var vm = new Vue({
 		},
 		handleCheckedChange:function(){
 			this.handleShowGrid();
-		}
+		},
+        saveThematic:function(){
+            if(z.isNullOrEmpty(this.thematicTit)){
+                z.error('专题名称不能为空！');
+                return;
+            }
+            var param = {};
+            param.thematicName = this.thematicTit;
+            param.thematicLayout = z.Obj2str(hJson);
+            z.msServiceAsync("user", "IisThematicApi/save",param,function(r){
+                if(null != r && r.code == 0){
+                    z.info('保存专题布局成功！');
+                    //保存专题数据
+                    if(vm.thematicItemData.length>0&&z.isNotNullOrEmpty(r.data.id)){
+                        for(var i=0;i<vm.thematicItemData.length;i++){
+                            vm.thematicItemData[i].thematicId = r.data.id;
+                        }
+                            z.msServiceAsync("user", "IisThematicItemApi/saveBatch",{items:z.Obj2str(vm.thematicItemData)},function(r){
+                                if(null != r && r.code == 0)z.info('保存专题数据成功！');
+                        })
+                    }
+        	    }
+            });
+        	
+        }
 	},
     mounted: function () {
     }

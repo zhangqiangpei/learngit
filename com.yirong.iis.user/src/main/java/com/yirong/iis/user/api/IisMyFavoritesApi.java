@@ -108,10 +108,10 @@ public class IisMyFavoritesApi {
     public String delete(@RequestBody String paramAll) {
         // 获取参数信息
         String pathName = "context/id";
-        String objIid = JsonUtil.getJsonStrByAttrName(paramAll, pathName);
+        String objId = JsonUtil.getJsonStrByAttrName(paramAll, pathName);
         String tokenId = JsonUtil.getJsonStrByAttrName(paramAll, "sessionId");
         // 处理业务
-        Map map = iisMyFavoritesService.delIisMyFavorite(objIid.replace("[","").replace("]","").replace("\"",""), tokenId);
+        Map map = iisMyFavoritesService.delIisMyFavorite(objId.replace("[","").replace("]","").replace("\"",""), tokenId);
         return JsonUtil.ObjectToStringClob(map);
     }
 }

@@ -18,10 +18,19 @@
     
 </head>
 
-<body scroll1="auto" style="background: rgb(247, 247, 247)">
+<body scroll1="auto" style="background: rgb(251, 251, 251)">
 	<div id="wrap">
 
         <table id="tabTemplate" style="display:none;margin-bottom:15px;" width="100%" border="0" cellspacing="0" cellpadding="3" class="miiTemplate">
+            <tr>
+                <td colspan="2" class="divTemplateTit">
+                    <div>
+                        <el-input v-model="thematicTit" placeholder="请输入专题名称" size="small" style="width:300px">
+                        </el-input>
+                        <el-button size="small" @click="saveThematic">保存</el-button>
+                    </div>
+                </td>
+            </tr>
             <tr>
                 <td><div id="divTemplate"></div></td>
                 <td width="180">
@@ -96,16 +105,22 @@
 
 
 <script type="text/javascript">
-    var strHomeJSON='{&#34;cols&#34;:&#34;*|260,*,270&#34;,&#34;items&#34;:[{&#34;type&#34;:&#34;text&#34;,&#34;title&#34;:&#34;文本框&#34;,&#34;idx&#34;:1,&#34;col&#34;:0,&#34;row&#34;:0,&#34;tab&#34;:1},{&#34;col&#34;:2,&#34;row&#34;:1,&#34;type&#34;:&#34;chart&#34;,&#34;title&#34;:&#34;图表&#34;,&#34;idx&#34;:3,&#34;tab&#34;:1},{&#34;type&#34;:&#34;table&#34;,&#34;title&#34;:&#34;表格&#34;,&#34;idx&#34;:2,&#34;col&#34;:1,&#34;row&#34;:0,&#34;tab&#34;:1}]}'.replace(/&#34;/img,'"');
-	//strHomeJSON='';
-	//alert(strHomeJSON);
-	if (strHomeJSON==''){
-		strHomeJSON = "{'cols':'*|260,*,260','items':[]}";
+//    var strHomeJSON='{&#34;cols&#34;:&#34;*|260,*,270&#34;,&#34;items&#34;:[{&#34;type&#34;:&#34;text&#34;,&#34;title&#34;:&#34;文本框&#34;,&#34;idx&#34;:1,&#34;col&#34;:0,&#34;row&#34;:0,&#34;tab&#34;:1},{&#34;col&#34;:2,&#34;row&#34;:1,&#34;type&#34;:&#34;chart&#34;,&#34;title&#34;:&#34;图表&#34;,&#34;idx&#34;:3,&#34;tab&#34;:1},{&#34;type&#34;:&#34;table&#34;,&#34;title&#34;:&#34;表格&#34;,&#34;idx&#34;:2,&#34;col&#34;:1,&#34;row&#34;:0,&#34;tab&#34;:1}]}'.replace(/&#34;/img,'"');
+    var hJson;
+    var thematicId = 'ff8080815ffaf883015ffb78f3b0000a';
+    //获取布局数据
+    var result = z.msService("user", "IisThematicApi/get",{id:thematicId});
+    if(null != result && result.code == 0){
+        try{hJson = result.data.thematicLayout;}catch(e){}
+    }
+    
+	if (z.isNullOrEmpty(hJson)){
+		hJson = {cols:'*|260,*,260',items:[]};
 	}
-	var hJson;
-	try{
-		eval('hJson='+strHomeJSON)
-	}catch(e){}
+	
+//	try{
+//		eval('hJson='+strHomeJSON)
+//	}catch(e){}
 	
 	hJson.items.sort(function(a, b){return a.row-b.row});
 

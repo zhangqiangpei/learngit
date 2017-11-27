@@ -3,34 +3,35 @@ var onlineVue = new Vue({
     data:{
         reportData:{
             id:null,
-            kmId:null
+            kmId:null,
+            reportName:null
         },
-        myFavorite:{
+        myReport:{
             objId:null
         },
         myCare:{
             objId:null
         },
-        isFavorite:false,
+        isMyReport:false,
         isCare:false
     },
     methods:{
-        addFavorite:function () {
-            var result = z.msService("user", "IisMyFavoritesApi/save", this.myFavorite);
+        addMyReport:function () {
+            var result = z.msService("user", "IisMyReportApi/save", this.myReport);
             if (result.code === 0){
-                this.isFavorite = true;
+                this.isMyReport = true;
                 z.success(result.msg);
             }
         },
-        cancelFavorite:function () {
-            var result = z.msService("user", "IisMyFavoritesApi/delete", {id: this.reportData.id});
+        cancelMyReport:function () {
+            var result = z.msService("user", "IisMyReportApi/delete", {id: this.reportData.id});
             if (result.code === 0){
-                this.isFavorite = false;
+                this.isMyReport = false;
                 z.success(result.msg);
             }
         },
         addCare:function () {
-            var result = z.msService("user", "IisMyCareApi/save", this.myFavorite);
+            var result = z.msService("user", "IisMyCareApi/save", this.myCare);
             if (result.code === 0){
                 this.isCare = true;
                 z.success(result.msg);
@@ -95,23 +96,27 @@ var onlineVue = new Vue({
             var id = z.url().id;
             if (z.isNotNullOrEmpty(id)) {
                 this.reportData.id = id;
-                this.myFavorite.objId = id;
+                this.myReport.objId = id;
                 this.myCare.objId = id;
             }
             var kmId = z.url().kmId;
             if (z.isNotNullOrEmpty(kmId)) {
                 this.reportData.kmId = kmId;
             }
+            var reportName = z.url().reportName;
+            if (z.isNotNullOrEmpty(reportName)) {
+                this.reportData.reportName = reportName;
+            }
         } catch (e) {
         }
         this.docOnline();
         var result;
-        result = z.msService("user", "IisMyFavoritesApi/getByObjIdAndCreator", {id: this.reportData.id});
+        result = z.msService("user", "IisMyReportApi/getByObjIdAndCreator", {id: this.reportData.id});
         if (result.code === 0){
             if (result.data.length === 0){
-                this.isFavorite = false;
+                this.isMyReport = false;
             } else {
-                this.isFavorite = true;
+                this.isMyReport = true;
             }
         }
         result = z.msService("user", "IisMyCareApi/getByObjIdAndCreator", {id: this.reportData.id});

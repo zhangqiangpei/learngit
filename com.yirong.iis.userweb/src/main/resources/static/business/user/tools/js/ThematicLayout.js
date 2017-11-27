@@ -76,10 +76,6 @@ var arrTemplateLayout_=['20%,*,20%','33%,*,33%','30%,*','25%,25%,25%,*'];
 
 var divIndexItemTemp=null; //占位DIV
 function initHomeDoc(){
-	try{
-		initKabseSetting(settingJSON,'home-document','homeDocument');//初始化arrTemplate
-	}catch(e){}
-	
 	if (typeof(hJson.cols)=='undefined') hJson.cols=arrTemplateLayout[0];
 	if (hJson.cols=='') hJson.cols=arrTemplateLayout[0];
 	//布局属性
@@ -87,7 +83,7 @@ function initHomeDoc(){
 	var sHTML='';
 	for (var i=0; i<arrTemplateLayout_.length; i++){
 		sHTML+='<div onmouseover="this.style.backgroundColor=\'#C6D880\'" onmouseout="this.style.backgroundColor=\'\'" onclick="_(\'#txtPageLayout\').value=\''+arrTemplateLayout[i]+'\';changePageLayout();">';
-		sHTML+='<table BORDER="1" BorderColor="#6699CC" CELLSPACING="0" CELLPADDING="0"><tr>';
+		sHTML+='<table BORDER="1" BorderColor="#409EFF" CELLSPACING="0" CELLPADDING="0"><tr>';
 		if (arrTemplateLayout_[i]=='*|20%,*,20%'){
 				sHTML+='<td colspan="3" height="4px;"></td></tr><tr>';
 				sHTML+='<td width="20%"></td><td></td><td width="20%"></td>';
@@ -155,6 +151,10 @@ function initHomeDoc(){
 	}
 	hJsonIdxMax=hJson.items.length;
 	for (var i=0; i<hJson.items.length; i++) reloadItem(i);
+    
+    //加载各个item内容
+    initItemContent();
+    
 	initTemplate_Item();
 	//alert(Obj2str(hJson))
 }
@@ -419,7 +419,6 @@ function reloadItem_Text(oDiv,item){
 	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent">待编辑内容</div>';
     sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
-	HttpToDiv(getItemURL(item),_('#MainIndexItemCnt_'+item.idx));
 }
 
 //表格
@@ -440,7 +439,24 @@ function reloadItem_List(oDiv,item){
 	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent">待编辑内容</div>';
     sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
-	HttpToDiv(getItemURL(item),_('#MainIndexItemCnt_'+item.idx));
+}
+
+//加载各个item内容
+function initItemContent(){
+    var result = z.msService("user", "IisThematicItemApi/list",{thematicId:thematicId});
+    if(null != result && result.code == 0){
+        var data = result.data.data;
+        if(data.length>0){
+            for(var i=0;i<data.length;i++){
+                var oDiv = _('#MainIndexItemCnt_'+data[i].thematicItemId);
+                if(data[i].type=='chart'){
+                    resizeItemCntHeight(data[i].thematicItemId);
+                    fnShowChart(oDiv,data[i].thematicItemData);
+                }
+                if(data[i].type=='text'||data[i].type=='table')oDiv.innerHTML = data[i].thematicItemData;
+            }
+        }
+    }
 }
 
 //图表
@@ -451,7 +467,6 @@ function reloadItem_Chart(oDiv,item){
 	sHTML += '<div id="MainIndexItemCnt_'+item.idx+'" class="miiContent">待编辑内容</div>';
     sHTML += getItemHTML_ResizeH();
 	oDiv.innerHTML=sHTML;
-	HttpToDiv(getItemURL(item),_('#MainIndexItemCnt_'+item.idx));
 }
 
 //获取URL
@@ -464,26 +479,10 @@ function getMoreURL(item,idx){
 	return z.getURLWithTime(sURL);
 }
 
-function HttpToDiv(sURL,oDiv,isPost){
+function HttpToDiv(){
 	try{
-		var obj = (typeof(oDiv)=='string')?_(oDiv):oDiv;
-		if ((isPost) && (sURL.indexOf('?')>-1)){
-			var oArr='';
-			var strURL=sURL.substr(0,sURL.indexOf('?'));
-			var strParam=sURL.substr(sURL.indexOf('?')+1);
-			var arrTem=strParam.split('&');
-			var arr={};
-			for (var i=0; i<arrTem.length; i++){
-				var sKey=arrTem[i].substr(0,arrTem[i].indexOf('='));
-				var sVal=arrTem[i].substr(arrTem[i].indexOf('=')+1);
-				arr[sKey]=sVal;
-			}
-			jsfw.Ajax.postArrDataHttp(strURL, arr, true, function (r){
-				oDiv.innerHTML = r.responseText;
-			});
-		}else{
-			jsfw.Ajax.loadHttpToObj(sURL,oDiv);
-		}
+		
+		
 	}catch(e){}
 }
 
@@ -528,6 +527,7 @@ function fnAfterSaveEdit(){
         _('#miiTitle_'+idx).style.display='';
         
     }
+    
     //文本框、表格
 	if (item.type=='text'||item.type=='table'){
         oDiv.innerHTML = vm.curItemCnt;
@@ -539,7 +539,29 @@ function fnAfterSaveEdit(){
         resizeItemCntHeight(idx);
         fnShowChart(oDiv,vm.curItemCnt);
     }
+    fnSaveItemData(idx,vm.curItemCnt);
     resizeOutFrameHeight();
+}
+
+//保存专题模块数据
+function fnSaveItemData(idx,itemData){
+    var jo = {};
+    jo.thematicItemId = idx;
+    jo.type = getJsonItem(idx).type;
+    jo.thematicItemData = typeof(itemData)=='String'?itemData:z.Obj2str(itemData);
+    if(vm.thematicItemData.length==0){
+        vm.thematicItemData.push(jo);
+    }else{
+        var cnt = 0;
+        for(var i=0;i<vm.thematicItemData.length;i++){
+            if(vm.thematicItemData[i].thematicItemId == idx){
+                vm.thematicItemData[i].thematicItemData = typeof(itemData)=='String'?itemData:z.Obj2str(itemData);
+                cnt ++;
+                break;
+            }
+        }
+        if(!cnt)vm.thematicItemData.push(jo);
+    }
 }
 
 //显示图表
@@ -568,7 +590,7 @@ function resizeItemCntHeight(idx){
     var oDiv = _('#MainIndexItem_'+idx);
     var oTit = _('#miiTitle_'+idx);
     var oCnt = _('#MainIndexItemCnt_'+idx);
-    oCnt.style.height = oDiv.clientHeight - (oTit.style.display == 'none'?0:oTit.clientHeight);
+    oCnt.style.height = oDiv.clientHeight - (oTit.style.display == 'none'?0:oTit.clientHeight)-26;
 }
 
 var chaLeft=0;
@@ -752,7 +774,7 @@ function funResizeH(e){
 	var eY=e.clientY;//+15;
     //divResizeItem.style.left=eX+document.body.scrollLeft - chaLeft;
 	divResizeItem.style.top=eY+document.body.scrollTop - chaTop;
-	divResizeSrc.style.minHeight= eY - parseInt(iTop);
+	divResizeSrc.style.height= eY - parseInt(iTop);
 }
 function endResizeH(){
 	if(divResizeItem.releaseCapture)

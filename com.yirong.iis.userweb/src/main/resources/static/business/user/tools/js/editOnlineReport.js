@@ -284,6 +284,7 @@ var editOnlineReportVue = new Vue({
         // },
         // 点击导出按钮
         exportClick: function(params){
+            this.report.reportInfo = ue.getContent();
             //定义一个form表单
             var form=$("<form></form>");
             //设置相关属性
@@ -291,7 +292,7 @@ var editOnlineReportVue = new Vue({
             form.attr("target","");
             form.attr("enctype","multipart/form-data");
             form.attr("method","post");
-            form.attr("action","http://10.142.50.100:8080/fileplug/fileConvertApi/htmlToDoc");
+            form.attr("action","http://s02.basin.ali:8080/fileplug/fileConvertApi/htmlToDoc");
             //将表单放置在web中
             $("body").append(form);
             //定义参数
@@ -347,7 +348,7 @@ var editOnlineReportVue = new Vue({
     mounted: function() {
         var result;
         // 初始化报告分类
-        result = z.msService("user","IisReportTypeApi/list",{typeName: ""});
+        result = z.msService("user","IisReportTypeApi/list",{typeName: "",isOutside:0});
         if(result.code === 0){
             this.reportTypeTreeData = result.data;
         }

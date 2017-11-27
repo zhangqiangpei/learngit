@@ -304,9 +304,13 @@
     background-size: 60px;
 }
 
+
 .category {
     padding: 0 20px;
     min-height: 260px;
+}
+.category .el-row{
+    margin-bottom: 6px;
 }
 
 .category .item {

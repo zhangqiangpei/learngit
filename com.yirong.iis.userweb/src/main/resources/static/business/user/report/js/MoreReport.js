@@ -3,8 +3,8 @@ var mainAttr={
     data:{
         typeId:null,
         reportTypeTreeData:[
-            {TYPENAME:"内部报告", ISOUTSIDE:0,children:[]},
-            {TYPENAME:"外部报告", ISOUTSIDE:1,children:[]}
+            {ID:"123",TYPENAME:"内部报告", ISOUTSIDE:0,children:[]},
+            {ID:"456",TYPENAME:"外部报告", ISOUTSIDE:1,children:[]}
         ],
         defaultProps: {
             label: 'TYPENAME',
@@ -13,16 +13,12 @@ var mainAttr={
         reportData:[],
         //查询对象
         tableSearchModel: {
-            isOutside:""
+            isOutside:"",
+            reportName:null
         },
-        searchData:null,
-        search:null
+        searchData:null
     },
     methods:{
-        // 搜索报告
-        searchReport:function () {
-            window.open("forward.do?viewPath=business/user/report/searchResult.html&search=" +this.searchData);
-        },
         // 点击报告分类树
         reportTypeNodeClick:function(data) {
             if (typeof (data.children) === 'undefined'){
@@ -45,7 +41,7 @@ var mainAttr={
         },
         // 在线浏览
         onLineView:function (row) {
-            window.open("forward.do?viewPath=business/user/report/onlineMain.html&kmId=" + row.KMID+"&id=" + row.ID);
+            window.open("forward.do?viewPath=business/user/report/onlineMain.html&kmId=" + row.KMID+"&id=" + row.ID+"&reportName="+row.REPORTNAME);
         }
     },
     mounted:function () {
@@ -55,7 +51,7 @@ var mainAttr={
                 this.tableSearchModel.typeId = z.url().typeId;
             }
         } catch (e) {
-        };
+        }
         var result;
         // 初始化报告分类
         result = z.msService("user","IisReportTypeApi/list",{typeName: ""});

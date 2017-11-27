@@ -394,7 +394,7 @@ public class IisReportServiceImpl extends BaseService<IisReport, String>
 		 sql.append("IR.REPORT_NAME AS reportName,");
 		 sql.append("IR.REPORT_INFO AS reportInfo,");
 		 sql.append("IR.KM_ID AS kmId,");
-		 sql.append("(SELECT NEWS_TYPE_NAME FROM IIS_REPORT_TYPE WHERE ID = IR.TYPE_ID ) AS typeName,");
+		 sql.append("(SELECT TYPE_NAME FROM IIS_REPORT_TYPE WHERE ID = IR.TYPE_ID ) AS typeName,");
 		 sql.append("TO_CHAR(IR.CREATE_TIME, 'YYYY-MM-DD HH24:MI:SS') AS createTime,");
 		 sql.append("IR.EOS_ID AS eosId,");
 		 sql.append("IR.CREATOR AS creator ");
