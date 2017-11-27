@@ -106,8 +106,10 @@ public class IisReportTypeApi {
 	 */
 	@RequestMapping(value = "listThreeRecord", method = RequestMethod.POST)
 	public String listThreeRecord(@RequestBody String paramAll) {
+	    String pathName = "context/reportName";
+	    String reportName = JsonUtil.getJsonStrByAttrName(paramAll, pathName);
 		// 处理业务
-		Map map = iisReportTypeService.queryIisReportTypeListThreeRecord();
+		Map map = iisReportTypeService.queryIisReportTypeListThreeRecord(reportName);
 		return JsonUtil.ObjectToStringClob(map);
 	}
 

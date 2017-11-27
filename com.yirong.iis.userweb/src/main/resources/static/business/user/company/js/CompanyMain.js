@@ -45,16 +45,82 @@ var mainAttr={
                 picker.$emit('pick', [start, end]);
               }
             }]
-          } 
+          } ,
+          
+        //数据
+        inFoData :[],
+        infoSearchModel : {
+			currentPage : 1,
+			pageSize : 20,
+			orders : []
+		} 
     },
     methods:{
         //查询按钮
         searchClick: function () {
+        	if(null != this.startAndEnd){
+        		this.tableSearchModel.startDt = this.startAndEnd[0];
+        		this.tableSearchModel.endDt = this.startAndEnd[1];
+            }
+        	
             var param = this.tableSearchModel;
             // 当前页切换成第一页
             param.currentPage = 1;
+            param.pageSize=10;
+
             //查询后台
             this.tableSearch(param);
+        },
+        
+        //选择洲，改变事件
+        continentChange:function(code){
+        	var res = ak.msService("user", "IisCountryInfoApi/queryCountrys",{continentCode: code});
+        	if(null != res && res.code == 0){
+        		this.countrys = res.data;
+        	}
+        },
+        //跳转到详情页面
+        handleClick:function(row){
+        	var idx = z.getUrlParam('idx');
+        	var id = row.ID;
+        	window.location.href = "/forward.do?viewPath=business/user/company/CompanyDetail.html&id="+id+"&idx="+idx;
+        },
+        detalClick:function(row){
+        	
+        },
+        //动态资讯
+        getInfoData:function(){
+        	//查询后台数据
+        	 
+        	this.infoSearchModel.pageSize=6;
+        	var param = this.infoSearchModel;
+            var result = ak.msService("user", "IisNewsApi/companyNews",param);
+            
+            //两条合并一条
+            function entity(title1,createTime1,title2,createTime2) //声明对象
+        	{
+        	    this.title1 = title1;
+        	    this.createTime1= createTime1;
+        	    this.title2= title2;
+        	    this.createTime2 = createTime2;
+        	}
+        	if(null != result && result.code == 0){
+        		var data = result.data.data;
+        		var title1,tiitle2,createTime1,createTime2;
+        		for(var i = 0;i<data.length;i++){
+        			var title = data[i].TITLE;
+        			var createTime = data[i].CREATE_TIME;
+        			if(i % 2 == 0){
+        				title1 = title;
+        				createTime1 = createTime;
+        			}else{
+        				title2 = title;
+        				createTime2 = createTime;
+        				this.inFoData.push(new entity(title1,createTime1,title2,createTime2));
+        				title1 = null; tiitle2 = null; createTime1 = null; createTime2 = null;
+        			}
+        		}
+        	}
         }
     },
     mounted:function () {
@@ -62,13 +128,17 @@ var mainAttr={
     	this.selectInit("user");
     	//角色类型下拉框数据
     	this.continents = this.selectSearch("021");
-    	
+    	this.industrys = this.selectSearch("022");
+    	this.frequencys = this.selectSearch("023");
     	
         //初始化table
         this.tableInit("user", "IisFinancialOverviewApi/list");
         //默认排序
         this.tableInitSort("O.CREATE_TIME", "desc");
         this.searchClick();
+        
+        //动态资讯
+        this.getInfoData();
     }
 };
 // 添加工具

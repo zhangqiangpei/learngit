@@ -2,6 +2,7 @@ package com.yirong.iis.tp.common.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -64,8 +65,8 @@ public class LtEtData implements Serializable {
 	/**
 	 * 整型值
 	 */
-	@Column(name = "INTGER_VALUE", nullable = true, length = 10)
-	public Integer intgerValue;
+	@Column(name = "INTGER_VALUE", nullable = true, length = 15)
+	public BigInteger intgerValue;
 
 	/**
 	 * 字符串值
@@ -169,11 +170,11 @@ public class LtEtData implements Serializable {
 		this.modifyTime = modifyTime;
 	}
 
-	public Integer getIntgerValue() {
+	public BigInteger getIntgerValue() {
 		return intgerValue;
 	}
 
-	public void setIntgerValue(Integer intgerValue) {
+	public void setIntgerValue(BigInteger intgerValue) {
 		this.intgerValue = intgerValue;
 	}
 }

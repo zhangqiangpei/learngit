@@ -134,5 +134,22 @@ public class IisCompanySurveyApi {
 		Map map = iisCompanySurveyService.queryIisCompanySurveyList(psue);
 		return JsonUtil.ObjectToString(map);
 	}
+	
+	/**
+	 * 
+	 * @Title: get 
+	 * @Description: TODO(根据ID查询企业概况表信息) 
+	 * @param paramAll
+	 * @return String
+	 */
+	@RequestMapping(value = "getByCompanyId", method = RequestMethod.POST)
+	public String getByCompanyId(@RequestBody String paramAll) {
+		// 获取参数信息
+		String pathName = "context/companyId";
+		String companyId = JsonUtil.getJsonStrByAttrName(paramAll, pathName);
+		// 处理业务
+		Map map = iisCompanySurveyService.queryIisCompanySurveyByCompanyId(companyId);
+		return JsonUtil.ObjectToString(map);
+	}
 
 }

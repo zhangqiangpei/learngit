@@ -1,10 +1,14 @@
 package com.yirong.iis.tp.tslt.et.service.impl;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +67,11 @@ public class LtEtDataServiceImpl extends BaseService<LtEtData, String> implement
 	private LtEtFieldService ltEtFieldService;
 
 	/**
+	 * 公式执行器
+	 */
+	private ScriptEngine jse = new ScriptEngineManager().getEngineByName("JavaScript");
+
+	/**
 	 * 功能描述：获取dao操作类
 	 * 
 	 * @author
@@ -100,8 +109,7 @@ public class LtEtDataServiceImpl extends BaseService<LtEtData, String> implement
 				// 获取基本信息
 				LtEtCode ltEtCode = ltEtCodeService.cacheFindByRicCode(ue.getRicCode());
 				LtEtField ltEtField = ltEtFieldService.cacheFindByFieldId(String.valueOf(ue.getFleldId()));
-				if (null == ltEtCode || null == ltEtField) {
-					logger.error("ltEtCode或者ltEtField为空，ricCode:" + ue.getRicCode() + ",fleldId:" + ue.getFleldId());
+				if (null == ltEtField) {// 多出来的字段为冗余字段，跟本系统无关
 					continue;
 				}
 				// 从数据库获取数据
@@ -111,36 +119,57 @@ public class LtEtDataServiceImpl extends BaseService<LtEtData, String> implement
 					ltEtData.setCodeId(ltEtCode.getId());
 					ltEtData.setFieldId(ltEtField.getId());
 				}
-				// 处理数据值
-				if (StringUtil.isNotNullOrEmpty(ue.getValue())) {
+				// 处理值
+				String value = ue.getValue();
+				if (StringUtil.isNotNullOrEmpty(value) && StringUtil.isNotNullOrEmpty(value.trim())
+						&& !"null".equals(value)) {// 对方程序有时候回放回NULL字符串，需特殊处理（有值的字段才保存）
 					// 判断类型
 					String code = LtEtConstant.FIELD_TYPE_MAP.get(ltEtField.getFieldType());
 					ltEtData.setFieldType(code);
 					// 处理数据
 					switch (code) {
 					case "017001":// 字符型
-						ltEtData.setStringValue(ue.getValue());
+						ltEtData.setStringValue(value);
 						break;
 					case "017002":// 整型
-						ltEtData.setIntgerValue(Integer.valueOf(ue.getValue()));
+						ltEtData.setIntgerValue(BigInteger.valueOf(Long.valueOf(value)));
 						break;
 					case "017004":// date型
 						SimpleDateFormat sdf = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH);
 						try {
-							ltEtData.setDateValue(sdf.parse(ue.getValue()));
-						} catch (ParseException e) {
-							logger.error("时间转换异常", e);
+							ltEtData.setDateValue(sdf.parse(value));
+						} catch (ParseException e) {// 无法转换（例子： Nov 2017）
+							logger.info("时间转换异常", e);
+							sdf = new SimpleDateFormat("MMM yyyy", Locale.ENGLISH);
+							try {
+								ltEtData.setDateValue(sdf.parse(value));
+							} catch (Exception e2) {// 2次均无法转换，保存为字符串
+								logger.info("时间2转换失败，保存为字符串", e2);
+								ltEtData.setFieldType("017001");
+								ltEtData.setStringValue(value);
+							}
 						}
 						break;
 					case "017005":// 浮点型
-						ltEtData.setFloatValue(new BigDecimal(ue.getValue()));
+						try {
+							ltEtData.setFloatValue(new BigDecimal(value));
+						} catch (Exception e) {// 无法转换（例子：-32/256）
+							logger.error("float转换异常");
+							try {
+								ltEtData.setFloatValue(new BigDecimal(String.valueOf(jse.eval(value))));
+							} catch (Exception e2) {
+								logger.info("float2转换失败，保存为字符串", e2);
+								ltEtData.setFieldType("017001");
+								ltEtData.setStringValue(value);
+							}
+						}
 						break;
 					default:// 无任何匹配，直接存入String
-						ltEtData.setStringValue(ue.getValue());
+						ltEtData.setStringValue(code + "   " + value);
 						break;
 					}
+					this.save(ltEtData);
 				}
-				this.save(ltEtData);
 			}
 		}
 	}

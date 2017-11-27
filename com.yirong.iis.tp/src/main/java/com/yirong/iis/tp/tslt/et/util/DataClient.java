@@ -23,6 +23,7 @@ import com.reuters.rfa.omm.OMMVector;
 import com.reuters.rfa.omm.OMMVectorEntry;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
+import com.yirong.iis.tp.tslt.et.ief.LtEtIef;
 import com.yirong.iis.tp.tslt.et.userentity.LtEtDataUserEntity;
 
 /**
@@ -47,7 +48,12 @@ public class DataClient {
 	/**
 	 * 客户端操作类
 	 */
-	private StarterConsumer starterConsumer;
+	private ConsumerClient starterConsumer;
+
+	/**
+	 * 消息操作客户端
+	 */
+	private MsgClient msgClient;
 
 	/**
 	 * 分页信息
@@ -66,8 +72,9 @@ public class DataClient {
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
 	 */
-	public DataClient(StarterConsumer starterConsumer) {
+	public DataClient(ConsumerClient starterConsumer, MsgClient msgClient) {
 		this.starterConsumer = starterConsumer;
+		this.msgClient = msgClient;
 	}
 
 	/**
@@ -203,11 +210,29 @@ public class DataClient {
 				}
 				if (data.getType() != OMMTypes.ENUM) {
 					LtEtDataUserEntity ue = new LtEtDataUserEntity();
-					ue.setFleldId(fiddef.getFieldId());
+					short fieldId = fiddef.getFieldId();
+					ue.setFleldId(fieldId);
 					ue.setRicCode(itemName);
 					Object obj = doData(data, itemName);
 					if (null != obj) {
-						ue.setValue(doData(data, itemName).toString());
+						String value = doData(data, itemName).toString();
+						ue.setValue(value);
+						// 如果是链代码，子数据每次返回14条且有下一页链代码标识，需将14条子数据及链代码发送请求获取数据
+						if (fieldId >= 800 && fieldId <= 815 && fieldId != 814) {// 第一种获取方式
+							if (fieldId == 815) {// 链代码
+								LtEtIef.doLtEtCode(value, itemName, true);
+							} else {
+								LtEtIef.doLtEtCode(value, itemName, false);
+							}
+							msgClient.sendRequest(value);
+						} else if (fieldId >= 238 && fieldId <= 253 && fieldId != 239) {// 第两种获取方式
+							if (fieldId == 238) {// 链代码
+								LtEtIef.doLtEtCode(value, itemName, true);
+							} else {
+								LtEtIef.doLtEtCode(value, itemName, false);
+							}
+							msgClient.sendRequest(value);
+						}
 					}
 					return ue;
 				}

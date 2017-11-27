@@ -175,6 +175,10 @@ public class IisReportApi {
 		// 实体转换
 		IisReportUserEntity psue = (IisReportUserEntity) JsonUtil
 				.StringToObject(param, IisReportUserEntity.class,calssMap);
+		if ("1".equals(psue.getIsOnlineReport())){
+			String tokenId = JsonUtil.getJsonStrByAttrName(paramAll, "sessionId");
+			psue.setCreator(RedisCacheEif.hget(tokenId, "id"));
+		}
 		// 处理业务
 		Map map = iisReportService.queryIisReportList(psue);
 		return JsonUtil.ObjectToStringClob(map);

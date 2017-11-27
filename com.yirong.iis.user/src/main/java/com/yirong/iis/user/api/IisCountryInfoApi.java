@@ -67,6 +67,18 @@ public class IisCountryInfoApi {
 		return JsonUtil.ObjectToString(map);
 	}
     
+	
+	@RequestMapping(value = "/queryCountrys", method = RequestMethod.POST)
+	public String queryCountrys(@RequestBody String context) {
+		// 获取参数信息
+		IisCountryInfoUserEntity para = this.getUserEntity(context);
+		
+		Map map = this.iisCountryInfoService.queryCountrys(para);
+ 
+		return JsonUtil.ObjectToString(map);
+	}
+	
+	
     @SuppressWarnings("rawtypes")
 	private IisCountryInfoUserEntity getUserEntity(String context){
 		// 获取参数信息

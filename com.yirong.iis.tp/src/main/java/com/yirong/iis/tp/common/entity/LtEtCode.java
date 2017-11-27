@@ -55,9 +55,15 @@ public class LtEtCode implements Serializable {
 	public String ricCode;
 
 	/**
+	 * 路透代码(RIC)父类
+	 */
+	@Column(name = "PARENT_RIC_CODE", nullable = false, length = 20)
+	public String parentRicCode;
+
+	/**
 	 * 代码名称
 	 */
-	@Column(name = "CODE_NAME", nullable = false, length = 100)
+	@Column(name = "CODE_NAME", nullable = false, length = 200)
 	public String codeName;
 
 	/**
@@ -174,6 +180,14 @@ public class LtEtCode implements Serializable {
 
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+
+	public String getParentRicCode() {
+		return parentRicCode;
+	}
+
+	public void setParentRicCode(String parentRicCode) {
+		this.parentRicCode = parentRicCode;
 	}
 
 }

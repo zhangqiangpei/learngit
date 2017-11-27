@@ -60,7 +60,7 @@ public class IisMyFavoritesApi {
         String creator = RedisCacheEif.hget(tokenId, "id");
         iisMyFavorites.setCreator(creator);
         // 业务处理
-        Map map = this.iisMyFavoritesService.saveIisMyFavorites(iisMyFavorites, tokenId);
+        Map map = this.iisMyFavoritesService.saveIisMyFavorites(iisMyFavorites);
         return JsonUtil.ObjectToStringClob(map);
     }
 

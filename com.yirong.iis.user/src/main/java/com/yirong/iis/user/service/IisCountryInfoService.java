@@ -24,4 +24,6 @@ public interface IisCountryInfoService extends IBaseService<IisCountryInfo, Stri
 	Map queryList(IisCountryInfoUserEntity para);
 
 	Map queryIisCountryInfo(IisCountryInfoUserEntity para);
+	
+	Map queryCountrys(IisCountryInfoUserEntity para);
 }

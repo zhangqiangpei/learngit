@@ -6,33 +6,42 @@ import com.yirong.awaken.core.service.IBaseService;
 import com.yirong.iis.user.entity.IisNews;
 import com.yirong.iis.user.userentity.IisNewsUserEntity;
 
+ 
 /**
- * 功能描述：新闻表service接口
- *
- * @author 林明铁
- *         <p>
- *         创建时间 ：2017-11-21 15:43:12
- *         </p>
- *
- *         <p>
- *         修改历史：(修改人，修改时间，修改原因/内容)
- *         </p>
+ * 
+ * @ClassName: IisNewsService  
+ * @Description: TODO(新闻表service接口) 
+ * @author liny
+ * @date 2017年11月24日 上午10:53:29 
+ * @version V0.1
  */
 @SuppressWarnings("rawtypes")
 public interface IisNewsService extends IBaseService<IisNews, String> {
-
+ 
     /**
-     * 功能描述：搜索
-     *
-     * @author 林明铁
-     *         <p>
-     *         创建时间 ：2017-11-09 10:00:09
-     *         </p>
-     *
-     *         <p>
-     *         修改历史：(修改人，修改时间，修改原因/内容)
-     *         </p>
-     * @return
+     * @author liny
+     * @Title: queryIisNewsList 
+     * @Description: TODO(查询新闻表列表信息) 
+     * @param ue
+     * @return Map
      */
-    Map esSearch(IisNewsUserEntity ue, String tokenId);
+    Map queryIisNewsList(IisNewsUserEntity ue);
+    
+    /**
+     * 
+     * @Title: queryIisNewsCompanyList 
+     * @Description: TODO(查询关注企业新闻列表信息) 
+     * @param ue
+     * @return Map
+     */
+    Map queryIisNewsCompanyList(IisNewsUserEntity ue);
+    
+    /**
+     * 
+     * @Title: queryIisNewsById 
+     * @Description: TODO(根据ID查询新闻表信息) 
+     * @param id
+     * @return Map
+     */
+    Map queryIisNewsById(String id);
 }

@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <div class="panel-bottom text-center panel-bottom-left">
-                    <button class="btn m-b-xs w-xs btn-default cs-btn cs-btn-exp" @click="fnShowChart()">生成图表</button>
+                    <button class="btn m-b-xs w-xs btn-default cs-btn cs-btn-exp" @click="fnDealChartData()">生成图表</button>
                 </div>
             </div>
         </div>
@@ -84,10 +84,11 @@
         
     </div>
     <div class="optContent content_2">
-        步骤3
+        发布图表
     </div>
     <div>
-        <el-button style="margin-top:12px;" @click="fnNextStep">下一步</el-button>
+        <el-button id="btnPrev" style="margin-top:12px;display:none" @click="fnStep(0)">上一步</el-button>
+        <el-button style="margin-top:12px;" @click="fnStep(1)">下一步</el-button>
     </div>
     
 </div> 
@@ -97,5 +98,6 @@
 <script src="/frame/jqueryui/jquery-ui.min.js"></script>
 <script src="/frame/vue/vue.min.js"></script>
 <script src="/frame/elementui/elementui.js"></script>
+<script src="/frame/echarts/echarts.min.js"></script>
 <script src="/common/js/com.js"></script>
 <script src="/business/user/tools/js/ThematicChartEdit.js"></script>

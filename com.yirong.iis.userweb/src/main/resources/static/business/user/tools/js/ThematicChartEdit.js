@@ -3,152 +3,41 @@ var vm_chart = new Vue({
     data: {   
         curStep:0,//当前步骤
         chartList:[],//图表列表
+        chartId:'0',
+        myChart:'',//图表实例
+        chartData:'',//图表实例数据
+        orginData:'',//字段值数据
         dataBaseSourceDef:'',//数据来源为数据库时默认的数据库
         dataBaseSourceOption:[{value:'ma',label:'挖掘子系统'},{value:'pm',label:'采集子系统'}],
         fieldTreeProps: {
             children: 'children',
             label: 'fieldName',
-            id:'fieldCode'
+            id:'fieldCode',
+            field:'field'
         },
-        treeData:[],
-        treeDataSet: [
-            {
-                "fieldCode": '297e49065d0d6997015d0d83eb290000',
-                "fieldName": "堆叠折线图",
-                "type": "root",
-                "children": [
-                    {
-                        "fieldCode": 11,
-                        "fieldName": "字符",
-                        "type": "char",
-                        "children":[
-                            {
-                                "fieldCode": 111,
-                                "fieldName":"姓名",
-                                "field":"name",
-                                "type":"char"
-                            }
-                        ]
-                    },
-                    {
-                        "fieldCode": 12,
-                        "fieldName": "数值",
-                        "type": "value",
-                        "children":[
-                            {
-                                "fieldCode": 121,
-                                "fieldName":"序号",
-                                "field":"no",
-                                "type":"value"
-                            },
-                            {
-                                "fieldCode":122,
-                                "fieldName":"成绩",
-                                "field":"score",
-                                "type":"value"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "fieldCode": '297e49065d1ca822015d1cde12aa0000',
-                "fieldName": "双向柱图",
-                "type": "root",
-                "children": [
-                    {
-                        "fieldCode": 11,
-                        "fieldName": "字符",
-                        "type": "char",
-                        "children":[
-                            {
-                                "fieldCode": 111,
-                                "fieldName":"时间",
-                                "field":"date",
-                                "type":"char"
-                            }
-                        ]
-                    },
-                    {
-                        "fieldCode": 12,
-                        "fieldName": "数值",
-                        "type": "value",
-                        "children":[
-                            {
-                                "fieldCode": 121,
-                                "fieldName":"利润",
-                                "field":"profit",
-                                "type":"value"
-                            },
-                            {
-                                "fieldCode":122,
-                                "fieldName":"收入",
-                                "field":"income",
-                                "type":"value"
-                            },
-                            {
-                                "fieldCode":123,
-                                "fieldName":"支出",
-                                "field":"expenditure",
-                                "type":"value"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "fieldCode": '297e49065d1ca822015d1cde7c7c0002',
-                "fieldName": "传统饼图",
-                "type": "root",
-                "children": [
-                    {
-                        "fieldCode": 12,
-                        "fieldName": "数值",
-                        "type": "value",
-                        "children":[
-                            {
-                                "fieldCode": 121,
-                                "fieldName":"直接访问",
-                                "field":"directAccess",
-                                "type":"value"
-                            },
-                            {
-                                "fieldCode":122,
-                                "fieldName":"邮件营销",
-                                "field":"emailMarketing",
-                                "type":"value"
-                            },
-                            {
-                                "fieldCode":123,
-                                "fieldName":"联盟广告",
-                                "field":"unionAd",
-                                "type":"value"
-                            },
-                            {
-                                "fieldCode":124,
-                                "fieldName":"视频广告",
-                                "field":"videoAd",
-                                "type":"value"
-                            },
-                            {
-                                "fieldCode":125,
-                                "fieldName":"搜索引擎",
-                                "field":"srhEngine",
-                                "type":"value"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+        treeData:[]
     },
     methods: {
-        //下一步骤
-        fnNextStep:function(){
-            if(this.curStep ++ >2)alert('完成');
+        //上下步骤
+        fnStep:function(step){
+            if(step){
+                this.curStep ++;
+            }else{
+                this.curStep --;
+            };
+            if(this.curStep>0){
+                $('#btnPrev').show();
+            }else{
+                $('#btnPrev').hide();
+            }
+            if(this.curStep>2){
+                //debugger;
+                parent.vm.curItemCnt = this.chartData;
+                if(typeof(parent.fnAfterSaveEdit)=='function')parent.fnAfterSaveEdit();
+            }
             $('.optContent').hide();
             $('.content_'+this.curStep).show();
-            if(this.curStep==1)this.fnInitTree();
+            if(this.curStep==1)this.fnInitDemo();
         },
         //初始化图表列表
         initChartList:function(){
@@ -159,6 +48,7 @@ var vm_chart = new Vue({
         },
         //选择图表
         fnSelChart:function(id){
+            this.chartId = id;
             $('.nav-img').removeClass('active');
             $('#'+id).find('img.nav-img').addClass('active');
         },
@@ -181,28 +71,50 @@ var vm_chart = new Vue({
                         'data-type': b.node.data.type,
                         'data-id': b.node.data[this.fieldTreeProps.id],
                         'data-label': b.node.data[this.fieldTreeProps.label],
-                        'data-field':b.node.data[this.fieldTreeProps.id]
+                        'data-field':b.node.data[this.fieldTreeProps.field]
                     }
                 }, b.node.data[this.fieldTreeProps.label])
             ])
         },
-        //初始化树数据(demo数据筛选)
-        fnInitTree:function(){
-            for(var i=0;i<this.treeDataSet.length;i++){
-                if(!i){
-                    this.treeData.push(this.treeDataSet[i]);
-                    setTimeout(function(){vm_chart.fnInitDrag();},100)   //初始化树拖拽
-                    
-                    if(z.getUrlParam('chartName')=='传统饼图'){
-                         //此饼图只有一维
-                        $('.xFieldInput').prev().hide();
-                        $('.xFieldInput').hide();
-                        $('.yFieldInput').prev().html('显示字段');
+        //初始化demo数据
+        fnInitDemo:function(){
+            var sURL = '/common/json/chart_tree_data.json';
+            z.get(sURL,null,function(r){
+                if(r.code==0&&r.data.length>0){
+                    var data = r.data;
+                    for(var i=0;i<data.length;i++){
+                        if(vm_chart.chartId==data[i].fieldCode){
+                            vm_chart.treeData=data[i];
+                            setTimeout(function(){vm_chart.fnInitDrag();},100)   //初始化树拖拽
+                            if(vm_chart.chartId=='2'){
+                                 //此饼图只有一维
+                                $('.xFieldInput').prev().hide();
+                                $('.xFieldInput').hide();
+                                $('.yFieldInput').prev().html('显示字段');
+                            }
+                            sURL = '/common/json/echarts_format_data.json';
+                             z.ajax({
+                                url : sURL,
+                                async : false,
+                                type : "GET",
+                                dataType : "json",
+                                success : function(res, textStatus) {
+                                    if(res.code==0&&res.data.length>0){
+                                        for(var j=0;j<res.data.length;j++){
+                                            if(vm_chart.chartId==res.data[j].id){
+                                                vm_chart.chartData = res.data[j];
+                                                vm_chart.fnShowChart();
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            })
+                            break;
+                        }
                     }
-                                       
-                    break;
                 }
-            }
+            })
         },
         // 左侧拖拽排序
         fnInitSortable:function(){
@@ -240,6 +152,155 @@ var vm_chart = new Vue({
             if($(obj).parent().parent().find('div.ui-drag-widget-sort').length==1)$(obj).parent().parent().find('span.tip').show();
             $(obj).parent().remove();
             //vm.funShowChart();
+        },
+        //处理图表实例数据
+        fnDealChartData:function(){
+            //获取字段对应数据
+            //0/1/2为demo数据
+            if(vm_chart.chartId=='0'||vm_chart.chartId=='1'||vm_chart.chartId=='2'){
+                var sURL = '/common/json/chart_database.json';
+                z.ajax({
+                    url : sURL,
+                    async : false,
+                    type : "GET",
+                    dataType : "json",
+                    success : function(r, textStatus) {
+                        var data = r.data;
+                        for(var i=0;i<data.length;i++){
+                            if(vm_chart.chartId==data[i].id){
+                                vm_chart.orginData = data[i].data;
+                                break;
+                            }
+                        }
+                    }
+                })
+            }
+            
+            //获取对应图表格式数据
+            var sURL = '/common/json/echarts_format_data.json';
+            z.ajax({
+                url : sURL,
+                async : false,
+                type : "GET",
+                dataType : "json",
+                success : function(r, textStatus) {
+                    var data = r.data;
+                    if(data.length>0){
+                        for(var i=0;i<data.length;i++){
+                            if(data[i].id == vm_chart.chartId){
+                                var jo = data[i];
+
+                                //此处暂时用来识别是否为饼图
+                                if(this.chartId==2){
+                                    //此饼图只有一维
+                                    $('.xFieldInput').hide();
+                                    $('.yFieldInput').prev().html('显示字段');
+                                    var yArr = [];
+                                    var yObj = $('.yFieldInput div.ui-drag-widget');
+                                    var yLen = yObj.length;
+                                    for(var i=0;i<yLen;i++){
+                                        var o = {};
+                                        o.id = $(yObj[i]).attr('sId');
+                                        o.text = $(yObj[i]).attr('sText');
+                                        o.field = $(yObj[i]).attr('sField');
+                                        yArr.push(o);
+                                    }
+
+                                    var dataArr = [];var legendData = [];
+                                    //按y轴字段获取对应的值
+                                    for(var i=0;i<yArr.length;i++){
+                                        var o = {};
+                                        legendData.push(yArr[i].text);
+                                        o.name = yArr[i].text;
+                                        o.value = vm_chart.orginData[0][yArr[i].field];
+                                        dataArr.push(o);
+                                    }
+
+
+                                    jo.series[0].data = dataArr;
+                                    jo.legend.data = legendData;
+
+                                }else{
+                                    //todoxy轴转置
+                                    
+                                    var xArr = [];//存放x轴字段
+                                    var yArr = [];//存放y轴字段
+
+                                    var xObj = $('.xFieldInput div.ui-drag-widget');
+                                    var yObj = $('.yFieldInput div.ui-drag-widget');
+
+                                    var xLen = xObj.length;
+                                    var yLen = yObj.length;
+                                    if(xLen==0||yLen==0)return;
+                                    for(var i=0;i<xLen;i++){
+                                        var o = {};
+                                        o.id = $(xObj[i]).attr('sId');
+                                        o.text = $(xObj[i]).attr('sText');
+                                        o.field = $(xObj[i]).attr('sField');
+                                        xArr.push(o);
+                                    }
+                                    for(var i=0;i<yLen;i++){
+                                        var o = {};
+                                        o.id = $(yObj[i]).attr('sId');
+                                        o.text = $(yObj[i]).attr('sText');
+                                        o.field = $(yObj[i]).attr('sField');
+                                        yArr.push(o);
+                                    }
+                                    //x轴做分类，y轴做值
+                                    var xOption = [];var seriesData = [];var xAxisData = [];var legendData=[];
+                                    //按x轴字段获取对应分类值
+                                    for(var i=0;i<xArr.length;i++){
+                                        for(var j=0;j<vm_chart.orginData.length;j++){
+                                            var o = {};
+                                            o.field = xArr[i].field;
+                                            o.value = vm_chart.orginData[j][xArr[i].field];
+                                            xAxisData.push(vm_chart.orginData[j][xArr[i].field]);
+                                            xOption.push(o);
+                                        }
+                                    }
+
+                                    //按y轴字段获取按x对应分类的值
+                                    for(var i=0;i<yArr.length;i++){
+                                        var o = {};
+                                        o.name = yArr[i].text;
+                                        o.stack = yArr[i].text;
+                                        o.type = vm_chart.chartId=="0"?"bar":"line";//todo不同图表类型不同
+                                        legendData.push(yArr[i].text);
+                                        var arr = [];
+                                        var sField = yArr[i].field;
+                                        for(var j=0;j<xOption.length;j++){
+                                            for(var k=0;k<vm_chart.orginData.length;k++){
+                                                var sKey = xOption[j].field;
+                                                var sVal = xOption[j].value;
+                                                if(vm_chart.orginData[k][sKey]==sVal)arr.push(vm_chart.orginData[k][sField]);
+                                            }
+                                        }
+                                        o.data = arr;
+                                        seriesData.push(o);
+
+                                    }
+
+                                    jo.xAxis.data = xAxisData;
+                                    jo.series = seriesData;
+                                    jo.legend.data = legendData;
+                                }
+                                vm_chart.chartData = jo;
+                                vm_chart.fnShowChart(); 
+                                break;
+                            }
+
+                        }
+                    }
+
+                }
+            })
+        },
+        //显示图表
+        fnShowChart:function(){
+            // 基于准备好的dom，初始化echarts实例
+            if(typeof(this.myChart.clear)=='function')this.myChart.clear();
+            this.myChart = echarts.init(document.getElementById('divChartContent'));
+            this.myChart.setOption(this.chartData);
         }
 	},
     mounted: function () {

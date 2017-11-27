@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jdk.nashorn.internal.objects.NativeUint8Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import com.yirong.awaken.core.util.ResultUtil;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.commons.util.datatype.StringUtil;
-import com.yirong.commons.util.entity.PageEntiry;
 import com.yirong.iis.user.dao.IisReportTypeDao;
 import com.yirong.iis.user.entity.IisReportType;
 import com.yirong.iis.user.service.IisReportTypeService;
@@ -93,12 +91,12 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT IRT.ID AS id,");
 		sql.append(" IRT.IS_OUTSIDE AS isOutside,");
-		sql.append("IRT.TYPE_NAME AS typeName ");
+		sql.append("IRT.NEWS_TYPE_NAME AS typeName ");
 		sql.append("FROM IIS_REPORT_TYPE IRT ");
 		sql.append("WHERE 1=1 ");
 		// 标准编码
 		if (StringUtil.isNotNullOrEmpty(ue.getTypeName())) {
-			sql.append("AND IRT.TYPE_NAME LIKE ? ");
+			sql.append("AND IRT.NEWS_TYPE_NAME LIKE ? ");
 			param.add("%" + ue.getTypeName() + "%");
 		}
 		// 标准编码
@@ -131,7 +129,7 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
         List<Object> param = new ArrayList<Object>();
         StringBuffer sql = new StringBuffer();
         sql.append("SELECT ID,REPORT_NAME,TYPE_ID,CREATE_TIME,REPORT_INFO,KM_ID,EOS_ID,");
-        sql.append("(SELECT TYPE_NAME FROM IIS_REPORT_TYPE WHERE ID = temp.TYPE_ID) AS TYPE_NAME ");
+        sql.append("(SELECT NEWS_TYPE_NAME FROM IIS_REPORT_TYPE WHERE ID = temp.TYPE_ID) AS NEWS_TYPE_NAME ");
         sql.append("FROM (");
         sql.append("select ID,REPORT_NAME,TYPE_ID,TO_CHAR(CREATE_TIME,'YYYY-MM-DD') AS CREATE_TIME,REPORT_INFO,KM_ID,EOS_ID,rank() over ");
         sql.append("(partition by TYPE_ID order by CREATE_TIME desc) rn FROM IIS_REPORT) temp ");
@@ -157,7 +155,7 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
 	}
 
     @Override
-    public Map queryIisReportTypeListThreeRecord() {
+    public Map queryIisReportTypeListThreeRecord(String reportName) {
         // 拼装查询sql
         List<Object> param = new ArrayList<Object>();
         StringBuffer sql = new StringBuffer();
@@ -171,19 +169,24 @@ public class IisReportTypeServiceImpl extends BaseService<IisReportType, String>
         }
         List<Map<String, Object>> result = this.exeNativeQueryMap(sql.toString(), param);
         for (Map<String, Object> t : result){
-            t.put("reports", this.getReports(t.get("ID").toString()));
+            t.put("reports", this.getReports(t.get("ID").toString(), reportName));
         }
         return ResultUtil.newOk("操作成功").setData(result).toMap();
     }
 
-    private List<Map<String, Object>> getReports(String id) {
+    private List<Map<String, Object>> getReports(String id, String reportName) {
         List<Object> param = new ArrayList<Object>();
         StringBuffer sql = new StringBuffer();
 	    sql.append("SELECT ID,TYPE_ID,REPORT_NAME,KM_ID,EOS_ID,CREATOR,TO_CHAR(CREATE_TIME,'YYYY-MM-DD') AS CREATE_TIME ");
 	    sql.append("FROM IIS_REPORT ");
-	    sql.append("WHERE TYPE_ID = ? AND rownum<=3 order by CREATE_TIME desc ");
+	    sql.append("WHERE TYPE_ID = ? ");
 	    param.add(id);
-	    return this.exeNativeQueryMap(sql.toString(), param);
+	    if (StringUtil.isNotNullOrEmpty(reportName)){
+	        sql.append("AND REPORT_NAME LIKE ? ");
+	        param.add("%"+reportName +"%");
+        }
+        sql.append(" AND rownum<=3 order by CREATE_TIME desc ");
+        return this.exeNativeQueryMap(sql.toString(), param);
 	}
 
 }

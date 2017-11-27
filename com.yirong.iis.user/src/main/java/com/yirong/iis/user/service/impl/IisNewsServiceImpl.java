@@ -4,37 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.yirong.commons.es.constant.EsMatchNames;
-import com.yirong.commons.es.eif.EsClientEif;
-import com.yirong.commons.util.order.EsSelect;
-import com.yirong.commons.util.order.Where;
-import com.yirong.iis.user.constant.esConstants;
-import com.yirong.iis.user.dao.IisNewsDao;
-import com.yirong.iis.user.entity.IisNews;
-import com.yirong.iis.user.service.IisNewsService;
-import com.yirong.iis.user.userentity.IisNewsUserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yirong.awaken.core.dao.IBaseDao;
-import com.yirong.commons.util.entity.PageEntiry;
+import com.yirong.awaken.core.dao.specification.RestrictionNames;
+import com.yirong.awaken.core.dao.specification.SimpleSpecificationBuilder;
 import com.yirong.awaken.core.service.impl.BaseService;
 import com.yirong.awaken.core.util.ResultUtil;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.commons.util.datatype.StringUtil;
+import com.yirong.commons.util.entity.PageEntiry;
+import com.yirong.iis.user.dao.IisNewsDao;
+import com.yirong.iis.user.entity.IisNews;
+import com.yirong.iis.user.service.IisNewsService;
+import com.yirong.iis.user.userentity.IisNewsUserEntity;
 
+ 
 /**
- * 功能描述：新闻表service实现类
- *
- * @author 林明铁
- *         <p>
- *         创建时间 ：2017-11-21 15:43:12
- *         </p>
- *
- *         <p>
- *         修改历史：(修改人，修改时间，修改原因/内容)
- *         </p>
+ * 
+ * @ClassName: IisNewsServiceImpl  
+ * @Description: TODO(新闻表service实现类) 
+ * @author liny
+ * @date 2017年11月24日 上午10:50:41 
+ * @version V0.1
  */
 @SuppressWarnings("rawtypes")
 @Service("IisNewsServiceImpl")
@@ -53,121 +47,89 @@ public class IisNewsServiceImpl extends BaseService<IisNews, String>
     @Autowired
     private IisNewsDao iisNewsDao;
 
+    
     /**
-     * 功能描述：获取dao操作类
-     *
-     * @author 林明铁
-     *         <p>
-     *         创建时间 ：2017-11-21 15:43:12
-     *         </p>
-     *
-     *         <p>
-     *         修改历史：(修改人，修改时间，修改原因/内容)
-     *         </p>
+     * 
+     * @Title: getBaseDao 
+     * @Description: TODO(liny) 
+     * @return
      */
     @Override
     public IBaseDao<IisNews, String> getBaseDao() {
         return iisNewsDao;
     }
 
-    /**
-     * 功能描述：搜索
-     *
-     * @author 林明铁
-     *         <p>
-     *         创建时间 ：2017-11-09 10:00:09
-     *         </p>
-     *
-     *         <p>
-     *         修改历史：(修改人，修改时间，修改原因/内容)
-     *         </p>
-     * @return
-     */
-    @Override
-    public Map esSearch(IisNewsUserEntity ue, String tokenId) {
-        /** 查询条件 **/
-        List<Where> whereList = this.getEsWhere(ue, tokenId);
-        /** 返回结果 **/
-        EsSelect select = new EsSelect();
-        if (StringUtil.isNotNullOrEmpty(ue.getKeywords())) {
-            select.setKeyword(ue.getKeywords().trim());
-            select.setKeywordFields(new String[]{esConstants.TITLE, esConstants.TITLE_CN,esConstants.CONTENT,esConstants.CONTENT_CN});
-        }
-        select.setAnalyzer("ik_max_word");
-        select.setIsHighlight(true);
-        select.setIncludes(new String[]{esConstants.TITLE, esConstants.TITLE_CN,
-                esConstants.CONTENT,esConstants.CONTENT_CN, esConstants.SUMMARY});
-        // 获取数据
-        PageEntiry page = EsClientEif.textSearch(esConstants.INDEX_NEWS_NAME, esConstants.TYPE_NEWS_NAME, ue,
-                whereList, select, esConstants.class);
-        return ResultUtil.newOk("操作成功").setData(page).toMap();
-    }
+   
 
     /**
-     * 功能描述：根据查询条件拼装es查询where
-     *
+     * @author liny
+     * @Title: queryIisNewsList 
+     * @Description: TODO(查询新闻表列表信息) 
      * @param ue
-     * @return
-     * @author
-     * <p>
-     * 创建时间 ：2017年10月12日 下午2:22:03
-     * </p>
-     * <p>
-     * <p>
-     * 修改历史：(修改人，修改时间，修改原因/内容)
-     * </p>
+     * @return Map
      */
-    private List<Where> getEsWhere(IisNewsUserEntity ue, String tokenId) {
-        List<Where> whereList = new ArrayList<Where>();
-        String format = "yyyy-MM-dd";
-        // 上传时间（开始）
-//        if (StringUtil.isNotNullOrEmpty(ue.getReleaseTime())) {
-//            Where we = new Where();
-//            we.setFieldName(esConstants.RELEASE_TIME);
-//            we.setFieldValue(ue.getReleaseTime());
-//            we.setOperationType(EsMatchNames.GEC);
-//            we.setFormatType(format);
-//            whereList.add(we);
-//        }
-        // 标题
-        // 中文标题
-        // 内容
-        // 中文内容
-        // 概要
-        // 新闻类型
-        if (StringUtil.isNotNullOrEmpty(ue.getType())){
-            Where where = new Where();
-            where.setFieldName(esConstants.NEWS_TYPE);
-            where.setFieldValue(ue.getType());
-            where.setOperationType(EsMatchNames.EQC);
-            whereList.add(where);
-        }
-        // 来源
-        // 国家ID
-        if (StringUtil.isNotNullOrEmpty(ue.getCountryId())){
-            Where where = new Where();
-            where.setFieldName(esConstants.COUNTRY_ID);
-            where.setFieldValue(ue.getCountryId());
-            where.setOperationType(EsMatchNames.EQC);
-            whereList.add(where);
-        }
-        // 国家名称
-        if (StringUtil.isNotNullOrEmpty(ue.getCountryName())){
-            Where where = new Where();
-            where.setFieldName(esConstants.COUNTRY_NAME);
-            where.setFieldValue(ue.getCountryName());
-            where.setOperationType(EsMatchNames.EQC);
-            whereList.add(where);
-        }
-        // 所属洲编码
-        if (StringUtil.isNotNullOrEmpty(ue.getContinentCode())){
-            Where where = new Where();
-            where.setFieldName(esConstants.CONTINENT_CODE);
-            where.setFieldValue(ue.getContinentCode());
-            where.setOperationType(EsMatchNames.EQC);
-            whereList.add(where);
-        }
-        return whereList;
-    }
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map queryIisNewsList(IisNewsUserEntity ue) {
+		SimpleSpecificationBuilder simpbuilder = new SimpleSpecificationBuilder();
+		
+		if(StringUtil.isNotNullOrEmpty(ue.getType())){
+			simpbuilder.add("type", RestrictionNames.EQ, ue.getType());
+		}
+		
+		if(StringUtil.isNotNullOrEmpty(ue.getCompanyName())){
+			simpbuilder.add("companyName", RestrictionNames.LIKE, ue.getCompanyName());
+		}
+		
+		if(StringUtil.isNotNullOrEmpty(ue.getCountryChnName())){
+			simpbuilder.add("countryChnName", RestrictionNames.LIKE, ue.getCountryChnName());
+		}
+		
+		if(StringUtil.isNotNullOrEmpty(ue.getCountryEngName())){
+			simpbuilder.add("countryEngName", RestrictionNames.LIKE, ue.getCountryEngName());
+		}
+ 
+		
+		if(StringUtil.isNotNullOrEmpty(ue.getTitle())){
+			simpbuilder.add("title", RestrictionNames.LIKE, ue.getTitle());
+		}
+		
+		if(StringUtil.isNotNullOrEmpty(ue.getContent())){
+			simpbuilder.add("content", RestrictionNames.LIKE, ue.getContent());
+		}
+		
+		// 获取数据
+		PageEntiry pageEntiry = this.findPage(simpbuilder.getOpers(), ue);
+		
+		return ResultUtil.newOk("操作成功").setData(pageEntiry).toMap();
+	}
+
+
+	/**
+	 * 
+	 * @Title: queryIisNewsCompanyList 
+	 * @Description: TODO(查询关注企业新闻列表信息)  
+	 * @param ue
+	 * @return
+	 */
+	@Override
+	public Map queryIisNewsCompanyList(IisNewsUserEntity ue) {
+		// 拼装查询sql
+ 
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT N.ID,N.TITLE,N.TITLE_EN,N.TITLE_CHN,N.SUMMARY,N.SOURCE,N.COMPANY_NAME,N.COUNTRY_ENG_NAME,N.COUNTRY_CHN_NAME,TO_CHAR(N.CREATE_TIME,'YYYY-MM-DD HH24:MI:SS') AS CREATE_TIME");
+		sql.append("  FROM IIS_NEWS N,IIS_COMPANY_LIST C WHERE N.COMPANY_NAME = C.COMPANY_NAME AND C.TYPE='0' ORDER BY N.CREATE_TIME DESC");
+		 
+		// 获取数据
+		PageEntiry pageEntiry = this.findPageSQLMap(sql.toString(), null, null, ue);
+		return ResultUtil.newOk("操作成功").setData(pageEntiry).toMap();
+	}
+ 
+
+	@Override
+	public Map queryIisNewsById(String id) {
+		IisNews entity =  this.get(id);
+		return ResultUtil.newOk("操作成功").setData(entity).toMap();
+	}
 
 }

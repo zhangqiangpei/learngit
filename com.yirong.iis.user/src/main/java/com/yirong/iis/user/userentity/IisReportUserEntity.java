@@ -24,6 +24,11 @@ public class IisReportUserEntity extends PageEntiry implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	 /**
+	  * 在线报告编辑
+	  */
+	 private String isOnlineReport;
+
      /**
       * 关键字
       */
@@ -74,7 +79,15 @@ public class IisReportUserEntity extends PageEntiry implements Serializable {
 	*/
 	private String creator;
 
-     public String getKeywords() {
+	 public String getIsOnlineReport() {
+		 return isOnlineReport;
+	 }
+
+	 public void setIsOnlineReport(String isOnlineReport) {
+		 this.isOnlineReport = isOnlineReport;
+	 }
+
+	 public String getKeywords() {
          return keywords;
      }
 

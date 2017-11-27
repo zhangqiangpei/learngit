@@ -5,6 +5,7 @@ var editOnlineReportVue = new Vue({
         //总记录数
         reportTableTotal : 0,
         reportTableSearchModel:{
+            isOnlineReport:1,
             currentPage : 1,
             pageSize : 10,
             orders : [],
@@ -46,9 +47,24 @@ var editOnlineReportVue = new Vue({
             content:null,
             title:null,
             typeId:null
-        }
+        },
+        addOperation:"新增",
+        updateOperation:"更新",
+        reportOpeType:"报告",
+        templateOpeType:"报告模板"
     },
     methods: {
+        // 使用模板按钮
+        useReportTemplate:function () {
+            if (!this.chooseOperateType){
+                z.info("请选择要使用的报告模板！");
+            } else {
+                this.editClick();
+                this.currentOpeObjType = this.reportOpeType;
+                this.operation = this.addOperation;
+                setTitleVue.dialogVisible = true;
+            }
+        },
         //当前页选择事件
         reportTableCurrentChange: function (val) {
             //处理参数
@@ -76,8 +92,8 @@ var editOnlineReportVue = new Vue({
         // 点击报告模板表格
         reportTemplateCellClick:function(row, column, cell, event){
             this.chooseOperateType = true;
-            this.currentOpeObjType = "报告模板";
-            this.operation = "更新";
+            this.currentOpeObjType = this.templateOpeType;
+            this.operation = this.updateOperation;
             this.currentClickData.id = row.ID;
             this.currentClickData.content = row.TEMPLATEINFO;
             this.currentClickData.title = row.TEMPLATENAME;
@@ -85,8 +101,8 @@ var editOnlineReportVue = new Vue({
         // 点击报告表格
         reportCellClick:function(row, column, cell, event){
             this.chooseOperateType = true;
-            this.currentOpeObjType = "报告";
-            this.operation = "更新";
+            this.currentOpeObjType = this.reportOpeType;
+            this.operation = this.updateOperation;
             this.currentClickData.id = row.ID;
             this.currentClickData.typeId = row.TYPEID;
             this.currentClickData.content = row.REPORTINFO;
@@ -98,15 +114,17 @@ var editOnlineReportVue = new Vue({
         },
         // 点击新增报告模板按钮
         addReportTemplateClick:function () {
-            this.currentOpeObjType = "报告模板";
-            this.operation = "新增";
+            this.currentOpeObjType = this.templateOpeType;
+            this.operation = this.addOperation;
             setTitleVue.dialogVisible = true;
+            ue.setContent("");
         },
         // 点击新增报告按钮
         addReportClick:function () {
-            this.currentOpeObjType = "报告";
-            this.operation = "新增";
+            this.currentOpeObjType = this.reportOpeType;
+            this.operation = this.addOperation;
             setTitleVue.dialogVisible = true;
+            ue.setContent("");
         },
         // 点击编辑按钮
         editClick:function () {
@@ -114,13 +132,13 @@ var editOnlineReportVue = new Vue({
                 z.info("请选择要编辑的报告或报告模板！");
             } else {
                 switch (this.currentOpeObjType){
-                    case "报告模板":
+                    case this.templateOpeType:
                         // 加载报告模板
                         this.reportTemplate.id = this.currentClickData.id;
                         ue.setContent(this.currentClickData.content);
                         this.title = this.currentClickData.title;
                         break;
-                    case "报告":
+                    case this.reportOpeType:
                         // 加载报告
                         this.report.id = this.currentClickData.id;
                         ue.setContent(this.currentClickData.content);
@@ -139,11 +157,11 @@ var editOnlineReportVue = new Vue({
                 z.confirm("确定要删除当前选择的" + this.currentOpeObjType +"吗？", function () {
                     var result;
                     switch (editOnlineReportVue.currentOpeObjType){
-                        case "报告模板":
+                        case this.templateOpeType:
                             // 删除报告模板
                             result = z.msService("user", "IisReportTemplateApi/delete", {id:editOnlineReportVue.currentClickData.id});
                             break;
-                        case "报告":
+                        case this.reportOpeType:
                             // 删除报告
                             result = z.msService("user", "IisReportApi/delete", {id:editOnlineReportVue.currentClickData.id});
                             break;
@@ -162,22 +180,32 @@ var editOnlineReportVue = new Vue({
             this.isSave = true;
             var result;
             switch (this.operation){
-                case  "更新":
+                case  this.updateOperation:
                     switch (this.currentOpeObjType){
-                        case "报告模板":
+                        case this.templateOpeType:
                             // 更新报告模板
                             this.reportTemplate.templateName = this.title;
                             this.reportTemplate.templateInfo = ue.getContent();
+                            if(z.isNullOrEmpty(this.reportTemplate.templateName)){
+                                z.info("请输入模板名称！");
+                                setTitleVue.dialogVisible = true;
+                                return;
+                            }
                             if(z.isNullOrEmpty(this.reportTemplate.templateInfo)){
                                 z.info("请输入模板内容！");
                                 return;
                             }
                             result = z.msService("user", "IisReportTemplateApi/update",this.reportTemplate);
                             break;
-                        case "报告":
+                        case this.reportOpeType:
                             // 更新报告
                             this.report.reportName = this.title;
                             this.report.reportInfo = ue.getContent();
+                            if(z.isNullOrEmpty(this.report.reportName)){
+                                z.info("请输入报告名称！");
+                                setTitleVue.dialogVisible = true;
+                                return;
+                            }
                             if(z.isNullOrEmpty(this.report.typeId)){
                                 z.info("请选择报告所属的分类！");
                                 return;
@@ -194,22 +222,32 @@ var editOnlineReportVue = new Vue({
                             break;
                     }
                     break;
-                case "新增":
+                case this.addOperation:
                     switch (this.currentOpeObjType){
-                        case "报告模板":
+                        case this.templateOpeType:
                             // 保存报告模板
                             this.reportTemplate.templateName = this.title;
                             this.reportTemplate.templateInfo = ue.getContent();
+                            if(z.isNullOrEmpty(this.reportTemplate.templateName)){
+                                z.info("请输入模板名称！");
+                                setTitleVue.dialogVisible = true;
+                                return;
+                            }
                             if(z.isNullOrEmpty(this.reportTemplate.templateInfo)){
                                 z.info("请输入模板内容！");
                                 return;
                             }
                             result = z.msService("user", "IisReportTemplateApi/save",this.reportTemplate);
                             break;
-                        case "报告":
+                        case this.reportOpeType:
                             // 保存报告
                             this.report.reportName = this.title;
                             this.report.reportInfo = ue.getContent();
+                            if(z.isNullOrEmpty(this.report.reportName)){
+                                z.info("请输入报告名称！");
+                                setTitleVue.dialogVisible = true;
+                                return;
+                            }
                             if(z.isNullOrEmpty(this.report.typeId)){
                                 z.info("请选择报告所属的分类！");
                                 return;
@@ -237,13 +275,13 @@ var editOnlineReportVue = new Vue({
             }
         },
         // 点击退出按钮
-        exitClick:function () {
-            if (!this.isSave ){
-                z.confirm("当前编辑内容未保存，确定要退出吗？", function () {
-                    // 退出当前系统
-                })
-            }
-        },
+        // exitClick:function () {
+        //     if (!this.isSave ){
+        //         z.confirm("当前编辑内容未保存，确定要退出吗？", function () {
+        //             // 退出当前系统
+        //         })
+        //     }
+        // },
         // 点击导出按钮
         exportClick: function(params){
             //定义一个form表单
@@ -309,7 +347,7 @@ var editOnlineReportVue = new Vue({
     mounted: function() {
         var result;
         // 初始化报告分类
-        result = z.msService("user","IisReportTypeApi/list",{typeName: "", isOutside: 0});
+        result = z.msService("user","IisReportTypeApi/list",{typeName: ""});
         if(result.code === 0){
             this.reportTypeTreeData = result.data;
         }
@@ -338,7 +376,7 @@ var setTitleVue = new Vue({
         setTitle:function () {
             this.dialogVisible = false;
             editOnlineReportVue.title = this.title;
-            ue.setContent("");
+            // ue.setContent("");
             this.title = ""
         }
     }

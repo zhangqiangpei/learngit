@@ -1,5 +1,7 @@
 package com.yirong.iis.tp.common.dao;
 
+import java.util.List;
+
 import com.yirong.awaken.core.dao.IBaseDao;
 import com.yirong.iis.tp.common.entity.LtEtCode;
 
@@ -34,4 +36,22 @@ public interface LtEtCodeDao extends IBaseDao<LtEtCode, String> {
 	 *
 	 */
 	LtEtCode findByRicCode(String ricCode);
+
+	/**
+	 * 功能描述：根据分类获取代码
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 *         创建时间 ：2017年11月24日 上午9:02:59
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 * @param codeType
+	 * @return
+	 *
+	 */
+	List<LtEtCode> findByCodeType(String codeType);
 }

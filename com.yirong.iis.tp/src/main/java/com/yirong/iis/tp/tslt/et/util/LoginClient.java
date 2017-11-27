@@ -39,7 +39,7 @@ public class LoginClient implements Client {
 	/**
 	 * 客户端操作类
 	 */
-	private StarterConsumer starterConsumer;
+	private ConsumerClient starterConsumer;
 
 	/**
 	 * 配置信息
@@ -63,7 +63,7 @@ public class LoginClient implements Client {
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
 	 */
-	public LoginClient(StarterConsumer starterConsumer) {
+	public LoginClient(ConsumerClient starterConsumer) {
 		this.starterConsumer = starterConsumer;
 		commandLine = starterConsumer.getCommondLine();
 	}
@@ -186,7 +186,7 @@ public class LoginClient implements Client {
 		if (respMsg.has(OMMMsg.HAS_STATE) && (respMsg.getState().getStreamState() == OMMState.Stream.OPEN)
 				&& (respMsg.getState().getDataState() == OMMState.Data.OK)) {
 			logger.error("收到登录成功信息");
-			starterConsumer.getDataClient().sendRequest();
+			starterConsumer.getMsgClient().sendRequest(null);
 		} else {
 			logger.error("登录失败，提示:" + OMMMsg.MsgType.toString(respMsg.getMsgType()));
 		}
