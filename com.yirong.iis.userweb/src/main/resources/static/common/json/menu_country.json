@@ -11,12 +11,12 @@
         {
           "id": "1-2",
           "name": "国情概况",
-          "url": "country.html"
+          "url": "business/user/country/CountrySurvey.html"
         },
         {
           "id": "1-3",
           "name": "政治环境",
-          "url": "country.html"
+          "url": "business/user/country/PoliticalEnvironment.html"
         },
         {
           "id": "1-4",
@@ -26,7 +26,7 @@
         {
           "id": "1-5",
           "name": "外交情况",
-          "url": "country.html"
+          "url": "business/user/country/DiplomaticSituation.html"
         },
         {
           "id": "1-6",

@@ -3,8 +3,8 @@ package com.yirong.iis.user.service;
 import java.util.Map;
 
 import com.yirong.awaken.core.service.IBaseService;
-import com.yirong.iis.user.entity.IisCountryInfo;
-import com.yirong.iis.user.userentity.IisCountryInfoUserEntity;
+import com.yirong.iis.user.entity.IisPoliticalEnvironment;
+import com.yirong.iis.user.userentity.IisPoliticalEnvironmentUserEntity;
 
 /**
  * 功能描述：国家信息表service接口
@@ -19,9 +19,8 @@ import com.yirong.iis.user.userentity.IisCountryInfoUserEntity;
  *         </p>
  */
 @SuppressWarnings("rawtypes")
-public interface IisCountryInfoService extends IBaseService<IisCountryInfo, String> {
+public interface IisPoliticalEnvironmentService extends IBaseService<IisPoliticalEnvironment, String> {
 
-	Map queryList(IisCountryInfoUserEntity para);
 
-	Map queryIisCountryInfo(IisCountryInfoUserEntity para);
+	Map queryList(IisPoliticalEnvironmentUserEntity psue);
 }

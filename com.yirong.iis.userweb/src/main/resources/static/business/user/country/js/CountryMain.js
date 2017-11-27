@@ -26,9 +26,8 @@ var vm_country = new Vue({
 		{name:'U~Z',id:'222',children:[]}]//国家列表
     },
     methods: {
-        showCountryDetail:function(id){
-        	alert(id);
-            var sURL = 'forward.do?viewPath=business/user/country/CountryDetail.html&idx='+z.getUrlParam('idx')+'&countryId='+id;
+        showCountryDetail:function(name){
+            var sURL = 'forward.do?viewPath=business/user/country/CountryDetail.html&eName='+name;
             window.location.href = sURL;
         },
         searchClick:function(){
@@ -43,7 +42,7 @@ var vm_country = new Vue({
     			"chineseName":this.countryName,
     			"continentCode":this.continentName
     		}
-    		var result = ak.msService("user","IisCountryInfoApi/queryList",param).data.data;
+    		var result = ak.msService("user","IisCountryInfoApi/queryList",param).data;
     		//循环判断国家所属的英文字母的排序
     		for (var i = 0; i < result.length; i++) {
 				if(AE.test(result[i].iso2code)){
