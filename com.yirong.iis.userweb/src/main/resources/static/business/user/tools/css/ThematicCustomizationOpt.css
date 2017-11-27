@@ -30,8 +30,8 @@ html,body {width: 975px; min-width: 975px;}
 .miiEdit_item .cap{width:80px;text-align:right; padding-right:3px;}
 .miiContent{width:auto;padding:10px;overflow-y: auto;overflow-x: hidden;word-wrap: break-word}
 
-.miiTemplate{background-color:#E6EFC2; border-bottom:1px solid #C6D880; }
-.miiTemplate_Item{margin:5px; background-color:#FFFFFF; border:1px dotted #AACBEE;
+.miiTemplate{background-color:#efefef; border-bottom:1px solid #ddd; }
+.miiTemplate_Item{margin:5px; background-color:#FFFFFF; border:1px dotted #409EFF;
 	width:150px; text-align:center;padding:5px; cursor:move;-moz-user-select:none;
 	display:inline-block !important; display:inline; 
 }
@@ -43,6 +43,7 @@ html,body {width: 975px; min-width: 975px;}
 
 .miiResizeH{height: 2px;position: absolute; bottom: 0;width: 100%;cursor:row-resize;}
 
+.divTemplateTit{border-bottom: 1px dotted rgba(204, 204, 204, 1);padding: 8px;}
 
 #divTemplateLayout div{width:36px; padding:3px; display:inline-block !important; display:inline; cursor:pointer;}
 #divTemplateLayout table{border-collapse:collapse;height:20px; width:30px; table-layout:fixed;}
