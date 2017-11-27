@@ -9,7 +9,8 @@ var tableAttr = getTableMergeAttr({
             chineseName: "",
             continentCode: ""
         },
-        continentCodeList: []
+        continentCodeList: [],
+        id : null
     },
     methods: {
         //查询按钮
@@ -46,8 +47,9 @@ var tableAttr = getTableMergeAttr({
                 ak.success(result.msg);
             }
         },
-        detailClick : function () {
-            ak.dialog("save", "business/iis/IisCountryInfo/IisCountryInfoDetail.html");
+        detailClick : function (row) {
+            this.id = row.ID;
+            ak.dialog("detail", "business/iis/IisCountryInfo/IisCountryInfoDetail.html");
         }
     }
 });
