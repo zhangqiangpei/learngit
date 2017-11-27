@@ -42,7 +42,7 @@
                     <el-tab-pane >
                         <span slot="label">{{item[0].TYPE_NAME}}</span>
                         <div v-for="(type, index) in item">
-                           <a :href="'forward.do?viewPath=business/user/report/onlineMain.html&kmId='+type.KM_ID+'&id='+type.ID">
+                           <a :href="'forward.do?viewPath=business/user/report/onlineMain.html&kmId='+type.KM_ID+'&id='+type.ID+'&reportName='+type.REPORT_NAME">
                                <el-col :span="19">{{type.REPORT_NAME}}</el-col>
                                <el-col :span="5">{{type.CREATE_TIME}}</el-col>
                            </a>

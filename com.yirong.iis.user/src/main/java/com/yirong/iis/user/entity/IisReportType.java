@@ -49,7 +49,7 @@ public class IisReportType implements Serializable {
 	/**
 	* 分类名称
 	*/
-	@Column(name="NEWS_TYPE_NAME",nullable=false,length=100)
+	@Column(name="TYPE_NAME",nullable=false,length=100)
 	public String typeName;
 	
 	/**

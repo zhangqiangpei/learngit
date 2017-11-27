@@ -39,6 +39,7 @@
             <div class="row clearfix">
                 <div class="row-l">
                     <div class="title">速递详情</div>
+                    <!--startprint-->
                     <div class="content category" style="min-height: 399px;">
                         <div id="newsTitle">【{{news.COUNTRY_CHN_NAME}}】{{news.TITLE}}</div>
                         <div class="divListContent">
@@ -47,10 +48,11 @@
                             <span>类型：<a>{{news.TYPE}}</a></span>
                             <span><a>{{news.RELEASE_TIME}}</a></span>
                             <div style="float: right;">
-                                <span><a><el-button type="text" size="mini">收藏</el-button></a></span>
-                                <span><a>打印</a></span>
+                                <span v-if ="!isFavorite"><a><el-button @click="addFavorite" type="text" size="mini">收藏</el-button></a></span>
+                                <span v-else ><a><el-button @click="cancelFavorite" type="text" size="mini">取消收藏</el-button></a></span>
+                                <span><a><el-button @click="print" type="text" size="mini">打印</el-button></a></span>
                                 <span><a>分享</a></span>
-                                <span><a><el-button type="text" size="mini">跟踪</el-button></a></span>
+                                <span><a><el-button type="text" size="mini">取消跟踪</el-button></a></span>
                             </div>
                         </div>
                         <div class="sp"></div>
@@ -58,6 +60,7 @@
                             {{news.CONTENT}}
                         </div>
                     </div>
+                    <!--endprint-->
                 </div>
             </div>
         </el-col>
@@ -79,7 +82,7 @@
                     <div class="row-l">
                         <div class="title">关联文档</div>
                         <div class="content category" style="min-height: 163px;">
-                            关联文档
+                            // 关联文档
                         </div>
                     </div>
                 </div>

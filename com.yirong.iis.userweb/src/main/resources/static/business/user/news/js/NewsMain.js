@@ -45,6 +45,7 @@ var mainAttr={
             param.currentPage = 1;
             //查询后台
             this.tableSearch(param);
+            // 新闻类型名称替换新闻类型编码
             for (var i = 0; i < this.tableData.length; i++){
                 for (var j = 0; j<this.newsTypes.length; j++){
                     if (this.tableData[i].TYPE === this.newsTypes[j].value){
