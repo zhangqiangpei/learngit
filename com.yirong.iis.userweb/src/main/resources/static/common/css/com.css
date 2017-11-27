@@ -43,6 +43,9 @@
 .fl{
     float:left;
 }
+.right{
+    float:right;
+}
 
 .fr{
     float:right;
@@ -91,7 +94,7 @@ body {
 .head-wrap .head {
     position: relative;
     margin: 0 auto;
-    width: 1200px;
+    width: 1250px;
     height: 60px;
     color: #ffffff;
     /*background: url(img/logo.svg) no-repeat 4px 21px;

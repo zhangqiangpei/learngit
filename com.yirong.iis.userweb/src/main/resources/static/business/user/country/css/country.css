@@ -1,8 +1,5 @@
 .main_div{
 	width: 780px;
-	margin-top: 15px;
-	margin-left: 15px;
-	margin-right: 15px;
 }
 .home_span{
 	font-weight: 400;
@@ -36,6 +33,6 @@
 	font-size: 12px;
 }
 .info_div{
-	height: 800px;
+	height: 1000px;
 	overflow:auto
 }
