@@ -102,7 +102,7 @@
 		<dependency>
 			<groupId>com.yirong.commons</groupId>
 			<artifactId>yr-commons-util</artifactId>
-			<version>0.0.4-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

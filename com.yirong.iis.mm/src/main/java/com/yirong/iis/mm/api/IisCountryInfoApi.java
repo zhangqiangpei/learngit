@@ -8,10 +8,7 @@ import com.yirong.iis.mm.service.IisCountryInfoService;
 import com.yirong.iis.mm.userentity.IisCountryInfoUserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.yirong.commons.util.order.Order;
 import com.yirong.commons.util.datatype.JsonUtil;
@@ -29,9 +26,8 @@ import com.yirong.commons.util.datatype.JsonUtil;
  *         </p>
  */
 @SuppressWarnings("rawtypes")
-@Controller
+@RestController
 @RequestMapping("IisCountryInfoApi")
-@ResponseBody
 public class IisCountryInfoApi {
 
 	/**
@@ -163,11 +159,10 @@ public class IisCountryInfoApi {
 		Map<String, Class> calssMap = new HashMap<String, Class>();
 		calssMap.put("orders", Order.class);
 		// 实体转换
-		IisCountryInfoUserEntity psue = (IisCountryInfoUserEntity) JsonUtil
-				.StringToObject(param, IisCountryInfoUserEntity.class,calssMap);
+		IisCountryInfoUserEntity psue = (IisCountryInfoUserEntity) JsonUtil.StringToObject(param, IisCountryInfoUserEntity.class,calssMap);
 		// 处理业务
 		Map map = iisCountryInfoService.queryIisCountryInfoList(psue);
-		return JsonUtil.ObjectToString(map);
+		return JsonUtil.ObjectToStringClob(map);
 	}
 
 }
