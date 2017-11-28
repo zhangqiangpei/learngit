@@ -14,7 +14,6 @@ import com.yirong.awaken.core.util.ResultUtil;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.commons.util.datatype.StringUtil;
-import com.yirong.commons.util.order.Order;
 import com.yirong.commons.util.server.HttpRequestUtils;
 import com.yirong.iis.tp.common.entity.LtTrkdCompany;
 import com.yirong.iis.tp.common.entity.LtTrkdCompanySignificant;
@@ -109,10 +108,10 @@ public class LtGetSignificantDevelopmentsServiceImpl extends LtHttpService{
 					sigList.add(sig);
 				}
 				
-				List<LtTrkdCompanySignificant> oldList = ltTrkdCompanySignificantService.findByProperty("companyId", company.getId(), Order.basicOrder());
+				/*List<LtTrkdCompanySignificant> oldList = ltTrkdCompanySignificantService.findByProperty("companyId", company.getId(), Order.basicOrder());
 				if(null != oldList && oldList.size() > 0){
 					ltTrkdCompanySignificantService.deleteAllByEntities(oldList);
-				}
+				}*/
 				
 				if(sigList.size() > 0){
 					ltTrkdCompanySignificantService.saveAll(sigList);
