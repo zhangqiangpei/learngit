@@ -50,7 +50,10 @@ public class LtGetSignificantDevelopmentsServiceImpl extends LtHttpService{
 		JSONArray CompanyIdentifiers = new JSONArray();
 		JSONObject RIC = new JSONObject();
 		RIC.put("Value", param.get("companyId").toString());
-		CompanyIdentifiers.add(RIC);
+		
+		JSONObject item = new JSONObject();
+		item.put("RIC", RIC);
+		CompanyIdentifiers.add(item);
 		FindRequest.put("CompanyIdentifiers", CompanyIdentifiers);
 		
 		if(param.containsKey("StartDate")){
@@ -102,6 +105,7 @@ public class LtGetSignificantDevelopmentsServiceImpl extends LtHttpService{
 					sig.setInitiation(developmentJson.getJSONObject("Dates").getString("Initiation").replace("T", " "));
 					sig.setLastUpdate(developmentJson.getJSONObject("Dates").getString("LastUpdate").replace("T", " "));
 					sig.setSignificance(developmentJson.getJSONObject("Flags").getInt("Significance"));
+					sig.setTopic(developmentJson.getJSONObject("Topics").getJSONObject("Topic1").getString("Value"));
 					sigList.add(sig);
 				}
 				

@@ -24,7 +24,7 @@ import com.yirong.awaken.core.entity.IdEntity;
 @Entity
 @Table(name="LT_TRKD_COMPANY")
 public class LtTrkdCompany extends IdEntity{
-
+	
 	/**
 	 * serialVersionUID
 	 */
@@ -112,7 +112,7 @@ public class LtTrkdCompany extends IdEntity{
 	* 主营业务代码
 	*/
 	@Column(name="ACTIVITY_CODE",nullable=true,length=22)
-	public Integer activityCode;
+	public Long activityCode;
 	
 	/**
 	* 主营业务名称
@@ -145,52 +145,10 @@ public class LtTrkdCompany extends IdEntity{
 	public Date modifyTime;
 	
 	/**
-	* repNo
-	*/
-	@Column(name="REP_NO",nullable=true,length=10)
-	public String repNo;
-	
-	/**
-	* 生成日期
-	*/
-	@Column(name="PRODUCTION_DATE",nullable=true,length=20)
-	public String productionDate;
-	
-	/**
 	* 雇员
 	*/
 	@Column(name="EMPLOYEES",nullable=true,length=10)
 	public String employees;
-	
-	/**
-	* 股价预估
-	*/
-	@Column(name="TOTAL_SHARES_OUT",nullable=true,length=20)
-	public String totalSharesOut;
-	
-	/**
-	* 普通股东
-	*/
-	@Column(name="COMMON_SHAREHOLDERS",nullable=true,length=20)
-	public String commonShareholders;
-	
-	/**
-	* 成立于
-	*/
-	@Column(name="INCORPORATED_IN",nullable=true,length=20)
-	public String incorporatedIn;
-	
-	/**
-	* 公开于
-	*/
-	@Column(name="PUBLIC_SINCE",nullable=true,length=20)
-	public String publicSince;
-	
-	/**
-	* 审计单位
-	*/
-	@Column(name="AUDITOR",nullable=true,length=50)
-	public String auditor;
 	
 	/**
 	* 公司主页
@@ -320,11 +278,11 @@ public class LtTrkdCompany extends IdEntity{
 	public void setIndustryName (String industryName){
 		this.industryName=industryName;
 	}
-	public Integer getActivityCode(){
+	public Long getActivityCode(){
 		return this.activityCode;
 	}
 		
-	public void setActivityCode (Integer activityCode){
+	public void setActivityCode (Long activityCode){
 		this.activityCode=activityCode;
 	}
 	public String getActivityName(){
@@ -362,20 +320,7 @@ public class LtTrkdCompany extends IdEntity{
 	public void setModifyTime (Date modifyTime){
 		this.modifyTime=modifyTime;
 	}
-	public String getRepNo(){
-		return this.repNo;
-	}
-		
-	public void setRepNo (String repNo){
-		this.repNo=repNo;
-	}
-	public String getProductionDate(){
-		return this.productionDate;
-	}
-		
-	public void setProductionDate (String productionDate){
-		this.productionDate=productionDate;
-	}
+
 	public String getEmployees(){
 		return this.employees;
 	}
@@ -383,41 +328,7 @@ public class LtTrkdCompany extends IdEntity{
 	public void setEmployees (String employees){
 		this.employees=employees;
 	}
-	public String getTotalSharesOut(){
-		return this.totalSharesOut;
-	}
-		
-	public void setTotalSharesOut (String totalSharesOut){
-		this.totalSharesOut=totalSharesOut;
-	}
-	public String getCommonShareholders(){
-		return this.commonShareholders;
-	}
-		
-	public void setCommonShareholders (String commonShareholders){
-		this.commonShareholders=commonShareholders;
-	}
-	public String getIncorporatedIn(){
-		return this.incorporatedIn;
-	}
-		
-	public void setIncorporatedIn (String incorporatedIn){
-		this.incorporatedIn=incorporatedIn;
-	}
-	public String getPublicSince(){
-		return this.publicSince;
-	}
-		
-	public void setPublicSince (String publicSince){
-		this.publicSince=publicSince;
-	}
-	public String getAuditor(){
-		return this.auditor;
-	}
-		
-	public void setAuditor (String auditor){
-		this.auditor=auditor;
-	}
+
 	public String getWebLinks(){
 		return this.webLinks;
 	}

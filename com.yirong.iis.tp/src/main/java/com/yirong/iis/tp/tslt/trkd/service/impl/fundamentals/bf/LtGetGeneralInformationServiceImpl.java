@@ -1,4 +1,4 @@
-package com.yirong.iis.tp.tslt.trkd.service.impl.fundamentals;
+package com.yirong.iis.tp.tslt.trkd.service.impl.fundamentals.bf;
 
 import java.util.Map;
 
@@ -75,17 +75,9 @@ public class LtGetGeneralInformationServiceImpl extends LtHttpService{
 				
 				JSONObject  generalInformation = data.getJSONObject("GetGeneralInformation_Response_1").getJSONObject("GeneralInformation");
 				//保存公司基础信息
-				company.setRepNo(generalInformation.getString("RepNo"));
-				company.setProductionDate(generalInformation.getJSONObject("Production").getString("Date").replace("T", " "));
-				
 				JSONObject companyGeneralInfo = generalInformation.getJSONObject("CompanyGeneralInfo");
 				company.setEmployees(companyGeneralInfo.getJSONObject("Employees").getString("Value"));
-				company.setTotalSharesOut(companyGeneralInfo.getJSONObject("TotalSharesOut").getString("Value"));
-				company.setCommonShareholders(companyGeneralInfo.getJSONObject("CommonShareholders").getString("Value"));
-				company.setIncorporatedIn(companyGeneralInfo.getJSONObject("IncorporatedIn").getString("Date"));
-				company.setPublicSince(companyGeneralInfo.getString("PublicSince"));
 				
-				company.setAuditor(generalInformation.getJSONObject("Advisors").getJSONObject("Auditor").getString("Name"));
 				company.setWebLinks(generalInformation.getJSONObject("WebLinksInfo").getJSONArray("WebSite").getJSONObject(0).getString("Value"));
 				
 				JSONObject address = generalInformation.getJSONObject("ContactInfo").getJSONObject("Address");

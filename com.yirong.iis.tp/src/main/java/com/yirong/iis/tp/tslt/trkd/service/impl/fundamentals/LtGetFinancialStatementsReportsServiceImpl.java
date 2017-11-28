@@ -111,8 +111,15 @@ public class LtGetFinancialStatementsReportsServiceImpl extends LtHttpService{
 								JSONObject line = lineItem.getJSONObject(n);
 								LtTrkdCompanyFinanceReport fp = new LtTrkdCompanyFinanceReport();
 								fp.setCompanyId(company.getId());
-								fp.setAuditorName(json.getJSONObject("AuditorName").getString("Value"));
-								fp.setAuditorOpinion(json.getJSONObject("AuditorOpinion").getString("Value"));
+								
+								if(json.has("AuditorName")){
+									fp.setAuditorName(json.getJSONObject("AuditorName").getString("Value"));
+								}
+								
+								if(json.has("AuditorOpinion")){
+									fp.setAuditorOpinion(json.getJSONObject("AuditorOpinion").getString("Value"));
+								}
+								
 								fp.setCoaCode(line.getString("coaCode"));
 								fp.setCoaType(type);
 								fp.setCoaValue(line.getString("Value"));
@@ -122,8 +129,14 @@ public class LtGetFinancialStatementsReportsServiceImpl extends LtHttpService{
 								}
 								fp.setFiscalYear(yearJson.getString("FiscalYear"));
 								fp.setName(coaMap.get(line.getString("coaCode")));
-								fp.setPeriodLength(fPHeader.getInt("PeriodLength"));
-								fp.setPeriodType(fPHeader.getJSONObject("periodType").getString("Value"));
+								if(fPHeader.has("PeriodLength")){
+									fp.setPeriodLength(fPHeader.getInt("PeriodLength"));
+								}
+								
+								if(fPHeader.has("periodType")){
+									fp.setPeriodType(fPHeader.getJSONObject("periodType").getString("Value"));
+								}
+								
 								fp.setSource(fPHeader.getJSONObject("Source").getString("Value"));
 								fp.setStatementDate(fPHeader.getString("StatementDate"));
 								fp.setType(yearJson.getString("Type"));
@@ -155,8 +168,14 @@ public class LtGetFinancialStatementsReportsServiceImpl extends LtHttpService{
 								JSONObject line = lineItem.getJSONObject(n);
 								LtTrkdCompanyFinanceReport fp = new LtTrkdCompanyFinanceReport();
 								fp.setCompanyId(company.getId());
-								fp.setAuditorName(json.getJSONObject("AuditorName").getString("Value"));
-								fp.setAuditorOpinion(json.getJSONObject("AuditorOpinion").getString("Value"));
+								if(json.has("AuditorName")){
+									fp.setAuditorName(json.getJSONObject("AuditorName").getString("Value"));
+								}
+								
+								if(json.has("AuditorOpinion")){
+									fp.setAuditorOpinion(json.getJSONObject("AuditorOpinion").getString("Value"));
+								}
+								
 								fp.setCoaCode(line.getString("coaCode"));
 								fp.setCoaType(type);
 								fp.setCoaValue(line.getString("Value"));
@@ -166,8 +185,14 @@ public class LtGetFinancialStatementsReportsServiceImpl extends LtHttpService{
 								}
 								fp.setFiscalYear(yearJson.getString("FiscalYear"));
 								fp.setName(coaMap.get(line.getString("coaCode")));
-								fp.setPeriodLength(fPHeader.getInt("PeriodLength"));
-								fp.setPeriodType(fPHeader.getJSONObject("periodType").getString("Value"));
+								if(fPHeader.has("PeriodLength")){
+									fp.setPeriodLength(fPHeader.getInt("PeriodLength"));
+								}
+								
+								if(fPHeader.has("periodType")){
+									fp.setPeriodType(fPHeader.getJSONObject("periodType").getString("Value"));
+								}
+								
 								fp.setSource(fPHeader.getJSONObject("Source").getString("Value"));
 								fp.setStatementDate(fPHeader.getString("StatementDate"));
 								fp.setType(yearJson.getString("Type"));
