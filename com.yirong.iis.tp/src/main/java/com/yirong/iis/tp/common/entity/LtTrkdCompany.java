@@ -1,7 +1,6 @@
 package com.yirong.iis.tp.common.entity;
 
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -30,18 +29,6 @@ public class LtTrkdCompany extends IdEntity{
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
-
-	/**
-	* 联系人头衔
-	*/
-	@Column(name="CONTACT_TITLE",nullable=true,length=50)
-	public String contactTitle;
-	
-	/**
-	* 联系电话
-	*/
-	@Column(name="PHONE_NUMBERS",nullable=true,length=20)
-	public String phoneNumbers;
 	
 	/**
 	* 公司简介
@@ -101,7 +88,7 @@ public class LtTrkdCompany extends IdEntity{
 	* 所属行业分组代码
 	*/
 	@Column(name="INDUSTRY_GROUP_CODE",nullable=true,length=22)
-	public BigDecimal industryGroupCode;
+	public Integer industryGroupCode;
 	
 	/**
 	* 所属行业分组名称
@@ -113,7 +100,7 @@ public class LtTrkdCompany extends IdEntity{
 	* 所属行业代码
 	*/
 	@Column(name="INDUSTRY_CODE",nullable=true,length=22)
-	public BigDecimal industryCode;
+	public Integer industryCode;
 	
 	/**
 	* 所属行业名称
@@ -125,7 +112,7 @@ public class LtTrkdCompany extends IdEntity{
 	* 主营业务代码
 	*/
 	@Column(name="ACTIVITY_CODE",nullable=true,length=22)
-	public BigDecimal activityCode;
+	public Integer activityCode;
 	
 	/**
 	* 主营业务名称
@@ -235,27 +222,6 @@ public class LtTrkdCompany extends IdEntity{
 	@Column(name="STATE_OR_REGION",nullable=true,length=50)
 	public String stateOrRegion;
 	
-	/**
-	* 联系人
-	*/
-	@Column(name="CONTACT_NAME",nullable=true,length=30)
-	public String contactName;
-	
-   
-	public String getContactTitle(){
-		return this.contactTitle;
-	}
-		
-	public void setContactTitle (String contactTitle){
-		this.contactTitle=contactTitle;
-	}
-	public String getPhoneNumbers(){
-		return this.phoneNumbers;
-	}
-		
-	public void setPhoneNumbers (String phoneNumbers){
-		this.phoneNumbers=phoneNumbers;
-	}
 	public String getTextInfo(){
 		return this.textInfo;
 	}
@@ -326,11 +292,11 @@ public class LtTrkdCompany extends IdEntity{
 	public void setBusinessSectorName (String businessSectorName){
 		this.businessSectorName=businessSectorName;
 	}
-	public BigDecimal getIndustryGroupCode(){
+	public Integer getIndustryGroupCode(){
 		return this.industryGroupCode;
 	}
 		
-	public void setIndustryGroupCode (BigDecimal industryGroupCode){
+	public void setIndustryGroupCode (Integer industryGroupCode){
 		this.industryGroupCode=industryGroupCode;
 	}
 	public String getIndustryGroupName(){
@@ -340,11 +306,11 @@ public class LtTrkdCompany extends IdEntity{
 	public void setIndustryGroupName (String industryGroupName){
 		this.industryGroupName=industryGroupName;
 	}
-	public BigDecimal getIndustryCode(){
+	public Integer getIndustryCode(){
 		return this.industryCode;
 	}
 		
-	public void setIndustryCode (BigDecimal industryCode){
+	public void setIndustryCode (Integer industryCode){
 		this.industryCode=industryCode;
 	}
 	public String getIndustryName(){
@@ -354,11 +320,11 @@ public class LtTrkdCompany extends IdEntity{
 	public void setIndustryName (String industryName){
 		this.industryName=industryName;
 	}
-	public BigDecimal getActivityCode(){
+	public Integer getActivityCode(){
 		return this.activityCode;
 	}
 		
-	public void setActivityCode (BigDecimal activityCode){
+	public void setActivityCode (Integer activityCode){
 		this.activityCode=activityCode;
 	}
 	public String getActivityName(){
@@ -487,13 +453,5 @@ public class LtTrkdCompany extends IdEntity{
 	public void setStateOrRegion (String stateOrRegion){
 		this.stateOrRegion=stateOrRegion;
 	}
-	public String getContactName(){
-		return this.contactName;
-	}
-		
-	public void setContactName (String contactName){
-		this.contactName=contactName;
-	}
-
    
 }

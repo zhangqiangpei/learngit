@@ -46,7 +46,7 @@ public class LtTrkdCompanyRatios extends IdEntity{
 	* 汇率
 	*/
 	@Column(name="EXCHANGE_RATE",nullable=true,length=22)
-	public Integer exchangeRate;
+	public Double exchangeRate;
 	
 	/**
 	* 
@@ -76,8 +76,8 @@ public class LtTrkdCompanyRatios extends IdEntity{
 	/**
 	* 值
 	*/
-	@Column(name="VALUE",nullable=true,length=20)
-	public String value;
+	@Column(name="FIELD_VALUE",nullable=true,length=20)
+	public String fieldValue;
 	
 	/**
 	* 创建时间
@@ -113,11 +113,11 @@ public class LtTrkdCompanyRatios extends IdEntity{
 	public void setReportingCurrency (String reportingCurrency){
 		this.reportingCurrency=reportingCurrency;
 	}
-	public Integer getExchangeRate(){
+	public Double getExchangeRate(){
 		return this.exchangeRate;
 	}
 		
-	public void setExchangeRate (Integer exchangeRate){
+	public void setExchangeRate (Double exchangeRate){
 		this.exchangeRate=exchangeRate;
 	}
 	public String getLatestAvailableDate(){
@@ -148,13 +148,15 @@ public class LtTrkdCompanyRatios extends IdEntity{
 	public void setType (String type){
 		this.type=type;
 	}
-	public String getValue(){
-		return this.value;
+	
+	public String getFieldValue() {
+		return fieldValue;
 	}
-		
-	public void setValue (String value){
-		this.value=value;
+
+	public void setFieldValue(String fieldValue) {
+		this.fieldValue = fieldValue;
 	}
+
 	public Date getCreateTime(){
 		return this.createTime;
 	}

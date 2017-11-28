@@ -19,6 +19,9 @@ public abstract class LtHttpService {
 	@Autowired
 	private ILtTokenService ltTokenService;
 	
+	@Autowired
+	private ILtTrkdRequestLogService ltTrkdRequestLogService;
+	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	/**
@@ -58,6 +61,21 @@ public abstract class LtHttpService {
 	 */
 	public String getHttpUrl(String code){
 		return new StringBuffer("http://").append(SysParameterEif.getValueByCode("Trkd-Url")).append(LtConstant.trkdMap.get(code)).toString();
+	}
+	
+	/**
+	 * 添加请求操作日志记录
+	 * @param name
+	 * @param param
+	 * @param result
+	 * @param status
+	 */
+	public void addRequestLog(String name,String param,String result,Integer status){
+		try {
+			ltTrkdRequestLogService.addRequestLog(name,param,result,status);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 	/**

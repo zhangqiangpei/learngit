@@ -5,6 +5,7 @@ import java.util.Map;
 
 import net.sf.json.JSONObject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yirong.awaken.core.util.ResultUtil;
@@ -16,6 +17,7 @@ import com.yirong.commons.util.datatype.StringUtil;
 import com.yirong.commons.util.server.HttpRequestUtils;
 import com.yirong.iis.tp.common.constant.LtConstant;
 import com.yirong.iis.tp.tslt.trkd.service.ILtTokenService;
+import com.yirong.iis.tp.tslt.trkd.service.ILtTrkdRequestLogService;
 
 /**
  * 获取token
@@ -27,6 +29,9 @@ import com.yirong.iis.tp.tslt.trkd.service.ILtTokenService;
 public class LtTokenServiceImpl implements ILtTokenService{
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired
+	private ILtTrkdRequestLogService ltTrkdRequestLogService;
 	
 	@Override
 	public Map<String, Object> getToken() {
@@ -46,6 +51,7 @@ public class LtTokenServiceImpl implements ILtTokenService{
 			if(data.has("Fault")){
 				String error = data.getJSONObject("Fault").getJSONObject("Reason").getJSONObject("Text").getString("Value");
 				logger.error("请求路透token失败："+error);
+				ltTrkdRequestLogService.addRequestLog("CreateServiceToken",content.toString(),result,0); 
 				return ResultUtil.newError("请求路透token失败："+error).toMap();
 			}
 			
@@ -55,11 +61,14 @@ public class LtTokenServiceImpl implements ILtTokenService{
 				dateStr = dateStr.replace("T", " ").substring(0, 19);
 				Date date = DateUtil.dateAdd(DateUtil.str2Date(dateStr,DateUtil.FORMAT_SECOND), DateUtil.HOUR, 8);
 				LtConstant.expiration = date;
+				
+				ltTrkdRequestLogService.addRequestLog("CreateServiceToken",content.toString(),result,1); 
 				return ResultUtil.newOk("获取路透接口成功！").toMap();
 			}
 			
 		}
 		
+		ltTrkdRequestLogService.addRequestLog("CreateServiceToken",content.toString(),result,0); 
 		return ResultUtil.newError("获取路透token失败!").toMap();
 	}
 
