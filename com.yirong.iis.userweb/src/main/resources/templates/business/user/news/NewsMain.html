@@ -57,7 +57,7 @@
                     <el-table-column :render-header="renderHeader">
                         <template scope="scope">
                             <div id="newsTitle">
-                                <a :href="'/forward.do?viewPath=business/user/news/NewsDetail.html&id=' + scope.row.id">
+                                <a :href="'/forward.do?viewPath=business/user/news/NewsDetail.html&esId=' + scope.row.id">
                                     【{{scope.row.COUNTRY_CHN_NAME}}】{{scope.row.TITLE}}</a>
                             </div>
                             <div >摘要：{{scope.row.SUMMARY}}</div>

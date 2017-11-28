@@ -48,7 +48,7 @@ window.ak = {
 	},
 	// 微服务请求
 	msService : function msService(serviceName, methodName, param) {
-		debugger;
+		// debugger;
 		var result = null;
 		if(this.isNotNullOrEmpty(param)){
 			param = JSON.stringify(param);

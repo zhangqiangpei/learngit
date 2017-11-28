@@ -24,24 +24,14 @@
 
 <!---------------网页主体start----------------->
 <div id="main" class="main  clearfix">
-    <!--<el-row>-->
-        <!--<el-col :span="6">&nbsp;</el-col>-->
-        <!--<el-col :span="12">-->
-            <!--<el-input v-model="search" size="medium"></el-input>-->
-        <!--</el-col>-->
-        <!--<el-col :span="6">-->
-            <!--<el-col :span="2">&nbsp;</el-col>-->
-            <!--<el-button size="medium" icon="el-icon-search" type="primary" @click="searchReport">搜索</el-button>-->
-        <!--</el-col>-->
-    <!--</el-row>-->
-    <el-row :gutter="30">
+    <el-row v-if="onlyChinese" :gutter="30">
         <el-col :span="16">
             <div class="row clearfix">
                 <div class="row-l">
                     <div class="title">速递详情</div>
                     <!--startprint-->
-                    <div class="content category" style="min-height: 399px;">
-                        <div id="newsTitle">【{{news.COUNTRY_CHN_NAME}}】{{news.TITLE}}</div>
+                    <div class="content category" style="min-height: 600px;">
+                        <div class="newsTitle">【{{news.COUNTRY_CHN_NAME}}】{{news.TITLE}}</div>
                         <div class="divListContent">
                             <span>来源：<a>{{news.SOURCE}}</a></span>
                             <span>国家：<a>{{news.COUNTRY_CHN_NAME}}</a></span>
@@ -87,6 +77,112 @@
                     </div>
                 </div>
             </el-row>
+        </el-col>
+    </el-row>
+
+    <el-row v-else :gutter="30">
+        <!-- 显示原文内容 -->
+        <el-col :span="12">
+            <div class="row clearfix">
+                <div class="row-l">
+                    <div class="title">Global > {{news.COUNTRY_ENG_NAME}}</div>
+                    <!--startprint-->
+                    <div class="content category" style="min-height: 600px;">
+                        <div class="newsTitle">【{{news.COUNTRY_ENG_NAME}}】{{news.TITLE}}</div>
+                        <div class="divListContent">
+                            <span>Source：<a>{{news.SOURCE}}</a></span>
+                            <span>Country：<a>{{news.COUNTRY_ENG_NAME}}</a></span>
+                            <span>Type：<a>{{news.TYPE}}</a></span>
+                            <span><a>{{news.RELEASE_TIME}}</a></span>
+                        </div>
+                        <div class="sp"></div>
+                        <div class="content">
+                            {{news.CONTENT}}
+                        </div>
+                    </div>
+                    <!--endprint-->
+                </div>
+            </div>
+        </el-col>
+        <!-- 显示英文内容 -->
+        <el-col v-if="chooseEng" :span="12">
+            <div class="row clearfix">
+                <div class="row-l">
+                    <div class="title">Global > {{news.COUNTRY_ENG_NAME}}
+                        <div style="float: right;">
+                            <el-button type="primary" size="small">追踪</el-button>
+                            <el-popover
+                                    ref="popover"
+                                    placement="bottom"
+                                    trigger="hover">
+                                <el-row>
+                                <el-button type="primary" size="small" @click="turnToChinese">转中文</el-button>
+                                </el-row>
+                                <el-row style="margin-top: 3px;">
+                                <el-button type="primary" size="small" @click="turnToEnglish">转英文</el-button>
+                                </el-row>
+                            </el-popover>
+                            <el-button type="primary" size="small" v-popover:popover >翻译</el-button>
+                        </div>
+                    </div>
+
+                    <!--startprint-->
+                    <div class="content category" style="min-height: 600px;">
+                        <div class="newsTitle">【{{news.COUNTRY_ENG_NAME}}】{{news.TITLE_EN}}</div>
+                        <div class="divListContent">
+                            <span>Source：<a>{{news.SOURCE}}</a></span>
+                            <span>Country：<a>{{news.COUNTRY_ENG_NAME}}</a></span>
+                            <span>Type：<a>{{news.TYPE}}</a></span>
+                            <span><a>{{news.RELEASE_TIME}}</a></span>
+                        </div>
+                        <div class="sp"></div>
+                        <div class="content">
+                            {{news.CONTENT_EN}}
+                        </div>
+                    </div>
+                    <!--endprint-->
+                </div>
+            </div>
+        </el-col>
+        <!-- 显示中文内容 -->
+        <el-col v-else :span="12">
+            <div class="row clearfix">
+                <div class="row-l">
+                    <div class="title">全球 > {{news.COUNTRY_CHN_NAME}}
+                        <div style="float: right;">
+                            <el-button type="primary" size="small">修正</el-button>
+                            <el-button type="primary" size="small">追踪</el-button>
+                            <el-popover
+                                    ref="popover"
+                                    placement="bottom"
+                                    trigger="hover">
+                                <el-row>
+                                    <el-button type="primary" size="small" @click="turnToChinese">转中文</el-button>
+                                </el-row>
+                                <el-row style="margin-top: 3px;">
+                                    <el-button type="primary" size="small" @click="turnToEnglish">转英文</el-button>
+                                </el-row>
+                            </el-popover>
+                            <el-button type="primary" size="small" v-popover:popover >翻译</el-button>
+                        </div>
+                    </div>
+                    <!--startprint-->
+                    <div class="content category" style="min-height: 600px;">
+                        <div class="newsTitle">【{{news.COUNTRY_CHN_NAME}}】{{news.TITLE_CN}}</div>
+                        <div class="divListContent">
+                            <span>来源：<a>{{news.SOURCE}}</a></span>
+                            <span>国家：<a>{{news.COUNTRY_CHN_NAME}}</a></span>
+                            <span>类型：<a>{{news.TYPE}}</a></span>
+                            <span><a>{{news.RELEASE_TIME}}</a></span>
+                        </div>
+                        <div class="sp"></div>
+                        <div class="content">
+                            {{news.CONTENT_CN}}
+                        </div>
+                    </div>
+                    <!--endprint-->
+                </div>
+            </div>
         </el-col>
     </el-row>
 

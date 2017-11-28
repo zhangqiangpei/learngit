@@ -7,11 +7,19 @@ var mainAttr={
         isFavorite:"",
         myFavorite:{
             objId:null
-        }
+        },
+        onlyChinese:false,
+        chooseEng:true
     },
     methods:{
         print:function () {
             
+        },
+        turnToChinese:function () {
+            this.chooseEng = false;
+        },
+        turnToEnglish:function () {
+            this.chooseEng = true;
         },
         // 添加我的收藏
         addFavorite:function () {
@@ -33,7 +41,7 @@ var mainAttr={
     mounted:function () {
         //外部链接传参
         try {
-            var id = z.url().id;
+            var id = z.url().esId;
             if (z.isNotNullOrEmpty(id)) {
                 this.newsId = id;
                 this.myFavorite.objId = id;
@@ -45,6 +53,23 @@ var mainAttr={
         if (result.code === 0){
             this.news=result.data;
         }
+        // 是中文 TITLE_EN.length = 0 TITLE_CN.length = 0
+        // 是英文 TITLE_EN.length = 0 TITLE.CN.length != 0
+        // 其他语言 TITLE_EN.length != 0 TITLE.CN.length != 0
+        // if (this.news.TITLE_EN.length === 0 ){
+        //     if (this.news.TITLE_CN.length === 0) {
+        //         // 新闻是中文
+        //         this.onlyChinese = true;
+        //     } else {
+        //         // 新闻是英文
+        //         this.onlyChinese = false;
+        //         this.chooseEng = false;
+        //     }
+        // } else if (this.news.TITLE_CN.length !== 0){
+        //     // 新闻是其他语言
+        //     this.onlyChinese = false;
+        //     this.chooseEng = true;
+        // }
         result = z.msService("user", "IisMyFavoritesApi/getByObjIdAndCreator", {id: this.newsId});
         if (result.code === 0){
             if (result.data.length === 0){

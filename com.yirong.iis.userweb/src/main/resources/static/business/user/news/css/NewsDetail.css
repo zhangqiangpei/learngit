@@ -62,7 +62,7 @@
     font-size:12px;
     color:#646E7C;
 }
-#newsTitle{
+.newsTitle{
     height:33px;
     padding-top: 20px;
     background:inherit;
@@ -292,7 +292,13 @@
 .title .more:hover {
     color: #fd5e18;
 }
+.el-popover .el-button--small, .el-button--small.is-round{
+    padding: 6px 15px;
+}
 
+.title .el-button--small, .el-button--small.is-round{
+    padding: 6px 15px;
+}
 .hot .item {
     float: left;
     margin-top: 20px;

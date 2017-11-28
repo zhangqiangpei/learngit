@@ -41,19 +41,30 @@
         <div class="content category">
             <div class="item" v-for="(item, index) in insiderReportList" style="height: 130px">
                 <div class="panel" style="height: 130px">
-                    <div class="title">{{item.TYPE_NAME}}<img src="/business/user/index/css/img/u216.svg">
-                        <span style="float: right">共{{item.DOCS_NUM}}文档&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <div class="title">
+                        <el-row>
+                        <el-col :span="2">
+                        <img src="/business/user/index/css/img/u216.svg">
+                        </el-col>
+                        <el-col :span="22">
+                        {{item.TYPE_NAME}}
+                        <span style="float: right">共{{item.DOCS_NUM}}文档&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        </el-col>
+                        </el-row>
                     </div>
                     <div>
                         <el-row v-for="item1 in item.reports">
                             <a  :href="'forward.do?viewPath=business/user/report/onlineMain.html&kmId='+item1.KM_ID+'&id='+item1.ID+'&reportName='+item1.REPORT_NAME">
-                                <el-col :span="18">{{item1.REPORT_NAME}}</el-col>
+                                <el-col :span="2">&nbsp;</el-col>
+                                <el-col :span="16">{{item1.REPORT_NAME}}</el-col>
                                 <el-col :span="6">{{item1.CREATE_TIME}}</el-col>
                             </a>
                         </el-row>
-
-                        <a class="more"
+                        <el-row>
+                            <el-col :span="2">&nbsp;</el-col>
+                            <a class="more"
                            :href="'/forward.do?viewPath=business/user/report/MoreReport.html&typeId=' + item.ID">更多...</a>
+                        </el-row>
                     </div>
                 </div>
             </div>
@@ -66,20 +77,33 @@
             <div class="content category">
                 <div class="item" v-for="(item, index) in externalReportList" style="height: 160px">
                     <div class="panel" >
-                        <div class="title">{{item.TYPE_NAME}}<img src="/business/user/index/css/img/u216.svg">
-                            <span style="float: right">共{{item.DOCS_NUM}}文档&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <div class="title">
+                            <el-row>
+                                <el-col :span="2">
+                                    <img src="/business/user/index/css/img/u216.svg">
+                                </el-col>
+                                <el-col :span="22">
+                                    {{item.TYPE_NAME}}
+                                    <span style="float: right">共{{item.DOCS_NUM}}文档&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                </el-col>
+                            </el-row>
                         </div>
                         <div>
                             <el-row v-for="item1 in item.reports">
                                 <a  :href="'forward.do?viewPath=business/user/report/onlineMain.html&kmId='+item1.KM_ID+'&id='+item1.ID+'&reportName='+item1.REPORT_NAME">
-                                    <el-col :span="24">{{item1.REPORT_NAME}}</el-col>
-                                    <el-col :span="18">来源：{{item1.REPORT_SOURCE}}</el-col>
+                                    <el-col :span="2">&nbsp;</el-col>
+                                    <el-col :span="22">{{item1.REPORT_NAME}}</el-col>
+                                    <el-col :span="2">&nbsp;</el-col>
+                                    <el-col :span="16">来源：{{item1.REPORT_SOURCE}}</el-col>
                                     <el-col :span="6">{{item1.CREATE_TIME}}</el-col>
                                 </a>
                             </el-row>
 
-                            <a class="more"
-                               :href="'/forward.do?viewPath=business/user/report/MoreReport.html&typeId=' + item.ID">更多...</a>
+                            <el-row>
+                                <el-col :span="2">&nbsp;</el-col>
+                                <a class="more"
+                                   :href="'/forward.do?viewPath=business/user/report/MoreReport.html&typeId=' + item.ID">更多...</a>
+                            </el-row>
                         </div>
                     </div>
                 </div>

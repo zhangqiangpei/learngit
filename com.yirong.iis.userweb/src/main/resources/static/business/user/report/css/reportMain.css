@@ -306,7 +306,7 @@
 
 
 .category {
-    padding: 0 20px;
+    padding: 0 10px;
     min-height: 260px;
 }
 .category .el-row{
@@ -321,7 +321,6 @@
 
 .category .item .panel {
     border-right: 1px solid #e0e0e0;
-    padding-left: 20px;
 }
 
 .category .item:nth-child(3n) .panel {
@@ -341,7 +340,6 @@
 }
 
 .category .item .title img {
-    margin-left: 10px;
     width: 24px;
     height: 24px;
     vertical-align: middle;
