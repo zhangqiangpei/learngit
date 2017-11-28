@@ -1,5 +1,6 @@
 package com.yirong.iis.tp.tslt.et.ief;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import com.yirong.iis.tp.common.entity.LtEtCode;
 import com.yirong.iis.tp.tslt.et.service.LtEtCodeService;
 import com.yirong.iis.tp.tslt.et.service.LtEtDataService;
 import com.yirong.iis.tp.tslt.et.userentity.LtEtDataUserEntity;
+import com.yirong.iis.tp.tslt.et.util.CommandLine;
+import com.yirong.iis.tp.tslt.et.util.LoginClient;
 import com.yirong.iis.tp.tslt.et.util.StarterConsumer;
 
 /**
@@ -45,6 +48,11 @@ public class LtEtIef {
 	private static SysDictionaryService sysDictionaryService;
 
 	/**
+	 * 登录客户端
+	 */
+	private static LoginClient loginClient;
+
+	/**
 	 * 功能描述：初始化
 	 *
 	 * @author 刘捷(liujie)
@@ -59,29 +67,55 @@ public class LtEtIef {
 	 *
 	 */
 	public static void run() {
+		CommandLine commandLine = new CommandLine("Demo::SESS_Demo", "ELEKTRON_DD", "user2", "", "login");
+		loginClient = new LoginClient(commandLine);
+		loginClient.sendRequest();// 发送登录信息
+		loginClient.run();
+	}
+
+	/**
+	 * 功能描述：运行数据
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 *         创建时间 ：2017年11月28日 下午5:10:31
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 *
+	 */
+	public static void runData() {
 		// 获取代码表类型信息
 		List<SysDictionaryEntity> sdeList = sysDictionaryService.findListByCodeAndAppId("020", null);
 		if (null != sdeList && sdeList.size() > 0) {
 			for (SysDictionaryEntity sde : sdeList) {
-				if("020".equals(sde.getCode())) {
+				if ("020".equals(sde.getCode())) {
 					continue;
 				}
 				List<LtEtCode> list = ltEtCodeService.findByCodeType(sde.getCode());
 				if (null != list && list.size() != 0) {
 					StringBuffer codeStrs = new StringBuffer();
 					int listLenth = list.size();
+					List<String> execList = new ArrayList<String>();// 执行的集合
 					for (int i = 0; i < listLenth; i++) {
 						LtEtCode ltEtCode = list.get(i);
-						if (i == (listLenth - 1)) {// 最后一个元素
+						if (i == (listLenth - 1) || (i != 0 && i % 1000 == 0)) {// 最后一个元素或者每1000个编码一个线程
 							codeStrs.append(ltEtCode.getRicCode());
+							execList.add(codeStrs.toString());
+							codeStrs = new StringBuffer();// 重置字符串
 						} else {
 							codeStrs.append(ltEtCode.getRicCode() + ",");
 						}
 					}
 					// 异步线程运行
-					StarterConsumer starterConsumer = new StarterConsumer("Demo::SESS_Demo", "ELEKTRON_DD", "user2",
-							codeStrs.toString(), sde.getCode());
-					starterConsumer.start();
+					for (String exec : execList) {
+						StarterConsumer starterConsumer = new StarterConsumer(loginClient, "Demo::SESS_Demo",
+								"ELEKTRON_DD", "user2", exec, sde.getCode());
+						starterConsumer.start();
+					}
 				}
 			}
 		}

@@ -20,6 +20,11 @@ public class StarterConsumer extends Thread {
 	private CommandLine commandLine;
 
 	/**
+	 * 登录客户端
+	 */
+	private LoginClient loginClient;
+
+	/**
 	 * 功能描述：构造函数
 	 *
 	 * @author 刘捷(liujie)
@@ -31,9 +36,10 @@ public class StarterConsumer extends Thread {
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
 	 */
-	public StarterConsumer(String session, String serviceName, String user, String iteamName,
+	public StarterConsumer(LoginClient loginClient, String session, String serviceName, String user, String iteamName,
 			String eventQueueName) {
 		commandLine = new CommandLine(session, serviceName, user, iteamName, eventQueueName);
+		this.loginClient = loginClient;
 	}
 
 	/**
@@ -52,7 +58,10 @@ public class StarterConsumer extends Thread {
 	 */
 	@Override
 	public void run() {
-		ConsumerClient sc = new ConsumerClient(commandLine);
+		ConsumerClient sc = new ConsumerClient(commandLine, loginClient);
+		//发送请求
+		sc.getMsgClient().sendRequest(null);
+		//获取数据
 		sc.run();
 	}
 

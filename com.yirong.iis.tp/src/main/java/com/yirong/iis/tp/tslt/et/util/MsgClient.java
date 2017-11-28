@@ -74,6 +74,11 @@ public class MsgClient implements Client {
 	private List<String> requestTiemList = new ArrayList<String>();
 
 	/**
+	 * 登录客户端
+	 */
+	private LoginClient loginClient;
+
+	/**
 	 * 功能描述：构造函数
 	 *
 	 * @author 刘捷(liujie)
@@ -85,8 +90,9 @@ public class MsgClient implements Client {
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
 	 */
-	public MsgClient(ConsumerClient starterConsumer) {
+	public MsgClient(ConsumerClient starterConsumer, LoginClient loginClient) {
 		this.starterConsumer = starterConsumer;
+		this.loginClient = loginClient;
 		commandLine = starterConsumer.getCommondLine();
 		dataClient = new DataClient(starterConsumer, this);
 	}
@@ -131,7 +137,7 @@ public class MsgClient implements Client {
 		ommmsg.setMsgType(OMMMsg.MsgType.REQUEST);
 		ommmsg.setMsgModelType(capability);
 		ommmsg.setPriority((byte) 1, 1);
-		Handle loginHandle = starterConsumer.getLoginClient().getLoginHandle();
+		Handle loginHandle = loginClient.getLoginHandle();
 		if (null != loginHandle) {
 			ommmsg.setAssociatedMetaInfo(loginHandle);
 		}
@@ -149,7 +155,7 @@ public class MsgClient implements Client {
 			}
 			ommmsg.setAttribInfo(serviceName, itemName, RDMInstrument.NameType.RIC);
 			ommItemIntSpec.setMsg(ommmsg);
-			Handle itemHandle = starterConsumer.getOmmConsumer().registerClient(starterConsumer.getEventQueue(),
+			Handle itemHandle = loginClient.getOmmConsumer().registerClient(starterConsumer.getEventQueue(),
 					ommItemIntSpec, this, itemName);
 			dataHandles.add(itemHandle);
 			requestTiemList.add(itemName);

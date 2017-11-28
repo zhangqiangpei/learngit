@@ -69,21 +69,21 @@ public class LtEtCodeServiceImpl extends BaseService<LtEtCode, String> implement
 	 */
 	@Override
 	public LtEtCode cacheFindByRicCode(String ricCode) {
-		synchronized (ricCode) {//防止并发
-			String redisId = "lt" + ricCode;
-			String id = RedisCacheEif.hget(redisId, "id");
-			LtEtCode ltEtCode = null;
-			if (StringUtil.isNotNullOrEmpty(id)) {// 缓存有数据，直接使用
-				ltEtCode = new LtEtCode();
-				ltEtCode.setId(id);
-				Map<String, String> map = RedisCacheEif.hgetall(redisId);
-				ltEtCode.setRicCode(map.get("code"));
-				ltEtCode.setParentRicCode(map.get("pcode"));
-				ltEtCode.setCodeDesc(map.get("desc"));
-				ltEtCode.setCodeName(map.get("name"));
-				ltEtCode.setCodeType(map.get("codeType"));
-				ltEtCode.setCountryEnglishName(map.get("countryEnglishName"));
-			} else {// 缓存没有数据，需查询数据库
+		String redisId = "lt" + ricCode;
+		String id = RedisCacheEif.hget(redisId, "id");
+		LtEtCode ltEtCode = null;
+		if (StringUtil.isNotNullOrEmpty(id)) {// 缓存有数据，直接使用
+			ltEtCode = new LtEtCode();
+			ltEtCode.setId(id);
+			Map<String, String> map = RedisCacheEif.hgetall(redisId);
+			ltEtCode.setRicCode(map.get("code"));
+			ltEtCode.setParentRicCode(map.get("pcode"));
+			ltEtCode.setCodeDesc(map.get("desc"));
+			ltEtCode.setCodeName(map.get("name"));
+			ltEtCode.setCodeType(map.get("codeType"));
+			ltEtCode.setCountryEnglishName(map.get("countryEnglishName"));
+		} else {// 缓存没有数据，需查询数据库
+			synchronized (ricCode) {// 防止并发
 				ltEtCode = this.ltEtCodeDao.findByRicCode(ricCode);
 				if (null != ltEtCode) {// 数据库有数据，同时保存一份至缓存
 					RedisCacheEif.hset(redisId, "code", ricCode);
@@ -104,8 +104,8 @@ public class LtEtCodeServiceImpl extends BaseService<LtEtCode, String> implement
 					RedisCacheEif.hset(redisId, "id", ltEtCode.getId());// 由于是识别标志，必须放最后SET（防止并发）
 				}
 			}
-			return ltEtCode;
 		}
+		return ltEtCode;
 	}
 
 	/**
