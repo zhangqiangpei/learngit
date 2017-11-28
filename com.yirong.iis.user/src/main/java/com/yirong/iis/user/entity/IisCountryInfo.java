@@ -20,7 +20,7 @@ import javax.persistence.*;
  *         </p>
  */
 @Entity
-@Table(name="IIS_COUNTRY_INFO")
+@Table(name="SY_COUNTRY")
 public class IisCountryInfo implements Serializable {
 
     /**

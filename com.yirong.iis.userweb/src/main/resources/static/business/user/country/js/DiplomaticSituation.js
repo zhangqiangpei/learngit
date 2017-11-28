@@ -41,7 +41,6 @@ var infoVe = new Vue({
         }
     },
     mounted: function() {
-    	debugger;
     	this.englishName = this.GetQueryString("eName");
     	this.getCountryInfo();
     	this.getDiplomaticSituation();

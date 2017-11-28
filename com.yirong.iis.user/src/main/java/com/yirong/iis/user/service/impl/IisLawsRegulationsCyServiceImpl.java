@@ -263,10 +263,11 @@ public class IisLawsRegulationsCyServiceImpl extends BaseService<IisLawsRegulati
 				}
 			}
 			StringBuffer sql = new StringBuffer();
-			sql.append("SELECT ID \"id\",CLASSIFY_ID \"classifyId\",TITLE \"title\",CONTENT content ");
+			sql.append("SELECT ID \"id\",CLASSIFY_ID \"classifyId\",TITLE \"title\"");
 			sql.append("FROM IIS_LAWS_REGULATIONS ");
 			sql.append("WHERE CLASSIFY_ID in ( "+idStr+" )");
 			resultLsit = this.exeNativeQueryMap(sql.toString(), param);
+			
 			result.put("cy", list);
 			result.put("laws", resultLsit);
 		}

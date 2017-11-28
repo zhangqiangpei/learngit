@@ -29,7 +29,7 @@
 				{{item.classifyName}}
 			</span>
 			<p style="font-size: 14px;" >
-				<span style="display:block;" v-for="subItem in item.children" @click="showContent()">{{subItem.title}}</span>
+				<span style="display:block;" v-for="subItem in item.children" @click="showContent(subItem.id)">{{subItem.title}}</span>
 			</p>
 		</div>
 	</div>
@@ -48,6 +48,7 @@ color:#009BEF;
 <script src="/frame/awaken/awaken.core.js"></script>
 <script src="/frame/awaken/awaken.common.js"></script>
 <script src="/common/js/com.js"></script>
+<script src="/frame/awaken/awaken.dialog.js"></script>
 <script src="/business/user/country/js/LawsRegulations.js"></script>
 </html>
 

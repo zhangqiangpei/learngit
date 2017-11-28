@@ -78,7 +78,7 @@ public class IisCountryInfoServiceImpl extends BaseService<IisCountryInfo, Strin
 		List<Object> param = new ArrayList<Object>();
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT t.ID \"id\", t.ISO2CODE \"iso2code\",t.ISOCODE \"isocode\",t.ENGLISH_NAME \"englishName\",t.CHINESE_NAME \"chineseName\",t.CONTINENT_CODE \"continentCode\"");
-		sql.append(" FROM IIS_COUNTRY_INFO t ");
+		sql.append(" FROM SY_COUNTRY t ");
 		sql.append("where 1=1 ");
 		if(StringUtil.isNotNullOrEmpty(para.getChineseName())){
 			sql.append(" and ( t.ENGLISH_NAME LIKE ? OR t.CHINESE_NAME LIKE ? )");
@@ -105,7 +105,7 @@ public class IisCountryInfoServiceImpl extends BaseService<IisCountryInfo, Strin
 		sql.append("SELECT t.ISO2CODE \"iso2code\",t.ISOCODE \"isocode\",t.ENGLISH_NAME \"englishName\",t.CHINESE_NAME \"chineseName\",t.CONTINENT_CODE \"continentCode\",");
 		sql.append("DATE_FORMAT(t.MODIFY_TIME,'%Y-%m-%d %H:%i:%s') \"modifyTime\",");
 		sql.append(" (SELECT d.NAME FROM SYS_DiCTIONARY d WHERE t.CONTINENT_CODE = d.code) \"continentName\"");
-		sql.append(" FROM IIS_COUNTRY_INFO t ");
+		sql.append(" FROM SY_COUNTRY t ");
 		sql.append("where 1=1 ");
 		if(StringUtil.isNotNullOrEmpty(para.getEnglishName())){
 			sql.append(" and t.ENGLISH_NAME  = ?");
