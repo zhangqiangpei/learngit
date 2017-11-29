@@ -55,6 +55,7 @@ var mainAttr = {
     	this.getCountryInfo();
     	//初始化table
     	this.tableInit("user","IisKeyEventsApi/list");
+    	this.tableInitSort("RELEASE_TIME","desc");
     	//请求后台
     	this.searchClick();
     } 

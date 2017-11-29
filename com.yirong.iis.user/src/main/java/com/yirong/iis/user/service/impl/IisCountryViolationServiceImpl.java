@@ -1,6 +1,5 @@
 package com.yirong.iis.user.service.impl;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,17 +15,17 @@ import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.commons.util.datatype.StringUtil;
 import com.yirong.commons.util.entity.PageEntiry;
 import com.yirong.commons.util.error.ErrorPromptInfoUtil;
-import com.yirong.iis.user.dao.IisKeyEventsDao;
-import com.yirong.iis.user.entity.IisKeyEvents;
-import com.yirong.iis.user.service.IisKeyEventsService;
-import com.yirong.iis.user.userentity.IisKeyEventsUserEntity;
+import com.yirong.iis.user.dao.IisCountryViolationDao;
+import com.yirong.iis.user.entity.IisCountryViolation;
+import com.yirong.iis.user.service.IisCountryViolationService;
+import com.yirong.iis.user.userentity.IisCountryViolationUserEntity;
 
  /**
- * 功能描述：重大事件表service实现类
+ * 功能描述：国家违约概率表service实现类
  * 
  * @author 
  *         <p>
- *         创建时间 ：2017-11-28 10:58:00
+ *         创建时间 ：2017-11-29 09:44:05
  *         </p>
  * 
  *         <p>
@@ -34,28 +33,28 @@ import com.yirong.iis.user.userentity.IisKeyEventsUserEntity;
  *         </p>
  */
 @SuppressWarnings("rawtypes")
-@Service("IisKeyEventsServiceImpl")
-public class IisKeyEventsServiceImpl extends BaseService<IisKeyEvents, String>
-		implements IisKeyEventsService {
+@Service("IisCountryViolationServiceImpl")
+public class IisCountryViolationServiceImpl extends BaseService<IisCountryViolation, String>
+		implements IisCountryViolationService {
 
 	/**
 	 * 日志操作类
 	 */
 	private Logger logger = LoggerFactory
-			.getLogger(IisKeyEventsServiceImpl.class);
+			.getLogger(IisCountryViolationServiceImpl.class);
 
 	/**
 	 * dao注入
 	 */
 	@Autowired
-	private IisKeyEventsDao iisKeyEventsDao;
+	private IisCountryViolationDao iisCountryViolationDao;
 
 	 /**
 	 * 功能描述：获取dao操作类
 	 * 
 	 * @author 林明铁
 	 *         <p>
-	 *         创建时间 ：2017-11-28 10:58:00
+	 *         创建时间 ：2017-11-29 09:44:05
 	 *         </p>
 	 * 
 	 *         <p>
@@ -63,42 +62,42 @@ public class IisKeyEventsServiceImpl extends BaseService<IisKeyEvents, String>
 	 *         </p>
 	 */
 	@Override
-	public IBaseDao<IisKeyEvents, String> getBaseDao() {
-		return iisKeyEventsDao;
+	public IBaseDao<IisCountryViolation, String> getBaseDao() {
+		return iisCountryViolationDao;
 	}
 
 	/**
-	 * 功能描述：新增重大事件表
+	 * 功能描述：新增国家违约概率表
 	 * 
 	 * @author 林明铁
 	 *         <p>
-	 *         创建时间 ：2017-11-28 10:58:00
+	 *         创建时间 ：2017-11-29 09:44:05
 	 *         </p>
 	 * 
 	 *         <p>
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
-	 * @param iisKeyEvents
+	 * @param iisCountryViolation
 	 * @return
 	 */
 	@Override
-	public Map saveIisKeyEvents(IisKeyEvents iisKeyEvents){
+	public Map saveIisCountryViolation(IisCountryViolation iisCountryViolation){
 		// 根据编码及分类ID获取数据（唯一键）
-		/*IisKeyEvents iisKeyEventsTemp = this.iisKeyEventsDao
+		/*IisCountryViolation iisCountryViolationTemp = this.iisCountryViolationDao
 				.findBy_____(_____);
-		String id = iisKeyEvents.getId();
-		if (null == iisKeyEventsTemp
-				|| (StringUtil.isNotNullOrEmpty(id) && id.equals(iisKeyEventsTemp
+		String id = iisCountryViolation.getId();
+		if (null == iisCountryViolationTemp
+				|| (StringUtil.isNotNullOrEmpty(id) && id.equals(iisCountryViolationTemp
 						.getId()))) {// 该唯一键不存在 或者为“修改操作且修改本身数据”
-			id = iisKeyEvents.getId();
+			id = iisCountryViolation.getId();
 			if (StringUtil.isNotNullOrEmpty(id)) {// 修改
 				// 获取数据库对象
-				iisKeyEventsTemp = this.iisKeyEventsDao.findOne(id);
+				iisCountryViolationTemp = this.iisCountryViolationDao.findOne(id);
 				// 复制属性
-				BeanUtil.copyPropertiesIgnoreNull(iisKeyEvents, iisKeyEventsTemp);
-				this.save(iisKeyEventsTemp);
+				BeanUtil.copyPropertiesIgnoreNull(iisCountryViolation, iisCountryViolationTemp);
+				this.save(iisCountryViolationTemp);
 			} else {
-				this.save(iisKeyEvents);
+				this.save(iisCountryViolation);
 			}
 			return ResultUtil.newOk("操作成功").toMap();
 		} else {// 该名称及父类ID已存在
@@ -110,41 +109,41 @@ public class IisKeyEventsServiceImpl extends BaseService<IisKeyEvents, String>
 	}
 
 	/**
-	 * 功能描述：修改重大事件表
+	 * 功能描述：修改国家违约概率表
 	 * 
 	 * @author 林明铁
 	 *         <p>
-	 *         创建时间 ：2017-11-28 10:58:00
+	 *         创建时间 ：2017-11-29 09:44:05
 	 *         </p>
 	 * 
 	 *         <p>
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
-	 * @param iisKeyEvents
+	 * @param iisCountryViolation
 	 * @return
 	 */
 	@Override
-	public Map updateIisKeyEvents(IisKeyEvents iisKeyEvents) {
+	public Map updateIisCountryViolation(IisCountryViolation iisCountryViolation) {
 		// 根据编号Id
-		IisKeyEvents iisKeyEventsTemp = this.iisKeyEventsDao.findOne(iisKeyEvents
+		IisCountryViolation iisCountryViolationTemp = this.iisCountryViolationDao.findOne(iisCountryViolation
 				.getId());
-		if (null == iisKeyEventsTemp) {// 未查询到任何数据
-			String promptInfo = "不存在ID：" + iisKeyEvents.getId();
+		if (null == iisCountryViolationTemp) {// 未查询到任何数据
+			String promptInfo = "不存在ID：" + iisCountryViolation.getId();
 			String result = ErrorPromptInfoUtil.getErrorInfo("00202",
 					promptInfo);
 			logger.warn(result);
 			return ResultUtil.newError(result).toMap();
 		} else {// 有该数据
-			return saveIisKeyEvents(iisKeyEvents);
+			return saveIisCountryViolation(iisCountryViolation);
 		}
 	}
 	
 	/**
-	 * 功能描述：删除重大事件表（批量）
+	 * 功能描述：删除国家违约概率表（批量）
 	 * 
 	 * @author 林明铁
 	 *         <p>
-	 *         创建时间 ：2017-11-28 10:58:00
+	 *         创建时间 ：2017-11-29 09:44:05
 	 *         </p>
 	 * 
 	 *         <p>
@@ -154,15 +153,15 @@ public class IisKeyEventsServiceImpl extends BaseService<IisKeyEvents, String>
 	 * @return
 	 */
 	 @Override
-	public Map delIisKeyEvents(String idStrs) {
+	public Map delIisCountryViolation(String idStrs) {
 		// 处理id集合串
 		String[] ids = idStrs.split(",");
 		/** 先判断所有ID是否允许删除 **/
 		StringBuffer sb = new StringBuffer();
 		for (String id : ids) {
 			// 判断ID是否存在
-			IisKeyEvents iisKeyEvents = this.iisKeyEventsDao.findOne(id);
-			if (null == iisKeyEvents) {// 不存在直接跳出循环
+			IisCountryViolation iisCountryViolation = this.iisCountryViolationDao.findOne(id);
+			if (null == iisCountryViolation) {// 不存在直接跳出循环
 				String promptInfo = "不存在ID：" + id;
 				sb.append(ErrorPromptInfoUtil.getErrorInfo("00202", promptInfo));
 				break;
@@ -172,7 +171,7 @@ public class IisKeyEventsServiceImpl extends BaseService<IisKeyEvents, String>
 		if (StringUtil.isNullOrEmpty(sb.toString())) {// 所有数据均允许删除
 			// 将id循环拼装成序列化集合
 			for (String id : ids) {
-				this.iisKeyEventsDao.delete(id);// 物理删除
+				this.iisCountryViolationDao.delete(id);// 物理删除
 			}
 			return ResultUtil.newOk("操作成功").toMap();
 		} else {// 不允许删除
@@ -182,11 +181,11 @@ public class IisKeyEventsServiceImpl extends BaseService<IisKeyEvents, String>
 	}
 
 	/**
-	 * 功能描述：根据ID查询重大事件表信息
+	 * 功能描述：根据ID查询国家违约概率表信息
 	 * 
 	 * @author 林明铁
 	 *         <p>
-	 *         创建时间 ：2017-11-28 10:58:00
+	 *         创建时间 ：2017-11-29 09:44:05
 	 *         </p>
 	 * 
 	 *         <p>
@@ -196,29 +195,25 @@ public class IisKeyEventsServiceImpl extends BaseService<IisKeyEvents, String>
 	 * @return
 	 */
 	@Override
-	public Map queryIisKeyEventsById(String id) {
-		if(StringUtil.isNullOrEmpty(id)){
-			return ResultUtil.newError("参数错误!").toMap();
-		}
-		// 拼装查询sql
-		List<Object> param = new ArrayList<Object>();
+	public Map queryIisCountryViolationById(String id) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT ID \"id\",TITLE \"title\",CONTENT \"content\",SOURCE \"source\",");
-		sql.append("DATE_FORMAT(RELEASE_TIME,' %Y-%m-%d ') \"releaseTime\" ");
-		sql.append(" FROM IIS_KEY_EVENTS");
-		sql.append(" WHERE ID = ? ");
-		param.add(id);
+		sql.append("");
+		sql.append("");
+		sql.append("");
+		sql.append(" ");
+		sql.append("");
+		List<Object> param = new ArrayList<Object>();
 		Map map = this.exeSqlMap(sql.toString(), param);
 		return ResultUtil.newOk("操作成功")
 				.setData(map).toMap();
 	}
 
 	/**
-	 * 功能描述：查询重大事件表列表信息
+	 * 功能描述：查询国家违约概率表列表信息
 	 * 
 	 * @author 林明铁
 	 *         <p>
-	 *         创建时间 ：2017-11-28 10:58:00
+	 *         创建时间 ：2017-11-29 09:44:05
 	 *         </p>
 	 * 
 	 *         <p>
@@ -228,28 +223,41 @@ public class IisKeyEventsServiceImpl extends BaseService<IisKeyEvents, String>
 	 * @return
 	 */
 	@Override
-	public Map queryIisKeyEventsList(IisKeyEventsUserEntity ue){
+	public Map queryIisCountryViolationList(IisCountryViolationUserEntity ue){
 		// 拼装查询sql
-		List<Object> param = new ArrayList<Object>();
+		/*List<Object> param = new ArrayList<Object>();
 		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT ID \"id\",TITLE \"title\",");
-		sql.append("DATE_FORMAT(RELEASE_TIME,' %Y-%m-%d ') \"releaseTime\" ");
-		sql.append(" FROM IIS_KEY_EVENTS");
-		sql.append(" WHERE 1=1 ");
+		sql.append("");
+		sql.append("");
+		sql.append("");
+		sql.append("");
 		// 标准编码
-		if (StringUtil.isNotNullOrEmpty(ue.getCountryEngName())) {
-			sql.append(" AND COUNTRY_ENG_NAME = ?");
-			param.add(ue.getCountryEngName());
-		}
-		if (StringUtil.isNotNullOrEmpty(ue.getQueryYear())){
-			sql.append(" AND EXTRACT(YEAR FROM RELEASE_TIME) = ?");
-			param.add(ue.getQueryYear());
+		if (StringUtil.isNotNullOrEmpty(ue.get_____())) {
+			sql.append("");
+			param.add("%");
 		}
 		// 获取数据
 		PageEntiry pageEntiry = this.findPageSQLMap(sql.toString(), param,
 				null, ue);
 		return ResultUtil.newOk("操作成功")
-				.setData(pageEntiry).toMap();
+				.setData(pageEntiry).toMap();*/
+		return null;
+	}
+
+	@Override
+	public Map querylist(IisCountryViolationUserEntity psue) {
+		if(StringUtil.isNullOrEmpty(psue.getEnglishName())){
+			return ResultUtil.newError("参数错误!").toMap();
+		}
+		List<Object> param = new ArrayList<Object>();
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT ID \"id\",VIOLATION_NAME \"violationName\",VIOLATION_VALUE \"violationValue\" ");
+		sql.append("FROM IIS_COUNTRY_VIOLATION ");
+		sql.append("WHERE 1=1 ");
+		sql.append("AND ENGLISH_NAME = ? ");
+		param.add(psue.getEnglishName());
+		List<Map<String,Object>> result = this.exeNativeQueryMap(sql.toString(),param );
+		return ResultUtil.newOk("查询成功!").setData(result).toMap();
 	}
 
 }
