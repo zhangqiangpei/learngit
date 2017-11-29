@@ -35,7 +35,7 @@ public class IisCompanyRatiosServiceImpl  extends BaseService<VeIisCompanyRatios
 	/**
 	 * 日志操作类
 	 */
-	private Logger logger = LoggerFactory.getLogger(IisCompanyListServiceImpl.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * dao注入

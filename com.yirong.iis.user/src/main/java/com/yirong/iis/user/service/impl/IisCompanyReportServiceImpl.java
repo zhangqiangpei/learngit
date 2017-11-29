@@ -35,7 +35,7 @@ public class IisCompanyReportServiceImpl  extends BaseService<VeIisCompanyFinanc
 	/**
 	 * 日志操作类
 	 */
-	private Logger logger = LoggerFactory.getLogger(IisCompanyListServiceImpl.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * dao注入
