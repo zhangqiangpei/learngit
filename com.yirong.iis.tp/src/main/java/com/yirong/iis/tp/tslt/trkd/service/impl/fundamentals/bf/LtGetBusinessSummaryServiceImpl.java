@@ -56,7 +56,7 @@ public class LtGetBusinessSummaryServiceImpl extends LtHttpService{
 				String error = data.getJSONObject("Fault").getJSONObject("Reason").getJSONObject("Text").getString("Value");
 				logger.error("获取业务摘要接口失败："+error);
 				
-				addRequestLog("GetBusinessSummary",content.toString(),result,0);
+				//addRequestLog("GetBusinessSummary",content.toString(),result,0);
 				return ResultUtil.newError("获取业务摘要接口失败："+error).toMap();
 			}
 			
@@ -67,19 +67,19 @@ public class LtGetBusinessSummaryServiceImpl extends LtHttpService{
 				LtTrkdCompany company = ltTrkdCompanyService.findByProperty("companyId", param.get("companyId").toString());
 				
 				if(null == company){
-					addRequestLog("GetBusinessSummary",content.toString(),result,2);
+					//addRequestLog("GetBusinessSummary",content.toString(),result,2);
 					return ResultUtil.newError("保存公司简介失败，公司不存在："+ param.get("companyId").toString()).toMap();
 				}
 				
 				company.setTextInfo(GetBusinessSummary_Response_1.getString("Value"));
 				ltTrkdCompanyService.save(company);
 				
-				addRequestLog("GetBusinessSummary",content.toString(),result,1);
+				//addRequestLog("GetBusinessSummary",content.toString(),result,1);
 				return ResultUtil.newOk("获取业务摘要成功！").toMap();
 			}
 		}
 		
-		addRequestLog("GetBusinessSummary",content.toString(),result,0);
+		//addRequestLog("GetBusinessSummary",content.toString(),result,0);
 		return ResultUtil.newError("获取业务摘要失败!").toMap();
 	}
 

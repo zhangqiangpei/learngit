@@ -11,7 +11,8 @@ public interface ILtTrkdRequestLogService  extends IBaseService<LtTrkdRequestLog
 	 * @param param
 	 * @param result
 	 * @param status
+	 * @param companyId 
 	 */
-	void addRequestLog(String name, String param, String result,Integer status);
+	void addRequestLog(String name, String param, String result,Integer status, String companyId);
 
 }

@@ -76,7 +76,7 @@ public class LtGetSignificantDevelopmentsServiceImpl extends LtHttpService{
 			JSONObject data = JSONObject.fromObject(result);
 			if(data.has("Fault")){
 				String error = data.getJSONObject("Fault").getJSONObject("Reason").getJSONObject("Text").getString("Value");
-				addRequestLog("GetSignificantDevelopment",content.toString(),result,0);
+				addRequestLog("GetSignificantDevelopment",content.toString(),result,0,param.get("companyId").toString());
 				logger.error("获取快照报告接口失败："+error);
 				return ResultUtil.newError("获取快照报告接口失败："+error).toMap();
 			}
@@ -84,45 +84,48 @@ public class LtGetSignificantDevelopmentsServiceImpl extends LtHttpService{
 			//返回成功 处理数据
 			if(data.has("GetSignificantDevelopments_Response_1")){
 				
-				//获取对应公司
-				LtTrkdCompany company = ltTrkdCompanyService.findByProperty("companyId", param.get("companyId").toString());
-				if(null == company){
-					addRequestLog("GetSignificantDevelopment",content.toString(),result,2);
-					return ResultUtil.newError("新增公司重大事件失败，公司不存在："+param.get("companyId").toString()).toMap();
+				if(null != data.getJSONObject("GetSignificantDevelopments_Response_1").getJSONObject("FindResponse")
+						&& !data.getJSONObject("GetSignificantDevelopments_Response_1").getJSONObject("FindResponse").isNullObject()){
+					//获取对应公司
+					LtTrkdCompany company = ltTrkdCompanyService.findByProperty("companyId", param.get("companyId").toString());
+					if(null == company){
+						addRequestLog("GetSignificantDevelopment",content.toString(),result,2,param.get("companyId").toString());
+						return ResultUtil.newError("新增公司重大事件失败，公司不存在："+param.get("companyId").toString()).toMap();
+					}
+					
+					List<LtTrkdCompanySignificant> sigList = new ArrayList<LtTrkdCompanySignificant>();
+					JSONArray developmentArr = data.getJSONObject("GetSignificantDevelopments_Response_1").getJSONObject("FindResponse")
+							.getJSONArray("Development");
+					for(int i = 0; i < developmentArr.size() ; i++){
+						JSONObject developmentJson = developmentArr.getJSONObject(i);
+						LtTrkdCompanySignificant sig = new LtTrkdCompanySignificant();
+						sig.setCompanyId(company.getCompanyId());
+						sig.setCountry(developmentJson.getJSONObject("Xrefs").getString("Country"));
+						sig.setDescription(developmentJson.getString("Description"));
+						sig.setHeadline(developmentJson.getString("Headline"));
+						sig.setInitiation(developmentJson.getJSONObject("Dates").getString("Initiation").replace("T", " "));
+						sig.setLastUpdate(developmentJson.getJSONObject("Dates").getString("LastUpdate").replace("T", " "));
+						sig.setSignificance(developmentJson.getJSONObject("Flags").getInt("Significance"));
+						sig.setTopic(developmentJson.getJSONObject("Topics").getJSONObject("Topic1").getString("Value"));
+						sigList.add(sig);
+					}
+					
+					/*List<LtTrkdCompanySignificant> oldList = ltTrkdCompanySignificantService.findByProperty("companyId", company.getId(), Order.basicOrder());
+					if(null != oldList && oldList.size() > 0){
+						ltTrkdCompanySignificantService.deleteAllByEntities(oldList);
+					}*/
+					
+					if(sigList.size() > 0){
+						ltTrkdCompanySignificantService.saveAll(sigList);
+					}
 				}
 				
-				List<LtTrkdCompanySignificant> sigList = new ArrayList<LtTrkdCompanySignificant>();
-				JSONArray developmentArr = data.getJSONObject("GetSignificantDevelopments_Response_1").getJSONObject("FindResponse")
-						.getJSONArray("Development");
-				for(int i = 0; i < developmentArr.size() ; i++){
-					JSONObject developmentJson = developmentArr.getJSONObject(i);
-					LtTrkdCompanySignificant sig = new LtTrkdCompanySignificant();
-					sig.setCompanyId(company.getId());
-					sig.setCountry(developmentJson.getJSONObject("Xrefs").getString("Country"));
-					sig.setDescription(developmentJson.getString("Description"));
-					sig.setHeadline(developmentJson.getString("Headline"));
-					sig.setInitiation(developmentJson.getJSONObject("Dates").getString("Initiation").replace("T", " "));
-					sig.setLastUpdate(developmentJson.getJSONObject("Dates").getString("LastUpdate").replace("T", " "));
-					sig.setSignificance(developmentJson.getJSONObject("Flags").getInt("Significance"));
-					sig.setTopic(developmentJson.getJSONObject("Topics").getJSONObject("Topic1").getString("Value"));
-					sigList.add(sig);
-				}
-				
-				/*List<LtTrkdCompanySignificant> oldList = ltTrkdCompanySignificantService.findByProperty("companyId", company.getId(), Order.basicOrder());
-				if(null != oldList && oldList.size() > 0){
-					ltTrkdCompanySignificantService.deleteAllByEntities(oldList);
-				}*/
-				
-				if(sigList.size() > 0){
-					ltTrkdCompanySignificantService.saveAll(sigList);
-				}
-				
-				addRequestLog("GetSignificantDevelopment",content.toString(),result,1);
+				addRequestLog("GetSignificantDevelopment",content.toString(),result,1,param.get("companyId").toString());
 				return ResultUtil.newOk("获取快照报告成功！").toMap();
 			}
 		}
 		
-		addRequestLog("GetSignificantDevelopment",content.toString(),result,0);
+		addRequestLog("GetSignificantDevelopment",content.toString(),result,0,param.get("companyId").toString());
 		return ResultUtil.newError("获取快照报告失败!").toMap();
 	}
 

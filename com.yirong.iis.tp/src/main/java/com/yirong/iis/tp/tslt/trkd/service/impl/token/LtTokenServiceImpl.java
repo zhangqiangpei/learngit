@@ -51,7 +51,7 @@ public class LtTokenServiceImpl implements ILtTokenService{
 			if(data.has("Fault")){
 				String error = data.getJSONObject("Fault").getJSONObject("Reason").getJSONObject("Text").getString("Value");
 				logger.error("请求路透token失败："+error);
-				ltTrkdRequestLogService.addRequestLog("CreateServiceToken",content.toString(),result,0); 
+				ltTrkdRequestLogService.addRequestLog("CreateServiceToken",content.toString(),result,0,""); 
 				return ResultUtil.newError("请求路透token失败："+error).toMap();
 			}
 			
@@ -62,13 +62,13 @@ public class LtTokenServiceImpl implements ILtTokenService{
 				Date date = DateUtil.dateAdd(DateUtil.str2Date(dateStr,DateUtil.FORMAT_SECOND), DateUtil.HOUR, 8);
 				LtConstant.expiration = date;
 				
-				ltTrkdRequestLogService.addRequestLog("CreateServiceToken",content.toString(),result,1); 
+				ltTrkdRequestLogService.addRequestLog("CreateServiceToken",content.toString(),result,1,""); 
 				return ResultUtil.newOk("获取路透接口成功！").toMap();
 			}
 			
 		}
 		
-		ltTrkdRequestLogService.addRequestLog("CreateServiceToken",content.toString(),result,0); 
+		ltTrkdRequestLogService.addRequestLog("CreateServiceToken",content.toString(),result,0,""); 
 		return ResultUtil.newError("获取路透token失败!").toMap();
 	}
 

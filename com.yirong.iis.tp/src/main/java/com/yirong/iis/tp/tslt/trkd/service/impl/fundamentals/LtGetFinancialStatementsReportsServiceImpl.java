@@ -66,7 +66,7 @@ public class LtGetFinancialStatementsReportsServiceImpl extends LtHttpService{
 				String error = data.getJSONObject("Fault").getJSONObject("Reason").getJSONObject("Text").getString("Value");
 				logger.error("获取财务报表接口失败："+error);
 				
-				addRequestLog("GetFinancialStatementsReports",content.toString(),result,0);
+				addRequestLog("GetFinancialStatementsReports",content.toString(),result,0,param.get("companyId").toString());
 				return ResultUtil.newError("获取财务报表接口失败："+error).toMap();
 			}
 			
@@ -87,7 +87,7 @@ public class LtGetFinancialStatementsReportsServiceImpl extends LtHttpService{
 				//获取对应公司
 				LtTrkdCompany company = ltTrkdCompanyService.findByProperty("companyId", param.get("companyId").toString());
 				if(null == company){
-					addRequestLog("GetFinancialStatementsReports",content.toString(),result,2);
+					addRequestLog("GetFinancialStatementsReports",content.toString(),result,2,param.get("companyId").toString());
 					return ResultUtil.newError("新增财务报表失败，公司不存在："+param.get("companyId").toString()).toMap();
 				}
 				
@@ -110,7 +110,7 @@ public class LtGetFinancialStatementsReportsServiceImpl extends LtHttpService{
 							for(int n = 0;n < lineItem.size() ; n++){
 								JSONObject line = lineItem.getJSONObject(n);
 								LtTrkdCompanyFinanceReport fp = new LtTrkdCompanyFinanceReport();
-								fp.setCompanyId(company.getId());
+								fp.setCompanyId(company.getCompanyId());
 								
 								if(json.has("AuditorName")){
 									fp.setAuditorName(json.getJSONObject("AuditorName").getString("Value"));
@@ -167,7 +167,7 @@ public class LtGetFinancialStatementsReportsServiceImpl extends LtHttpService{
 							for(int n = 0;n < lineItem.size() ; n++){
 								JSONObject line = lineItem.getJSONObject(n);
 								LtTrkdCompanyFinanceReport fp = new LtTrkdCompanyFinanceReport();
-								fp.setCompanyId(company.getId());
+								fp.setCompanyId(company.getCompanyId());
 								if(json.has("AuditorName")){
 									fp.setAuditorName(json.getJSONObject("AuditorName").getString("Value"));
 								}
@@ -207,18 +207,18 @@ public class LtGetFinancialStatementsReportsServiceImpl extends LtHttpService{
 				}
 				
 				//先删除旧有数据，然后新增新数据
-				List<LtTrkdCompanyFinanceReport> oldList = ltTrkdCompanyFinanceReportService.findByProperty("companyId", param.get("companyIdType").toString(), Order.basicOrder());
+				List<LtTrkdCompanyFinanceReport> oldList = ltTrkdCompanyFinanceReportService.findByProperty("companyId", company.getCompanyId(), Order.basicOrder());
 				ltTrkdCompanyFinanceReportService.deleteAllByEntities(oldList);
 				if(null != frList && frList.size() > 0){
 					ltTrkdCompanyFinanceReportService.saveAll(frList);
 				}
 				
-				addRequestLog("GetFinancialStatementsReports",content.toString(),result,1);
+				addRequestLog("GetFinancialStatementsReports",content.toString(),result,1,param.get("companyId").toString());
 				return ResultUtil.newOk("获取财务报表成功！").toMap();
 			}
 		}
 		
-		addRequestLog("GetFinancialStatementsReports",content.toString(),result,0);
+		addRequestLog("GetFinancialStatementsReports",content.toString(),result,0,param.get("companyId").toString());
 		return ResultUtil.newError("获取财务报表失败!").toMap();
 	}
 

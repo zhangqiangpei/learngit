@@ -61,7 +61,7 @@ public class LtGetGeneralInformationServiceImpl extends LtHttpService{
 				String error = data.getJSONObject("Fault").getJSONObject("Reason").getJSONObject("Text").getString("Value");
 				logger.error("获取一般信息接口失败："+error);
 				
-				addRequestLog("GetGeneralInformation",content.toString(),result,0);
+				//addRequestLog("GetGeneralInformation",content.toString(),result,0);
 				return ResultUtil.newError("获取一般信息接口失败："+error).toMap();
 			}
 			
@@ -69,7 +69,7 @@ public class LtGetGeneralInformationServiceImpl extends LtHttpService{
 			if(data.has("GetGeneralInformation_Response_1")){
 				LtTrkdCompany company = ltTrkdCompanyService.findByProperty("companyId", param.get("companyId").toString());
 				if(null == company){
-					addRequestLog("GetGeneralInformation",content.toString(),result,2);
+					//addRequestLog("GetGeneralInformation",content.toString(),result,2);
 					return ResultUtil.newError("保存公司基础信息失败，公司不存在："+ param.get("companyId").toString()).toMap();
 				}
 				
@@ -97,12 +97,12 @@ public class LtGetGeneralInformationServiceImpl extends LtHttpService{
 				
 				ltTrkdCompanyService.save(company);
 				
-				addRequestLog("GetGeneralInformation",content.toString(),result,1);
+				//addRequestLog("GetGeneralInformation",content.toString(),result,1);
 				return ResultUtil.newOk("获取一般信息成功！").toMap();
 			}
 		}
 		
-		addRequestLog("GetGeneralInformation",content.toString(),result,0);
+		//addRequestLog("GetGeneralInformation",content.toString(),result,0);
 		return ResultUtil.newError("获取一般信息失败!").toMap();
 	}
 }

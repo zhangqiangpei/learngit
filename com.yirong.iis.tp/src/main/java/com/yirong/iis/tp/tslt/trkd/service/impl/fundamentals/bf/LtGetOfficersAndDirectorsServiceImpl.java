@@ -62,7 +62,7 @@ public class LtGetOfficersAndDirectorsServiceImpl extends LtHttpService{
 				String error = data.getJSONObject("Fault").getJSONObject("Reason").getJSONObject("Text").getString("Value");
 				logger.error("获取官员和董事接口失败："+error);
 				
-				addRequestLog("GetOfficersAndDirectors",content.toString(),result,0);
+				//addRequestLog("GetOfficersAndDirectors",content.toString(),result,0);
 				return ResultUtil.newError("获取官员和董事接口失败："+error).toMap();
 			}
 			
@@ -71,19 +71,19 @@ public class LtGetOfficersAndDirectorsServiceImpl extends LtHttpService{
 				//获取公司
 				LtTrkdCompany company = ltTrkdCompanyService.findByProperty("companyId", param.get("companyId").toString());
 				if(null == company){
-					addRequestLog("GetOfficersAndDirectors",content.toString(),result,2);
+					//addRequestLog("GetOfficersAndDirectors",content.toString(),result,2);
 					return ResultUtil.newError("保存公司高管信息失败，公司不存在："+ param.get("companyId").toString()).toMap();
 				}
 				
 				
 				
 				
-				addRequestLog("GetOfficersAndDirectors",content.toString(),result,1);
+				//addRequestLog("GetOfficersAndDirectors",content.toString(),result,1);
 				return ResultUtil.newOk("获取获得官员和董事成功！").toMap();
 			}
 		}
 		
-		addRequestLog("GetOfficersAndDirectors",content.toString(),result,0);
+		//addRequestLog("GetOfficersAndDirectors",content.toString(),result,0);
 		return ResultUtil.newError("获取获得官员和董事失败!").toMap();
 	}
 

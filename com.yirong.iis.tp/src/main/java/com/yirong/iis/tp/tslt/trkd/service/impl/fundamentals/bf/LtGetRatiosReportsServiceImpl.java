@@ -65,7 +65,7 @@ public class LtGetRatiosReportsServiceImpl extends LtHttpService{
 				String error = data.getJSONObject("Fault").getJSONObject("Reason").getJSONObject("Text").getString("Value");
 				logger.error("获取比率报告接口失败："+error);
 				
-				addRequestLog("GetRatiosReports",content.toString(),result,0);
+				//addRequestLog("GetRatiosReports",content.toString(),result,0);
 				return ResultUtil.newError("获取比率报告接口失败："+error).toMap();
 			}
 			
@@ -75,7 +75,7 @@ public class LtGetRatiosReportsServiceImpl extends LtHttpService{
 				//获取对应公司
 				LtTrkdCompany company = ltTrkdCompanyService.findByProperty("companyId", param.get("companyId").toString());
 				if(null == company){
-					addRequestLog("GetRatiosReports",content.toString(),result,2);
+					//addRequestLog("GetRatiosReports",content.toString(),result,2);
 					return ResultUtil.newError("新增比率报告失败，公司不存在："+param.get("companyId").toString()).toMap();
 				}
 				
@@ -117,12 +117,12 @@ public class LtGetRatiosReportsServiceImpl extends LtHttpService{
 					ltTrkdCompanyRatiosService.saveAll(ratiosList);
 				}
 				
-				addRequestLog("GetRatiosReports",content.toString(),result,1);
+				//addRequestLog("GetRatiosReports",content.toString(),result,1);
 				return ResultUtil.newOk("获取比率报告成功！").toMap();
 			}
 		}
 		
-		addRequestLog("GetRatiosReports",content.toString(),result,0);
+		//addRequestLog("GetRatiosReports",content.toString(),result,0);
 		return ResultUtil.newError("获取比率报告失败!").toMap();
 	}
 

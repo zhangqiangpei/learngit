@@ -51,6 +51,12 @@ public class LtTrkdRequestLog extends IdEntity{
 	 */
 	@Column(name="STATUS",nullable=true)
 	private Integer status;
+	
+	/**
+	* 公司唯一标识
+	*/
+	@Column(name="COMPANY_ID",nullable=false,length=20)
+	public String companyId;
 
 	public String getName() {
 		return name;
@@ -90,6 +96,14 @@ public class LtTrkdRequestLog extends IdEntity{
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 	
 }

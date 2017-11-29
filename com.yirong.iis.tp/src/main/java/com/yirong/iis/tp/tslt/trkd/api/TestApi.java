@@ -17,7 +17,7 @@ import com.yirong.iis.tp.tslt.trkd.service.LtHttpService;
 @RequestMapping("test")
 public class TestApi {
 	
-	@Resource(name="ltGetSignificantDevelopmentsServiceImpl")
+	@Resource(name="ltGetSnapshotReportsServiceImpl")
 	private LtHttpService ltHttpService;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)

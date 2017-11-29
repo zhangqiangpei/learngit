@@ -68,7 +68,7 @@ public class LtGetSnapshotReportsServiceImpl extends LtHttpService{
 			JSONObject data = JSONObject.fromObject(result);
 			if(data.has("Fault")){
 				String error = data.getJSONObject("Fault").getJSONObject("Reason").getJSONObject("Text").getString("Value");
-				addRequestLog("GetSnapshotReports",content.toString(),result,0);
+				addRequestLog("GetSnapshotReports",content.toString(),result,0,param.get("companyId").toString());
 				logger.error("获取快照报告接口失败："+error);
 				return ResultUtil.newError("获取快照报告接口失败："+error).toMap();
 			}
@@ -78,7 +78,7 @@ public class LtGetSnapshotReportsServiceImpl extends LtHttpService{
 				//获取对应公司
 				LtTrkdCompany company = ltTrkdCompanyService.findByProperty("companyId", param.get("companyId").toString());
 				if(null == company){
-					addRequestLog("GetSnapshotReports",content.toString(),result,2);
+					addRequestLog("GetSnapshotReports",content.toString(),result,2,param.get("companyId").toString());
 					return ResultUtil.newError("新增高管信息失败，公司不存在："+param.get("companyId").toString()).toMap();
 				}
 				
@@ -114,7 +114,7 @@ public class LtGetSnapshotReportsServiceImpl extends LtHttpService{
 					JSONObject officerJson = officerArr.getJSONObject(i);
 					LtTrkdCompanyOfficer officer = new LtTrkdCompanyOfficer();
 					officer.setAge(officerJson.getInt("age"));
-					officer.setCompanyId(company.getId());
+					officer.setCompanyId(company.getCompanyId());
 					officer.setFirstName(officerJson.getString("firstName"));
 					officer.setLastName(officerJson.getString("lastName"));
 					officer.setMi(officerJson.getString("mI"));
@@ -135,7 +135,7 @@ public class LtGetSnapshotReportsServiceImpl extends LtHttpService{
 					officerList.add(officer);
 				}
 				
-				List<LtTrkdCompanyOfficer> oldOfficerList = ltTrkdCompanyOfficerService.findByProperty("companyId", company.getId(), Order.basicOrder());
+				List<LtTrkdCompanyOfficer> oldOfficerList = ltTrkdCompanyOfficerService.findByProperty("companyId", company.getCompanyId(), Order.basicOrder());
 				if(null != oldOfficerList && oldOfficerList.size() > 0){
 					ltTrkdCompanyOfficerService.deleteAllByEntities(oldOfficerList);
 				}
@@ -156,7 +156,7 @@ public class LtGetSnapshotReportsServiceImpl extends LtHttpService{
 						JSONObject ratioJson = ratioArr.getJSONObject(j);
 						
 						LtTrkdCompanyRatios ratios = new LtTrkdCompanyRatios();
-						ratios.setCompanyId(company.getId());
+						ratios.setCompanyId(company.getCompanyId());
 						ratios.setExchangeRate(radioJson.getDouble("ExchangeRate"));
 						ratios.setPriceCurrency(radioJson.getString("PriceCurrency"));
 						ratios.setReportingCurrency(radioJson.getString("ReportingCurrency"));
@@ -172,7 +172,7 @@ public class LtGetSnapshotReportsServiceImpl extends LtHttpService{
 					}
 				}
 				
-				List<LtTrkdCompanyRatios> oldList = ltTrkdCompanyRatiosService.findByProperty("companyId", company.getId(), Order.basicOrder());
+				List<LtTrkdCompanyRatios> oldList = ltTrkdCompanyRatiosService.findByProperty("companyId", company.getCompanyId(), Order.basicOrder());
 				if(null != oldList && oldList.size() > 0){
 					ltTrkdCompanyRatiosService.deleteAllByEntities(oldList);
 				}
@@ -181,12 +181,12 @@ public class LtGetSnapshotReportsServiceImpl extends LtHttpService{
 					ltTrkdCompanyRatiosService.saveAll(ratiosList);
 				}
 				
-				addRequestLog("GetSnapshotReports",content.toString(),result,1);
+				addRequestLog("GetSnapshotReports",content.toString(),result,1,param.get("companyId").toString());
 				return ResultUtil.newOk("获取快照报告成功！").toMap();
 			}
 		}
 		
-		addRequestLog("GetSnapshotReports",content.toString(),result,0);
+		addRequestLog("GetSnapshotReports",content.toString(),result,0,param.get("companyId").toString());
 		return ResultUtil.newError("获取快照报告失败!").toMap();
 	}
 
