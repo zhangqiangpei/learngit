@@ -81,17 +81,15 @@ public class IisCountryInfoServiceImpl extends BaseService<IisCountryInfo, Strin
      * </p>
      */
     @Override
-    public Map saveIisCountryInfo(IisCountryInfo iisCountryInfo) {
+    public Map saveIisCountryInfo(IisCountryInfo iisCountryInfo,boolean isUpdate) {
         // 根据编码及分类ID获取数据（唯一键）
-        IisCountryInfo iisCountryInfoTemp = this.iisCountryInfoDao.findOne(iisCountryInfo.getId());
-        String id = iisCountryInfo.getId();
-        if (null == iisCountryInfoTemp
-                || (StringUtil.isNotNullOrEmpty(id) && id.equals(iisCountryInfoTemp
-                .getId()))) {// 该唯一键不存在 或者为“修改操作且修改本身数据”
-            id = iisCountryInfo.getId();
-            if (StringUtil.isNotNullOrEmpty(id)) {// 修改
+        IisCountryInfo iisCountryInfoTemp = this.iisCountryInfoDao.getByEnglishName(iisCountryInfo.getEnglishName());
+        String englishName = iisCountryInfo.getEnglishName();
+        if (null == iisCountryInfoTemp || isUpdate) {// 该唯一键不存在 或者为“修改操作且修改本身数据”
+            englishName = iisCountryInfo.getEnglishName();
+            if (isUpdate) {// 修改
                 // 获取数据库对象
-                iisCountryInfoTemp = this.iisCountryInfoDao.findOne(id);
+                iisCountryInfoTemp = this.iisCountryInfoDao.getByEnglishName(iisCountryInfo.getEnglishName());
                 // 复制属性
                 BeanUtil.copyPropertiesIgnoreNull(iisCountryInfo, iisCountryInfoTemp);
                 this.save(iisCountryInfoTemp);
@@ -123,14 +121,14 @@ public class IisCountryInfoServiceImpl extends BaseService<IisCountryInfo, Strin
     @Override
     public Map updateIisCountryInfo(IisCountryInfo iisCountryInfo) {
         // 根据编号Id
-        IisCountryInfo iisCountryInfoTemp = this.iisCountryInfoDao.findOne(iisCountryInfo.getId());
+        IisCountryInfo iisCountryInfoTemp = this.iisCountryInfoDao.getByEnglishName(iisCountryInfo.getEnglishName());
         if (null == iisCountryInfoTemp) {// 未查询到任何数据
-            String promptInfo = "不存在ID：" + iisCountryInfo.getId();
+            String promptInfo = "不存在英文名：" + iisCountryInfo.getEnglishName();
             String result = ErrorPromptInfoUtil.getErrorInfo("00102", promptInfo);
             logger.warn(result);
             return ResultUtil.newError(result).toMap();
         } else {// 有该数据
-            return saveIisCountryInfo(iisCountryInfo);
+            return saveIisCountryInfo(iisCountryInfo,true);
         }
     }
 
@@ -195,10 +193,10 @@ public class IisCountryInfoServiceImpl extends BaseService<IisCountryInfo, Strin
 
         List<Object> param = new ArrayList<Object>();
         StringBuffer sql = new StringBuffer();
-        sql.append("SELECT ID,ISO2CODE,ISOCODE,ENGLISH_NAME,CHINESE_NAME,");
+        sql.append("SELECT ISO2CODE \"iso2code\",ISOCODE \"isocode\",ENGLISH_NAME \"englishName\",CHINESE_NAME \"chineseName\",CONTINENT_CODE \"continentCode\", ");
         sql.append("(SELECT NAME FROM SYS_DICTIONARY WHERE CODE = CONTINENT_CODE) CONTINENT_NAME ");
-        sql.append("FROM IIS_COUNTRY_INFO ");
-        sql.append("WHERE ID = ? ");
+        sql.append("FROM SY_COUNTRY ");
+        sql.append("WHERE ENGLISH_NAME = ? ");
         param.add(id);
         Map map = this.exeSqlMap(sql.toString(), param);
         return ResultUtil.newOk("操作成功").setData(map).toMap();
@@ -223,9 +221,9 @@ public class IisCountryInfoServiceImpl extends BaseService<IisCountryInfo, Strin
         // 拼装查询sql
         List<Object> param = new ArrayList<Object>();
         StringBuffer sql = new StringBuffer();
-        sql.append("SELECT ID,ISO2CODE,ISOCODE,ENGLISH_NAME,CHINESE_NAME,CREATE_TIME,");
+        sql.append("SELECT ISO2CODE,ISOCODE,ENGLISH_NAME,CHINESE_NAME,CREATE_TIME,");
         sql.append("(SELECT NAME FROM SYS_DICTIONARY WHERE CODE = CONTINENT_CODE) CONTINENT_NAME ");
-        sql.append("FROM IIS_COUNTRY_INFO ");
+        sql.append("FROM SY_COUNTRY ");
         sql.append("WHERE 1=1 ");
         // 所属州
         if (StringUtil.isNotNullOrEmpty(ue.getContinentCode())) {

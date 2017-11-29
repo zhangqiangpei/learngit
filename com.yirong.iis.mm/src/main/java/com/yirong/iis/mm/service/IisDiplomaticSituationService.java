@@ -3,15 +3,15 @@ package com.yirong.iis.mm.service;
 import java.util.Map;
 
 import com.yirong.awaken.core.service.IBaseService;
-import com.yirong.iis.mm.entity.IisCountryInfo;
-import com.yirong.iis.mm.userentity.IisCountryInfoUserEntity;
+import com.yirong.iis.mm.entity.IisDiplomaticSituation;
+import com.yirong.iis.mm.userentity.IisDiplomaticSituationUserEntity;
 
 /**
- * 功能描述：国家信息表service接口
+ * 功能描述：外交情况表(与中国)service接口
  * 
  * @author 陈清沣
  *         <p>
- *         创建时间 ：2017-11-24 18:16:59
+ *         创建时间 ：2017-11-27 19:29:29
  *         </p>
  * 
  *         <p>
@@ -19,46 +19,46 @@ import com.yirong.iis.mm.userentity.IisCountryInfoUserEntity;
  *         </p>
  */
 @SuppressWarnings("rawtypes")
-public interface IisCountryInfoService extends IBaseService<IisCountryInfo, String> {
+public interface IisDiplomaticSituationService extends IBaseService<IisDiplomaticSituation, String> {
 
 	/**
-	 * 功能描述：新增国家信息表
+	 * 功能描述：新增外交情况表(与中国)
 	 * 
 	 * @author 陈清沣
 	 *         <p>
-	 *         创建时间 ：2017-11-24 18:16:59
+	 *         创建时间 ：2017-11-27 19:29:29
 	 *         </p>
 	 * 
 	 *         <p>
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
-	 * @param iisCountryInfo
+	 * @param iisDiplomaticSituation
 	 * @return
 	 */
-	Map saveIisCountryInfo(IisCountryInfo iisCountryInfo,boolean isUpdate);
+	Map saveIisDiplomaticSituation(IisDiplomaticSituation iisDiplomaticSituation);
 
 	/**
-	 * 功能描述：修改国家信息表
+	 * 功能描述：修改外交情况表(与中国)
 	 * 
 	 * @author 陈清沣
 	 *         <p>
-	 *         创建时间 ：2017-11-24 18:16:59
+	 *         创建时间 ：2017-11-27 19:29:29
 	 *         </p>
 	 * 
 	 *         <p>
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
-	 * @param iisCountryInfo
+	 * @param iisDiplomaticSituation
 	 * @return
 	 */
-	Map updateIisCountryInfo(IisCountryInfo iisCountryInfo);
+	Map updateIisDiplomaticSituation(IisDiplomaticSituation iisDiplomaticSituation);
 
 	/**
-	 * 功能描述：删除国家信息表（批量）
+	 * 功能描述：删除外交情况表(与中国)（批量）
 	 * 
 	 * @author 陈清沣
 	 *         <p>
-	 *         创建时间 ：2017-11-24 18:16:59
+	 *         创建时间 ：2017-11-27 19:29:29
 	 *         </p>
 	 * 
 	 *         <p>
@@ -67,14 +67,14 @@ public interface IisCountryInfoService extends IBaseService<IisCountryInfo, Stri
 	 * @param idStrs
 	 * @return
 	 */
-	Map delIisCountryInfo(String idStrs);
+	Map delIisDiplomaticSituation(String idStrs);
 
 	/**
-	 * 功能描述：根据ID查询国家信息表信息
+	 * 功能描述：根据ID查询外交情况表(与中国)信息
 	 * 
 	 * @author 陈清沣
 	 *         <p>
-	 *         创建时间 ：2017-11-24 18:16:59
+	 *         创建时间 ：2017-11-27 19:29:29
 	 *         </p>
 	 * 
 	 *         <p>
@@ -83,14 +83,14 @@ public interface IisCountryInfoService extends IBaseService<IisCountryInfo, Stri
 	 * @param id
 	 * @return
 	 */
-	Map queryIisCountryInfoById(String id);
+	Map queryIisDiplomaticSituationById(String id);
 
 	 /**
-	 * 功能描述：查询国家信息表列表信息
+	 * 功能描述：查询外交情况表(与中国)列表信息
 	 * 
 	 * @author 陈清沣
 	 *         <p>
-	 *         创建时间 ：2017-11-24 18:16:59
+	 *         创建时间 ：2017-11-27 19:29:29
 	 *         </p>
 	 * 
 	 *         <p>
@@ -99,6 +99,6 @@ public interface IisCountryInfoService extends IBaseService<IisCountryInfo, Stri
 	 * @param ue
 	 * @return
 	 */
-	Map queryIisCountryInfoList(IisCountryInfoUserEntity ue);
+	Map queryIisDiplomaticSituationList(IisDiplomaticSituationUserEntity ue);
 
 }
