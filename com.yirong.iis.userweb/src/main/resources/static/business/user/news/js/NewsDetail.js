@@ -23,26 +23,44 @@ var mainAttr={
             projectName:"",
             projectInfo:"",
             reason:"",
-            keyword:""
+            keyWord:""
         },
         projectTrackDetailModel:{
             proId:"",
-            objId:""
+            objId:"",
+            isSign:"1",
+            objOrder:1
         },
+        signList:[{key:"1",label:"作为标记点"},{key:"0",label:"不作为标记点"}],
         rules:{
             projectName: [
                 { required: true, message: '请输入名称', trigger: 'blur' },
                 { min: 1, max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur' }
             ]
-        }
+        },
+        correctDialogVisible:false
     },
     methods:{
+        // 修正按钮
+        correctBtnClick:function () {
+            this.correctDialogVisible = true;
+        },
         tableRowClick:function (row, event, column) {
             this.projectTrackDetailModel.proId = row.ID;
         },
         // 保存追踪明细
         saveProjectTrackDetail:function () {
-
+            if (z.isNullOrEmpty(this.projectTrackDetailModel.proId)){
+                z.info("请选择追踪项目！");
+                return;
+            }
+            z.msServiceAsync("user","IisProjectTrackDetailApi/save", this.projectTrackDetailModel, function (result) {
+                if (result.code === 0){
+                    z.success(result.msg);
+                    mainVue.addProjectTrackDetailDialogVisible = false;
+                    mainVue.projectTrackDetailModel.proId = "";
+                }
+            })
         },
         // 保存追踪
         saveProjectTrack:function () {
@@ -52,13 +70,14 @@ var mainAttr={
                     if (result.code === 0){
                         z.success(result.msg);
                         this.newProjectTrackDialogVisible = false;
+                        this.searchClick();
                     }
                 }
             });
         },
         // 追踪时，追踪类型发生变化
         aptdTypeCodeChange:function (typeCode) {
-            // this.tableSearchModel.typeCode = typeCode;
+            mainVue.projectTrackDetailModel.proId = "";
             this.searchClick();
         },
         // 追踪
@@ -127,7 +146,7 @@ var mainAttr={
         result = z.msService("user", "IisEsSearchApi/getReportById", {id:this.newsId});
         if (result.code === 0){
             this.news=result.data;
-            this.projectTrackDetailModel.objId = this.news.NEW_ID;
+            this.projectTrackDetailModel.objId = this.news.new_id;
         }
         // 新闻是中文
         if (this.news.COUNTRY_ENG_NAME === 'China'){

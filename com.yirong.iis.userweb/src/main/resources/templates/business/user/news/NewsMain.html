@@ -40,12 +40,12 @@
                         </el-select>
                     </el-form-item>
                     <el-form-item>
-                        <el-select v-model="tableSearchModel.country" size="medium" :clearable="true" @change="setCountryCode" placeholder="选择国家">
+                        <el-select v-model="country" size="medium" :clearable="true" @change="setCountryCode" placeholder="选择国家">
                             <el-option
                                     v-for="item in countries"
-                                    :key="item.id"
+                                    :key="item.englishName"
                                     :label="item.chineseName"
-                                    :value="item.id">
+                                    :value="item.englishName">
                             </el-option>
                         </el-select>
                     </el-form-item>
@@ -53,19 +53,51 @@
             </el-col>
             <el-col :span="20">
                 <el-table  :data="tableData" @sort-change="tableSortChange"
-                           @selection-change="tableChange" ref="mytable" stripe border>
+                           @selection-change="tableChange" ref="mytable" border>
                     <el-table-column :render-header="renderHeader">
                         <template scope="scope">
-                            <div id="newsTitle">
-                                <a :href="'/forward.do?viewPath=business/user/news/NewsDetail.html&esId=' + scope.row.id">
-                                    【{{scope.row.COUNTRY_CHN_NAME}}】{{scope.row.TITLE}}</a>
+                            <div v-if='scope.row.COUNTRY_ENG_NAME === "China"'>
+                                <div class="newsTitle">
+                                    <a :href="'/forward.do?viewPath=business/user/news/NewsDetail.html&esId=' + scope.row.id">
+                                        【{{scope.row.COUNTRY_CHN_NAME}}】{{scope.row.TITLE}}</a>
+                                </div>
+                                <div >摘要：{{scope.row.SUMMARY}}</div>
+                                <div class="divListContent">
+                                    <span>来源：<a>{{scope.row.SOURCE}}</a></span>
+                                    <span>国家：<a>{{scope.row.COUNTRY_CHN_NAME}}</a></span>
+                                    <span>类型：<a>{{scope.row.TYPE}}</a></span>
+                                    <span><a>{{scope.row.RELEASE_TIME}}</a></span>
+                                </div>
                             </div>
-                            <div >摘要：{{scope.row.SUMMARY}}</div>
-                            <div class="divListContent">
-                                <span>来源：<a>{{scope.row.SOURCE}}</a></span>
-                                <span>国家：<a>{{scope.row.COUNTRY_CHN_NAME}}</a></span>
-                                <span>类型：<a>{{scope.row.TYPE}}</a></span>
-                                <span><a>{{scope.row.RELEASE_TIME}}</a></span>
+                            <div v-else-if='scope.row.COUNTRY_ENG_NAME === "America"'>
+                                <div class="newsTitle">
+                                    <a :href="'/forward.do?viewPath=business/user/news/NewsDetail.html&esId=' + scope.row.id">
+                                        【{{scope.row.COUNTRY_ENG_NAME}}】{{scope.row.TITLE_EN}}</a>
+                                </div>
+                                <div >摘要：{{scope.row.SUMMARY}}</div>
+                                <div class="divListContent">
+                                    <span>Source：<a>{{scope.row.SOURCE}}</a></span>
+                                    <span>Country：<a>{{scope.row.COUNTRY_ENG_NAME}}</a></span>
+                                    <span>Type：<a>{{scope.row.TYPE}}</a></span>
+                                    <span><a>{{scope.row.RELEASE_TIME}}</a></span>
+                                </div>
+                            </div>
+                            <div v-else>
+                                <div class="newsTitle">
+                                    <a :href="'/forward.do?viewPath=business/user/news/NewsDetail.html&esId=' + scope.row.id">
+                                        【{{scope.row.COUNTRY_ENG_NAME}}】{{scope.row.TITLE}}</a>
+                                </div>
+                                <div class="newsEngTitle">
+                                    <a :href="'/forward.do?viewPath=business/user/news/NewsDetail.html&esId=' + scope.row.id">
+                                        【{{scope.row.COUNTRY_ENG_NAME}}】{{scope.row.TITLE_EN}}</a>
+                                </div>
+                                <div >摘要：{{scope.row.SUMMARY}}</div>
+                                <div class="divListContent">
+                                    <span>Source：<a>{{scope.row.SOURCE}}</a></span>
+                                    <span>Country：<a>{{scope.row.COUNTRY_ENG_NAME}}</a></span>
+                                    <span>Type：<a>{{scope.row.TYPE}}</a></span>
+                                    <span><a>{{scope.row.RELEASE_TIME}}</a></span>
+                                </div>
                             </div>
                         </template>
                     </el-table-column>

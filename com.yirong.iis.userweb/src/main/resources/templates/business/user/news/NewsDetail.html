@@ -125,7 +125,7 @@
                 <div class="row-l">
                     <div class="title">Global > {{news.COUNTRY_ENG_NAME}}
                         <div style="float: right;">
-                            <el-button type="primary" size="small">追踪</el-button>
+                            <el-button @click="addTrack" type="primary" size="small">追踪</el-button>
                             <el-popover
                                     ref="popover"
                                     placement="bottom"
@@ -181,8 +181,8 @@
                 <div class="row-l">
                     <div class="title">全球 > {{news.COUNTRY_CHN_NAME}}
                         <div style="float: right;">
-                            <el-button type="primary" size="small">修正</el-button>
-                            <el-button type="primary" size="small">追踪</el-button>
+                            <el-button @click="correctBtnClick" type="primary" size="small">修正</el-button>
+                            <el-button @click="addTrack" type="primary" size="small">追踪</el-button>
                             <el-popover
                                     ref="popover"
                                     placement="bottom"
@@ -233,6 +233,38 @@
         </el-col>
     </el-row>
 
+    <!-- 语言修正对话框 -->
+    <el-dialog
+            width="33%"
+            title="修正"
+            :visible.sync="correctDialogVisible">
+        <el-row>
+            <el-col :span="10">
+                <el-input
+                        type="textarea"
+                        :autosize="{ minRows: 3, maxRows: 3}"
+                        placeholder="请输入内容"
+                        >
+                </el-input>
+            </el-col>
+            <el-col :span="4">
+                &nbsp;
+            </el-col>
+            <el-col :span="10">
+                <el-input
+                        type="textarea"
+                        :autosize="{ minRows: 3, maxRows: 3}"
+                        placeholder="请输入内容"
+                        >
+                </el-input>
+            </el-col>
+        </el-row>
+        <span slot="footer" class="dialog-footer">
+            <el-button  size="medium" @click="correctDialogVisible = false">取 消</el-button>
+            <el-button  size="medium" type="primary" @click="correctDialogVisible = false">确 定</el-button>
+        </span>
+    </el-dialog>
+    <!-- 新闻追踪对话框 -->
     <el-dialog
             :show-close="false"
             :visible.sync="addProjectTrackDetailDialogVisible">
@@ -266,7 +298,7 @@
                     <el-input v-model="projectTrackModel.reason" placeholder="请输入原因"></el-input>
                 </el-form-item>
                 <el-form-item label="关键字">
-                    <el-input v-model="projectTrackModel.keyword" placeholder="请输入关键词，以逗号隔开"></el-input>
+                    <el-input v-model="projectTrackModel.keyWord" placeholder="请输入关键词，以逗号隔开"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer">
@@ -276,7 +308,7 @@
         </el-dialog>
         <!--<div class="sp"></div>-->
         <el-row>
-            <el-form ref="form" :model="tableSearchModel" label-width="80px">
+            <el-form ref="tableSearchForm" :model="tableSearchModel" label-width="80px">
                 <el-form-item label="追踪类别">
                     <el-select v-model="tableSearchModel.typeCode" @change="aptdTypeCodeChange" placeholder="选择追踪类别">
                         <el-option
@@ -290,18 +322,39 @@
             </el-form>
         </el-row>
         <el-row>
-            <el-table  :data="tableData" @sort-change="tableSortChange" :show-header="false"
-                       :highlight-current-row="true" @row-click="tableRowClick"
-                       @selection-change="tableChange" ref="mytable" stripe border>
-                <el-table-column
-                        prop="PROJECT_NAME"
-                        label="名称">
-                </el-table-column>
-            </el-table>
-            <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"
-                           @size-change="tableSizeChange"
-                           :page-size="tableSearchModel.pageSize" @current-change="tableCurrentChange"
-                           layout="total, sizes, prev, pager, next, jumper"></el-pagination>
+            <el-form label-width="80px">
+                <el-form-item label="追踪项目">
+                    <el-table  :data="tableData" @sort-change="tableSortChange" :show-header="false"
+                               :highlight-current-row="true" @row-click="tableRowClick"
+                               @selection-change="tableChange" ref="mytable" stripe border>
+                        <el-table-column
+                                prop="PROJECT_NAME"
+                                label="名称">
+                        </el-table-column>
+                    </el-table>
+                    <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"
+                                   @size-change="tableSizeChange"
+                                   :page-size="tableSearchModel.pageSize" @current-change="tableCurrentChange"
+                                   layout="total, sizes, prev, pager, next, jumper"></el-pagination>
+                </el-form-item>
+            </el-form>
+        </el-row>
+        <el-row>
+            <el-form ref="projectTrackDetailForm" :model="projectTrackDetailModel" label-width="80px">
+                <el-form-item label="标记点">
+                    <el-select v-model="projectTrackDetailModel.isSign">
+                        <el-option
+                                v-for="item in signList"
+                                :key="item.key"
+                                :label="item.label"
+                                :value="item.key">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="排序">
+                    <el-input-number size="medium" v-model="projectTrackDetailModel.objOrder"></el-input-number>
+                </el-form-item>
+            </el-form>
         </el-row>
         <span slot="footer">
             <el-button @click="addProjectTrackDetailDialogVisible = false" size="medium">取 消</el-button>

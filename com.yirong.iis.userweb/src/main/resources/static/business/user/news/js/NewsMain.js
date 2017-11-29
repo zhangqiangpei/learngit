@@ -9,6 +9,7 @@ var mainAttr={
             countryChnName:"",
             countryEngName:""
         },
+        country:"",
         continents:[],
         countries:[],
         countriesParam:{
@@ -25,18 +26,13 @@ var mainAttr={
         setContinentsCode:function (code) {
             this.tableSearchModel.continentCode = code;
         },
-        setCountryCode:function (id) {
+        setCountryCode:function (chineseName) {
             for (var i = 0; i< this.countries.length; i++){
-                if (this.countries[i].id === id){
+                if (this.countries[i].chineseName === chineseName){
                     this.tableSearchModel.countryChnName = this.countries[i].chineseName;
                     this.tableSearchModel.countryEngName = this.countries[i].englishName;
                 }
             }
-        },
-        // 获取搜索结果
-        getSearchResult:function () {
-            console.log(vm_toolbarVue.searchNewsResult);
-            console.log("11233");
         },
         //查询按钮
         searchClick: function () {
@@ -62,11 +58,10 @@ var mainAttr={
         this.continents = this.selectSearch("021");
         this.newsTypes = this.selectSearch("024");
         // 初始化国家选项
-        z.msServiceAsync("user","IisCountryInfoApi/queryList", this.countriesParam, function (result) {
-            if (result.code === 0){
-                searchNewsVue.countries = result.data.data;
-            }
-        });
+        var result = z.msService("user","IisCountryInfoApi/queryList", this.countriesParam);
+        if (result.code === 0){
+            this.countries = result.data;
+        }
         //初始化table
         this.tableInit("user", "IisEsSearchApi/searchNews");
         //默认排序
