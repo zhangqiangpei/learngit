@@ -33,7 +33,7 @@ public class FundamentalsJob {
 	
 	private Logger logger = LoggerFactory.getLogger(FundamentalsJob.class);
 	
-	private static final ExecutorService threadPool = Executors.newFixedThreadPool(10);
+	private static final ExecutorService threadPool = Executors.newFixedThreadPool(5);
 	
 	@Resource(name="ltGetFinancialStatementsReportsServiceImpl")
 	private LtHttpService financialService;

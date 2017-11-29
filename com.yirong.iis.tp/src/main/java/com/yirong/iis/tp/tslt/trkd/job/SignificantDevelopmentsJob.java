@@ -36,7 +36,7 @@ import com.yirong.iis.tp.tslt.trkd.service.LtTrkdCompanyService;
 public class SignificantDevelopmentsJob {
 	
 	private static final ExecutorService threadPool = Executors
-			.newFixedThreadPool(3);
+			.newFixedThreadPool(10);
 	
 	private Logger logger = LoggerFactory.getLogger(FundamentalsJob.class);
 	
@@ -47,19 +47,19 @@ public class SignificantDevelopmentsJob {
 	private LtTrkdCompanyService ltTrkdCompanyService;
 	
 	/**
-	 * 每隔半个小时获取一次重大事件数据
+	 * 每隔3小时获取一次重大事件数据
 	 * @throws InterruptedException
 	 */
-	@Scheduled(cron = "0 55 9 * * ?")//0 0/1 *  * * ? 
+	@Scheduled(cron = "0 0 0/3  * * ?") 
 	public void doSignificantDevelopmentsJob() throws InterruptedException {
 		logger.info("***************doSignificantDevelopmentsJob定时任务开始**********");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-		final String startTime = sdf.format(new Date());
+		final String endTime = sdf.format(new Date());
 		
-		Calendar nowTime = Calendar.getInstance();
-		nowTime.add(Calendar.MINUTE, 30);
-		final String endTime = sdf.format(nowTime.getTime());
+		Calendar startDate = Calendar.getInstance();
+		startDate.add(Calendar.HOUR, -3);
+		final String startTime = sdf.format(startDate.getTime());
 		
 		long count = ltTrkdCompanyService.entityCount();
 		List<LtTrkdCompany> companyList = new ArrayList<LtTrkdCompany>();
