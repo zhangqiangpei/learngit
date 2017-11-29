@@ -13,38 +13,40 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yirong.commons.util.datatype.JsonUtil;
 import com.yirong.commons.util.order.Order;
-import com.yirong.iis.user.service.IisCompanyInformationService;
-import com.yirong.iis.user.userentity.IisCompanyInformationUserEntity;
+import com.yirong.iis.user.service.IisCompanyOfficerService;
+import com.yirong.iis.user.userentity.VeIisCompanyOfficerUserEntity;
 
  
-
 /**
  * 
- * @ClassName: IisCompanyInformationApi  
- * @Description: TODO(企业资讯表api接口) 
+ * @ClassName: IisCompanyOfficerApi  
+ * @Description: TODO(企业高管信息api接口) 
  * @author liny
- * @date 2017年11月22日 下午3:48:59 
+ * @date 2017年11月28日 下午3:48:48 
  * @version V0.1
  */
 @SuppressWarnings("rawtypes")
 @Controller
-@RequestMapping("IisCompanyInformationApi")
+@RequestMapping("IisCompanyOfficerApi")
 @ResponseBody
-public class IisCompanyInformationApi {
+public class IisCompanyOfficerApi {
 
 	/**
 	 * 标准service注入
 	 */
 	@Autowired
-	private IisCompanyInformationService iisCompanyInformationService;
+	private IisCompanyOfficerService iisCompanyOfficerService;
+ 
+
 	 
-	/**
-	 * 
-	 * @Title: list 
-	 * @Description: TODO(查询企业资讯表列表信息) 
-	 * @param paramAll
-	 * @return String
-	 */
+	 
+	 /**
+	  * 
+	  * @Title: list 
+	  * @Description: TODO(查询企业高管列表信息) 
+	  * @param paramAll
+	  * @return String
+	  */
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	public String list(@RequestBody String paramAll) {
 		// 获取参数信息
@@ -54,11 +56,11 @@ public class IisCompanyInformationApi {
 		Map<String, Class> calssMap = new HashMap<String, Class>();
 		calssMap.put("orders", Order.class);
 		// 实体转换
-		IisCompanyInformationUserEntity psue = (IisCompanyInformationUserEntity) JsonUtil
-				.StringToObject(param, IisCompanyInformationUserEntity.class,calssMap);
+		VeIisCompanyOfficerUserEntity ue = (VeIisCompanyOfficerUserEntity) JsonUtil
+				.StringToObject(param, VeIisCompanyOfficerUserEntity.class,calssMap);
 		// 处理业务
-		Map map = iisCompanyInformationService.queryIisCompanyInformationList(psue);
+		Map map = iisCompanyOfficerService.queryIisCompanyOfficerList(ue);
 		return JsonUtil.ObjectToString(map);
 	}
-
+ 
 }

@@ -37,7 +37,7 @@
              </el-form-item>
                 
 			<el-form-item>
-                 <el-select v-model="tableSearchModel.countryEngName" clearable  style="width:132px;" size="small"   placeholder="选择国家">
+                 <el-select v-model="tableSearchModel.countryEnglishName" clearable  style="width:132px;" size="small"   placeholder="选择国家">
                      <el-option
                              v-for="item in countrys"
                              :key="item.englishName"
@@ -99,7 +99,7 @@
 
              <el-table-column prop="COMPANY_NAME" width="250"   show-overflow-tooltip label="公司名称"  fixed="left">
              	<template slot-scope="scope">
-			        <el-button @click="handleClick(scope.row)" type="text" size="small">{{scope.row.COMPANY_NAME}}</el-button>
+			        <el-button @click="handleClick(scope.row)" type="text" size="small">{{scope.row.companyName}}</el-button>
 			    </template>
              </el-table-column>
              
@@ -144,10 +144,10 @@
           <el-row style="margin-top: 10px;">
           		<span>关注公司动态资讯</span>
           </el-row>
-          <el-table id="infoTableId" height=100% :data="inFoData"   :show-header="false">
+          <el-table id="infoTableId" height="100%" :data="inFoData"   :show-header="false">
           	 <el-table-column prop="address"    show-overflow-tooltip label="标题">
           	 	<template slot-scope="scope">
-			        <el-button @click="detalClick(scope.row)" type="text" size="small">{{scope.row.title1}}</el-button>
+			        <el-button @click="detailClick(scope.row)" type="text" size="small">{{scope.row.title1}}</el-button>
 			    </template>
           	 </el-table-column>
              
@@ -155,7 +155,7 @@
              
             <el-table-column prop="address"    show-overflow-tooltip label="标题">
           	 	<template slot-scope="scope">
-			        <el-button @click="detalClick(scope.row)" type="text" size="small">{{scope.row.title2}}</el-button>
+			        <el-button @click="detailClick(scope.row)" type="text" size="small">{{scope.row.title2}}</el-button>
 			    </template>
           	 </el-table-column>
              
@@ -164,9 +164,9 @@
     </div>
     <!---------------网页主体end------------------->
      
-    <!---------------网页底部start----------------->
+<!--     -------------网页底部start---------------
     <div id="footer" class="footer"></div>
-    <!---------------网页底部end------------------->
+    -------------网页底部end----------------- -->
     
     <script src="/frame/jquery/jquery.min.js"></script>
 	<script src="/frame/vue/vue.min.js"></script>
@@ -178,7 +178,9 @@
 	<script src="/frame/awaken/awaken.common.js"></script>
 	<script src="/frame/awaken/awaken.util.js"></script>
     <script src="/common/js/com.js"></script>
-    <!-- 本页面js -->
-	<script src="/business/user/company/js/CompanyMain.js"></script>
+    
 </body>
 </html>
+
+<!-- 本页面js -->
+	<script src="/business/user/company/js/CompanyMain.js"></script>

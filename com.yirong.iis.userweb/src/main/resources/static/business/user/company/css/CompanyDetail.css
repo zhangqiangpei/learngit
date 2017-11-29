@@ -5,7 +5,7 @@
 .center{
     width: 980px;
     margin:0 10px;
-    height:500px;
+    height:900px;
 }
 
 .el-menu{
@@ -121,4 +121,10 @@
 	height: 80px;
     line-height: 80px;
     text-align: center;
+}
+
+.div-ellipsis{
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
