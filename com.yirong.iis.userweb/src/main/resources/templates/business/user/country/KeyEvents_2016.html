@@ -31,7 +31,7 @@
 		  		 <el-table  :data="tableData" @sort-change="tableSortChange" style="width:950px;" 
                            @selection-change="tableChange" ref="mytable" stripe border>
      
-		             <el-table-column prop="TITLE" show-overflow-tooltip label="2017"   >
+		             <el-table-column prop="TITLE" show-overflow-tooltip label="2016"   >
 		             	  <template scope="scope">
 		             	  	<div> 
 		             	  		 <el-button @click="detailClick(scope.row.id)" type="text" size="small">{{scope.row.title}}</el-button>
