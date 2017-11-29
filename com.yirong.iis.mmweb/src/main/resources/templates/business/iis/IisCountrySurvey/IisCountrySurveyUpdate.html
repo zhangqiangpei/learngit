@@ -1,0 +1,20 @@
+<div id="update" class="main">
+    <el-dialog :visible.sync="dialogVisible" title="修改国家概况">
+        <el-form :model="updateModel" :rules="updateRules" ref="updateModel" label-width="100px">
+            <el-form-item label="名称" prop="fieldName">
+                <el-input v-model="updateModel.fieldName" placeholder="请输入字段名称"></el-input>
+            </el-form-item>
+            <el-form-item label="内容" prop="fieldValue">
+                <el-input v-model="updateModel.fieldValue" placeholder="请输入字段内容"></el-input>
+            </el-form-item>
+            <el-form-item style="text-align: center">
+                <el-button type="primary" @click="update" size="small">确定</el-button>
+                <el-button @click="reset" size="small">重置</el-button>
+            </el-form-item>
+        </el-form>
+    </el-dialog>
+</div>
+
+
+<!-- 本页面js -->
+<script src="/business/iis/IisCountrySurvey/js/IisCountrySurveyUpdate.js"></script>

@@ -1,25 +1,24 @@
 package com.yirong.iis.mm.dao;
 
 import com.yirong.awaken.core.dao.IBaseDao;
-import com.yirong.iis.mm.entity.IisCountryInfo;
-import com.yirong.iis.mm.entity.IisCountrySurvey;
+import com.yirong.iis.mm.entity.IisCountryNationalFlag;
 
 /**
- * 功能描述：国家信息表dao接口
+ * 功能描述：国家国旗表dao接口
  * 
  * @author 陈清沣
  *         <p>
- *         创建时间 ：2017-11-24 18:16:59
+ *         创建时间 ：2017-11-29 10:40:39
  *         </p>
  * 
  *         <p>
  *         修改历史：(修改人，修改时间，修改原因/内容)
  *         </p>
  */
-public interface IisCountryInfoDao extends IBaseDao<IisCountryInfo, String> {
+public interface IisCountryNationalFlagDao extends IBaseDao<IisCountryNationalFlag, String> {
 
     /**
-     * 功能描述：根据英文名查询国家信息表
+     * 功能描述：根据英文名查询国家国旗表
      *
      * @author 陈清沣
      *         <p>
@@ -30,5 +29,6 @@ public interface IisCountryInfoDao extends IBaseDao<IisCountryInfo, String> {
      *         修改历史：(修改人，修改时间，修改原因/内容)
      *         </p>
      */
-    IisCountryInfo getByEnglishName(String englishName);
+    IisCountryNationalFlag findByCountryEngName(String engName);
+
 }

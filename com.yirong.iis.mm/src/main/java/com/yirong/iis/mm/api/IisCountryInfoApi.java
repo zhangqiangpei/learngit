@@ -59,7 +59,7 @@ public class IisCountryInfoApi {
 		IisCountryInfo iisCountryInfo = (IisCountryInfo) JsonUtil.StringToObject(param,
 				IisCountryInfo.class);
 		// 业务处理
-		Map map = this.iisCountryInfoService.saveIisCountryInfo(iisCountryInfo);
+		Map map = this.iisCountryInfoService.saveIisCountryInfo(iisCountryInfo,false);
 		return JsonUtil.ObjectToString(map);
 	}
 

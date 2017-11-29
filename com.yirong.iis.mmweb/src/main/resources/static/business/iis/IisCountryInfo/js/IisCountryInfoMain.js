@@ -26,7 +26,7 @@ var tableAttr = getTableMergeAttr({
         },
         //新增按钮
         addClick: function () {
-            ak.dialog("save", "business/ct/CtDatabase/CtDatabaseSave.html");
+            ak.dialog("save", "business/iis/IisCountryInfo/IisCountryInfoSave.html");
         },
         //删除按钮
         delClick: function () {
@@ -48,7 +48,7 @@ var tableAttr = getTableMergeAttr({
             }
         },
         detailClick : function (row) {
-            this.id = row.ID;
+            this.id = row.ENGLISH_NAME;
             ak.dialog("detail", "business/iis/IisCountryInfo/IisCountryInfoDetail.html");
         }
     }
