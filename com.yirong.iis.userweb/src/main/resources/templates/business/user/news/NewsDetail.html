@@ -239,29 +239,29 @@
             title="修正"
             :visible.sync="correctDialogVisible">
         <el-row>
-            <el-col :span="10">
+            <el-col :span="10" style="text-align: center;">
                 <el-input
                         type="textarea"
-                        :autosize="{ minRows: 3, maxRows: 3}"
+                        :autosize="{ minRows: 4 }"
                         placeholder="请输入内容"
-                        >
+                        v-model="correctModel.sourceContent">
                 </el-input>
             </el-col>
-            <el-col :span="4">
-                &nbsp;
+            <el-col :span="4" style="text-align: center; margin-top: 30px;">
+                <img src="/business/user/news/css/img/u7224.png">
             </el-col>
-            <el-col :span="10">
+            <el-col :span="10" style="text-align: center;">
                 <el-input
                         type="textarea"
-                        :autosize="{ minRows: 3, maxRows: 3}"
+                        :autosize="{ minRows: 4 }"
                         placeholder="请输入内容"
-                        >
+                        v-model="correctModel.targetContent">
                 </el-input>
             </el-col>
         </el-row>
         <span slot="footer" class="dialog-footer">
             <el-button  size="medium" @click="correctDialogVisible = false">取 消</el-button>
-            <el-button  size="medium" type="primary" @click="correctDialogVisible = false">确 定</el-button>
+            <el-button  size="medium" type="primary" @click="saveCorrect">确 定</el-button>
         </span>
     </el-dialog>
     <!-- 新闻追踪对话框 -->

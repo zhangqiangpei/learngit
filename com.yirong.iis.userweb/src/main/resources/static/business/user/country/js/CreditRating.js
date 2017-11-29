@@ -1,11 +1,15 @@
-var infoVe = new Vue({
+var peVue = new Vue({
     el: '#info',
     data: {
-    	content:'',
     	continentName:'',
     	englishName:'',
     	chineseName:'',
-    	modifyTime:''
+    	createTime:'',
+    	languaged:'',
+    	source:'',
+    	CountryCredit:new Object(),
+    	CountryDebt:new Object(),
+    	CountryViolationArray:[]
     },
     methods: {
     	//根据国家英文名查询
@@ -23,16 +27,26 @@ var infoVe = new Vue({
         		this.modifyTime = result.modifyTime;
         	}
         },
-        getDiplomaticSituation:function(){
+        getCountryCredit:function(){
         	var param = {
         			"englishName":this.englishName
             	};
-            	var result = ak.msService("user","IisDiplomaticSituationApi/queryList",param).data;
-            	this.content = result.content;
-            	if(result.modifyTime==null){
-            		result.modifyTime='无';
-            	}
-            	this.modifyTime = result.modifyTime;
+            	var result = ak.msService("user","IisCountryCreditApi/getByName",param).data;
+            	this.CountryCredit = result;
+        },
+        getCountryDebt:function(){
+        	var param = {
+        			"englishName":this.englishName
+            	};
+            	var result = ak.msService("user","IisCountryDebtApi/getByName",param).data;
+            	this.CountryDebt = result;
+        },
+        getCountryViolation:function(){
+        	var param = {
+        			"englishName":this.englishName
+            	};
+            	var result = ak.msService("user","IisCountryViolationApi/querylist",param).data;
+            	this.CountryViolationArray = result;
         },
         GetQueryString: function(name){
              var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
@@ -41,10 +55,12 @@ var infoVe = new Vue({
         }
     },
     mounted: function() {
+    	debugger;
     	this.englishName = this.GetQueryString("eName");
     	this.getCountryInfo();
-    	this.getDiplomaticSituation();
-    	var result = ak.msService("user","IisCountryNationalFlagApi/save",{}).data;
+    	this.getCountryCredit();
+    	this.getCountryDebt();
+    	this.getCountryViolation();
     }
 })
 

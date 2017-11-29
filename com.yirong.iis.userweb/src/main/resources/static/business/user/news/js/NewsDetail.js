@@ -38,11 +38,22 @@ var mainAttr={
                 { min: 1, max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur' }
             ]
         },
-        correctDialogVisible:false
+        correctDialogVisible:false,
+        correctModel:{
+            sourceLanguage:"",
+            sourceContent:"",
+            targetLanguage:"",
+            targetContent:""
+        }
     },
     methods:{
+        // 保存修正信息
+        saveCorrect:function () {
+
+        },
         // 修正按钮
         correctBtnClick:function () {
+            this.correctModel.sourceContent = window.getSelection().toString();
             this.correctDialogVisible = true;
         },
         tableRowClick:function (row, event, column) {
@@ -64,7 +75,7 @@ var mainAttr={
         },
         // 保存追踪
         saveProjectTrack:function () {
-            this.$refs["projectTrackForm"].validate((valid) => {
+            this.$refs["projectTrackForm"].validate(function(valid) {
                 if (valid) {
                     var result = z.msService("user", "IisProjectTrackApi/save", this.projectTrackModel);
                     if (result.code === 0){
