@@ -45,11 +45,12 @@ public class FileController {
      */
     @RequestMapping(value = "/upFlagFile", method = RequestMethod.POST)
     @ResponseBody
-    public boolean upFlagFile(@RequestParam(name = "file") MultipartFile multipartFile, @RequestParam(name = "engName") String engName, HttpServletRequest request) {
+    public String upFlagFile(@RequestParam(name = "file") MultipartFile multipartFile, @RequestParam(name = "engName") String engName, HttpServletRequest request) {
         InputStream is = null;
         OutputStream os = null;
+        String targetFileName = null;
         try {
-            String targetFileName = engName + multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
+            targetFileName = engName + multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
             File file = new File(this.getFileDirPath(null) + File.separator + targetFileName);
             if (!file.exists()){
                 FileUtil.delFile(targetFileName);
@@ -79,7 +80,7 @@ public class FileController {
                 }
             }
         }
-        return true;
+        return targetFileName;
     }
 
 

@@ -221,7 +221,7 @@ public class IisCountryInfoServiceImpl extends BaseService<IisCountryInfo, Strin
         // 拼装查询sql
         List<Object> param = new ArrayList<Object>();
         StringBuffer sql = new StringBuffer();
-        sql.append("SELECT ISO2CODE,ISOCODE,ENGLISH_NAME,CHINESE_NAME,CREATE_TIME,");
+        sql.append("SELECT ISO2CODE,ISOCODE,ENGLISH_NAME,CHINESE_NAME,TO_CHAR(CREATE_TIME, 'yyyy-MM-dd HH24:mi:ss ') CREATE_TIME,");
         sql.append("(SELECT NAME FROM SYS_DICTIONARY WHERE CODE = CONTINENT_CODE) CONTINENT_NAME ");
         sql.append("FROM SY_COUNTRY ");
         sql.append("WHERE 1=1 ");

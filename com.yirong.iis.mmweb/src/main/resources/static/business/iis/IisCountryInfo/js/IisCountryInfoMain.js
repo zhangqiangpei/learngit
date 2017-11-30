@@ -71,3 +71,8 @@ var mainAttr = {
 
 //生成vue对象
 var mainVue = ak.getMergeVue(mainAttr, tableAttr, utilAttr);
+
+
+$(function () {
+    $('#tableId').height($(window).height()-$('form').height()-75)
+});

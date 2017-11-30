@@ -69,22 +69,6 @@ public interface IisDiplomaticSituationService extends IBaseService<IisDiplomati
 	 */
 	Map delIisDiplomaticSituation(String idStrs);
 
-	/**
-	 * 功能描述：根据ID查询外交情况表(与中国)信息
-	 * 
-	 * @author 陈清沣
-	 *         <p>
-	 *         创建时间 ：2017-11-27 19:29:29
-	 *         </p>
-	 * 
-	 *         <p>
-	 *         修改历史：(修改人，修改时间，修改原因/内容)
-	 *         </p>
-	 * @param id
-	 * @return
-	 */
-	Map queryIisDiplomaticSituationById(String id);
-
 	 /**
 	 * 功能描述：查询外交情况表(与中国)列表信息
 	 * 

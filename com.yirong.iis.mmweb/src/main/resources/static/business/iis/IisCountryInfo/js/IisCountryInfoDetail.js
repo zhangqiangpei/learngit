@@ -9,40 +9,52 @@ var tableAttr = getTableMergeAttr({
             fieldName: ""
         },
         countryInfo: null,
-        displomaticSituationInfo : null,
+        displomaticSituationInfo: [],
         flag: null,
         situation: null,
         activeName: 'basic'
     },
     methods: {
-        loadCountryInfo : function () {
+        loadCountryInfo: function () {
             var result = ak.msService("mm", "IisCountryInfoApi/get", {id: mainVue.id});
             if (result.code === 0) {
                 this.countryInfo = result.data;
             }
         },
         tabClick: function (tab) {
-            switch (tab.index) {
-                case '0'://基本信息
+            // 初始化查询条件
+            var param = this.tableSearchModel;
+            param.fieldName = "";
+
+            switch (tab.name) {
+                case 'basic'://基本信息
                     break;
-                case '1'://概况信息
-                    var param = this.tableSearchModel;
+                case 'survey'://概况信息
+                    this.tableInit("mm", "IisCountrySurveyApi/list");
                     // 当前页切换成第一页
                     param.currentPage = 1;
                     param.countryEngName = this.countryInfo.ENGLISH_NAME;
                     //查询后台
                     this.tableSearch(param);
                     break;
-                case '2'://外交信息
-                    var result = ak.msService("mm","IisDiplomaticSituationApi/list",{englishName :  mainVue.id});
-                    if (result.code === 0){
+                case 'political'://概况信息
+                    this.tableInit("mm", "IisPoliticalEnvironmentApi/list");
+                    // 当前页切换成第一页
+                    param.currentPage = 1;
+                    param.countryEngName = this.countryInfo.ENGLISH_NAME;
+                    //查询后台
+                    this.tableSearch(param);
+                    break;
+                case 'situation'://外交信息
+                    var result = ak.msService("mm", "IisDiplomaticSituationApi/list", {englishName: mainVue.id});
+                    if (result.code === 0) {
                         this.displomaticSituationInfo = result.data.data;
                     }
                     break;
             }
         },
-        updateCountry :function () {
-            ak.dialog("update","business/iis/IisCountryInfo/IisCountryInfoUpdate.html");
+        updateCountry: function () {
+            ak.dialog("update", "business/iis/IisCountryInfo/IisCountryInfoUpdate.html");
         },
         //查询按钮
         searchClick: function () {
@@ -56,32 +68,73 @@ var tableAttr = getTableMergeAttr({
             this.tableResetCondition();
         },
         //删除按钮
-        delClick: function () {
+        delClick: function (obj) {
             //获取表格选中的id集
             var ids = this.tableGetCheckIds();
             if (ids.length === 0) {
-                ak.warning("请选择需要删除的概况字段");
+                if (obj === 'survey') {
+                    ak.warning("请选择需要删除的概况字段");
+                } else if (obj === 'political') {
+                    ak.warning("请选择需要删除的政治字段");
+                }
             } else {
-                ak.confirm("确定要删除选中的" + ids.length + "个概况字段吗？", this.delCallback);
+                if (obj === 'survey') {
+                    ak.confirm("确定要删除选中的" + ids.length + "个概况字段吗？", this.delSurveyCallback);
+                } else if (obj === 'political') {
+                    ak.confirm("确定要删除选中的" + ids.length + "个政治字段吗？", this.delPoliticalCallback);
+                }
             }
         },
         //确认删除的回调函数
-        delCallback: function (instance) {
+        delSurveyCallback: function (instance) {
             //获取表格选中的id集
             var ids = this.tableGetCheckIds();
-            var result = ak.msService("mm","IisCountrySurveyApi/delete",{ids : ids});
-            if (result.code === 0){
+            var result = ak.msService("mm", "IisCountrySurveyApi/delete", {ids: ids});
+            if (result.code === 0) {
                 ak.success(result.msg);
                 detailVue.tableRefresh();
             }
         },
-        saveSurvey : function () {
-            this.countryEngName =  mainVue.id;
-            ak.dialog("save","business/iis/IisCountrySurvey/IisCountrySurveySave.html");
+        //确认删除的回调函数
+        delPoliticalCallback: function (instance) {
+            //获取表格选中的id集
+            var ids = this.tableGetCheckIds();
+            var result = ak.msService("mm", "IisPoliticalEnvironmentApi/delete", {ids: ids});
+            if (result.code === 0) {
+                ak.success(result.msg);
+                detailVue.tableRefresh();
+            }
         },
-        updateSurvey : function (row) {
-            this.updateSurveyId =  row.id;
-            ak.dialog("update","business/iis/IisCountrySurvey/IisCountrySurveyUpdate.html");
+        saveSurvey: function (obj) {
+            this.countryEngName = mainVue.id;
+            if (obj === 'survey') {
+                ak.dialog("save", "business/iis/IisCountrySurvey/IisCountrySurveySave.html");
+            } else if (obj === 'political') {
+                ak.dialog("save", "business/iis/IisPoliticalEnvironment/IisPoliticalEnvironmentSave.html");
+            }
+
+        },
+        updateSurvey: function (row, obj) {
+            this.updateSurveyId = row.id;
+            if (obj === 'survey') {
+                ak.dialog("update", "business/iis/IisCountrySurvey/IisCountrySurveyUpdate.html");
+            } else if (obj === 'political') {
+                ak.dialog("update", "business/iis/IisPoliticalEnvironment/IisPoliticalEnvironmentUpdate.html");
+            }
+        },
+        editSituation: function (oper) {
+            if (oper === 'save')
+                top.vm.url = "/forward.do?viewPath=business/iis/IisDiplomaticSituation/IisDiplomaticSituationSave.html&engName=" + mainVue.id + "&chnName=" + this.countryInfo.chineseName;
+            else if (oper === 'update')
+                top.vm.url = "/forward.do?viewPath=business/iis/IisDiplomaticSituation/IisDiplomaticSituationUpdate.html&engName=" + mainVue.id + "&chnName=" + this.countryInfo.chineseName;
+            else
+                ak.confirm("确定要删除外交信息吗？", this.delSurveyCallback);
+        },
+        delSituationCallback : function (instance) {
+            var result = ak.msService("mm", "IisDiplomaticSituationApi/delete", {ids: this.displomaticSituationInfo[0].id});
+            if (result.code === 0) {
+                this.displomaticSituationInfo = [];
+            }
         }
     }
 });
@@ -91,11 +144,8 @@ var mainAttr = {
     el: '#detail',
     //页面初始化事件
     mounted: function () {
-        //初始化table
-        this.tableInit("mm", "IisCountrySurveyApi/list");
         //默认排序
         this.tableInitSort("create_time", "desc");
-
         this.loadCountryInfo();
         var result = ak.msService("mm", "IisCountryNationalFlagApi/get", {engName: mainVue.id});
         if (result.code === 0) {

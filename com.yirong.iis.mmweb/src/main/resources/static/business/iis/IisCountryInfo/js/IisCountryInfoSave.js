@@ -10,12 +10,14 @@ var dialogAttr = getDialogMergeAttr({
             isocode: null
         },
         continentCodeList: [],
-        hasFlag: false
+        hasFlag: false,
+        imageUrl : null
     },
     methods: {
         saveClick: function () {
             var result = ak.msService("mm", "IisCountryInfoApi/save", this.countryInfo);
             if (result.code === 0) {
+                ak.msService("mm", "IisCountryNationalFlagApi/save", {engName: this.countryInfo.englishName});
                 mainVue.tableRefresh();
             }
             if (this.hasFlag) {
@@ -49,8 +51,8 @@ var dialogAttr = getDialogMergeAttr({
             this.hasFlag = fileList.length > 0;
         },
         handleSuccess: function (response) {
-            if (response) {
-                ak.msService("mm", "IisCountryNationalFlagApi/save", {engName: this.countryInfo.englishName});
+            if (ak.isNotNullOrEmpty(response)) {
+                this.imageUrl = response;
             }
         }
     }

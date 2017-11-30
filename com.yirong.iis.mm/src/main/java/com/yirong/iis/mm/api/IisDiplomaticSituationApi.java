@@ -91,30 +91,6 @@ public class IisDiplomaticSituationApi {
 	}
 
 	/**
-	 * 功能描述：根据ID查询外交情况表(与中国)信息
-	 * 
-	 * @author 陈清沣
-	 *         <p>
-	 *         创建时间 ：2017-11-27 19:29:29
-	 *         </p>
-	 * 
-	 *         <p>
-	 *         修改历史：(修改人，修改时间，修改原因/内容)
-	 *         </p>
-	 * @param paramAll
-	 * @return
-	 */
-	@RequestMapping(value = "get", method = RequestMethod.POST)
-	public String get(@RequestBody String paramAll) {
-		// 获取参数信息
-		String pathName = "context/id";
-		String id = JsonUtil.getJsonStrByAttrName(paramAll, pathName);
-		// 处理业务
-		Map map = iisDiplomaticSituationService.queryIisDiplomaticSituationById(id);
-		return JsonUtil.ObjectToString(map);
-	}
-
-	/**
 	 * 功能描述：删除外交情况表(与中国)（批量）
 	 * 
 	 * @author 陈清沣

@@ -40,13 +40,14 @@
                     <el-form-item label="国旗：">
                         <el-upload
                                 ref="upload"
+                                class="avatar-uploader"
                                 action="/file/upFlagFile"
-                                list-type="picture-card"
-                                :auto-upload="false"
+                                :show-file-list="false"
                                 :data="{engName:countryInfo.englishName}"
                                 :on-success="handleSuccess"
                                 :on-change="handleChange">
-                            <i class="el-icon-plus"></i>
+                            <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
                 </el-row>
@@ -61,3 +62,5 @@
 
 <!-- 本页面js -->
 <script src="/business/iis/IisCountryInfo/js/IisCountryInfoSave.js"></script>
+<!-- 本页面css -->
+<link href="/business/iis/IisCountryInfo/css/IisCountryInfoSave.css" rel="stylesheet"/>

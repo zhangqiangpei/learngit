@@ -1,10 +1,11 @@
 package com.yirong.iis.mm.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
 
  /**
  * 功能描述：国家信息表entity类

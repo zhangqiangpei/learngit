@@ -83,7 +83,7 @@ public class IisDiplomaticSituationServiceImpl extends BaseService<IisDiplomatic
 	@Override
 	public Map saveIisDiplomaticSituation(IisDiplomaticSituation iisDiplomaticSituation){
 		// 根据编码及分类ID获取数据（唯一键）
-		IisDiplomaticSituation iisDiplomaticSituationTemp = this.iisDiplomaticSituationDao.findOne(iisDiplomaticSituation.getId());
+		IisDiplomaticSituation iisDiplomaticSituationTemp = this.iisDiplomaticSituationDao.getByEnglishName(iisDiplomaticSituation.getEnglishName());
 		String id = iisDiplomaticSituation.getId();
 		if (null == iisDiplomaticSituationTemp
 				|| (StringUtil.isNotNullOrEmpty(id) && id.equals(iisDiplomaticSituationTemp
@@ -123,7 +123,7 @@ public class IisDiplomaticSituationServiceImpl extends BaseService<IisDiplomatic
 	@Override
 	public Map updateIisDiplomaticSituation(IisDiplomaticSituation iisDiplomaticSituation) {
 		// 根据编号Id
-		IisDiplomaticSituation iisDiplomaticSituationTemp = this.iisDiplomaticSituationDao.findOne(iisDiplomaticSituation.getId());
+		IisDiplomaticSituation iisDiplomaticSituationTemp = this.iisDiplomaticSituationDao.getByEnglishName(iisDiplomaticSituation.getEnglishName());
 		if (null == iisDiplomaticSituationTemp) {// 未查询到任何数据
 			String promptInfo = "不存在ID：" + iisDiplomaticSituation.getId();
 			String result = ErrorPromptInfoUtil.getErrorInfo("00202",
@@ -178,33 +178,6 @@ public class IisDiplomaticSituationServiceImpl extends BaseService<IisDiplomatic
 	}
 
 	/**
-	 * 功能描述：根据ID查询外交情况表(与中国)信息
-	 * 
-	 * @author 陈清沣
-	 *         <p>
-	 *         创建时间 ：2017-11-27 19:29:29
-	 *         </p>
-	 * 
-	 *         <p>
-	 *         修改历史：(修改人，修改时间，修改原因/内容)
-	 *         </p>
-	 * @param id
-	 * @return
-	 */
-	@Override
-	public Map queryIisDiplomaticSituationById(String id) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("");
-		sql.append("");
-		sql.append("");
-		sql.append(" ");
-		sql.append("");
-		List<Object> param = new ArrayList<Object>();
-		Map map = this.exeSqlMap(sql.toString(), param);
-		return ResultUtil.newOk("操作成功").setData(map).toMap();
-	}
-
-	/**
 	 * 功能描述：查询外交情况表(与中国)列表信息
 	 * 
 	 * @author 陈清沣
@@ -223,7 +196,7 @@ public class IisDiplomaticSituationServiceImpl extends BaseService<IisDiplomatic
 		// 拼装查询sql
 		List<Object> param = new ArrayList<Object>();
 		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT CONTENT,CREATE_TIME ");
+		sql.append("SELECT ID \"id\",CONTENT,CREATE_TIME ");
 		sql.append("FROM IIS_DIPLOMATIC_SITUATION ");
 		sql.append("WHERE 1 = 1 ");
 		// 国家英文名
