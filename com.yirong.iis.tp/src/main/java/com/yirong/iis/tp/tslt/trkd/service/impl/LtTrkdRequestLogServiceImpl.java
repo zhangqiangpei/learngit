@@ -20,4 +20,16 @@ public class LtTrkdRequestLogServiceImpl extends BaseService<LtTrkdRequestLog,St
 		return ltTrkdRequestLogDao;
 	}
 
+	@Override
+	public void addRequestLog(String name, String param, String result,
+			Integer status,String companyId) {
+		LtTrkdRequestLog log = new LtTrkdRequestLog();
+		log.setName(name);
+		log.setParam(param);
+		log.setResult(result);
+		log.setStatus(status);
+		log.setCompanyId(companyId);
+		this.save(log);
+	}
+
 }

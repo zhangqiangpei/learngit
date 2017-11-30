@@ -2,7 +2,6 @@ package com.yirong.iis.tp.tslt.et.util;
 
 import com.reuters.rfa.common.Context;
 import com.reuters.rfa.common.EventQueue;
-import com.reuters.rfa.common.EventSource;
 import com.reuters.rfa.common.Handle;
 import com.reuters.rfa.dictionary.FieldDictionary;
 import com.reuters.rfa.omm.OMMEncoder;
@@ -59,11 +58,6 @@ public class ConsumerClient {
 	private OMMEncoder ommEncoder;
 
 	/**
-	 * 登录客户端
-	 */
-	private LoginClient loginClient;
-
-	/**
 	 * 数据客户端
 	 */
 	private MsgClient msgClient;
@@ -100,7 +94,7 @@ public class ConsumerClient {
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
 	 */
-	public ConsumerClient(CommandLine commondLine) {
+	public ConsumerClient(CommandLine commondLine, LoginClient loginClient) {
 		logger.info("==================路透elektron产品初始化开始======================= ");
 		this.commondLine = commondLine;
 		Context.initialize();
@@ -119,12 +113,10 @@ public class ConsumerClient {
 		// 创建omm编码器
 		ommEncoder = ommPool.acquireEncoder();
 		ommEncoder.initialize(OMMTypes.MSG, 5000);
-		// 初始化登录客户端
-		loginClient = new LoginClient(this);
 		// 初始化消息客户端
-		msgClient = new MsgClient(this);
+		msgClient = new MsgClient(this, loginClient);
 		// 创建omm客户端
-		ommConsumer = (OMMConsumer) session.createEventSource(EventSource.OMM_CONSUMER, "myOMMConsumer", true);
+		ommConsumer = loginClient.getOmmConsumer();
 		// 创建omm链接
 		OMMConnectionIntSpec connIntSpec = new OMMConnectionIntSpec();
 		connIntSpecHandle = ommConsumer.registerClient(eventQueue, connIntSpec, loginClient, null);
@@ -132,8 +124,6 @@ public class ConsumerClient {
 		dictionary = FieldDictionary.create();
 		FieldDictionary.readRDMFieldDictionary(dictionary, commondLine.getVariable("rdmFieldDictionary"));
 		FieldDictionary.readEnumTypeDef(dictionary, commondLine.getVariable("enumType"));
-		// 发送登录请求
-		loginClient.sendRequest();
 		logger.info("==================路透elektron产品初始化结束（成功）======================= ");
 	}
 
@@ -186,9 +176,6 @@ public class ConsumerClient {
 		if (null != msgClient) {
 			msgClient.closeRequest();
 		}
-		if (null != loginClient) {
-			loginClient.closeRequest();
-		}
 		if (null != ommConsumer) {
 			ommConsumer.destroy();
 		}
@@ -216,10 +203,6 @@ public class ConsumerClient {
 
 	public OMMConsumer getOmmConsumer() {
 		return ommConsumer;
-	}
-
-	public LoginClient getLoginClient() {
-		return loginClient;
 	}
 
 	public MsgClient getMsgClient() {

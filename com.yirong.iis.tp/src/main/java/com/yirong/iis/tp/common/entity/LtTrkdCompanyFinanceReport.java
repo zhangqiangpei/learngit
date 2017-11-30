@@ -1,7 +1,6 @@
 package com.yirong.iis.tp.common.entity;
 
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -64,8 +63,8 @@ public class LtTrkdCompanyFinanceReport extends IdEntity{
 	/**
 	* 结束时间
 	*/
-	@Column(name="END_DATE",nullable=true)
-	public Date endDate;
+	@Column(name="END_DATE",nullable=true,length=20)
+	public String endDate;
 	
 	/**
 	* 财政年度
@@ -77,13 +76,13 @@ public class LtTrkdCompanyFinanceReport extends IdEntity{
 	* 1,2,3,4财政期间号码
 	*/
 	@Column(name="FISCAL_PERIOD_NUMBER",nullable=true,length=22)
-	public BigDecimal fiscalPeriodNumber;
+	public Integer fiscalPeriodNumber;
 	
 	/**
 	* 周期长度
 	*/
 	@Column(name="PERIOD_LENGTH",nullable=true,length=22)
-	public BigDecimal periodLength;
+	public Integer periodLength;
 	
 	/**
 	* 周期类型
@@ -100,8 +99,8 @@ public class LtTrkdCompanyFinanceReport extends IdEntity{
 	/**
 	* 报表日期
 	*/
-	@Column(name="STATEMENT_DATE",nullable=true)
-	public Date statementDate;
+	@Column(name="STATEMENT_DATE",nullable=true,length=20)
+	public String statementDate;
 	
 	/**
 	* 审计单位
@@ -176,11 +175,11 @@ public class LtTrkdCompanyFinanceReport extends IdEntity{
 	public void setType (String type){
 		this.type=type;
 	}
-	public Date getEndDate(){
+	public String getEndDate(){
 		return this.endDate;
 	}
 		
-	public void setEndDate (Date endDate){
+	public void setEndDate (String endDate){
 		this.endDate=endDate;
 	}
 	public String getFiscalYear(){
@@ -190,18 +189,18 @@ public class LtTrkdCompanyFinanceReport extends IdEntity{
 	public void setFiscalYear (String fiscalYear){
 		this.fiscalYear=fiscalYear;
 	}
-	public BigDecimal getFiscalPeriodNumber(){
+	public Integer getFiscalPeriodNumber(){
 		return this.fiscalPeriodNumber;
 	}
 		
-	public void setFiscalPeriodNumber (BigDecimal fiscalPeriodNumber){
+	public void setFiscalPeriodNumber (Integer fiscalPeriodNumber){
 		this.fiscalPeriodNumber=fiscalPeriodNumber;
 	}
-	public BigDecimal getPeriodLength(){
+	public Integer getPeriodLength(){
 		return this.periodLength;
 	}
 		
-	public void setPeriodLength (BigDecimal periodLength){
+	public void setPeriodLength (Integer periodLength){
 		this.periodLength=periodLength;
 	}
 	public String getPeriodType(){
@@ -218,11 +217,11 @@ public class LtTrkdCompanyFinanceReport extends IdEntity{
 	public void setUpdateType (String updateType){
 		this.updateType=updateType;
 	}
-	public Date getStatementDate(){
+	public String getStatementDate(){
 		return this.statementDate;
 	}
 		
-	public void setStatementDate (Date statementDate){
+	public void setStatementDate (String statementDate){
 		this.statementDate=statementDate;
 	}
 	public String getAuditorName(){

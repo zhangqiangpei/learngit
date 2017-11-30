@@ -1,11 +1,13 @@
 package com.yirong.iis.user.entity;
 
 
-import org.hibernate.annotations.GenericGenerator;
-
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * 功能描述：国家信息表entity类
@@ -20,7 +22,7 @@ import javax.persistence.*;
  *         </p>
  */
 @Entity
-@Table(name="IIS_COUNTRY_INFO")
+@Table(name="SY_COUNTRY")
 public class IisCountryInfo implements Serializable {
 
     /**
@@ -34,26 +36,7 @@ public class IisCountryInfo implements Serializable {
     @Column(name="CREATE_TIME",nullable=false)
     public Date createTime;
 
-    /**
-     * 修改人
-     */
-    @Column(name="MODIFIER",nullable=true,length=32)
-    public String modifier;
 
-    /**
-     * 修改时间
-     */
-    @Column(name="MODIFY_TIME",nullable=true)
-    public Date modifyTime;
-
-    /**
-     * 编码
-     */
-    @Id
-    @GeneratedValue(generator="system-uuid",strategy = GenerationType.AUTO)
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(name="ID",nullable=false,length=32)
-    public String id;
 
     /**
      * 二位字母
@@ -70,6 +53,7 @@ public class IisCountryInfo implements Serializable {
     /**
      * 国家英文名
      */
+    @Id
     @Column(name="ENGLISH_NAME",nullable=false,length=100)
     public String englishName;
 
@@ -85,11 +69,6 @@ public class IisCountryInfo implements Serializable {
     @Column(name="CONTINENT_CODE",nullable=false,length=6)
     public String continentCode;
 
-    /**
-     * 创建人
-     */
-    @Column(name="CREATOR",nullable=true,length=32)
-    public String creator;
 
 
     public Date getCreateTime(){
@@ -98,27 +77,6 @@ public class IisCountryInfo implements Serializable {
 
     public void setCreateTime (Date createTime){
         this.createTime=createTime;
-    }
-    public String getModifier(){
-        return this.modifier;
-    }
-
-    public void setModifier (String modifier){
-        this.modifier=modifier;
-    }
-    public Date getModifyTime(){
-        return this.modifyTime;
-    }
-
-    public void setModifyTime (Date modifyTime){
-        this.modifyTime=modifyTime;
-    }
-    public String getId(){
-        return this.id;
-    }
-
-    public void setId (String id){
-        this.id=id;
     }
     public String getIso2code(){
         return this.iso2code;
@@ -154,13 +112,6 @@ public class IisCountryInfo implements Serializable {
 
     public void setContinentCode (String continentCode){
         this.continentCode=continentCode;
-    }
-    public String getCreator(){
-        return this.creator;
-    }
-
-    public void setCreator (String creator){
-        this.creator=creator;
     }
 
 

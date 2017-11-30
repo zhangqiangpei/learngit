@@ -46,6 +46,7 @@ public class LtValidateTokenServiceImpl extends LtHttpService{
 			if(data.has("Fault")){
 				String error = data.getJSONObject("Fault").getJSONObject("Reason").getJSONObject("Text").getString("Value");
 				logger.error("验证token失败："+error);
+				addRequestLog("ValidateToken",content.toString(),result,0,"");
 				return ResultUtil.newError("验证token失败："+error).toMap();
 			}
 			
@@ -56,10 +57,12 @@ public class LtValidateTokenServiceImpl extends LtHttpService{
 				Date date = DateUtil.dateAdd(DateUtil.str2Date(dateStr,DateUtil.FORMAT_SECOND), DateUtil.HOUR, 8);
 				LtConstant.expiration = date;
 				
+				addRequestLog("ValidateToken",content.toString(),result,1,"");
 				return ResultUtil.newOk("验证token成功！").toMap();
 			}
 		}
 		
+		addRequestLog("ValidateToken",content.toString(),result,0,"");
 		return ResultUtil.newError("验证token失败!").toMap();
 	}
 

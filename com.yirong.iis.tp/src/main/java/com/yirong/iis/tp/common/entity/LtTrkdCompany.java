@@ -1,7 +1,6 @@
 package com.yirong.iis.tp.common.entity;
 
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -25,23 +24,11 @@ import com.yirong.awaken.core.entity.IdEntity;
 @Entity
 @Table(name="LT_TRKD_COMPANY")
 public class LtTrkdCompany extends IdEntity{
-
+	
 	/**
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
-
-	/**
-	* 联系人头衔
-	*/
-	@Column(name="CONTACT_TITLE",nullable=true,length=50)
-	public String contactTitle;
-	
-	/**
-	* 联系电话
-	*/
-	@Column(name="PHONE_NUMBERS",nullable=true,length=20)
-	public String phoneNumbers;
 	
 	/**
 	* 公司简介
@@ -101,7 +88,7 @@ public class LtTrkdCompany extends IdEntity{
 	* 所属行业分组代码
 	*/
 	@Column(name="INDUSTRY_GROUP_CODE",nullable=true,length=22)
-	public BigDecimal industryGroupCode;
+	public Integer industryGroupCode;
 	
 	/**
 	* 所属行业分组名称
@@ -113,7 +100,7 @@ public class LtTrkdCompany extends IdEntity{
 	* 所属行业代码
 	*/
 	@Column(name="INDUSTRY_CODE",nullable=true,length=22)
-	public BigDecimal industryCode;
+	public Integer industryCode;
 	
 	/**
 	* 所属行业名称
@@ -125,7 +112,7 @@ public class LtTrkdCompany extends IdEntity{
 	* 主营业务代码
 	*/
 	@Column(name="ACTIVITY_CODE",nullable=true,length=22)
-	public BigDecimal activityCode;
+	public Long activityCode;
 	
 	/**
 	* 主营业务名称
@@ -158,52 +145,10 @@ public class LtTrkdCompany extends IdEntity{
 	public Date modifyTime;
 	
 	/**
-	* repNo
-	*/
-	@Column(name="REP_NO",nullable=true,length=10)
-	public String repNo;
-	
-	/**
-	* 生成日期
-	*/
-	@Column(name="PRODUCTION_DATE",nullable=true,length=20)
-	public String productionDate;
-	
-	/**
 	* 雇员
 	*/
 	@Column(name="EMPLOYEES",nullable=true,length=10)
 	public String employees;
-	
-	/**
-	* 股价预估
-	*/
-	@Column(name="TOTAL_SHARES_OUT",nullable=true,length=20)
-	public String totalSharesOut;
-	
-	/**
-	* 普通股东
-	*/
-	@Column(name="COMMON_SHAREHOLDERS",nullable=true,length=20)
-	public String commonShareholders;
-	
-	/**
-	* 成立于
-	*/
-	@Column(name="INCORPORATED_IN",nullable=true,length=20)
-	public String incorporatedIn;
-	
-	/**
-	* 公开于
-	*/
-	@Column(name="PUBLIC_SINCE",nullable=true,length=20)
-	public String publicSince;
-	
-	/**
-	* 审计单位
-	*/
-	@Column(name="AUDITOR",nullable=true,length=50)
-	public String auditor;
 	
 	/**
 	* 公司主页
@@ -235,27 +180,6 @@ public class LtTrkdCompany extends IdEntity{
 	@Column(name="STATE_OR_REGION",nullable=true,length=50)
 	public String stateOrRegion;
 	
-	/**
-	* 联系人
-	*/
-	@Column(name="CONTACT_NAME",nullable=true,length=30)
-	public String contactName;
-	
-   
-	public String getContactTitle(){
-		return this.contactTitle;
-	}
-		
-	public void setContactTitle (String contactTitle){
-		this.contactTitle=contactTitle;
-	}
-	public String getPhoneNumbers(){
-		return this.phoneNumbers;
-	}
-		
-	public void setPhoneNumbers (String phoneNumbers){
-		this.phoneNumbers=phoneNumbers;
-	}
 	public String getTextInfo(){
 		return this.textInfo;
 	}
@@ -326,11 +250,11 @@ public class LtTrkdCompany extends IdEntity{
 	public void setBusinessSectorName (String businessSectorName){
 		this.businessSectorName=businessSectorName;
 	}
-	public BigDecimal getIndustryGroupCode(){
+	public Integer getIndustryGroupCode(){
 		return this.industryGroupCode;
 	}
 		
-	public void setIndustryGroupCode (BigDecimal industryGroupCode){
+	public void setIndustryGroupCode (Integer industryGroupCode){
 		this.industryGroupCode=industryGroupCode;
 	}
 	public String getIndustryGroupName(){
@@ -340,11 +264,11 @@ public class LtTrkdCompany extends IdEntity{
 	public void setIndustryGroupName (String industryGroupName){
 		this.industryGroupName=industryGroupName;
 	}
-	public BigDecimal getIndustryCode(){
+	public Integer getIndustryCode(){
 		return this.industryCode;
 	}
 		
-	public void setIndustryCode (BigDecimal industryCode){
+	public void setIndustryCode (Integer industryCode){
 		this.industryCode=industryCode;
 	}
 	public String getIndustryName(){
@@ -354,11 +278,11 @@ public class LtTrkdCompany extends IdEntity{
 	public void setIndustryName (String industryName){
 		this.industryName=industryName;
 	}
-	public BigDecimal getActivityCode(){
+	public Long getActivityCode(){
 		return this.activityCode;
 	}
 		
-	public void setActivityCode (BigDecimal activityCode){
+	public void setActivityCode (Long activityCode){
 		this.activityCode=activityCode;
 	}
 	public String getActivityName(){
@@ -396,20 +320,7 @@ public class LtTrkdCompany extends IdEntity{
 	public void setModifyTime (Date modifyTime){
 		this.modifyTime=modifyTime;
 	}
-	public String getRepNo(){
-		return this.repNo;
-	}
-		
-	public void setRepNo (String repNo){
-		this.repNo=repNo;
-	}
-	public String getProductionDate(){
-		return this.productionDate;
-	}
-		
-	public void setProductionDate (String productionDate){
-		this.productionDate=productionDate;
-	}
+
 	public String getEmployees(){
 		return this.employees;
 	}
@@ -417,41 +328,7 @@ public class LtTrkdCompany extends IdEntity{
 	public void setEmployees (String employees){
 		this.employees=employees;
 	}
-	public String getTotalSharesOut(){
-		return this.totalSharesOut;
-	}
-		
-	public void setTotalSharesOut (String totalSharesOut){
-		this.totalSharesOut=totalSharesOut;
-	}
-	public String getCommonShareholders(){
-		return this.commonShareholders;
-	}
-		
-	public void setCommonShareholders (String commonShareholders){
-		this.commonShareholders=commonShareholders;
-	}
-	public String getIncorporatedIn(){
-		return this.incorporatedIn;
-	}
-		
-	public void setIncorporatedIn (String incorporatedIn){
-		this.incorporatedIn=incorporatedIn;
-	}
-	public String getPublicSince(){
-		return this.publicSince;
-	}
-		
-	public void setPublicSince (String publicSince){
-		this.publicSince=publicSince;
-	}
-	public String getAuditor(){
-		return this.auditor;
-	}
-		
-	public void setAuditor (String auditor){
-		this.auditor=auditor;
-	}
+
 	public String getWebLinks(){
 		return this.webLinks;
 	}
@@ -487,13 +364,5 @@ public class LtTrkdCompany extends IdEntity{
 	public void setStateOrRegion (String stateOrRegion){
 		this.stateOrRegion=stateOrRegion;
 	}
-	public String getContactName(){
-		return this.contactName;
-	}
-		
-	public void setContactName (String contactName){
-		this.contactName=contactName;
-	}
-
    
 }

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	 <link href="/user/country/css/country.css" rel="stylesheet" />
+	 <link href="/business/user/country/css/country.css" rel="stylesheet" />
 </head>
 <body>
 <div id="info" class="main_div">
@@ -21,10 +21,13 @@
 	<img class="separate_img"  src="/common/images/u1934.png">
 	</div>
 	<div class="info_div">
-		<p v-for="item in PoliticalEnvironment">
+		<p v-for="item in PoliticalEnvironment" v-if="PoliticalEnvironment&&PoliticalEnvironment.length!=0">
                 <span>【{{item.fieldName}}】 </span>
                 <span>{{item.fieldValue}}</span>
-                </p>
+        </p>
+        <p  v-else>
+       	<span style="font-size: 18px;">暂无内容</span>
+       </p>
 	</div>
 	
 </div>

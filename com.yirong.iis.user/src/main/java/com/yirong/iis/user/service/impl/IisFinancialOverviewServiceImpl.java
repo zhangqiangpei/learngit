@@ -79,7 +79,7 @@ public class IisFinancialOverviewServiceImpl extends BaseService<IisFinancialOve
 		// 拼装查询sql
 		List<Object> param = new ArrayList<Object>();
 		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT C.ID,C.COMPANY_NAME,O.GROSS_INCOME,O.NET_PROFIT,O.TOTAL_ASSETS,O.TOTAL_LIABILITIES,O.CAPITAL_EXPENDITURE,O.MARKET_VALUE,O.PRICE_OF_STOCK,O.PROFIT,O.EPS,O.A_BONUS,O.PB,O.PE,O.GRADE ");
+		sql.append("SELECT C.ID,C.COMPANY_NAME,C.COMPANY_CHN_NAME,O.GROSS_INCOME,O.NET_PROFIT,O.TOTAL_ASSETS,O.TOTAL_LIABILITIES,O.CAPITAL_EXPENDITURE,O.MARKET_VALUE,O.PRICE_OF_STOCK,O.PROFIT,O.EPS,O.A_BONUS,O.PB,O.PE,O.GRADE ");
 		sql.append(" FROM  IIS_FINANCIAL_OVERVIEW O,IIS_COMPANY_LIST C WHERE O.COMPANY_ID = C.ID");
 		if (StringUtil.isNotNullOrEmpty(ue.getContinentCode())) {
 			sql.append(" AND C.CONTINENT_CODE = ?");

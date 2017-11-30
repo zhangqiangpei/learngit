@@ -21,7 +21,7 @@ import com.yirong.commons.util.datatype.JsonUtil;
  * 
  * @author 陈清沣
  *         <p>
- *         创建时间 ：2017-11-24 18:17:00
+ *         创建时间 ：2017-11-27 19:29:29
  *         </p>
  * 
  *         <p>
@@ -45,7 +45,7 @@ public class IisCountrySurveyApi {
 	 * 
 	 * @author 陈清沣
 	 *         <p>
-	 *         创建时间 ：2017-11-24 18:17:00
+	 *         创建时间 ：2017-11-27 19:29:29
 	 *         </p>
 	 * 
 	 *         <p>
@@ -57,11 +57,9 @@ public class IisCountrySurveyApi {
 	@RequestMapping(value = "save", method = RequestMethod.POST)
 	public String save(@RequestBody String paramAll) {
 		// 获取参数信息
-		String param = JsonUtil.getJsonStrByAttrName(paramAll,
-				"context");
+		String param = JsonUtil.getJsonStrByAttrName(paramAll,"context");
 		// 实体转换
-		IisCountrySurvey iisCountrySurvey = (IisCountrySurvey) JsonUtil.StringToObject(param,
-				IisCountrySurvey.class);
+		IisCountrySurvey iisCountrySurvey = (IisCountrySurvey) JsonUtil.StringToObject(param,IisCountrySurvey.class);
 		// 业务处理
 		Map map = this.iisCountrySurveyService.saveIisCountrySurvey(iisCountrySurvey);
 		return JsonUtil.ObjectToString(map);
@@ -72,7 +70,7 @@ public class IisCountrySurveyApi {
 	 * 
 	 * @author 陈清沣
 	 *         <p>
-	 *         创建时间 ：2017-11-24 18:17:00
+	 *         创建时间 ：2017-11-27 19:29:29
 	 *         </p>
 	 * 
 	 *         <p>
@@ -84,11 +82,9 @@ public class IisCountrySurveyApi {
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String update(@RequestBody String paramAll) {
 		// 获取参数信息
-		String param = JsonUtil.getJsonStrByAttrName(paramAll,
-				"context");
+		String param = JsonUtil.getJsonStrByAttrName(paramAll,"context");
 		// 实体转换
-		IisCountrySurvey iisCountrySurvey = (IisCountrySurvey) JsonUtil.StringToObject(param,
-				IisCountrySurvey.class);
+		IisCountrySurvey iisCountrySurvey = (IisCountrySurvey) JsonUtil.StringToObject(param,IisCountrySurvey.class);
 		// 业务处理
 		Map map = this.iisCountrySurveyService.updateIisCountrySurvey(iisCountrySurvey);
 		return JsonUtil.ObjectToString(map);
@@ -99,7 +95,7 @@ public class IisCountrySurveyApi {
 	 * 
 	 * @author 陈清沣
 	 *         <p>
-	 *         创建时间 ：2017-11-24 18:17:00
+	 *         创建时间 ：2017-11-27 19:29:29
 	 *         </p>
 	 * 
 	 *         <p>
@@ -115,7 +111,7 @@ public class IisCountrySurveyApi {
 		String id = JsonUtil.getJsonStrByAttrName(paramAll, pathName);
 		// 处理业务
 		Map map = iisCountrySurveyService.queryIisCountrySurveyById(id);
-		return JsonUtil.ObjectToString(map);
+		return JsonUtil.ObjectToStringClob(map);
 	}
 
 	/**
@@ -123,13 +119,13 @@ public class IisCountrySurveyApi {
 	 * 
 	 * @author 陈清沣
 	 *         <p>
-	 *         创建时间 ：2017-11-24 18:17:00
+	 *         创建时间 ：2017-11-27 19:29:29
 	 *         </p>
 	 * 
 	 *         <p>
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
-	 * @param
+	 * @param idStrs
 	 * @return
 	 */
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -147,7 +143,7 @@ public class IisCountrySurveyApi {
 	 * 
 	 * @author 陈清沣
 	 *         <p>
-	 *         创建时间 ：2017-11-24 18:17:00
+	 *         创建时间 ：2017-11-27 19:29:29
 	 *         </p>
 	 * 
 	 *         <p>
@@ -159,17 +155,15 @@ public class IisCountrySurveyApi {
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	public String list(@RequestBody String paramAll) {
 		// 获取参数信息
-		String param = JsonUtil.getJsonStrByAttrName(paramAll,
-				"context");
+		String param = JsonUtil.getJsonStrByAttrName(paramAll, "context");
 		// 定义转换对象属性类
 		Map<String, Class> calssMap = new HashMap<String, Class>();
 		calssMap.put("orders", Order.class);
 		// 实体转换
-		IisCountrySurveyUserEntity psue = (IisCountrySurveyUserEntity) JsonUtil
-				.StringToObject(param, IisCountrySurveyUserEntity.class,calssMap);
+		IisCountrySurveyUserEntity psue = (IisCountrySurveyUserEntity) JsonUtil.StringToObject(param, IisCountrySurveyUserEntity.class,calssMap);
 		// 处理业务
 		Map map = iisCountrySurveyService.queryIisCountrySurveyList(psue);
-		return JsonUtil.ObjectToString(map);
+		return JsonUtil.ObjectToStringClob(map);
 	}
 
 }

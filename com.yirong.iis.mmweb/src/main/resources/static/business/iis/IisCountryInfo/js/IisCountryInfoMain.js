@@ -9,7 +9,8 @@ var tableAttr = getTableMergeAttr({
             chineseName: "",
             continentCode: ""
         },
-        continentCodeList: []
+        continentCodeList: [],
+        id : null
     },
     methods: {
         //查询按钮
@@ -25,7 +26,7 @@ var tableAttr = getTableMergeAttr({
         },
         //新增按钮
         addClick: function () {
-            ak.dialog("save", "business/ct/CtDatabase/CtDatabaseSave.html");
+            ak.dialog("save", "business/iis/IisCountryInfo/IisCountryInfoSave.html");
         },
         //删除按钮
         delClick: function () {
@@ -46,8 +47,9 @@ var tableAttr = getTableMergeAttr({
                 ak.success(result.msg);
             }
         },
-        detailClick : function () {
-            ak.dialog("save", "business/iis/IisCountryInfo/IisCountryInfoDetail.html");
+        detailClick : function (row) {
+            this.id = row.ENGLISH_NAME;
+            ak.dialog("detail", "business/iis/IisCountryInfo/IisCountryInfoDetail.html");
         }
     }
 });

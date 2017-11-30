@@ -26,22 +26,27 @@
     <div id="main" class="main clearfix">
     	  
         <div class="fl left">
-	         <div>
-	    		<el-button @click="back()" type="text" size="small"  class="cfont">企业&nbsp></el-button><span class="cfont cname">波哥大能源公司</span>
+	         <div class="div-ellipsis">
+	    		<el-button @click="back" type="text" size="small"  class="cfont">企业&nbsp></el-button>
+	    	    <span class="cfont cname " v-if="companyEntity.companyChnName != ''"  >{{companyEntity.companyChnName}}</span>
+	    		<span class="cfont cname" v-if="companyEntity.companyChnName == ''"  >{{companyEntity.companyName}}</span>
 	    	</div>
 	    	
 	    	<div class="menu">
-			    <el-menu class="el-menu-vertical-demo" :default-openeds="defOpens" id="menu">
-			      <el-submenu index="1">
-			        <template slot="title">
-			          <span>波哥大能源公司</span>
+			    <el-menu class="el-menu-vertical-demo" :default-openeds="defOpens" id="menu"  default-active="1-1" @select="handleSelect">
+			      <el-submenu index="1" >
+			        <template slot="title" >
+			        	<div class="div-ellipsis">
+			        		<span  v-if="companyEntity.companyChnName != ''">{{companyEntity.companyChnName}}</span>
+			          		<span   v-if="companyEntity.companyChnName == ''">{{companyEntity.companyName}}</span>
+			        	</div>
 			        </template>
 			        <el-menu-item-group  >
 			          <el-menu-item index="1-1" @click="loadPageToIFrame('business/user/company/CompanySurvey.html')" >企业概况</el-menu-item>
-			          <el-menu-item index="1-2">财务数据</el-menu-item>
-			          <el-menu-item index="1-3">股市概况</el-menu-item>
-			          <el-menu-item index="1-4">高管介绍</el-menu-item>
-			          <el-menu-item index="1-5">企业新闻</el-menu-item>
+			          <el-menu-item index="1-2" @click="loadPageToIFrame('business/user/company/CompanyFinanceReport.html')">财务数据</el-menu-item>
+			          <el-menu-item index="1-3" @click="loadPageToIFrame('business/user/company/CompanyRatios.html')">股市概况</el-menu-item>
+			          <el-menu-item index="1-4" @click="loadPageToIFrame('business/user/company/CompanyOfficer.html')">高管介绍</el-menu-item>
+			          <el-menu-item index="1-5" @click="loadPageToIFrame('business/user/company/CompanyNews.html')">企业新闻</el-menu-item>
 			        </el-menu-item-group>
 			      </el-submenu>
 			    </el-menu>
@@ -60,8 +65,13 @@
     <script src="/frame/jquery/jquery.min.js"></script>
 	<script src="/frame/vue/vue.min.js"></script>
 	<script src="/frame/elementui/elementui.js"></script>
+	<script src="/frame/awaken/awaken.core.js"></script>
+	<script src="/frame/awaken/awaken.table.js"></script>
+	<script src="/frame/awaken/awaken.tree.js"></script>
+	<script src="/frame/awaken/awaken.dialog.js"></script>
+	<script src="/frame/awaken/awaken.common.js"></script>
 	<script src="/frame/awaken/awaken.util.js"></script>
-	<script src="/common/js/com.js"></script>
+    <script src="/common/js/com.js"></script>
 	<script src="/business/user/company/js/CompanyDetail.js"></script>
 </body>
 </html>

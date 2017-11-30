@@ -1,10 +1,13 @@
-.left,.right{
+.left{
     width:200px;
     border:1px solid #ddd;
 }
-
+.right{
+    width:180px;
+    border:1px solid #ddd;
+}
 .center{
-    width:736px;
+    width:790px;
     margin:0 10px;
 }
 

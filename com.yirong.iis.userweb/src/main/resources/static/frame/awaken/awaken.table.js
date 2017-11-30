@@ -11,7 +11,7 @@ function getTableMergeAttr(attrs){
 			//公用查询参数
 			tableSearchModel : {
 				currentPage : 1,
-				pageSize : 20,
+				pageSize : 15,
 				orders : []
 			},
 			//初始化参数

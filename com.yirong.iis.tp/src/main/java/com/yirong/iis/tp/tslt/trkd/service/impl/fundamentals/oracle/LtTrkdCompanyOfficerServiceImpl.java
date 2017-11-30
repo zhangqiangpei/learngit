@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.yirong.awaken.core.dao.IBaseDao;
 import com.yirong.awaken.core.service.impl.BaseService;
-import com.yirong.commons.logging.Logger;
-import com.yirong.commons.logging.LoggerFactory;
 import com.yirong.iis.tp.common.dao.LtTrkdCompanyOfficerDao;
 import com.yirong.iis.tp.common.entity.LtTrkdCompanyOfficer;
 import com.yirong.iis.tp.tslt.trkd.service.fundamentals.LtTrkdCompanyOfficerService;
@@ -27,12 +25,6 @@ import com.yirong.iis.tp.tslt.trkd.service.fundamentals.LtTrkdCompanyOfficerServ
 @Service("LtTrkdCompanyOfficerServiceImpl")
 public class LtTrkdCompanyOfficerServiceImpl extends BaseService<LtTrkdCompanyOfficer, String>
 		implements LtTrkdCompanyOfficerService {
-
-	/**
-	 * 日志操作类
-	 */
-	private Logger logger = LoggerFactory
-			.getLogger(LtTrkdCompanyOfficerServiceImpl.class);
 
 	/**
 	 * dao注入

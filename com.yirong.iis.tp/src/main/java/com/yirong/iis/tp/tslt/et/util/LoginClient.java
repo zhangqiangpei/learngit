@@ -2,6 +2,8 @@ package com.yirong.iis.tp.tslt.et.util;
 
 import com.reuters.rfa.common.Client;
 import com.reuters.rfa.common.Event;
+import com.reuters.rfa.common.EventQueue;
+import com.reuters.rfa.common.EventSource;
 import com.reuters.rfa.common.Handle;
 import com.reuters.rfa.omm.OMMElementList;
 import com.reuters.rfa.omm.OMMEncoder;
@@ -11,11 +13,14 @@ import com.reuters.rfa.omm.OMMState;
 import com.reuters.rfa.omm.OMMTypes;
 import com.reuters.rfa.rdm.RDMMsgTypes;
 import com.reuters.rfa.rdm.RDMUser;
+import com.reuters.rfa.session.Session;
 import com.reuters.rfa.session.omm.OMMConnectionEvent;
+import com.reuters.rfa.session.omm.OMMConsumer;
 import com.reuters.rfa.session.omm.OMMItemEvent;
 import com.reuters.rfa.session.omm.OMMItemIntSpec;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
+import com.yirong.iis.tp.tslt.et.ief.LtEtIef;
 
 /**
  * 功能描述：登录实体类
@@ -37,11 +42,6 @@ public class LoginClient implements Client {
 	private final static Logger logger = LoggerFactory.getLogger(LoginClient.class);
 
 	/**
-	 * 客户端操作类
-	 */
-	private ConsumerClient starterConsumer;
-
-	/**
 	 * 配置信息
 	 */
 	private CommandLine commandLine;
@@ -50,6 +50,21 @@ public class LoginClient implements Client {
 	 * 登录操作类
 	 */
 	private Handle loginHandle;
+
+	/**
+	 * omm客户端
+	 */
+	private OMMConsumer ommConsumer;
+
+	/**
+	 * 事件队列
+	 */
+	private EventQueue eventQueue;
+
+	/**
+	 * 处理omm池
+	 */
+	private OMMPool ommPool;
 
 	/**
 	 * 功能描述：构造函数
@@ -63,9 +78,18 @@ public class LoginClient implements Client {
 	 *         修改历史：(修改人，修改时间，修改原因/内容)
 	 *         </p>
 	 */
-	public LoginClient(ConsumerClient starterConsumer) {
-		this.starterConsumer = starterConsumer;
-		commandLine = starterConsumer.getCommondLine();
+	public LoginClient(CommandLine commandLine) {
+		// 配置文件
+		this.commandLine = commandLine;
+		// 处理事件队列
+		eventQueue = EventQueue.create(commandLine.getOption("eventQueueName").toString());
+		// 处理omm池
+		ommPool = OMMPool.create();
+		// 处理会话
+		String sessionName = commandLine.getVariable("session");
+		Session session = Session.acquire(sessionName);
+		// 创建omm客户端
+		ommConsumer = (OMMConsumer) session.createEventSource(EventSource.OMM_CONSUMER, "myOMMConsumer", true);
 	}
 
 	/**
@@ -88,8 +112,7 @@ public class LoginClient implements Client {
 		OMMMsg ommmsg = encodeLoginReqMsg();
 		OMMItemIntSpec ommItemIntSpec = new OMMItemIntSpec();
 		ommItemIntSpec.setMsg(ommmsg);
-		loginHandle = starterConsumer.getOmmConsumer().registerClient(starterConsumer.getEventQueue(), ommItemIntSpec,
-				this, null);
+		loginHandle = ommConsumer.registerClient(eventQueue, ommItemIntSpec, this, null);
 		logger.info("================发送登录请求结束==================");
 	}
 
@@ -109,10 +132,9 @@ public class LoginClient implements Client {
 	 *
 	 */
 	private OMMMsg encodeLoginReqMsg() {
-		OMMEncoder encoder = starterConsumer.getOmmEncoder();
-		OMMPool pool = starterConsumer.getOmmPool();
+		OMMEncoder encoder = ommPool.acquireEncoder();
 		encoder.initialize(OMMTypes.MSG, 500);
-		OMMMsg msg = pool.acquireMsg();
+		OMMMsg msg = ommPool.acquireMsg();
 		msg.setMsgType(OMMMsg.MsgType.REQUEST);
 		msg.setMsgModelType(RDMMsgTypes.LOGIN);
 		msg.setIndicationFlags(OMMMsg.Indication.REFRESH);
@@ -127,8 +149,33 @@ public class LoginClient implements Client {
 		encoder.encodeUInt((long) RDMUser.Role.CONSUMER);
 		encoder.encodeAggregateComplete();
 		OMMMsg encMsg = (OMMMsg) encoder.getEncodedObject();
-		pool.releaseMsg(msg);
+		ommPool.releaseMsg(msg);
 		return encMsg;
+	}
+
+	/**
+	 * 功能描述：处理线程信息
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 *         创建时间 ：2017年11月28日 下午5:51:15
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 *
+	 */
+	public void run() {
+		while (true) {
+			try {
+				eventQueue.dispatch(1000);
+				Thread.sleep(1000);
+			} catch (Exception e) {
+				logger.error("处理异常", e);
+			}
+		}
 	}
 
 	/**
@@ -166,7 +213,6 @@ public class LoginClient implements Client {
 		logger.info("收到登录响应");
 		if (type != Event.OMM_ITEM_EVENT) {// 非项目事件
 			logger.error("非项目事件类型");
-			starterConsumer.stop();
 			return;
 		}
 		/** 处理业务 **/
@@ -174,19 +220,18 @@ public class LoginClient implements Client {
 		OMMMsg respMsg = ie.getMsg();
 		if (respMsg.getMsgModelType() != RDMMsgTypes.LOGIN) {
 			logger.error("非正常登录状态");
-			starterConsumer.stop();
 			return;
 		}
 
 		if (respMsg.isFinal()) {
-			logger.error("收到接收返回消息成功");
+			logger.info("收到登录返回消息（未知成功与否）");
 			return;
 		}
 
 		if (respMsg.has(OMMMsg.HAS_STATE) && (respMsg.getState().getStreamState() == OMMState.Stream.OPEN)
 				&& (respMsg.getState().getDataState() == OMMState.Data.OK)) {
-			logger.error("收到登录成功信息");
-			starterConsumer.getMsgClient().sendRequest(null);
+			logger.info("收到登录成功信息");
+			LtEtIef.runData();// 开始获取数据
 		} else {
 			logger.error("登录失败，提示:" + OMMMsg.MsgType.toString(respMsg.getMsgType()));
 		}
@@ -209,13 +254,17 @@ public class LoginClient implements Client {
 	 */
 	public void closeRequest() {
 		if (null != loginHandle) {
-			starterConsumer.getOmmConsumer().unregisterClient(loginHandle);
+			ommConsumer.unregisterClient(loginHandle);
 			loginHandle = null;
 		}
 	}
 
 	public Handle getLoginHandle() {
 		return loginHandle;
+	}
+
+	public OMMConsumer getOmmConsumer() {
+		return ommConsumer;
 	}
 
 }

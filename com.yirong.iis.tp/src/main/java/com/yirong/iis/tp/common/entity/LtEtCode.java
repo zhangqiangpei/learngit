@@ -1,6 +1,7 @@
 package com.yirong.iis.tp.common.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -77,6 +78,18 @@ public class LtEtCode implements Serializable {
 	 */
 	@Column(name = "CODE_DESC", nullable = true, length = 400)
 	public String codeDesc;
+
+	/**
+	 * 代码分类
+	 */
+	@Column(name = "CODE_CLASSIFY", nullable = true, length = 1)
+	public BigDecimal codeClassify;
+
+	/**
+	 * 是否链代码
+	 */
+	@Column(name = "IS_LINK", nullable = true, length = 1)
+	public BigDecimal isLink;
 
 	/**
 	 * 创建人
@@ -188,6 +201,22 @@ public class LtEtCode implements Serializable {
 
 	public void setParentRicCode(String parentRicCode) {
 		this.parentRicCode = parentRicCode;
+	}
+
+	public BigDecimal getCodeClassify() {
+		return codeClassify;
+	}
+
+	public void setCodeClassify(BigDecimal codeClassify) {
+		this.codeClassify = codeClassify;
+	}
+
+	public BigDecimal getIsLink() {
+		return isLink;
+	}
+
+	public void setIsLink(BigDecimal isLink) {
+		this.isLink = isLink;
 	}
 
 }

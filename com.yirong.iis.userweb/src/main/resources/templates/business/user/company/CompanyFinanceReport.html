@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>财务数据</title>
+
+    <link href="/frame/elementui/elementui.css" rel="stylesheet" />
+    <link href="/common/css/reset.css" rel="stylesheet" />
+    <link href="/common/css/com.css" rel="stylesheet" />
+    <link href="/business/user/company/css/CompanyNews.css" rel="stylesheet" />  
+</head>
+<body>
+ 
+    <!---------------网页主体start----------------->
+    <div id="main" class="clearfix">
+     		<el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel">
+           	 <el-row>
+	             <el-input placeholder="输入关键字" v-model="tableSearchModel.keywords" style="width:950px;" size="small" class="input-with-select">
+				      <el-button slot="append" icon="el-icon-search" @click="searchClick"></el-button>
+				  </el-input>
+            </el-row>
+ 			</el-form>
+ 
+          <!-- 企业概况 -->
+		 	<div class="div-main">
+		  		 <el-table  :data="tableData" @sort-change="tableSortChange" style="width:950px;" 
+                           @selection-change="tableChange" ref="mytable" stripe border>
+     
+		             <el-table-column prop="TITLE" show-overflow-tooltip label="股市概况"   >
+		             	   <el-table-column type="index" align="center" label="序号" width="50"  fixed="left"> </el-table-column>
+		             	   <el-table-column prop="fiscalYear"   show-overflow-tooltip label="财政年度"></el-table-column>
+		             	   <el-table-column prop="endDate"   show-overflow-tooltip label="结束时间"></el-table-column>
+		             	   <el-table-column prop="periodLength"   show-overflow-tooltip label="周期长度"></el-table-column>
+		             	   <el-table-column prop="coaType"   show-overflow-tooltip label="类型"></el-table-column>
+		             	   <el-table-column prop="type"   show-overflow-tooltip label="频度"></el-table-column>
+		             	   <el-table-column prop="coaCode"   show-overflow-tooltip label="coa编码"></el-table-column>
+		             	   <el-table-column prop="coaValue"   show-overflow-tooltip label="coa值"></el-table-column>
+		             </el-table-column>
+             
+                </el-table>
+                <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               :page-size="tableSearchModel.pageSize" @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper"></el-pagination>
+		  		 
+		  		
+		  </div>    
+    </div>
+    <!---------------网页主体end------------------->
+    
+    
+    <script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/vue/vue.min.js"></script>
+	<script src="/frame/elementui/elementui.js"></script>
+	<script src="/frame/awaken/awaken.core.js"></script>
+	<script src="/frame/awaken/awaken.table.js"></script>
+	<script src="/frame/awaken/awaken.tree.js"></script>
+	<script src="/frame/awaken/awaken.dialog.js"></script>
+	<script src="/frame/awaken/awaken.common.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+    <script src="/common/js/com.js"></script>
+    <!-- 本页面js -->
+	<script src="/business/user/company/js/CompanyFinanceReport.js"></script>
+</body>
+</html>

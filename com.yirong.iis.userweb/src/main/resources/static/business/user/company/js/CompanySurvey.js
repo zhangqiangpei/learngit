@@ -13,14 +13,26 @@ var mainAttr={
     		// 当前页切换成第一页
             param.currentPage = 1;
             param.pageSize=1;
-    		var res = z.msService("user", "IisCompanySurveyApi/getByCompanyId",param);
+    		var res = z.msService("user", "IisCompanyApi/getByCompanyId",param);
         	if(null != res && res.code == 0){
         		this.surveyEntiy = res.data;
         	}
-    	} 
+    	} ,
+    	
+    	chnTranslate:function(){
+    		$("#chnctdiv").css("display", "block");
+    		$("#ctdiv").css("display", "none");
+    		$("#engctdiv").css("display", "none");
+    	},
+    	
+    	engTranslate:function(){
+    		$("#chnctdiv").css("display", "none");
+    		$("#ctdiv").css("display", "none");
+    		$("#engctdiv").css("display", "block");
+    	}
     },
     mounted: function() {
-    	this.tableSearchModel.companyId="8a0eb2dc5fe6b7ab015fe6bdc0f20016";
+    	this.tableSearchModel.companyId= parent.mainVue.$data.companyId;
         //默认排序
         this.searchClick();
     }

@@ -58,6 +58,9 @@ var vm_country = new Vue({
 				}
 			}
     		
+    	},
+    	continentChange:function(){
+    		this.searchClick();
     	}
     },
     mounted: function() {

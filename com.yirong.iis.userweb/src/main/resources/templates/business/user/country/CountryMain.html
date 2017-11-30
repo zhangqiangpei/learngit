@@ -22,8 +22,8 @@
         <div class="search-wrap">
             <div class="search-bar">
                 查找国家
-                <el-input placeholder="请输入国家" v-model="countryName" class="input-with-select">
-                    <el-select v-model="continentName" slot="prepend" placeholder="请选择大洲">
+                <el-input placeholder="请输入国家" v-model="countryName" class="input-with-select" >
+                    <el-select v-model="continentName" slot="prepend" placeholder="请选择大洲" @change="continentChange">
                         <el-option v-for="item in continentList" :label="item.name" :value="item.id"></el-option>
                     </el-select>
                     <el-button @click="searchClick" slot="append" icon="el-icon-search"></el-button>

@@ -29,8 +29,8 @@
 		  		<div class="div-title">
 		  			<span>企业概况</span>
 		  			<div class="div-bt">
-		  				<el-button type="primary" @click="" size="mini">中文</el-button>
-		  				<el-button type="primary" @click="" size="mini">英文</el-button>
+		  				<el-button type="primary" @click="chnTranslate" size="mini">中文</el-button>
+		  				<el-button type="primary" @click="engTranslate" size="mini">英文</el-button>
 		  			</div>
 		  		</div>
 		  		<div class="div-content">
@@ -38,10 +38,18 @@
 		  				<!-- <img id="u6670_img" class="c-img" src="business/user/company/css/img/company.png"> -->
 		  				<span>{{surveyEntiy.companyName}}</span>
 		  			</div>
-		  			<div>
-		  				<span>{{surveyEntiy.content}}</span>
+		  			<div id="ctdiv">
+		  				<span>{{surveyEntiy.textInfo}}</span>
 		  			</div>
 		  			
+		  			<div style="display:none" id="engctdiv">
+		  				<span>{{surveyEntiy.textInfoEng}}</span>
+		  			</div>
+		  			
+		  			<div style="display:none" id="chnctdiv">
+		  				<span>{{surveyEntiy.textInfoChn}}</span>
+		  			</div>
+
 		  		</div>
 		  		
 		  		 

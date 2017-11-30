@@ -1,25 +1,15 @@
 package com.yirong.iis.user.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yirong.awaken.core.dao.IBaseDao;
 import com.yirong.awaken.core.service.impl.BaseService;
-import com.yirong.awaken.core.util.BeanUtil;
-import com.yirong.awaken.core.util.ResultUtil;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
-import com.yirong.commons.util.datatype.StringUtil;
-import com.yirong.commons.util.entity.PageEntiry;
-import com.yirong.commons.util.error.ErrorPromptInfoUtil;
 import com.yirong.iis.user.dao.IisIndicatorInfoDao;
 import com.yirong.iis.user.entity.IisIndicatorInfo;
 import com.yirong.iis.user.service.IisIndicatorInfoService;
-import com.yirong.iis.user.userentity.IisIndicatorInfoUserEntity;
 
  /**
  * 功能描述：指标信息表service实现类

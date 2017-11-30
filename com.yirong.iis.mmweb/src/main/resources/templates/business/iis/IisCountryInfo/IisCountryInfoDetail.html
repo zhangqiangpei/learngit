@@ -1,86 +1,94 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <!-- 公用方法 -->
-    <script src="/frame/jquery/jquery.min.js"></script>
-    <script src="/frame/awaken/awaken.init.js"></script>
-    <script src="/frame/awaken/awaken.util.js"></script>
-    <script>
-        //初始化头部
-        initHeadConfig();
-    </script>
-</head>
-<body>
-<div id="main" class="main">
-    <el-tabs>
-        <el-tab-pane label="基本信息" name="basic">
-            <el-row v-if="countryInfo">
-                <el-form :model="countryInfo" label-width="100px" class="form">
+<div id="detail" class="main">
+    <el-dialog :visible.sync="dialogVisible" title="国家详细信息">
+        <el-tabs :active-name="activeName" @tab-click="tabClick">
+            <el-tab-pane label="基本信息" name="basic">
+                <el-row v-if="countryInfo">
+                    <el-form :model="countryInfo" label-width="100px" class="form">
+                        <el-row>
+                            <el-form-item label="所属洲：" prop="CONTINENT_NAME">
+                                <span>{{ countryInfo.CONTINENT_NAME }}</span>
+                            </el-form-item>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="12">
+                                <el-form-item label="中文名：" prop="chineseName">
+                                    <span>{{ countryInfo.CHINESE_NAME }}</span>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="英文名：" prop="englishName">
+                                    <span>{{ countryInfo.ENGLISH_NAME }}</span>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="12">
+                                <el-form-item label="两位缩写：" prop="iso2code">
+                                    <span>{{ countryInfo.ISO2CODE }}</span>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="三位缩写：" prop="ioscode">
+                                    <span>{{ countryInfo.ISOCODE }}</span>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-form-item label="国旗：">
+                                <img :src="flag">
+                            </el-form-item>
+                        </el-row>
+                    </el-form>
+                </el-row>
+                <el-row style="text-align: center">
+                    <el-button type="primary" size="small" @click="updateCountry">编 辑</el-button>
+                </el-row>
+            </el-tab-pane>
+            <el-tab-pane label="概况信息" name="survey">
+                <!-- 查询条件 -->
+                <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel">
                     <el-row>
-                        <el-form-item label="所属洲：" prop="CONTINENT_NAME">
-                            <span>{{ countryInfo.CONTINENT_NAME }}</span>
+                        <el-form-item label="字段名" prop="fieldName">
+                            <el-input v-model="tableSearchModel.fieldName" placeholder="请输入字段名"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="searchClick" size="small">查 询</el-button>
+                            <el-button type="default" @click="resetClick" size="small">重 置</el-button>
                         </el-form-item>
                     </el-row>
                     <el-row>
-                        <el-col :span="12">
-                            <el-form-item label="中文名：" prop="CHINESE_NAME">
-                                <span>{{ countryInfo.CHINESE_NAME }}</span>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="12">
-                            <el-form-item label="英文名：" prop="ENGLISH_NAME">
-                                <span>{{ countryInfo.ENGLISH_NAME }}</span>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                    <el-row>
-                        <el-col :span="12">
-                            <el-form-item label="两位缩写：" prop="ISO2CODE">
-                                <span>{{ countryInfo.ISO2CODE }}</span>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="12">
-                            <el-form-item label="三位缩写：" prop="ISOCODE">
-                                <span>{{ countryInfo.ISOCODE }}</span>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                    <el-row>
-                        <el-form-item label="国旗：">
-                            <!--<span>{{ countryInfo.resourcesRemark }}</span>-->
-                        </el-form-item>
+                        <el-button type="primary" size="small" @click="saveSurvey">新 增</el-button>
+                        <el-button type="default" @click="delClick" size="small">删 除</el-button>
                     </el-row>
                 </el-form>
-            </el-row>
-        </el-tab-pane>
-        <el-tab-pane label="概况信息" name="survey">
-            <el-table>
-                <el-table-colunm label="字段" prop="FIELD_NAME"></el-table-colunm>
-                <el-table-colunm label="内容" prop="FIELD_VALUE"></el-table-colunm>
-            </el-table>
-        </el-tab-pane>
-        <el-tab-pane label="外交信息" name="situation">
-            <!--<el-row v-if="countryInfo">-->
-                <!--<el-form :model="countryInfo" label-width="100px" class="form">-->
-                    <!--<el-row>-->
-                        <!--<el-form-item label="所属洲：" prop="CONTINENT_NAME">-->
-                            <!--<span>{{ countryInfo.CONTINENT_NAME }}</span>-->
-                        <!--</el-form-item>-->
-                    <!--</el-row>-->
-                    <!--<el-row>-->
-                        <!--<el-form-item label="中文名：" prop="CHINESE_NAME">-->
-                            <!--<span>{{ countryInfo.CHINESE_NAME }}</span>-->
-                        <!--</el-form-item>-->
-                    <!--</el-row>-->
-                <!--</el-form>-->
-            <!--</el-row>-->
-        </el-tab-pane>
-    </el-tabs>
+                <el-table id="tableId" height="400" :data="tableData" @sort-change="tableSortChange"
+                          @selection-change="tableChange"
+                          ref="mytable" stripe border style="margin-top: 10px">
+                    <el-table-column type="selection"></el-table-column>
+                    <el-table-column label="字段" prop="FIELD_NAME" width="133"></el-table-column>
+                    <el-table-column label="内容" prop="FIELD_VALUE" show-overflow-tooltip></el-table-column>
+                    <el-table-column label="操作" width="88">
+                        <template scope="scope">
+                            <el-button type="primary" size="small" @click="updateSurvey(scope.row)">编 辑</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <!-- 分页 -->
+                <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               :page-size="tableSearchModel.pageSize" @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper"></el-pagination>
+            </el-tab-pane>
+            <el-tab-pane label="外交信息" name="situation">
+                <el-row v-if="displomaticSituationInfo">
+                    <span v-html="displomaticSituationInfo[0].CONTENT"></span>
+                </el-row>
+            </el-tab-pane>
+        </el-tabs>
+    </el-dialog>
 </div>
 
 <!-- 本页面js -->
 <script src="/business/iis/IisCountryInfo/js/IisCountryInfoDetail.js"></script>
 <!-- 本页面css -->
 <link href="/business/iis/IisCountryInfo/css/IisCountryInfoDetail.css" rel="stylesheet"/>
-</body>
-</html>
