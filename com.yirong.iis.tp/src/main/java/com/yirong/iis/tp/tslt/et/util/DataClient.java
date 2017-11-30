@@ -23,6 +23,8 @@ import com.reuters.rfa.omm.OMMVector;
 import com.reuters.rfa.omm.OMMVectorEntry;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
+import com.yirong.commons.util.datatype.StringUtil;
+import com.yirong.iis.tp.common.entity.LtEtCode;
 import com.yirong.iis.tp.tslt.et.ief.LtEtIef;
 import com.yirong.iis.tp.tslt.et.userentity.LtEtDataUserEntity;
 
@@ -217,21 +219,18 @@ public class DataClient {
 					if (null != obj) {
 						String value = doData(data, itemName).toString();
 						ue.setValue(value);
-						// 如果是链代码，子数据每次返回14条且有下一页链代码标识，需将14条子数据及链代码发送请求获取数据
-						if (fieldId >= 800 && fieldId <= 815 && fieldId != 814) {// 第一种获取方式
-							if (fieldId == 815) {// 链代码
+						if ((fieldId >= 800 && fieldId <= 815 && fieldId != 814)
+								|| (fieldId >= 238 && fieldId <= 253 && fieldId != 239)) {// 代码下肯呢个存在子数据，每次返回14条且有下一页链代码标识，需将14条子数据及链代码发送请求获取数据
+							if (fieldId == 815 || fieldId == 238) {// 下一页链代码
 								LtEtIef.doLtEtCode(value, itemName, true);
-							} else {
-								LtEtIef.doLtEtCode(value, itemName, false);
+								msgClient.sendRequest(value);
+							} else {// 1-14子集合
+								LtEtCode ltEtCode = LtEtIef.getLtEtCode(itemName);
+								if (StringUtil.isNullOrEmpty(ltEtCode.getParentRicCode())) {// 说明本code为第二级，允许继续订阅（目前根据业务需求仅获取到第二级代码）
+									LtEtIef.doLtEtCode(value, itemName, false);
+									msgClient.sendRequest(value);
+								}
 							}
-							msgClient.sendRequest(value);
-						} else if (fieldId >= 238 && fieldId <= 253 && fieldId != 239) {// 第两种获取方式
-							if (fieldId == 238) {// 链代码
-								LtEtIef.doLtEtCode(value, itemName, true);
-							} else {
-								LtEtIef.doLtEtCode(value, itemName, false);
-							}
-							msgClient.sendRequest(value);
 						}
 					}
 					return ue;

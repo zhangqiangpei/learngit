@@ -157,6 +157,26 @@ public class LtEtIef {
 		return ltEtCodeService.doLtEtCode(code, pcode, isLink);
 	}
 
+	/**
+	 * 功能描述：根据编码获取代码信息
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 * 		创建时间 ：2017年11月30日 下午1:54:14
+	 *         </p>
+	 *
+	 *         <p>
+	 * 		修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 * @param ricCode
+	 * @return
+	 *
+	 */
+	public static LtEtCode getLtEtCode(String ricCode) {
+		return ltEtCodeService.cacheFindByRicCode(ricCode);
+	}
+
 	@Autowired(required = true)
 	public void setLtEtCodeService(LtEtCodeService ltEtCodeService) {
 		LtEtIef.ltEtCodeService = ltEtCodeService;
