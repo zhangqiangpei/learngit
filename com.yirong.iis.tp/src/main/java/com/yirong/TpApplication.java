@@ -24,7 +24,7 @@ public class TpApplication extends BaseApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TpApplication.class, args);
 		// 运行路透elektron产品
-		//LtEtIef.run();
+		LtEtIef.run();
 	}
 
 	// destroy-method="close"的作用是当数据库连接不使用的时候,就把该连接重新放到数据池中,方便下次使用调用.
