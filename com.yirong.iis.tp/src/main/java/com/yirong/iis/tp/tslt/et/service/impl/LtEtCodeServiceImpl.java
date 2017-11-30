@@ -83,7 +83,7 @@ public class LtEtCodeServiceImpl extends BaseService<LtEtCode, String> implement
 			ltEtCode.setCodeName(map.get("name"));
 			ltEtCode.setCodeType(map.get("codeType"));
 			ltEtCode.setCountryEnglishName(map.get("countryEnglishName"));
-			ltEtCode.setCodeClassify(new BigDecimal(map.get("codeClassify")));
+			ltEtCode.setIsGetSon(new BigDecimal(map.get("isGetSon")));
 		} else {// 缓存没有数据，需查询数据库
 			synchronized (ricCode) {// 防止并发
 				ltEtCode = this.ltEtCodeDao.findByRicCode(ricCode);
@@ -99,7 +99,7 @@ public class LtEtCodeServiceImpl extends BaseService<LtEtCode, String> implement
 					}
 					RedisCacheEif.hset(redisId, "name", ltEtCode.getCodeName());
 					RedisCacheEif.hset(redisId, "codeType", ltEtCode.getCodeType());
-					RedisCacheEif.hset(redisId, "codeClassify", ltEtCode.getCodeClassify().toString());
+					RedisCacheEif.hset(redisId, "isGetSon", ltEtCode.getIsGetSon().toString());
 					String countryEnglishName = ltEtCode.getCountryEnglishName();
 					if (StringUtil.isNotNullOrEmpty(countryEnglishName)) {
 						RedisCacheEif.hset(redisId, "countryEnglishName", countryEnglishName);
@@ -153,7 +153,7 @@ public class LtEtCodeServiceImpl extends BaseService<LtEtCode, String> implement
 		if (null == ltEtCode) {// 不存在需新增
 			ltEtCode = new LtEtCode();
 			LtEtCode pLtEtCode = cacheFindByRicCode(pcode);
-			ltEtCode.setCodeName(pLtEtCode.getCodeName() + "-" + code);
+			ltEtCode.setCodeName(pLtEtCode.getRicCode() + "--" + code);
 			ltEtCode.setCodeType(pLtEtCode.getCodeType());
 			ltEtCode.setCountryEnglishName(pLtEtCode.getCountryEnglishName());
 			ltEtCode.setRicCode(code);
@@ -165,7 +165,7 @@ public class LtEtCodeServiceImpl extends BaseService<LtEtCode, String> implement
 				isLinkNum = new BigDecimal("0");
 			}
 			ltEtCode.setIsLink(isLinkNum);
-			ltEtCode.setCodeClassify(pLtEtCode.getCodeClassify());
+			ltEtCode.setIsGetSon(new BigDecimal("0"));// 新增的CODE肯定不获取子代码
 			this.save(ltEtCode);
 		}
 		return ltEtCode;

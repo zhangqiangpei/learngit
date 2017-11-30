@@ -80,10 +80,10 @@ public class LtEtCode implements Serializable {
 	public String codeDesc;
 
 	/**
-	 * 代码分类
+	 * 是否获取子代码(1是、0否)
 	 */
-	@Column(name = "CODE_CLASSIFY", nullable = true, length = 1)
-	public BigDecimal codeClassify;
+	@Column(name = "IS_GET_SON", nullable = true, length = 1)
+	public BigDecimal isGetSon;
 
 	/**
 	 * 是否链代码
@@ -203,12 +203,12 @@ public class LtEtCode implements Serializable {
 		this.parentRicCode = parentRicCode;
 	}
 
-	public BigDecimal getCodeClassify() {
-		return codeClassify;
+	public BigDecimal getIsGetSon() {
+		return isGetSon;
 	}
 
-	public void setCodeClassify(BigDecimal codeClassify) {
-		this.codeClassify = codeClassify;
+	public void setIsGetSon(BigDecimal isGetSon) {
+		this.isGetSon = isGetSon;
 	}
 
 	public BigDecimal getIsLink() {

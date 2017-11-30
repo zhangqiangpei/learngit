@@ -219,17 +219,17 @@ public class DataClient {
 					if (null != obj) {
 						String value = doData(data, itemName).toString();
 						ue.setValue(value);
-						if ((fieldId >= 800 && fieldId <= 815 && fieldId != 814)
-								|| (fieldId >= 238 && fieldId <= 253 && fieldId != 239)) {// 代码下肯呢个存在子数据，每次返回14条且有下一页链代码标识，需将14条子数据及链代码发送请求获取数据
-							if (fieldId == 815 || fieldId == 238) {// 下一页链代码
-								LtEtIef.doLtEtCode(value, itemName, true);
+						if (fieldId == 815 || fieldId == 238) {// 下一页链代码
+							LtEtIef.doLtEtCode(value, itemName, true);
+							msgClient.sendRequest(value);
+						} else if ((fieldId >= 800 && fieldId < 815 && fieldId != 814)
+								|| (fieldId > 238 && fieldId <= 253 && fieldId != 239)) {// 代码下还存在子数据，每次返回14条且有下一页链代码标识，需将14条子数据及链代码发送请求获取数据
+							// 1-14子集合
+							LtEtCode ltEtCode = LtEtIef.getLtEtCode(itemName);
+							if (1 == ltEtCode.getIsGetSon().intValue()
+									&& StringUtil.isNullOrEmpty(ltEtCode.getParentRicCode())) {// 需要获取子代码，且本code为第二级，允许继续订阅（目前根据业务需求仅获取到第二级代码）
+								LtEtIef.doLtEtCode(value, itemName, false);
 								msgClient.sendRequest(value);
-							} else {// 1-14子集合
-								LtEtCode ltEtCode = LtEtIef.getLtEtCode(itemName);
-								if (StringUtil.isNullOrEmpty(ltEtCode.getParentRicCode())) {// 说明本code为第二级，允许继续订阅（目前根据业务需求仅获取到第二级代码）
-									LtEtIef.doLtEtCode(value, itemName, false);
-									msgClient.sendRequest(value);
-								}
 							}
 						}
 					}
