@@ -1,6 +1,5 @@
 package com.yirong.iis.tp.tslt.et.ief;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,23 +98,18 @@ public class LtEtIef {
 				if (null != list && list.size() != 0) {
 					StringBuffer codeStrs = new StringBuffer();
 					int listLenth = list.size();
-					List<String> execList = new ArrayList<String>();// 执行的集合
 					for (int i = 0; i < listLenth; i++) {
 						LtEtCode ltEtCode = list.get(i);
-						if (i == (listLenth - 1) || (i != 0 && i % 1000 == 0)) {// 最后一个元素或者每1000个编码一个线程
+						if (i == (listLenth - 1)) {// 最后一个元素
 							codeStrs.append(ltEtCode.getRicCode());
-							execList.add(codeStrs.toString());
-							codeStrs = new StringBuffer();// 重置字符串
 						} else {
 							codeStrs.append(ltEtCode.getRicCode() + ",");
 						}
 					}
 					// 异步线程运行
-					for (String exec : execList) {
-						StarterConsumer starterConsumer = new StarterConsumer(loginClient, "Demo::SESS_Demo",
-								"ELEKTRON_DD", "user2", exec, sde.getCode());
-						starterConsumer.start();
-					}
+					StarterConsumer starterConsumer = new StarterConsumer(loginClient, "Demo::SESS_Demo", "ELEKTRON_DD",
+							"user2", codeStrs.toString(), sde.getCode());
+					starterConsumer.start();
 				}
 			}
 		}
