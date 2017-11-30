@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>文档信息</title>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+        <el-form :inline="true"
+                  :model="tableSearchModel"
+                  ref="tableSearchModel">
+           	 <el-row>
+           	 
+           	  <el-form-item label="" prop="integratetAppId">
+                    <el-select v-model="tableSearchModel.integratetAppId" filterable  placeholder="请选择应用" @change="" size="small">
+					    <el-option
+					        v-for="item in appsOptions"
+					        :key="item.id"
+					        :label="item.appName"
+					        :value="item.id">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                
+           	  <el-form-item label="" prop="docName">
+                   <el-input v-model="tableSearchModel.docName" placeholder="请输入文档名称" size="small"></el-input>
+               </el-form-item>
+ 
+  				<el-form-item label="" prop="docType">
+                    <el-select v-model="tableSearchModel.docType" filterable  placeholder="请选择文档类型" @change="" size="small">
+                        <el-option
+					        v-for="item in docTypeOptions"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+ 
+                <el-form-item>
+                    <el-button type="primary" @click="onSearch" size="small" name="per_km_docInfo_show">查 询</el-button>
+                    <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+                </el-form-item>
+            </el-row>
+           
+			</el-form>
+                <el-table :data="tableData"
+                          @sort-change="tableSortChange"
+                          @selection-change="tableChange"
+                          ref="mytable" stripe
+                          border id="tableId" height=100%>
+		              <el-table-column type="selection"
+						               align="center"
+						               width="45">
+		              </el-table-column>
+ 
+                    <el-table-column prop="docName"   show-overflow-tooltip
+                                     label="文档名称" >
+                    </el-table-column>
+                   
+                   <el-table-column prop="docSize" width="150"  show-overflow-tooltip
+                                     label="文档大小(Kb)"  >
+                    </el-table-column>
+                   <!-- <el-table-column prop="docType" width="100"  show-overflow-tooltip
+                                     label="文档类型"   >
+                    </el-table-column> -->
+                    <el-table-column prop="orgName" width="150"  show-overflow-tooltip
+                                     label="机构名称"   >
+                    </el-table-column>
+                    
+                 
+                    <el-table-column prop="createTime" sortable="custom" show-overflow-tooltip
+                                     label="创建时间" :formatter="formatDate"
+                                     width="180">
+                    </el-table-column>
+                    
+                     <el-table-column prop="creatorName" width="150" show-overflow-tooltip
+                                     label="创建人" sortable="custom"> 
+                    </el-table-column> 
+                    
+                  <!--   <el-table-column prop="creator" width="100" show-overflow-tooltip
+                                     label="创建人" sortable="custom"> 
+                    </el-table-column>    -->
+
+                     <!-- <el-table-column label="操作"
+	                             align="center"
+	                             width="100">
+	                	<template scope="scope">
+	                    	<el-button size="small"
+	                               @click="handleEdit(scope.$index, scope.row)" name="per_km_app_edit">编辑</el-button>
+	 
+	               	 	</template>
+	            	</el-table-column>  -->
+                </el-table>
+
+
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :page-size= "tableSearchModel.pageSize"
+                               :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+          
+  
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/km/KmDocInfo/js/KmDocInfoMain.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<div id="save" class="main">
+	<el-dialog title="新增网址" 
+                   :visible.sync="dialogVisible">
+            <el-form :model="saveModel"
+                     :rules="saveRules"
+                     ref="saveModel"
+                     label-width="100px"
+                      >
+                <el-form-item label="网址名称" prop="websiteName">
+                    <el-input v-model="saveModel.websiteName" placeholder="请输入网址中文名称"></el-input>
+                </el-form-item>
+                <el-form-item label="网址" prop="websiteAddress">
+                    <el-input v-model="saveModel.websiteAddress" placeholder="请输入网址"></el-input>
+                </el-form-item>
+                <el-form-item label="说明" prop="websiteRemark">
+                    <el-input type="textarea" :rows="2" v-model="saveModel.websiteRemark" placeholder="请输入说明(长度：1-64)"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="saveSubmit" size="small">确定</el-button>
+                    <el-button @click="saveReset" size="small">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/ct/CtWebsite/js/CtWebsiteSave.js"></script>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+		 <!-- 查询条件 -->
+         <el-form :inline="true"
+                 :model="tableSearchModel"
+                 ref="tableSearchModel">
+            <el-row>
+                <el-form-item label="目录名称" prop="catalogName">
+                    <el-input v-model="tableSearchModel.catalogName" placeholder="请输入目录名称"></el-input>
+                </el-form-item>
+                <el-form-item label="发布状态" prop="releaseState">
+                	<el-select v-model="tableSearchModel.releaseState" placeholder="请选择" clearable>
+	                    <el-option :key="rs.key" :label="rs.label" :value="rs.value" v-for="rs in releaseStateList"></el-option>
+	                </el-select>
+            	</el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="searchClick" size="small" name="per_dm_release_show">查 询</el-button>
+                    <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+                </el-form-item>
+            </el-row>
+            <el-row>
+                <el-form-item>
+                    <el-button type="primary" @click="enReleaseClick" icon="plus" size="small" name="per_dm_release_release">对外发布</el-button>
+                    <el-button type="primary" @click="enPublishClick" icon="plus" size="small" name="per_dm_publish_release">对内发布</el-button>
+                </el-form-item>
+            </el-row>
+        </el-form>
+
+		<!-- 数据 -->
+        <el-table :data="tableData" id="tableId" height=100%
+                  @sort-change="tableSortChange"
+                  @selection-change="tableChange"
+                  ref="mytable" stripe
+                  border>
+            <el-table-column type="selection"
+                             align="center"
+                             width="45">
+            </el-table-column>
+            <el-table-column prop="catalog_name"
+                             label="目录名称" sortable="custom">
+            </el-table-column>
+            <el-table-column prop="catalog_attr_name"
+                             label="目录属性" sortable="custom"
+                             width="200">
+            </el-table-column>
+            <el-table-column prop="release_state_name"
+                             label="发布状态" sortable="custom"
+                             width="120">
+            <!-- </el-table-column>
+            <el-table-column prop="is_mining_analysis" sortable="custom"
+                             label="挖掘分析"
+                             width="120">
+            </el-table-column>
+            <el-table-column prop="is_visualization" sortable="custom"
+                             label="可视化展示"
+                             width="140"> -->
+            </el-table-column>
+            <el-table-column prop="release_creator_name" sortable="custom"
+                             label="发布人"
+                             width="150">
+            </el-table-column>
+            <el-table-column prop="release_time" sortable="custom"
+                             label="发布时间"
+                             width="180">
+            </el-table-column>
+        </el-table>
+
+		<!-- 分页 -->
+        <el-pagination class="pagination"
+                       :current-page="tableSearchModel.currentPage"
+                       :total="tableTotal"
+                        @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize" 
+                       @current-change="tableCurrentChange"
+                       layout="total, sizes, prev, pager, next, jumper">
+        </el-pagination>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/dm/DmRelease/js/DmReleaseMain.js"></script>
+</body>
+</html>

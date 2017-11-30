@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>企业</title>
+
+    <link href="/frame/elementui/elementui.css" rel="stylesheet" />
+    <link href="/common/css/reset.css" rel="stylesheet" />
+    <link href="/common/css/com.css" rel="stylesheet" />
+    <link href="/business/user/company/css/CompanyMain.css" rel="stylesheet" />
+</head>
+<body>
+    
+    <!---------------网页头部start----------------->
+    <div id="header" class="header"></div>
+    <!---------------网页头部end------------------->
+ 
+    <!---------------网页主体start----------------->
+    <div id="main" class="main  clearfix">
+    	 <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel">
+           	 <el-row>
+           	 <el-form-item>
+           	 		<el-lable>关注公司财务总览&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</el-lable>
+           	 </el-form-item>
+           	  <el-form-item>
+                 <el-select v-model="tableSearchModel.continentCode"  clearable  style="width:158px;" size="small" @change="continentChange" placeholder="选择洲">
+                     <el-option
+                             v-for="item in continents"
+                             :key="item.value"
+                             :label="item.label"
+                             :value="item.value">
+                     </el-option>
+                 </el-select>
+             </el-form-item>
+                
+			<el-form-item>
+                 <el-select v-model="tableSearchModel.countryEnglishName" clearable  style="width:132px;" size="small"   placeholder="选择国家">
+                     <el-option
+                             v-for="item in countrys"
+                             :key="item.englishName"
+                             :label="item.chineseName"
+                             :value="item.englishName">
+                     </el-option>
+                 </el-select>
+             </el-form-item>
+             
+             <el-form-item>
+                 <el-select v-model="tableSearchModel.industryCode" clearable style="width:132px;" size="small" placeholder="选择行业">
+                     <el-option
+                             v-for="item in industrys"
+                             :key="item.value"
+                             :label="item.label"
+                             :value="item.value">
+                     </el-option>
+                 </el-select>
+             </el-form-item>
+             <el-form-item>
+              <el-date-picker
+			      v-model="startAndEnd"
+			      type="daterange"
+			      value-format="yyyyMMdd"
+			      align="right"
+			      unlink-panels
+			      range-separator="至"
+			      start-placeholder="开始日期"
+			      end-placeholder="结束日期"
+			      size="small"
+			      style="width:200px;"
+			      :picker-options="pickerOptions2">
+			    </el-date-picker>
+     		  </el-form-item>
+              <el-form-item>
+                 <el-select v-model="tableSearchModel.frequency" clearable style="width:132px;" size="small" placeholder="频度">
+                     <el-option
+                             v-for="item in frequencys"
+                             :key="item.value"
+                             :label="item.label"
+                             :value="item.value">
+                     </el-option>
+                 </el-select>
+             </el-form-item>
+             <el-form-item>
+	             <el-input placeholder="输入公司名称/关键字" v-model="tableSearchModel.keyWord" style="width:210px;" size="small" class="input-with-select">
+				      <el-button slot="append" icon="el-icon-search" @click="searchClick"></el-button>
+				  </el-input>
+			  </el-form-item>
+             
+              <!-- <el-form-item>
+                  <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+              </el-form-item> -->
+            </el-row>
+		   </el-form>
+          <el-table :data="tableData" @sort-change="tableSortChange" @selection-change="tableChange"  height="345" 
+                    ref="mytable" stripe border id="tableId" height=100% >
+             <el-table-column type="index" align="center" label="序号" width="50"  fixed="left"> </el-table-column>
+
+             <el-table-column prop="COMPANY_NAME" width="250"   show-overflow-tooltip label="公司名称"  fixed="left">
+             	<template slot-scope="scope">
+			        <el-button @click="handleClick(scope.row)" type="text" size="small">{{scope.row.companyName}}</el-button>
+			    </template>
+             </el-table-column>
+             
+             <el-table-column prop="GROSS_INCOME"   show-overflow-tooltip label="总收入"></el-table-column>
+ 
+             <el-table-column prop="NET_PROFIT"  show-overflow-tooltip label="净收益"></el-table-column>
+              
+             <el-table-column prop="TOTAL_ASSETS"  show-overflow-tooltip label="总资产"></el-table-column>
+             
+             <el-table-column prop="TOTAL_LIABILITIES"   show-overflow-tooltip label="总负债"></el-table-column>
+             
+             <el-table-column prop="CAPITAL_EXPENDITURE"  width="100"    show-overflow-tooltip label="资本性支出"></el-table-column>
+             
+             <el-table-column prop="MARKET_VALUE"  show-overflow-tooltip label="市值"></el-table-column>
+             
+             <el-table-column prop="PRICE_OF_STOCK"    show-overflow-tooltip label="股价"></el-table-column>
+             
+             <el-table-column prop="PROFIT"   show-overflow-tooltip label="收益"></el-table-column>
+             
+             <el-table-column prop="EPS"   show-overflow-tooltip label="EPS"></el-table-column>
+             
+             <el-table-column prop="A_BONUS"    show-overflow-tooltip label="分红"></el-table-column>
+             
+             <el-table-column prop="PE"  show-overflow-tooltip label="PE"></el-table-column>
+             
+             <el-table-column prop="PB"  show-overflow-tooltip label="PB"></el-table-column>
+             
+             <el-table-column prop="NET_PROFIT"   show-overflow-tooltip label="评级"></el-table-column>
+          </el-table>
+
+
+          <el-pagination class="pagination"
+                         :current-page="tableSearchModel.currentPage"
+                         :page-size= "tableSearchModel.pageSize"
+                         :total="tableTotal"
+                         @size-change="tableSizeChange"
+                         @current-change="tableCurrentChange"
+                         layout="total, sizes, prev, pager, next, jumper">
+          </el-pagination>
+          
+          <!-- 关注公司动态资讯 -->
+          <el-row style="margin-top: 10px;">
+          		<span>关注公司动态资讯</span>
+          </el-row>
+          <el-table id="infoTableId" height="100%" :data="inFoData"   :show-header="false">
+          	 <el-table-column prop="address"    show-overflow-tooltip label="标题">
+          	 	<template slot-scope="scope">
+			        <el-button @click="detailClick(scope.row)" type="text" size="small">{{scope.row.title1}}</el-button>
+			    </template>
+          	 </el-table-column>
+             
+             <el-table-column prop="createTime1"    show-overflow-tooltip label="发布时间"></el-table-column>
+             
+            <el-table-column prop="address"    show-overflow-tooltip label="标题">
+          	 	<template slot-scope="scope">
+			        <el-button @click="detailClick(scope.row)" type="text" size="small">{{scope.row.title2}}</el-button>
+			    </template>
+          	 </el-table-column>
+             
+             <el-table-column prop="createTime2"   show-overflow-tooltip label="发布时间"></el-table-column>     
+          </el-table>
+    </div>
+    <!---------------网页主体end------------------->
+     
+<!--     -------------网页底部start---------------
+    <div id="footer" class="footer"></div>
+    -------------网页底部end----------------- -->
+    
+    <script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/vue/vue.min.js"></script>
+	<script src="/frame/elementui/elementui.js"></script>
+	<script src="/frame/awaken/awaken.core.js"></script>
+	<script src="/frame/awaken/awaken.table.js"></script>
+	<script src="/frame/awaken/awaken.tree.js"></script>
+	<script src="/frame/awaken/awaken.dialog.js"></script>
+	<script src="/frame/awaken/awaken.common.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+    <script src="/common/js/com.js"></script>
+    
+</body>
+</html>
+
+<!-- 本页面js -->
+	<script src="/business/user/company/js/CompanyMain.js"></script>

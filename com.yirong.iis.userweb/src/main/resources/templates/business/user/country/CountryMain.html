@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>国家</title>
+
+    <link href="/frame/elementui/elementui.css" rel="stylesheet" />
+    <link href="/common/css/reset.css" rel="stylesheet" />
+    <link href="/common/css/com.css" rel="stylesheet" />
+    <link href="/business/user/country/css/CountryMain.css" rel="stylesheet" />
+</head>
+<body>
+    <!---------------网页头部start----------------->
+    <div id="header" class="header"></div>
+    <!---------------网页头部end------------------->
+    <div id="main">
+    <!---------------网页搜索(如有)start------------>
+    <div class="search">
+        <div class="search-wrap">
+            <div class="search-bar">
+                查找国家
+                <el-input placeholder="请输入国家" v-model="countryName" class="input-with-select" >
+                    <el-select v-model="continentName" slot="prepend" placeholder="请选择大洲" @change="continentChange">
+                        <el-option v-for="item in continentList" :label="item.name" :value="item.id"></el-option>
+                    </el-select>
+                    <el-button @click="searchClick" slot="append" icon="el-icon-search"></el-button>
+                </el-input>
+            </div>
+        </div>
+    </div>
+    <!---------------网页搜索(如有)end-------------->
+        
+    <!---------------网页工具栏(如有)start----------
+    <div id="toolbar" class="toolbar"></div>
+    !---------------网页工具栏索(如有)end---------->
+    
+    <!---------------网页主体start----------------->
+    <div  class="main">
+        <el-tabs v-model="activeName" type="card" class="tab-country">
+            <el-tab-pane :label="labelName" name="first">
+                <ul>
+                    <li v-for="item in countryList" class="country-group clearfix">
+                        <h3>{{item.name}}</h3>
+                        <ul v-if="item.children&&item.children.length!=0">
+                            <li v-for="subItem in item.children" class="fl">
+                                <a href="javascript:void(0);" @click="showCountryDetail(subItem.englishName)">{{subItem.chineseName}}</a>
+                            </li>
+                        </ul>
+                        <ul v-else>
+                            <li class="fl">
+                                <a href="javascript:void(0);">无</a>
+                            </li>
+                        </ul> 
+                    </li>
+                </ul>
+            </el-tab-pane>
+        </el-tabs>
+    </div>
+    <!---------------网页主体end------------------->
+     </div>
+    <!---------------网页底部start----------------->
+    <div id="footer" class="footer"></div>
+    <!---------------网页底部end------------------->
+    
+</body>
+</html>
+<script src="/frame/jquery/jquery.min.js"></script>
+<script src="/frame/vue/vue.min.js"></script>
+<script src="/frame/elementui/elementui.js"></script>
+<script src="/frame/awaken/awaken.core.js"></script>
+<script src="/frame/awaken/awaken.common.js"></script>
+<script src="/frame/awaken/awaken.util.js"></script>
+<script src="/common/js/com.js"></script>
+<script src="/business/user/country/js/CountryMain.js"></script>

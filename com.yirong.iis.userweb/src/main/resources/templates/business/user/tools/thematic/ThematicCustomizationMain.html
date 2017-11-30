@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>专题定制</title>
+
+    <link href="/frame/elementui/elementui.css" rel="stylesheet" />
+    <link href="/common/css/reset.css" rel="stylesheet" />
+    <link href="/common/css/com.css" rel="stylesheet" />
+    <link href="/business/user/tools/css/ThematicCustomizationMain.css" rel="stylesheet" />
+</head>
+<body>
+    
+    <!---------------网页头部start----------------->
+    <div id="header" class="header"></div>
+    <!---------------网页头部end------------------->
+        
+    <!---------------网页工具栏(如有)start----------
+    <div id="toolbar" class="toolbar">
+        
+    </div>
+    !---------------网页工具栏索(如有)end----------->
+    
+    <!---------------网页主体start----------------->
+    <div id="main" class="main  clearfix">
+        <div class="fl left" id="left">
+            <div class="tit">专题列表</div>
+            <div class="search">
+                <el-autocomplete class="inline-input" v-model="keyword" :fetch-suggestions="fnAutoSrhThematic"          placeholder="查找专题" :trigger-on-focus="false" @select="fnSelThematic" @keyup.enter.native="fnSelThematic">
+                </el-autocomplete>
+            </div>
+            <div class="tabs">
+                <template>
+                    <el-tabs v-model="tabActiveName" type="card">
+                        <el-tab-pane label="已发布" name="first">
+                            <ul>
+                                <li v-for="item in thematicList" v-if="item.status==1" @click="fnShowThematic(item.id)">{{item.thematicName}}</li>
+                            </ul>
+                        </el-tab-pane>
+                        <el-tab-pane label="未发布" name="second">
+                            <ul>
+                                <li v-for="item in thematicList" v-if="item.status==0" @click="fnShowThematic(item.id)">{{item.thematicName}}</li>
+                            </ul>
+                        </el-tab-pane>
+                    </el-tabs>
+                </template>
+            </div>
+        </div>
+        <div class="fr right" style="min-height:600px;height:1000px;width:975px">
+            <iframe src="/forward.do?viewPath=business/user/tools/thematic/ThematicCustomizationList.html&idx=8" id="iframeThematicOpt" frameborder=0 scrolling=no width="100%" height="100%">
+            </iframe>
+        </div>
+    </div>
+    <!---------------网页主体end------------------->
+     
+    <!---------------网页底部start----------------->
+    <div id="footer" class="footer"></div>
+    <!---------------网页底部end------------------->
+    
+</body>
+</html>
+<script src="/frame/jquery/jquery.min.js"></script>
+<script src="/frame/vue/vue.min.js"></script>
+<script src="/frame/elementui/elementui.js"></script>
+<script src="/frame/awaken/awaken.util.js"></script>
+<script src="/common/js/com.js"></script>
+<script src="/business/user/tools/js/ThematicCustomization.js"></script>

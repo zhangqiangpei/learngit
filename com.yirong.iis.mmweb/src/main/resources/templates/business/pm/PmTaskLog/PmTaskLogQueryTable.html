@@ -1,0 +1,16 @@
+<div id="queryTable" class="main">
+	<el-dialog title="系统监测到有多个输出对象" :visible.sync="dialogVisible">
+		<!-- 数据 -->
+      	<el-table :data="tableData" @sort-change="tableSortChange" ref="mytable" stripe border>
+        	<el-table-column prop="output_name" label="输出对象中文名" sortable="custom"></el-table-column>
+	        <el-table-column prop="output_code" label="输出对象英文名" sortable="custom"></el-table-column>
+	        <el-table-column label="操作" align="center" width="100">
+	            <template scope="scope">
+	              	<el-button size="small" type="warning" @click="queryDataClick(scope.$index, scope.row)">查看数据</el-button>
+	            </template>
+            </el-table-column>
+      	</el-table>
+</div>
+  
+<!-- 本页面js -->
+<script src="/business/pm/PmTaskLog/js/PmTaskLogQueryTable.js"></script>

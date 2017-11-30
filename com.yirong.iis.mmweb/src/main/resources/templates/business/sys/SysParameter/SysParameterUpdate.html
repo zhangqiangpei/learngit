@@ -1,0 +1,41 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div id="update" class="main">
+	<el-dialog title="修改系统参数" 
+                   :visible.sync="dialogVisible">
+            <el-form :model="updateModel"
+                     :rules="updateRules"
+                     ref="updateModel"
+                     label-width="100px"
+                      >
+                     
+			   <el-form-item label="参数代码" prop="paramKey">
+                    <el-input v-model="updateModel.paramKey" placeholder="请输入参数代码（长度：1-64）" size="small"></el-input>
+                </el-form-item>
+                
+                <el-form-item label="参数名称" prop="paramName">
+                    <el-input v-model="updateModel.paramName" placeholder="请输入参数名称（长度：1-128）" size="small"></el-input>
+                </el-form-item>
+               
+             	<el-form-item label="参数值" prop="paramValue">
+                    <el-input v-model="updateModel.paramValue" placeholder="请输入参数值（长度：1-1024）" size="small"></el-input>
+                </el-form-item>
+                
+                <el-form-item label="描述" prop="descp">
+                    <el-input v-model="updateModel.descp" placeholder="请输入描述（长度：1-1024）" size="small"></el-input>
+                </el-form-item>
+ 
+                <el-form-item align="center">
+                    <el-button type="primary" @click="updateSubmit" size="small">确定</el-button>
+                    <el-button @click="updateCancel" size="small">取消</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/sys/SysParameter/js/SysParameterUpdate.js"></script>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/common/css/SysMsgSendLogDetail.css" rel="stylesheet" /> 
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+	 <header class="bg-black">
+            <div class="header-logo">
+                <p class="p1">情报信息平台</p>
+                <p class="p2">Intelligence Information Platform</p>
+            </div>
+ 
+        </header>
+        <el-row class="container" style="left:150px;width:965px">
+		  <el-tabs v-model="activeName" @tab-click="handleClick" >
+		    <el-tab-pane label="未读" name="unRead" ></el-tab-pane>
+		    <el-tab-pane label="已读" name="read"></el-tab-pane>
+		    <el-tab-pane label="全部" name="all"></el-tab-pane>
+		  </el-tabs>
+                <el-table :data="tableData"
+                          @sort-change="tableSortChange"
+                          @selection-change="tableChange"
+                          @row-click="showDetail"
+                          ref="mytable" stripe
+                          border
+                          >
+ 
+                    <el-table-column prop="msgTitle"
+                                     label="标题">
+                    </el-table-column>
+                   
+                   <!-- <el-table-column prop="msgType"
+                                     label="消息类型" width="120"  >
+                    </el-table-column> -->
+                    
+                    <el-table-column prop="senderName"
+                                     label="发送人" width="150" >
+                    </el-table-column>
+                    
+ 					<el-table-column prop="createTime" sortable="custom"
+                                     label="发送时间" :formatter="formatDate"
+                                     width="220" >
+                    </el-table-column>
+                    
+                    <el-table-column prop="state"
+                                     label="状态"  width="180" :formatter="formatState">
+                    </el-table-column>
+                   
+                </el-table>
+
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+        </el-row >
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/common/js/SysMsgSendLogMain.js"></script>
+</body>
+</html>

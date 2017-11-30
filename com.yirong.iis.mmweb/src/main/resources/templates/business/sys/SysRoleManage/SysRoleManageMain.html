@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>角色管理</title>
+ 
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<!-- 本页面js -->
+    <link rel="stylesheet" href="/frame/treetable/css/jquery.treetable.theme.default.css"/>  
+    <link rel="stylesheet" href="/frame/treetable/css/jquery.treetable.css" /> 
+    <script src="/frame/treetable/js/jquery.treetable.js"></script> 
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+        <el-form :inline="true"
+                  :model="tableSearchModel"
+                  ref="tableSearchModel">
+           	 <el-row>
+           	  <el-form-item label="角色名称" prop="name">
+                   <el-input v-model="tableSearchModel.name" placeholder="请输入角色名称"></el-input>
+               </el-form-item>
+   
+                <el-form-item label="角色类型" prop="type">
+                    <el-select v-model="tableSearchModel.type" filterable  placeholder="请选角色类型" @change="" clearable >
+                        <el-option
+					        v-for="item in typeoptions"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                
+                <el-form-item label="应用名称" prop="applicationId">
+                	 <el-select v-model="tableSearchModel.applicationId" filterable  placeholder="请选择应用名称" clearable >
+	                   <el-option
+					        v-for="item in appoptions"
+					        :key="item.id"
+					        :label="item.name"
+					        :value="item.id">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+  
+                <el-form-item>
+                    <el-button type="primary" @click="onSearch" size="small" name="per_sys_role_show">查 询</el-button>
+                    <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+                </el-form-item>
+            </el-row>
+              <el-row>
+                  <el-form-item>
+                      <el-button type="primary" @click="addClick" icon="plus" size="small" name="per_sys_role_add">新 增</el-button>
+                      <el-button type="primary" @click="delClick" icon="delete" size="small" name="per_sys_role_del">删 除</el-button>
+                  </el-form-item>
+              </el-row>
+			</el-form>
+                <el-table :data="tableData"
+                          @sort-change="tableSortChange"
+                          @selection-change="tableChange"
+                          ref="mytable" stripe
+                          border id="tableId" height=100% >
+		              <el-table-column type="selection"
+						               align="center"
+						               width="45">
+		              </el-table-column>
+ 
+ 					<el-table-column prop="applicationName"
+                                     label="应用名称"  width="150" show-overflow-tooltip>
+                    </el-table-column>
+                    <el-table-column prop="name"
+                                     label="角色名称"  width="150" show-overflow-tooltip>
+                    </el-table-column>
+                   
+                 
+                   <el-table-column prop="typeName"
+                                     label="类型" sortable="custom" width="100" >
+                    </el-table-column>
+                    
+                    <el-table-column prop="description"
+                                     label="描述"  show-overflow-tooltip>
+                    </el-table-column>
+                                                  
+                    <el-table-column prop="createTime" sortable="custom"
+                                     label="创建时间" :formatter="formatDate"
+                                     width="170">
+                    </el-table-column>
+                    
+                    <el-table-column label="操作"  align="center" width="260">
+	                	<template scope="scope">
+	                    	<el-button size="small" @click="handleEdit(scope.$index, scope.row)" name="per_sys_role_edit">编辑</el-button>
+	                    	<el-button size="small" type="primary" @click="handleRoleUser(scope.$index, scope.row)" name="per_sys_role_addUserRole">添加用户</el-button>
+	                    	<el-button size="small" type="primary" @click="configPermission(scope.$index, scope.row)" name="per_sys_role_configPermission">配置权限</el-button>
+	                	</template>
+	           		 </el-table-column>
+	           		 
+                </el-table>
+
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :page-size= "tableSearchModel.pageSize"
+                               :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+      
+    </div>
+    
+	<!-- 本页面js --> 
+	<script src="/business/sys/SysRoleManage/js/SysRoleManageMain.js"></script>
+</body>
+</html>

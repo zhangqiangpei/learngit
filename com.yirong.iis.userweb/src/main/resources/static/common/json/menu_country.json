@@ -1,0 +1,137 @@
+{
+  "code": 0,
+  "msg": "获取菜单成功",
+  "data": [
+    {
+      "id": "1",
+      "name": "国家概况",
+      "ico": "el-icon-menu",
+      "url": "index.html",
+      "children": [
+        {
+          "id": "1-2",
+          "name": "国情概况",
+          "url": "business/user/country/CountrySurvey.html"
+        },
+        {
+          "id": "1-3",
+          "name": "政治环境",
+          "url": "business/user/country/PoliticalEnvironment.html"
+        },
+        {
+          "id": "1-4",
+          "name": "宏观经济",
+          "url": "country.html"
+        },
+        {
+          "id": "1-5",
+          "name": "外交情况",
+          "url": "business/user/country/DiplomaticSituation.html"
+        },
+        {
+          "id": "1-6",
+          "name": "法律法规",
+          "url": "business/user/country/LawsRegulations.html"
+        }
+      ]  
+    },
+    {
+      "id": "2",
+      "name": "电力行业",
+      "ico": "el-icon-menu",
+      "url": "country.html",
+      "children": [
+        {
+          "id": "2-1",
+          "name": "发电",
+          "url": "country.html"
+        },
+        {
+          "id": "2-2",
+          "name": "输电",
+          "url": "country.html"
+        },
+        {
+          "id": "2-3",
+          "name": "配电",
+          "url": "country.html"
+        },
+	{
+          "id": "2-4",
+          "name": "售电",
+          "url": "country.html"
+        },
+	{
+          "id": "2-5",
+          "name": "电力需求",
+          "url": "country.html"
+        },
+	{
+          "id": "2-6",
+          "name": "主要电力企业",
+          "url": "/business/user/country/PowerCompany.html"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "电力市场",
+      "ico": "el-icon-menu",
+      "url": "",
+      "children": [
+        {
+          "id": "3-1",
+          "name": "监管机构",
+          "url": "business/user/country/Regulatory.html"
+        },
+        {
+          "id": "3-2",
+          "name": "监管政策",
+          "url": "business/user/country/RegulatoryPolicy.html"
+        },
+         {
+          "id": "3-3",
+          "name": "电价情况",
+          "url": "form1.html"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "投资风险",
+      "ico": "el-icon-menu",
+      "url": "",
+      "children": [
+        {
+          "id": "4-1",
+          "name": "中信保风险评级",
+          "url": "iscroll1.html"
+        },
+	{
+          "id": "4-2",
+          "name": "政府负债与信用评级",
+          "url": "business/user/country/CreditRating.html"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "重点事件",
+      "ico": "el-icon-menu",
+      "url": "",
+      "children": [
+        {
+          "id": "5-1",
+          "name": "2017",
+          "ico": "el-icon-menu",
+          "url":"/business/user/country/KeyEvents_2017.html"
+        },
+        {
+          "id": "5-2",
+          "name": "2016",
+          "url":"/business/user/country/KeyEvents_2016.html"
+        }
+      ]
+    }
+  ]
+}

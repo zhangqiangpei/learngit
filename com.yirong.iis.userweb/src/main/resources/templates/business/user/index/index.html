@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>首页</title>
+    
+    <link href="/frame/elementui/elementui.css" rel="stylesheet" />
+    <link href="/common/css/reset.css" rel="stylesheet" />
+    <link href="/common/css/com.css" rel="stylesheet" />
+    <link href="/business/user/index/css/index.css" rel="stylesheet" />
+</head>
+<body>
+    
+<!---------------网页头部start----------------->
+<div id="header" class="header"></div>
+<!---------------网页头部end------------------->
+    
+<!---------------网页工具栏(如有)start----------
+<div id="toolbar" class="toolbar"></div>
+!---------------网页工具栏索(如有)end----------->
+
+<!---------------网页主体start----------------->
+<div id="main" class="main  clearfix">
+    <el-row>
+        <el-col :span="6">&nbsp;</el-col>
+        <el-col :span="12">
+            <el-input v-model="search" size="medium"></el-input>
+        </el-col>
+        <el-col :span="6">
+            <el-col :span="2">&nbsp;</el-col>
+            <el-button size="medium" icon="el-icon-search" type="primary" @click="searchReport">搜索</el-button>
+        </el-col>
+    </el-row>
+
+    <div id="category" style="margin-right: 160px; margin-top: 20px;">
+        <div v-for="(item, index) in typeData">
+            <el-col :span="11" style="margin-left: 16px;">
+                <el-tabs type="card">
+                    <el-tab-pane >
+                        <span slot="label">{{item[0].TYPE_NAME}}</span>
+                        <div v-for="(type, index) in item">
+                           <a :href="'forward.do?viewPath=business/user/report/onlineMain.html&kmId='+type.KM_ID+'&id='+type.ID+'&reportName='+type.REPORT_NAME">
+                               <el-col :span="19">{{type.REPORT_NAME}}</el-col>
+                               <el-col :span="5">{{type.CREATE_TIME}}</el-col>
+                           </a>
+                        </div>
+                        <el-button style="float: right; margin-right: 20px;" type="text" @click="moreTypeData(item)">更多...</el-button>
+                    </el-tab-pane>
+                </el-tabs>
+            </el-col>
+        </div>
+    </div>
+</div>
+<!---------------网页主体end------------------->
+ 
+<!---------------网页底部start----------------->
+<div id="footer" class="footer"></div>
+<!---------------网页底部end------------------->
+    
+</body>
+</html>
+<script src="/frame/jquery/jquery.min.js"></script>
+<script src="/frame/vue/vue.min.js"></script>
+<script src="/frame/elementui/elementui.js"></script>
+<script src="/frame/awaken/awaken.util.js"></script>
+<script src="/common/js/com.js"></script>
+<script src="/business/user/index/js/index.js"></script>

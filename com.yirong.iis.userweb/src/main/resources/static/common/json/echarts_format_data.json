@@ -1,0 +1,272 @@
+{
+    "code": 0,
+    "msg": "获取数据成功",
+    "data": [
+        {
+            "id":"0",
+            "name":"双向柱图",
+            "title": {
+                "text": "双向柱图",
+                "x":"left",
+                "textStyle":{}
+            },
+            "toolbox": {
+                "show": true,
+                "feature": {
+                    "dataView": {
+                        "show":true,
+                        "readOnly": false
+                    },
+                    "saveAsImage" : {"show": false}  
+                }
+            },
+            "tooltip": {
+                "trigger": "axis",
+                "axisPointer": {
+                    "type": "shadow"
+                }
+            },
+            "legend": {
+                "data": [
+                    "利润",
+                    "支出",
+                    "收入"
+                ]
+            },
+            "grid": {
+                "left": "3%",
+                "right": "4%",
+                "bottom": "3%",
+                "containLabel": true
+            },
+            "xAxis": [
+                {
+                    "type": "value"
+                }
+            ],
+            "yAxis": [
+                {
+                    "type": "category",
+                    "axisTick": {
+                        "show": false
+                    },
+                    "data": [
+                        "周一",
+                        "周二",
+                        "周三",
+                        "周四",
+                        "周五",
+                        "周六",
+                        "周日"
+                    ]
+                }
+            ],
+            "series": [
+                {
+                    "name": "利润",
+                    "type": "bar",
+                    "label": {
+                        "normal": {
+                            "show": true,
+                            "position": "inside"
+                        }
+                    },
+                    "data": [
+                        200,
+                        170,
+                        240,
+                        244,
+                        200,
+                        220,
+                        210
+                    ]
+                },
+                {
+                    "name": "收入",
+                    "type": "bar",
+                    "stack": "总量",
+                    "label": {
+                        "normal": {
+                            "show": true
+                        }
+                    },
+                    "data": [
+                        320,
+                        302,
+                        341,
+                        374,
+                        390,
+                        450,
+                        420
+                    ]
+                },
+                {
+                    "name": "支出",
+                    "type": "bar",
+                    "stack": "总量",
+                    "label": {
+                        "normal": {
+                            "show": true,
+                            "position": "left"
+                        }
+                    },
+                    "data": [
+                        -120,
+                        -132,
+                        -101,
+                        -134,
+                        -190,
+                        -230,
+                        -210
+                    ]
+                }
+            ]
+        },
+        
+        {
+            "id":"1",
+            "name":"堆叠折线图",
+            "title":{
+                "text": "折线图堆叠",
+                "textStyle":{}
+            },
+            "toolbox": {
+                "show": true,
+                "feature": {
+                    "dataView": {
+                        "show":true,
+                        "readOnly": false
+                    },
+                    "saveAsImage" : {"show": false}  
+                }
+            },
+            "tooltip": {
+                "trigger": "item"
+            },
+            "legend": {
+                "data": [
+                    "序号",
+                    "成绩"
+                ]
+            },
+            "grid": {
+                "left": "3%",
+                "right": "4%",
+                "bottom": "3%",
+                "containLabel": true
+            },
+            "xAxis": {
+                "type": "category",
+                "boundaryGap": false,
+                "data": [
+                    "张三",
+                    "李四",
+                    "王五",
+                    "赵六"
+                ]
+            },
+            "yAxis": {
+                "type": "value"
+            },
+            "series": [
+                {
+                    "name": "成绩",
+                    "type": "line",
+                    "stack": "分数",
+                    "data": [
+                        100,
+                        69,
+                        88,
+                        91
+                    ]
+                },
+                {
+                    "name": "序号",
+                    "type": "line",
+                    "stack": "序号",
+                    "data": [
+                        1,
+                        5,
+                        2,
+                        8
+                    ]
+                }
+            ]
+        },
+        {
+            "id":"2",
+            "name":"传统饼图",
+            "title": {
+                "text": "某站点用户访问来源",
+                "subtext": "纯属虚构",
+                "x": "center",
+                "textStyle":{}
+            },
+            "toolbox": {
+                "show": true,
+                "feature": {
+                    "dataView": {
+                        "show":true,
+                        "readOnly": false
+                    },
+                    "saveAsImage" : {"show": false}  
+                }
+            },
+            "tooltip": {
+                "trigger": "item",
+                "formatter": "{a} <br/>{b} : {c} ({d}%)"
+            },
+            "legend": {
+                "orient": "vertical",
+                "left": "left",
+                "data": [
+                    "直接访问",
+                    "邮件营销",
+                    "联盟广告",
+                    "视频广告",
+                    "搜索引擎"
+                ]
+            },
+            "series": [
+                {
+                    "name": "访问来源",
+                    "type": "pie",
+                    "radius": "55%",
+                    "center": [
+                        "50%",
+                        "60%"
+                    ],
+                    "data": [
+                        {
+                            "value": 335,
+                            "name": "直接访问"
+                        },
+                        {
+                            "value": 310,
+                            "name": "邮件营销"
+                        },
+                        {
+                            "value": 234,
+                            "name": "联盟广告"
+                        },
+                        {
+                            "value": 135,
+                            "name": "视频广告"
+                        },
+                        {
+                            "value": 1548,
+                            "name": "搜索引擎"
+                        }
+                    ],
+                    "itemStyle": {
+                        "emphasis": {
+                            "shadowBlur": 10,
+                            "shadowOffsetX": 0,
+                            "shadowColor": "rgba(0, 0, 0, 0.5)"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

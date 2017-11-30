@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div id="ImSpLibraryTree" class="main">
+	<el-dialog title="专题库选择器"  :visible.sync="dialogVisible">
+    	<el-tree node-key="id" ref="tree" :data="treeData" :props="treeProps" show-checkbox :expand-on-click-node="false" 
+    		:highlight-current="true" :default-expand-all="true"  ></el-tree>
+     
+            <span slot="footer" class="dialog-footer">
+			    <el-button @click="dialogVisible = false">取 消</el-button>
+			    <el-button type="primary" @click="treeSubmit">确 定</el-button>
+			  </span>
+    </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/common/js/ImSpLibraryTree.js"></script>

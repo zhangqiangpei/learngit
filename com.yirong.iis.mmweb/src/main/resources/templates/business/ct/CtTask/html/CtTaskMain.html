@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+		           <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel"> 
+		           <el-row> 
+		           	<el-form-item label="名称" prop=taskName> 
+		           	<el-input v-model="tableSearchModel.taskName" placeholder="请输入任务名称" size="small"></el-input> 
+		           </el-form-item>
+		           <el-form-item>
+		           	<el-button type="primary" @click="searchClick" size="small" name="per_ct_task_show">查 询</el-button>
+		           	<el-button type="default" @click="tableResetCondition" size="small">重 置</el-button> 
+		           </el-form-item> </el-row> <el-row> <el-form-item> 
+		           	<el-button type="primary" @click="addClick"  icon="plus" size="small" name="per_ct_task_add">新 增</el-button> 
+		           	<el-button type="primary" @click="updateClick" icon="edit" size="small" name="per_ct_task_edit">修改</el-button> 
+		           	<el-button type="primary" @click="delClick" icon="delete" size="small" name="per_ct_task_del">删 除</el-button> 
+		           	<el-button type="primary" @click="runTask" icon="plus" size="small" name="per_ct_task_runTask">启动任务</el-button>
+		           	<el-button type="primary" @click="stopTask" icon="plus" size="small" name="per_ct_task_stopTask">停止任务</el-button>
+		           	<el-button type="primary" @click="sharRunTask" icon="plus" size="small" >共享资源启动任务</el-button>
+		           	  
+		           </el-form-item> 
+		           </el-row>
+		           </el-form> 
+		           <el-table id="tableId" height=100% :data="tableData" @sort-change="tableSortChange" @selection-change="tableChange" ref="mytable" stripe border> 
+		           <el-table-column type="selection" align="center" width="45">
+		           </el-table-column> <el-table-column prop=taskName label="任务名称" sortable>
+		           </el-table-column> <el-table-column prop=ctObjectId label="采集对象" width="200"> 
+		           </el-table-column> <el-table-column prop=ctObjectWay label="采集渠道" width="100" :formatter="ctObjectWay"> 
+		           </el-table-column> <el-table-column prop="firstRunTime" label="首次运行时间" width="200">  
+		           </el-table-column> <el-table-column prop="runCycle" label="运行周期（分钟）" width="150" :formatter="runCycle">  
+		           </el-table-column> <el-table-column prop=runState label="运行状态" sortable>
+		           </el-table-column> <el-table-column prop="create_time" label="创建时间" width="180"> </el-table-column>
+		           </el-table>
+		           <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"  @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize"  @current-change="tableCurrentChange" layout="total, sizes, prev, pager, next, jumper"> 
+		           </el-pagination>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/ct/CtTask/js/CtTaskMain.js"></script>
+</body>
+</html>

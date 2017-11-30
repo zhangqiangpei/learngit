@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>机构管理</title>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<style>
+.el-table__body-wrapper{
+	overflow-x:hidden;
+}
+</style>
+<body>
+	 <div id="main" class="main">
+        <el-row :gutter="20">
+            <el-col :span="4">
+              	 <el-select v-model="tableSearchModel.applicationId" filterable  placeholder="请选择应用名称"  @change="appschg" icon="delete" size="small">
+                  	<el-option
+				        v-for="item in appoptions"
+				        :key="item.id"
+				        :label="item.name"
+				        :value="item.id">
+			    	</el-option>
+                </el-select>
+		                    
+                <el-tree node-key="id" ref="tree"
+                         :data="treeData" 
+                         :props="treeProps" 
+						 :expand-on-click-node="true"
+						 :highlight-current="true"
+						 :default-expand-all="false"
+                         @node-click="treeNodeClick" icon="delete" size="small" id="resoure_tree" height=100% style="overflow:auto;"></el-tree>
+            </el-col>
+            <el-col :span="20">
+
+                <el-form :inline="true"
+                         :model="tableSearchModel"
+                         ref="tableSearchModel">
+ 
+	                <el-collapse v-model="activeNames"  >
+					  <el-collapse-item :title="resourceName" name="1">
+	 
+					    <table class="am-table am-table-bordered">
+						    <tr>
+							    <td style="width:100px" class="am-text-right">名称：</td>
+							    <td id="name"></td>
+							    <td style="width:100px" class="am-text-right">授权编码：</td>
+							    <td id="sn"></td>
+						    </tr>
+						    <tr>
+							    <td style="width:100px" class="am-text-right">URL：</td> 
+							    <td id="url"></td>
+							    <td style="width:100px" class="am-text-right">排序：</td> 
+							    <td id="priority"></td>
+						    </tr>
+						    <tr>
+						    	<td style="width:100px" class="am-text-right">样式名称：</td>
+						    	<td id="className"></td>
+						    	<td style="width:100px" class="am-text-right">图标名称：</td>
+						    	<td id="iconName"></td>
+						    </tr>
+						</table>
+					  </el-collapse-item>
+					</el-collapse>
+				 
+				 	<el-row>
+                        <el-form-item>
+                          	<el-button type="primary" @click="addres" icon="plus" size="small" name="per_sys_res_addResource">新增资源</el-button>
+                            <el-button type="primary" @click="upres" icon="edit" size="small" name="per_sys_res_editResource">修改资源</el-button>
+                            <el-button type="primary" @click="delres" icon="delete" size="small" name="per_sys_res_deleteResource">删 除资源</el-button>
+                            <el-button type="primary" @click="addClick" icon="plus" size="small" name="per_sys_res_add">新 增</el-button>
+                            <el-button type="primary" @click="delClick" icon="delete" size="small" name="per_sys_res_del">删 除</el-button>
+                        </el-form-item>
+                    </el-row>
+                </el-form>
+                
+
+                <el-table :data="tableData"
+                          @sort-change="tableSortChange"
+                          @selection-change="tableChange"
+                          ref="mytable" stripe
+                          border id="tableId" height=100% >
+                    <el-table-column type="selection"
+                                     align="center"
+                                     width="45">
+                    </el-table-column>
+                 
+                    <el-table-column prop="name"
+                                     label="名称"  show-overflow-tooltip>
+                    </el-table-column>
+                    
+                     <el-table-column prop="sn"
+                                     label="授权名称" show-overflow-tooltip width="180">
+                    </el-table-column>
+                 
+                     <el-table-column prop="description"
+                                     label="描述"  show-overflow-tooltip>
+                    </el-table-column>
+ 
+                     <el-table-column prop="createTime" sortable="custom"
+                                     label="创建时间" :formatter="formatDate"
+                                     width="180">
+                    </el-table-column>
+                     
+      
+                    </el-table-column>
+                    <el-table-column label="操作"  align="center" width="100">
+	                	<template scope="scope">
+	                    	<el-button size="small" @click="handleEdit(scope.$index, scope.row)" name="per_sys_res_edit">编辑</el-button>
+	                	</template>
+	           		 </el-table-column>
+                </el-table>
+
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :page-size= "tableSearchModel.pageSize"
+                               :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+            </el-col>
+        </el-row>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/sys/SysResourceManage/js/SysResourceManageMain.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<div id="save" class="main">
+    <el-dialog :visible.sync="dialogVisible" title="新增国家信息">
+        <el-row>
+            <el-form :model="countryInfo" ref="countryInfo" label-width="100px" class="form">
+                <el-row>
+                    <el-form-item label="所属洲" prop="continentCode">
+                        <el-select v-model="countryInfo.continentCode" placeholder="请选择所属洲" clearable size=10>
+                            <el-option :key="cc.key" :label="cc.label" :value="cc.value"
+                                       v-for="cc in continentCodeList"></el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-row>
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="中文名：" prop="chineseName">
+                            <el-input v-model="countryInfo.chineseName"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="英文名：" prop="englishName">
+                            <el-input v-model="countryInfo.englishName"></el-input>
+
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="两位缩写：" prop="iso2code">
+                            <el-input v-model="countryInfo.iso2code"></el-input>
+
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="三位缩写：" prop="isocode">
+                            <el-input v-model="countryInfo.isocode"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-form-item label="国旗：">
+                        <el-upload
+                                ref="upload"
+                                class="avatar-uploader"
+                                action="/file/upFlagFile"
+                                :show-file-list="false"
+                                :data="{engName:countryInfo.englishName}"
+                                :on-success="handleSuccess"
+                                :on-change="handleChange">
+                            <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
+                    </el-form-item>
+                </el-row>
+            </el-form>
+        </el-row>
+        <el-row style="text-align: center">
+            <el-button type="primary" size="small" @click="saveClick">保 存</el-button>
+            <el-button type="default" size="small" @click="resetClick">重 置</el-button>
+        </el-row>
+    </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/iis/IisCountryInfo/js/IisCountryInfoSave.js"></script>
+<!-- 本页面css -->
+<link href="/business/iis/IisCountryInfo/css/IisCountryInfoSave.css" rel="stylesheet"/>

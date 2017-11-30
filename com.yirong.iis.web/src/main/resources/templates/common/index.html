@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<link href="common/css/index.css" rel="stylesheet" />
+	<script>
+	//初始化头部
+		initHeadConfig();
+	</script>
+	<style type="text/css">
+	
+	.el-table::after{
+		top: 0;
+		right: 0;
+		width: 0px;
+		height: 100%
+	}
+	</style>
+    <title>信息管理子系統</title>
+</head>
+<body>
+   <div id="wrap" class="wrap">
+		<input type="hidden" id="applicationId" value="">
+        <header class="bg-black">
+            <div class="header-logo">
+                <p class="p1">情报信息平台</p>
+                <p class="p2">Intelligence Information Platform</p>
+            </div>
+            <div class="header-nav" id="headDiv"></div>
+            <ul class="header-operations">
+               <!--   <li>
+                    <div class="notice"><span>3</span></div>
+                    
+                </li> -->
+                 <!-- 新提示 -->
+				 <el-popover
+				  ref="msg"
+				  placement="bottom"
+				  width="300"
+				  trigger="click" >
+				  <el-table :data="msgData" @header-click="openList" @row-click="openDetail" style="border:none;">
+				  	<el-table-column   property="msgTitle"  show-overflow-tooltip></el-table-column>
+				    <el-table-column   width="100" property="createTime" label="进入列表..." align="right"  :formatter="formatDate" >
+			 
+				    </el-table-column>
+				  </el-table>
+				  	 
+				</el-popover>
+				
+				<el-popover
+				  ref="email"
+				  placement="bottom"
+				  width="400"
+				  trigger="click">
+				</el-popover>
+                 
+                 <li> 
+                   <div class="notice" v-popover:msg><span >{{msgnum}}</span></div>
+                   <div class="msg" v-popover:email><span  >{{emailnum}}</span></div>
+                 </li>
+ 
+  				<li>
+                    <img src="common/images/onlinePerson.png" id="userCount" title="在线人数" style="height:30px;vertical-align:middle;"/>
+                </li>
+                
+                <li>
+                	<el-popover ref="user" placement="bottom" width="100" trigger="hover">
+					<div style="border:none;">
+						 <span @click="setPwd">修改密码</span><br/>
+						 <span @click="setPwd">更改头像</span>
+					</div>
+					</el-popover>
+                    <span  v-popover:user  id="userDisplayName" style="display: inline-block;padding-left: 70px;background: url(common/css/img/头像_u46.png) no-repeat left center;background-size: 60px;">
+                    </span>
+                    
+                </li>
+                
+                <li>
+                    <span @click="loginOut">退出</span>
+                </li>
+ 
+            </ul>
+        </header>
+
+        <el-row class="container">
+            <el-col :xs="8" :sm="6" :md="4" :lg="4" class="left" id="left" >
+            	<el-row style="height:40px;" id="divMenuTop" align=center>         		
+            	</el-row>
+            	<el-row style="height:100%;position:relative;">
+            	   <div id="divMenu" style="height:100%;overflow:hidden;border-right: 1px solid #e0e0e0;">
+            	   		<div>
+			                <el-menu class="menu" id="menu"  unique-opened="true"  :collapse="isCollapse"  @open="handleOpen" @close="handleClose">
+			                    <el-submenu v-for="item in menuList" v-if="item.children&&item.children.length!=0" :index="item.id">
+			                        <template slot="title">
+			                            <i :class="item.iconName"></i>
+			                            <el-span slot="title">{{item.name}}</el-span>
+			                        </template>
+			
+			                        <el-submenu v-for="item2 in item.children" v-if="item2.children&&item2.children.length!=0" :index="item2.id">
+			                            <template slot="title">
+			                                <i :class="item2.iconName"></i>
+			                                <el-span slot="title">{{item2.name}}</el-span>
+			                            </template>
+			                            <el-menu-item v-for="item3 in item2.children" :index="item3.id" @click="jump(item3.url)" :class="'item_'+item3.id">
+			                                {{item3.name}}
+			                            </el-menu-item>
+			                        </el-submenu>
+			
+			                        <el-menu-item v-else :index="item2.id" @click="jump(item2.url)" :class="'item_'+item2.id">
+			                            {{item2.name}}
+			                        </el-menu-item>
+			
+			                    </el-submenu>
+			
+			                    <el-menu-item v-else :index="item.id" @click="jump(item.url)" :class="'item_'+item.id">
+			                        <i :class="item.iconName"></i>
+			                        <el-span slot="title">{{item.name}}</el-span>
+			                    </el-menu-item>
+			                </el-menu>
+	                	</div>
+	              	</div>
+	            </el-row>
+            </el-col>
+
+            <el-col :xs="16" :sm="18" :md="20" :lg="20" class="content" id="content">
+    
+            		 <iframe id="frame" frameborder="0" scrolling="no" width="100%" height="100%" :src="url"></iframe>
+           
+            </el-col>
+
+        </el-row>
+
+    </div>
+
+    <!-- 本页面js -->
+    <script src="frame/iscroll/iscroll.js"></script>
+    <script src="common/js/index.js"></script>
+</body>
+</html>

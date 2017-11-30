@@ -1,0 +1,21 @@
+<div id="rule200" class="main">
+	<el-dialog :title="checkObjectName" :visible.sync="dialogVisible">
+		<el-row>
+	        <template>
+				<el-transfer v-model="rule200Model" :data="rule200Data" :titles="['过滤前字段','过滤后字段']"></el-transfer>
+			</template>
+		<el-row>
+		<!-- 按扭区 -->
+        <el-row style="margin-top:10px;text-align:center;">
+        	<el-button type="primary" @click="rule200Submit">确定</el-button>
+            <el-button @click="rule200Cancel">取消</el-button>
+            <el-popover ref="popover" placement="right" width="400" trigger="click" @show="getPopoverInfo">
+				<el-input type="textarea" v-model="elementRemark" disabled="true"></el-input>
+			</el-popover>
+            <el-button type="warning" v-popover:popover>帮助说明</el-button>
+        </el-row>
+     </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/pm/PmFlow/js/PmFlowRule200.js"></script>

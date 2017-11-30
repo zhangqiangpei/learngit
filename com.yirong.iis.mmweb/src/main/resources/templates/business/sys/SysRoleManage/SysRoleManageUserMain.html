@@ -1,0 +1,82 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <style>
+ 	#roleUsermain .el-dialog--full{
+ 		overflow:hidden;
+ 	}
+ </style>
+  <div id="roleUsermain" class="main" >
+  		<el-dialog title="角色用户"  :visible.sync="dialogVisible" size="full">
+  			 <el-form :inline="true"
+                  :model="tableSearchModel"
+                  ref="tableSearchModel" id="roleUserForm">
+           	 <el-row>
+           	 
+           	 <el-form-item label="用户名" prop="userName">
+                   <el-input v-model="tableSearchModel.userName" placeholder="请输入用户名" size="small"></el-input>
+               </el-form-item>
+  				<el-form-item label="中文名" prop="userDisplayName">
+                   <el-input v-model="tableSearchModel.userDisplayName" placeholder="请输入中文名" size="small"></el-input>
+               </el-form-item>
+ 
+                <el-form-item>
+                    <el-button type="primary" @click="onSearch" size="small">查 询</el-button>
+                    <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+                </el-form-item>
+            </el-row>
+              <el-row>
+                  <el-form-item>
+                      <el-button type="primary" @click="addClick" icon="plus" size="small">新 增</el-button>
+                      <el-button type="primary" @click="delClick" icon="delete" size="small">删 除</el-button>
+                  </el-form-item>
+              </el-row>
+			</el-form> 
+             <el-table :data="tableData"
+                       @sort-change="tableSortChange"
+                       @selection-change="tableChange"
+                       ref="subtable" stripe
+                       border id="roleUserTable" height=100% >
+             <el-table-column type="selection"
+			               align="center"
+			               width="45">
+             </el-table-column>
+            
+                 <el-table-column prop="userName"
+                                  label="用户名"  >
+                 </el-table-column>
+                
+                <el-table-column prop="userDisplayName"
+                                  label="中文名"  >
+                 </el-table-column>
+                <el-table-column prop="userStatus"
+                                  label="用户状态" sortable="custom" width="120" :formatter="formatState">
+                 </el-table-column>
+               <!--  <el-table-column prop="organizationName"
+                                  label="所属机构" sortable="custom" width="120">
+                 </el-table-column> -->
+                                        
+                 <el-table-column prop="createTime" sortable="custom"
+                                  label="创建时间" :formatter="formatDate"
+                                  width="180">
+                 </el-table-column>
+  
+             </el-table>
+
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :page-size= "tableSearchModel.pageSize"
+                               :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+       
+  		</el-dialog>
+ </div>
+
+ 	<!-- 本页面js -->
+	 <script src="/business/sys/SysRoleManage/js/SysRoleManageUserMain.js"></script>   
+ 

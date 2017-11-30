@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <!-- 公用css -->
+    <link href="frame/elementui/elementui.css" rel="stylesheet" />
+    <link href="common/css/awaken.css" rel="stylesheet" />
+    <link href="common/css/login.css" rel="stylesheet" />
+ 
+</head>
+<body>
+    <div id="wrap" class="wrap">
+        <div class="header">
+            <p class="p1">情报信息平台</p>
+            <p class="p2">Intelligence Information Platform</p>
+            <p class="p3"></p>
+            <p class="p4" id="toolBar">
+           		<img src="common/images/onlinePerson.png" id="userCount" title="在线人数" style="height:30px;vertical-align:middle;"/>
+                <span class="user" id="userDisplayName" style="margin-left:20px;"></span><span>,</span>
+				<span id="organizationName"></span>
+                <span class="btnExit" onclick="loginOut();">退出</span>
+            </p>
+        </div>
+        <div class="main">
+            <div class="list" id="list">
+            </div>
+        </div>
+        <div class="footer">2017  Version 1.0</div>
+    </div>
+    
+    
+    <!-- 公用js -->
+    <script src="frame/jquery/jquery.min.js"></script>
+    <script src="frame/vue/vue.min.js"></script>
+    <script src="frame/elementui/elementui.js"></script>
+    <script src="frame/awaken/awaken.core.js"></script>
+    <script src="/frame/awaken/awaken.dialog.js"></script>
+    <script src="/frame/awaken/awaken.common.js"></script>
+    <!-- 本页面js -->
+    <script src="common/js/potole.js"></script>
+ 
+</body>
+</html>

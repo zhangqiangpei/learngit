@@ -1,0 +1,152 @@
+<style>
+#edit_org_html .el-dialog__body {
+    padding: 10px 20px;
+    color: #48576a;
+    font-size: 14px;
+}
+
+#edit_org_html .el-dialog{
+  top:5% !important;
+  height:90%;
+  overflow:auto;
+}
+#edit_org_html .el-form-item{
+  float: left;
+}
+</style>
+<div id="save" class="main">
+	<el-dialog title="新增元数据"  :visible.sync="dialogVisible" id="edit_org_html">
+			  <el-tabs v-model="metadataTab" type="card" @tab-click="handleClick">
+			    <el-tab-pane label="库表元数据" name="first">
+			     <el-form :model="saveModelDB" :rules="saveRules" ref="saveModelDB" label-width="100px"  >
+	                <el-form-item label="名称" prop="dbMetadataName" style="width:50%">
+	                    <el-input v-model="saveModelDB.dbMetadataName" placeholder="请输入元数据名称(长度：1-64)"></el-input>
+	                </el-form-item>
+			          <el-form-item label="采集方式" prop="ctWay" style="width:50%"> 
+			           	<el-select v-model="saveModelDB.ctWay" placeholder="采集方式" @change="ctWayDB">
+	                        <el-option
+					        v-for="item in ctWays"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+	                    </el-select>
+			          </el-form-item>
+			          <el-form-item label="SQL增量条件" prop="inCondition" v-show="inConditionDB" style="width:100%">
+	                    <el-input v-model="saveModelDB.inCondition" placeholder="请输入时间类型的作为增量条件的字段名称"></el-input>
+	                </el-form-item>
+			          <!-- <el-form-item label="目录名称" prop="catalogId"> 
+						  <el-input v-model="DBcatalogName" placeholder="请选择目录类型" icon="search" :on-icon-click="changeClickDB" :disabled="true"></el-input>
+			         </el-form-item> -->
+			         <el-form-item label="数据库名称" prop="databaseId" style="width:100%">
+	                    <el-select v-model="saveModelDB.databaseId" placeholder="请选择数据库" clearable >
+	                        <el-option :label="dbDatabase.databaseName" :value="dbDatabase.id" v-for="dbDatabase in dbDatabaseList"></el-option>
+	                    </el-select>
+	                    <el-button type="primary" @click="connectDB">连 接</el-button>
+	                </el-form-item>
+	                <el-form-item label="表名" prop="tableName" style="width:100%">
+	                    <el-select v-model="saveModelDB.tableName" placeholder="请选择表" clearable @change="dbTableChange">
+	                        <el-option :label="tableData.tableName" :value="tableData.tableName" v-for="tableData in tableDataList"></el-option>
+	                    </el-select>
+	                </el-form-item>
+				     <el-form-item label="说明" prop="dbMetadataRemark" style="width:100%">
+	                    <el-input type="textarea" :rows="2" v-model="saveModelDB.dbMetadataRemark" placeholder="请输入说明(长度：1-64)"></el-input>
+	                </el-form-item>
+			        <!--下拉框来显示数据  -->
+			         
+			        <el-table :data="field.dbColData" height="250" @selection-change="dbColSelect"  stripe border style="width:100%"> 
+			        	<el-table-column type="selection" align="center" width="45"> 
+			           	</el-table-column>
+			           	<el-table-column prop="columnName" label="字段名称" sortable> 
+			           	</el-table-column>
+			           	<el-table-column prop="comments" label="字段注释" sortable>
+			           	</el-table-column>
+			           	<el-table-column prop="fieldType" label="类型">
+	                    	<template scope="scope">
+	                    	<el-select v-model="scope.row.fieldType" placeholder="请选择">
+	                    		<el-option
+							        v-for="item in fieldTypes"
+							        :key="item.key"
+							        :label="item.label"
+							        :value="item.value">
+							    </el-option>
+	                    	</el-select>
+	                		</template>
+	            		</el-table-column>
+			        </el-table>
+			        <el-form-item style="width:100%">
+	                    <el-button type="primary" @click="saveSubmitDB">确定</el-button>
+	                    <el-button @click="saveResetDB">重置</el-button>
+	                </el-form-item>
+			        </el-form>
+			    </el-tab-pane>
+			    <el-tab-pane label="SQL元数据" name="second">
+			    <el-form :model="saveModelSQL" :rules="saveRules" ref="saveModelSQL" label-width="100px" >
+			    	<el-form-item label="名称" prop="dbMetadataName" style="width:50%">
+	                    <el-input v-model="saveModelSQL.dbMetadataName" placeholder="请输入元数据名称(长度：1-32)"></el-input>
+	                </el-form-item>
+			          <el-form-item label="采集方式" prop="ctWay" style="width:50%"> 
+			           	<el-select v-model="saveModelSQL.ctWay" placeholder="数据库类型"  @change="ctWaySQL">
+	                        <el-option
+					        v-for="item in ctWays"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+	                    </el-select>
+			          </el-form-item>
+			          <!-- <el-form-item label="目录名称" prop="catalogId"> 
+						  <el-input v-model="SQLcatalogName" placeholder="请选择目录类型" icon="search" :on-icon-click="changeClickSQL" :disabled="true"></el-input>
+			         </el-form-item> -->
+			         <el-form-item label="SQL增量条件" prop="inCondition"  v-show="inConditionSQL" style="width:100%">
+	                    <el-input v-model="saveModelDB.inCondition" placeholder="请输入SQL增量条件"></el-input>
+	                </el-form-item>
+	                <div slot="tip" class="el-upload__tip">注：如果sql语句为多表关联，请填写表名加“.”字段名，如system.createtime</div>
+			         <el-form-item label="数据库名称" prop="databaseId" style="width:100%"> 
+						  <el-select v-model="saveModelSQL.databaseId" placeholder="请选择数据库" clearable >
+	                        <el-option :label="dbDatabase.databaseName" :value="dbDatabase.id" v-for="dbDatabase in dbDatabaseList"></el-option>
+	                    </el-select>
+						   <el-button type="primary" @click="connectSQL">连 接</el-button>
+			         </el-form-item>
+			         <el-form-item label="SQL" prop="runSql" style="width:100%">
+	                    <el-input type="textarea" :rows="2" v-model="saveModelSQL.runSql" placeholder="请输入sql语句"></el-input>
+	                </el-form-item>
+				     <el-form-item label="说明" prop="dbMetadataRemark" style="width:100%">
+	                    <el-input type="textarea" :rows="2" v-model="saveModelSQL.dbMetadataRemark" placeholder="请输入说明(长度：1-64)"></el-input>
+	                </el-form-item>
+	                <!--根据SQL语句查询相关字段  -->
+	                <el-table :data="field.SQLColData" height="250"  @selection-change="SQLColSelect" style="width:100%"> 
+			        	<el-table-column type="selection" align="center" width="45">
+			           </el-table-column>
+			           <el-table-column prop="columnName" label="字段名称" sortable>
+			           </el-table-column>
+			           	<el-table-column prop="comments" label="字段注释" sortable>
+			           		<template scope="scope">
+			           		<el-input v-model="scope.row.comments" placeholder="请输入中文名称"></el-input>
+			           		</template>
+			           	</el-table-column>
+			           <el-table-column prop="fieldType" label="类型">
+	                		<template scope="scope">
+	                    	<el-select v-model="scope.row.fieldType" placeholder="请选择">
+		                        <el-option
+							        v-for="item in fieldTypes"
+							        :key="item.key"
+							        :label="item.label"
+							        :value="item.value">
+							    </el-option>
+	                    	</el-select>
+	                		</template>
+	            		</el-table-column>
+			        </el-table>
+			    	<el-form-item style="width:100%">
+	                    <el-button type="primary" @click="saveSubmitSQL" size="small">确定</el-button>
+	                    <el-button @click="saveResetSQL" size="small">重置</el-button>
+	                </el-form-item>
+	                </el-form>
+			    </el-tab-pane>
+			  </el-tabs>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/ct/CtDbMetadata/js/CtDbMetadataSave.js"></script>

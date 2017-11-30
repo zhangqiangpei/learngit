@@ -1,0 +1,8 @@
+.pagination {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.pagination .el-pagination__total {
+    line-height: 31px;
+}

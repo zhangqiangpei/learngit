@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+		           <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel"> 
+		           <el-row> 
+		           	<el-form-item label="名称" prop="fileTypeName"> 
+		           	<el-input v-model="tableSearchModel.fileTypeName" placeholder="请输入文件分类名称名称" size="small"></el-input> 
+		           </el-form-item>
+		           <el-form-item> 
+		           	<el-button type="primary" @click="searchClick" size="small" name="per_ct_md_show">查 询</el-button> 
+		           	<el-button type="default" @click="tableResetCondition" size="small">重 置</el-button> 
+		           </el-form-item> </el-row> 
+		           <el-row> 
+		           <el-form-item>
+		           	<el-button type="primary" @click="addClick" icon="plus" size="small" name="per_ct_md_add">新 增</el-button> 
+		           	<el-button type="primary" @click="updateClick" icon="edit" size="small" name="per_ct_md_edit">修改</el-button> 
+		           	<el-button type="primary" @click="delClick" icon="delete" size="small" name="per_ct_md_del">删 除</el-button>
+		           	<el-button type="primary" @click="upFile" icon="plus" size="small" name="per_ct_md_uploadFile">上传文件</el-button>
+		           	<el-button type="primary" @click="detailList" icon="plus" size="small" name="per_ct_md_viewDetail">查看详细记录</el-button>   
+		           </el-form-item>
+		           </el-row>
+		           </el-form> 
+		           <el-table id="tableId" height=100% :data="tableData" @sort-change="tableSortChange" @selection-change="tableChange" ref="mytable" stripe border> 
+		           <el-table-column type="selection" align="center" width="45">
+		           </el-table-column> <el-table-column prop="fileTypeName" label="文件分类名称名称" sortable>
+		           </el-table-column> <el-table-column prop="create_time" label="创建时间" width="180"> </el-table-column> 
+		           <el-table-column label="操作" align="center" width="100">
+		            <template scope="scope">
+	                	<el-button size="small" type="warning" @click="queryDataClick(scope.$index, scope.row)" name="per_ct_md_data">查看数据</el-button>
+	                </template>
+                	</el-table-column>
+		           </el-table>
+		           <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"  @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize"  @current-change="tableCurrentChange" layout="total, sizes, prev, pager, next, jumper"> 
+		           </el-pagination>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/ct/CtManualData/js/CtManualDataMain.js"></script>
+</body>
+</html>

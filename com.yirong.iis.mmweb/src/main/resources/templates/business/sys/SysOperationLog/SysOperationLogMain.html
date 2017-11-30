@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>用户管理</title>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+        <el-form :inline="true"
+                  :model="tableSearchModel"
+                  ref="tableSearchModel">
+           	 <el-row>
+           	   <el-form-item label="" prop="userName">
+                   <el-input v-model="tableSearchModel.userName" placeholder="请输入用户名" size="small"></el-input>
+               </el-form-item>
+               
+               
+  				<el-form-item label="" prop="ip">
+                   <el-input v-model="tableSearchModel.ip" placeholder="请输入ip" size="small"></el-input>
+               </el-form-item>
+  
+                <el-form-item label="" prop="optState">
+                    <el-select v-model="tableSearchModel.optState" filterable  placeholder="请选择操作状态" @change="" size="small" clearable>
+                        <el-option
+					        v-for="item in stateoptions"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                
+                <el-form-item label="" prop="logLevel">
+                    <el-select v-model="tableSearchModel.logLevel" filterable  placeholder="请选择日志级别" @change="" size="small" clearable>
+                        <el-option
+					        v-for="item in leveloptions"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                
+                <el-form-item label="" prop="optEvent">
+                    <el-select v-model="tableSearchModel.optEvent" filterable  placeholder="请选择操作事件" @change="" size="small" clearable>
+                        <el-option
+					        v-for="item in eventoptions"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+   
+                <el-form-item>
+                    <el-button type="primary" @click="onSearch" size="small" name="per_sys_op_show">查 询</el-button>
+                    <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+                </el-form-item>
+            </el-row>
+               
+			</el-form>
+                <el-table :data="tableData"
+                          @sort-change="tableSortChange"
+                          @selection-change="tableChange"
+                          ref="mytable" stripe
+                          border id="tableId" height=100% >
+		            <el-table-column prop="userName"
+                                     label="用户名" show-overflow-tooltip min-width="120">
+                    </el-table-column>
+                   
+                   <el-table-column prop="userDisplayName"
+                                     label="中文名"  show-overflow-tooltip min-width="120">
+                    </el-table-column>
+                   <el-table-column prop="unitName"
+                                     label="所属机构"   show-overflow-tooltip min-width="120">
+                    </el-table-column>
+           			<el-table-column prop="clientIp"
+                                     label="IP"   show-overflow-tooltip>
+                    </el-table-column>
+                    <el-table-column prop="eventCode"
+                                     label="操作事件"   :formatter="formatEventCode" show-overflow-tooltip width="100">
+                    </el-table-column>
+                    
+                     <el-table-column prop="operateContent"
+                                     label="操作内容"  show-overflow-tooltip min-width="120">
+                    </el-table-column>
+                    
+                     <el-table-column prop="operateState"
+                                     label="操作状态"   :formatter="formatState" show-overflow-tooltip width="100">
+                    </el-table-column>
+ 
+ 
+ 					<el-table-column prop="logLevel"
+                                     label="日志级别"   :formatter="formatLogLevel" width="100" show-overflow-tooltip>
+                    </el-table-column>
+ 
+ 					<el-table-column prop="optTime" 
+                                     label="操作时间" :formatter="formatDate"
+                                     width="180">
+                    </el-table-column>
+                    
+                </el-table>
+                
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :page-size= "tableSearchModel.pageSize"
+                               :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+            </el-col>
+        </el-row>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/sys/SysOperationLog/js/SysOperationLogMain.js"></script>
+</body>
+</html>

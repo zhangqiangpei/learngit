@@ -1,0 +1,22 @@
+<style>
+#ml .el-dialog__body {
+    padding: 10px 20px;
+    color: #48576a;
+    font-size: 14px;
+}
+
+#ml .el-dialog{
+	top:5% !important;
+	height:90%;
+	overflow:auto;
+}
+</style>
+<div id="DmCatalogTree" class="main">
+	<el-dialog title="目录树选择器"  :visible.sync="dialogVisible" id="ml">
+    	<el-tree node-key="id" ref="tree" :data="treeData" :props="treeProps" :expand-on-click-node="false" 
+    		:highlight-current="true" :default-expand-all="true" @node-click="treeNodeClick"></el-tree>
+    </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/common/js/DmCatalogTree.js"></script>

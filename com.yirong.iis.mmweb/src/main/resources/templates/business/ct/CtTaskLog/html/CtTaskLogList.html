@@ -1,0 +1,67 @@
+<div id="PmStandardList" class="main">
+	<el-dialog title="任务日志" 
+                   :visible.sync="dialogVisible">
+            <!-- 查询条件 -->
+            <el-form :inline="true"
+                         :model="tableSearchModel"
+                         ref="tableSearchModel">
+                    <el-row>
+                        <!-- <el-form-item label="采集渠道" prop="standardCode">
+                            <el-input v-model="tableSearchModel.standardCode" placeholder="请输入标准编码"></el-input>
+                             <el-select v-model="tableSearchModel.dbMetadataType"   placeholder="数据库类型" >
+					    <el-option
+					        v-for="item in dbMetadataTypes"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                        </el-form-item> -->
+                     <el-form-item label="采集渠道" prop="ctChannel">
+                     <el-select v-model="tableSearchModel.ctChannel"   placeholder="请选择采集渠道" >
+                      	<el-option v-for="item in ctChannels" :key="item.key" :label="item.label" :value="item.value">
+                      </el-select>
+			    </el-option>
+                      </el-form-item>
+                      <el-form-item>
+                          <el-button type="primary" @click="searchClick" size="small">查 询</el-button>
+                          <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+                      </el-form-item>
+                    </el-row>
+                </el-form>
+
+				<!-- 数据 -->
+                <el-table :data="tableData"
+                          ref="mytable" stripe
+                          highlight-current-row height="300"
+                          border>
+                    <el-table-column prop="ctChannel" label="采集渠道" width="100">
+                    </el-table-column>
+                    <el-table-column prop="ctChannel" label="采集渠道" width="100">
+                    </el-table-column>
+                    <el-table-column prop="taskName" label="任务民称"  width="100" >
+                    </el-table-column>
+                    <el-table-column prop="startTime" label="开始时间"  width="180">
+                    </el-table-column>
+                    <el-table-column prop="endTime" label="结束时间"  width="180">
+                    </el-table-column>
+                    <!-- <el-table-column prop="dataCount" label="数据量"  width="80">
+                    </el-table-column> -->
+                    <el-table-column prop="isSuccess" label="运行状态" width="100">
+                    </el-table-column>
+                </el-table>
+
+				<!-- 分页 -->
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :total="tableTotal"
+                                @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize" 
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/frame/awaken/awaken.util.js"></script>
+<script src="/business/ct/CtTaskLog/js/CtTaskLogList.js"></script>

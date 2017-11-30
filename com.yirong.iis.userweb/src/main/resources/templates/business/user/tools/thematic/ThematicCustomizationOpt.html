@@ -1,0 +1,147 @@
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>工作台拖拽</title>
+	
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>	
+    <link href="/frame/elementui/elementui.css" rel="stylesheet" />
+    <link href="/common/css/reset.css" rel="stylesheet" />
+    <link href="/common/css/com.css" rel="stylesheet" />
+    <link href="/business/user/tools/css/ThematicCustomizationOpt.css" rel="stylesheet" />
+    
+</head>
+
+<body scroll1="auto" style="background: rgb(251, 251, 251)">
+	<div id="wrap">
+
+        <table id="tabTemplate" style="display:none;margin-bottom:15px;" width="100%" border="0" cellspacing="0" cellpadding="3" class="miiTemplate">
+            <tr>
+                <td colspan="2" class="divTemplateTit">
+                    <div>
+                        <el-input v-model="thematicTit" placeholder="请输入专题名称" size="small" style="width:300px">
+                        </el-input>
+                        <el-button size="small" @click="saveThematic">保存</el-button>
+                        <el-button size="small" v-if="status==1" @click="publicThematic(0)" style="margin-left: 0">取消发布</el-button>
+                        <el-button size="small" v-else @click="publicThematic(1)" style="margin-left: 0">发布</el-button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><div id="divTemplate"></div></td>
+                <td width="180">
+                    <div>设置布局：</div>
+                    <div id="divTemplateLayout"></div>
+                    <form onsubmit="changePageLayout();return false;">
+                        <div >
+                            <input type="text" name="txtPageLayout" id="txtPageLayout" class="input" style="width:120px;" value=""> 
+                            <input type="submit" class="button" value="确定">
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+        <div id="divMain"></div>
+
+        <el-dialog title="编辑文本":visible.sync="dialogEditTextVisible" :close-on-press-escape="true"  :fullscreen="true">
+            <template>
+                <div style="margin-bottom:10px;">
+                    标题：
+                    <el-radio v-model="titDisplay" label="1">显示</el-radio>
+                    <el-radio v-model="titDisplay" label="0">不显示</el-radio>
+                    <el-input v-model="itemTit" v-if="titDisplay==1" placeholder="请输入标题" style="width:200px;"></el-input>
+                </div>
+            </template>
+            <iframe src="/forward.do?viewPath=business/user/tools/thematic/kindEditor.htm" id="keFrame" frameborder="0" style="width:100%;height:300px"></iframe>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogEditTextVisible = false">取 消</el-button>
+                <el-button type="primary" @click="saveText()">确 定</el-button>
+            </span>
+        </el-dialog>
+
+        <el-dialog title="编辑表格":visible.sync="dialogEditGridVisible" :close-on-press-escape="true" :fullscreen="true">
+            <template>
+                <div style="margin-bottom:10px;">
+                    标题：
+                    <el-radio v-model="titDisplay" label="1">显示</el-radio>
+                    <el-radio v-model="titDisplay" label="0">不显示</el-radio>
+                    <el-input v-model="itemTit" v-if="titDisplay==1" placeholder="请输入标题" style="width:200px;"></el-input>
+                </div>
+            </template>
+            <iframe src="/forward.do?viewPath=business/user/tools/thematic/gridEditor.htm" id="gdFrame" frameborder="0" style="width:100%;height:500px"></iframe>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogEditGridVisible = false">取 消</el-button>
+                <el-button type="primary" @click="saveGrid()">确 定</el-button>
+            </span>
+        </el-dialog>
+
+        <el-dialog title="编辑图表":visible.sync="dialogEditChartVisible" :close-on-press-escape="true" :fullscreen="true">
+            <template>
+                <div style="margin-bottom:10px;">
+                    标题：
+                    <el-radio v-model="titDisplay" label="1">显示</el-radio>
+                    <el-radio v-model="titDisplay" label="0">不显示</el-radio>
+                    <el-input v-model="itemTit" v-if="titDisplay==1" placeholder="请输入标题" style="width:200px;"></el-input>
+                </div>
+            </template>
+            <iframe src="/forward.do?viewPath=business/user/tools/thematic/chartEditor.html" id="chartFrame" frameborder="0" style="width:100%;height:830px"></iframe>
+        </el-dialog>
+
+	</div>
+</body>
+</html>
+<script src="/frame/jquery/jquery.min.js"></script>
+<script src="/frame/vue/vue.min.js"></script>
+<script src="/frame/elementui/elementui.js"></script>
+<script src="/frame/echarts/echarts.min.js"></script>
+<script src="/common/js/com.js"></script>
+<script src="/business/user/tools/js/ThematicLayout.js"></script>
+<script src="/business/user/tools/js/ThematicMoudleEdit.js"></script>
+
+
+<script type="text/javascript">
+    var hJson;
+    var thematicId = '';
+    var isAdminEdit = '';
+    var url = '';
+    //判断是否新页面打开
+    if(parent.document.getElementById("iframeThematicOpt")){
+        url = parent.document.getElementById("iframeThematicOpt").contentWindow.location.search;
+    }else{
+        //新开选项卡，重置html body的宽度
+        $('html').css('min-width','1200px');
+        $('html').css('width','1200px');
+        $(document.body).css('min-width','1200px');
+        $(document.body).css('width','1200px');
+    }
+    thematicId = z.url(url).thematicId;
+    isAdminEdit = z.url(url).isEdit;
+    
+    vm.status = z.url(url).status;
+    vm.thematicId = thematicId;
+    
+    //获取布局数据
+    if(z.isNotNullOrEmpty(thematicId)){
+        var result = z.msService("user", "IisThematicApi/get",{id:thematicId});
+        if(null != result && result.code == 0){
+            vm.thematicTit = result.data.thematicName;
+            try{hJson = result.data.thematicLayout;}catch(e){}
+        }
+    }
+    
+	if (z.isNullOrEmpty(hJson)){
+		hJson = {cols:'*|260,*,260',items:[]};
+	}
+	
+	hJson.items.sort(function(a, b){return a.row-b.row});
+
+	initHomeDoc();
+    
+</script>

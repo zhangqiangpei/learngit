@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+            <!-- <el-col :span="4"> 
+            	<el-tree node-key="id" ref="tree" :data="treeData" :props="treeProps" :expand-on-click-node="false" :highlight-current="true" :default-expand-all="true" @node-click="treeNodeClick">
+            	</el-tree>
+            </el-col> -->
+            <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel"> 
+            <el-row> 
+            	<el-form-item label="名称" prop="websiteGroupName"> 
+            	<el-input v-model="tableSearchModel.websiteGroupName" placeholder="请输入网址组名称" size="small"></el-input> 
+	            </el-form-item> 
+	            <el-form-item> 
+	            	<el-button type="primary" @click="searchClick" size="small" name="per_ct_web_show">查 询</el-button>  
+	            	<el-button type="default" @click="tableResetCondition" size="small">重 置</el-button> 
+	            </el-form-item>
+            </el-row> 
+            <el-row> 
+            <el-form-item> 
+            	<el-button type="primary" @click="addClick" icon="plus" size="small" name="per_ct_web_add">新 增</el-button> 
+            	<el-button type="primary" @click="updateClick" icon="edit" size="small" name="per_ct_web_edit">修改</el-button> 
+            	<el-button type="primary" @click="delClick" icon="delete" size="small" name="per_ct_web_del">删 除</el-button> 
+            	<el-button type="primary" @click="ctWebsiteList"  icon="plus" size="small" name="per_ct_web_webView">查看网址</el-button> 
+            </el-form-item>
+            </el-row> 
+            </el-form>
+            <!-- 数据 -->
+            <el-table id="tableId" height=100% :data="tableData" @sort-change="tableSortChange" @selection-change="tableChange" ref="mytable" stripe border> 
+	            <el-table-column type="selection" align="center" width="45"> </el-table-column> 
+	            <el-table-column prop="website_group_name" label="名称" sortable> </el-table-column> 
+	            <el-table-column prop="website_group_remark" label="说明" width="450"> </el-table-column> 
+	            <el-table-column prop="create_time" label="创建时间" width="180"> </el-table-column> 
+            </el-table>
+            	<el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"  @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize"  @current-change="tableCurrentChange" layout="total, sizes, prev, pager, next, jumper"> 
+            	</el-pagination>
+        </el-row>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/ct/CtWebsiteGroup/js/CtWebsiteGroupMain.js"></script>
+</body>
+</html>

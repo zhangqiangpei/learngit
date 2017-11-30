@@ -1,0 +1,28 @@
+<div id="update" class="main">
+	<el-dialog title="修改目录" :visible.sync="dialogVisible">
+		<el-form :model="updateModel" :rules="updateRules" ref="updateModel" label-width="100px"  >
+			<el-form-item label="目录编码" prop="catalogCode">
+            	<el-input v-model="updateModel.catalogCode" placeholder="请输入目录编码" :disabled="true"></el-input>
+            </el-form-item>
+        	<el-form-item label="目录名称" prop="catalogName">
+            	<el-input v-model="updateModel.catalogName" placeholder="请输入目录名称(长度：1-40)"></el-input>
+            </el-form-item>
+            <el-form-item label="目录说明" prop="catalogRemark">
+                <el-input type="textarea" :rows="2" v-model="updateModel.catalogRemark" placeholder="请输入说明(长度：1-100)"></el-input>
+            </el-form-item>
+            <el-form-item label="目录属性" prop="catalogAttrName">
+	            <el-input v-model="catalogAttrName" :disabled="true"></el-input>
+			</el-form-item>
+			<el-form-item label="目录分类名称" prop="catalogTypeName">
+            	<el-input v-model="catalogTypeName" :disabled="true"></el-input>
+            </el-form-item>
+            <el-row style="text-align:center">
+                <el-button type="primary" @click="updateSubmit" size="small">确定</el-button>
+                <el-button @click="updateCancel" size="small">取消</el-button>
+            </el-row>
+        </el-form>
+	</el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/dm/DmCatalog/js/DmCatalogUpdate.js"></script>

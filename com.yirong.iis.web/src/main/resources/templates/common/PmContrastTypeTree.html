@@ -1,0 +1,15 @@
+<div id="PmContrastTypeTree" class="main">
+	<el-dialog title="标准分类树选择器" 
+                   :visible.sync="dialogVisible">
+            <el-tree node-key="id" ref="tree"
+                         :data="treeData" 
+                         :props="treeProps" 
+						 :expand-on-click-node="false"
+						 :highlight-current="true"
+						 :default-expand-all="true"
+                         @node-click="treeNodeClick"></el-tree>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/common/js/PmContrastTypeTree.js"></script>

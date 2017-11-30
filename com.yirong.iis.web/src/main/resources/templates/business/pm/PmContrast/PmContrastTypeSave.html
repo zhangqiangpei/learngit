@@ -1,0 +1,27 @@
+<div id="saveType" class="main">
+	<el-dialog title="新增分类" 
+                   :visible.sync="dialogVisible">
+            <el-form :model="saveTypeModel"
+                     ref="saveTypeModel"
+                     :rules="saveTypeRules"
+                     label-width="150px"
+                      >
+                <el-form-item label="标准分类名称" prop="standardTypeName">
+                    <el-input v-model="saveTypeModel.standardTypeName" placeholder="请选择" icon="search" :on-icon-click="changeClick" :disabled="true"></el-input>
+                </el-form-item>
+                <el-form-item label="采集对象名称" prop="ctObjectName">
+                    <el-input v-model="ctObjectName" :disabled="true"></el-input>
+                </el-form-item>
+                <el-form-item label="采集渠道" prop="ctChannelName">
+                    <el-input v-model="ctChannelName" :disabled="true"></el-input>
+                </el-form-item>
+                <el-row style="text-align:center">
+                    <el-button type="primary" @click="saveTypeSubmit" size="small">确定</el-button>
+                    <el-button @click="saveTypeReset" size="small">重置</el-button>
+                </el-row>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/pm/PmContrast/js/PmContrastTypeSave.js"></script>

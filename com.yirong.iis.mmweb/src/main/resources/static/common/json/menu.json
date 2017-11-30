@@ -1,0 +1,102 @@
+{
+  "code": 0,
+  "msg": "获取菜单成功",
+  "data": [
+    {
+      "id": "1",
+      "name": "专题库管理",
+      "ico": "el-icon-menu",
+      "url": "",
+      "subs": [
+        {
+          "id": "11",
+          "name": "专题库维护",
+          "url": "business/im/ImSpLibrary/ImSpLibraryMain.html"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "信息处理",
+      "ico": "el-icon-menu",
+      "url": "",
+      "subs": [
+        {
+          "id": "21",
+          "name": "智能研判",
+          "url": ""
+        },
+        {
+          "id": "22",
+          "name": "专家研判",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "信息检索",
+      "ico": "el-icon-menu",
+      "url": "",
+      "subs": [
+        {
+          "id": "31",
+          "name": "信息统计",
+          "url": "business/im/ImInfoStat/ImInfoStatMain.html"
+        },
+        {
+          "id": "32",
+          "name": "信息多维查询",
+          "url": "business/im/ImInfoQuery/ImInfoQueryMain.html"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "信息服务",
+      "ico": "el-icon-menu",
+      "url": "",
+      "subs": [
+        {
+          "id": "41",
+          "name": "服务管理",
+          "ico": "el-icon-menu",
+          "subs": [
+            {
+              "id": "411",
+              "name": "推送服务管理",
+              "url": "business/im/ImPushServiceCfg/ImPushServiceCfgMain.html"
+            },
+            {
+              "id": "412",
+              "name": "任务日志管理",
+              "url": "business/im/ImPushServiceLog/ImPushServiceLogMain.html"
+            }
+          ]
+        },
+        {
+          "id": "52",
+          "name": "配置管理",
+          "ico": "el-icon-menu",
+          "subs": [
+            {
+              "id": "521",
+              "name": "集成应用配置",
+              "url": "/business/im/ImIntegratetAppCfg/ImIntegratetAppCfgMain.html"
+            },
+            {
+              "id": "522",
+              "name": "通讯录配置",
+              "url": "/business/im/ImAddressListCfg/ImAddressListCfgMain.html"
+            },
+            {
+              "id": "523",
+              "name": "提醒服务配置",
+              "url": "/business/im/ImCallServiceCfg/ImCallServiceCfgMain.html"
+            } 
+          ]
+        }
+      ]
+    }
+  ]
+}

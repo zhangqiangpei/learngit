@@ -1,0 +1,137 @@
+{
+  "code": 0,
+  "msg": "获取数据成功",
+  "data": [
+        {
+                "fieldCode":0,
+                "fieldName": "柱状图",
+                "type": "root",
+                "chartType": "bar",
+                "children": [
+                    {
+                        "fieldCode": 11,
+                        "fieldName": "字符",
+                        "type": "char",
+                        "children":[
+                            {
+                                "fieldCode": 111,
+                                "fieldName":"时间",
+                                "field":"date",
+                                "type":"char"
+                            },
+                            {
+                                "fieldCode": 112,
+                                "fieldName":"地区",
+                                "field":"city",
+                                "type":"char"
+                            }
+                        ]
+                    },
+                    {
+                        "fieldCode": 12,
+                        "fieldName": "数值",
+                        "type": "value",
+                        "children":[
+                            {
+                                "fieldCode": 121,
+                                "fieldName":"气温",
+                                "field":"temp",
+                                "type":"value"
+                            },
+                            {
+                                "fieldCode":122,
+                                "fieldName":"人居收入",
+                                "field":"income",
+                                "type":"value"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "fieldCode": 1,
+                "fieldName": "堆叠折线图",
+                "type": "root",
+                "chartType": "line",
+                "children": [
+                    {
+                        "fieldCode": 11,
+                        "fieldName": "字符",
+                        "type": "char",
+                        "children":[
+                            {
+                                "fieldCode": 111,
+                                "fieldName":"姓名",
+                                "field":"name",
+                                "type":"char"
+                            }
+                        ]
+                    },
+                    {
+                        "fieldCode": 12,
+                        "fieldName": "数值",
+                        "type": "value",
+                        "children":[
+                            {
+                                "fieldCode": 121,
+                                "fieldName":"序号",
+                                "field":"no",
+                                "type":"value"
+                            },
+                            {
+                                "fieldCode":122,
+                                "fieldName":"成绩",
+                                "field":"score",
+                                "type":"value"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "fieldCode":2,
+                "fieldName": "传统饼图",
+                "type": "root",
+                "chartType": "pie",
+                "children": [
+                    {
+                        "fieldCode": 12,
+                        "fieldName": "数值",
+                        "type": "value",
+                        "children":[
+                            {
+                                "fieldCode": 121,
+                                "fieldName":"直接访问",
+                                "field":"directAccess",
+                                "type":"value"
+                            },
+                            {
+                                "fieldCode":122,
+                                "fieldName":"邮件营销",
+                                "field":"emailMarketing",
+                                "type":"value"
+                            },
+                            {
+                                "fieldCode":123,
+                                "fieldName":"联盟广告",
+                                "field":"unionAd",
+                                "type":"value"
+                            },
+                            {
+                                "fieldCode":124,
+                                "fieldName":"视频广告",
+                                "field":"videoAd",
+                                "type":"value"
+                            },
+                            {
+                                "fieldCode":125,
+                                "fieldName":"搜索引擎",
+                                "field":"srhEngine",
+                                "type":"value"
+                            }
+                        ]
+                    }
+                ]
+            }
+  ]
+}

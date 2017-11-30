@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>消息管理</title>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+        <el-form :inline="true"
+                  :model="tableSearchModel"
+                  ref="tableSearchModel">
+           	 <el-row>
+           	   <el-form-item label="" prop="senderId">
+                   <el-input v-model="tableSearchModel.senderId" placeholder="请输入发送人账号" size="small"></el-input>
+               </el-form-item>
+               <el-form-item label="" prop="receiverId">
+                   <el-input v-model="tableSearchModel.receiverId" placeholder="请输入接收方账号" size="small"></el-input>
+               </el-form-item>
+               <el-form-item>
+                    <el-button type="primary" @click="onSearch" size="small" name="per_sys_op_show">查 询</el-button>
+                    <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+               </el-form-item>
+            </el-row>
+            <el-row>
+                <el-form-item>
+                    <el-button type="primary" @click="addClick"  icon="plus" size="small" name="per_sys_msg_add">新 增</el-button>
+                </el-form-item>
+            </el-row>  
+		</el-form>
+                <el-table :data="tableData"
+                          @sort-change="tableSortChange"
+                          @selection-change="tableChange"
+                          ref="mytable" stripe
+                          border id="tableId" height=100% >
+		            <el-table-column prop="batchNum"
+                                     label="批次号" show-overflow-tooltip min-width="120">
+                    </el-table-column>
+                   
+                   <el-table-column prop="senderId"
+                                     label="发送账号"  show-overflow-tooltip min-width="120">
+                    </el-table-column>
+                   <el-table-column prop="senderName"
+                                     label="发送名称"   show-overflow-tooltip min-width="120">
+                    </el-table-column>
+           			<el-table-column prop="receiverId"
+                                     label="接受账号"   show-overflow-tooltip min-width="120">
+                    </el-table-column>
+                    <el-table-column prop="msgTitle"
+                                     label="消息标题"  show-overflow-tooltip min-width="120">
+                    </el-table-column>
+                    
+                     <el-table-column prop="msgContent"
+                                     label="消息内容"   show-overflow-tooltip min-width="120">
+                    </el-table-column>
+                    
+                     <el-table-column prop="sendTime"
+                                     label="发送时间"   :formatter="formatDate" width="170">
+                    </el-table-column>
+ 
+ 
+ 					<el-table-column prop="sendState"
+                                     label="推送状态"   :formatter="formatSendState" show-overflow-tooltip width="100">
+                    </el-table-column>
+ 					
+ 					<el-table-column prop="state"
+                                     label="状态"   :formatter="formatState" show-overflow-tooltip width="80">
+                    </el-table-column>
+                    
+                    <el-table-column prop="redoTimes"
+                                     label="重发次数"   show-overflow-tooltip width="100">
+                    </el-table-column>
+ 					
+                </el-table>
+                
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :page-size= "tableSearchModel.pageSize"
+                               :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+            </el-col>
+        </el-row>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/sys/SysMsgSendLog/js/SysMsgSendLogMain.js"></script>
+</body>
+</html>

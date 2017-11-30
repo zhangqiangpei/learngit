@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- 公用方法 -->
+		<script src="/frame/jquery/jquery.min.js"></script>
+		<script src="/frame/awaken/awaken.init.js"></script>
+		<script>
+			//初始化头部
+			initHeadConfig();
+		</script>
+	</head>
+	<body>
+		 <div id="main" class="main">
+			 <!-- 查询条件 -->
+	         <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel">
+	            <el-row>
+	            	<el-form-item label="预处理任务名称" prop="taskName">
+	                    <el-input v-model="tableSearchModel.taskName" placeholder="请输入预处理任务名称"></el-input>
+	                </el-form-item>
+	            </el-row>
+	            <el-row>
+	                <el-form-item>
+	                    <el-button type="primary" @click="searchClick" size="small" name="per_pm_task_show">查 询</el-button>
+	                    <el-button type="default" @click="tableResetCondition" size="small">重 置</el-button>
+	                </el-form-item>
+	            </el-row>
+	        </el-form>
+	
+			<!-- 数据 -->
+	        <el-table :data="tableData" id="tableId" height=100% @sort-change="tableSortChange" @selection-change="tableChange" ref="mytable" stripe border>
+	            <el-table-column type="selection" align="center" width="45"></el-table-column>
+	            <el-table-column prop="task_name" label="预处理任务名称" sortable="custom"></el-table-column>
+	            <el-table-column prop="flow_name" label="预处理流程名称" sortable="custom" width="250" ></el-table-column>
+	            <el-table-column prop="ct_channel_name" label="采集渠道" sortable="custom" width="120" ></el-table-column>
+	            <el-table-column prop="ct_object_name" label="采集对象名称" sortable="custom" width="180" ></el-table-column>
+	            <el-table-column prop="run_state_name" label="当前运行状态" sortable="custom" width="150" ></el-table-column>
+	            <el-table-column label="操作" align="center" width="200">
+		            <template scope="scope">
+		            	<el-button size="small" type="primary" @click="doClick(scope.$index, scope.row)" name="per_pm_task_run">立即运行</el-button>
+	                	<el-button size="small" type="primary" @click="doReClick(scope.$index, scope.row)" name="per_pm_task_doRe">重新预处理</el-button>
+	                </template>
+                </el-table-column>
+	        </el-table>
+	
+			<!-- 分页 -->
+	        <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"
+	        	 @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize"  @current-change="tableCurrentChange" layout="total, sizes, prev, pager, next, jumper">
+	        </el-pagination>
+	    </div>
+	    
+		<!-- 本页面js -->
+		<script src="/frame/awaken/awaken.table.field.js"></script>
+		<script src="/business/pm/PmTask/js/PmTaskMain.js"></script>
+	</body>
+</html>

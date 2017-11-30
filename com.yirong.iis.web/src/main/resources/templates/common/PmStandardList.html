@@ -1,0 +1,51 @@
+<div id="PmStandardList" class="main">
+	<el-dialog title="标准列表选择器" 
+                   :visible.sync="dialogVisible">
+            <!-- 查询条件 -->
+            <el-form :inline="true"
+                         :model="tableSearchModel"
+                         ref="tableSearchModel">
+                    <el-row>
+                        <el-form-item label="标准编码" prop="standardCode">
+                            <el-input v-model="tableSearchModel.standardCode" placeholder="请输入标准编码"></el-input>
+                        </el-form-item>
+                       <el-form-item label="标准名称" prop="standardName">
+                            <el-input v-model="tableSearchModel.standardName" placeholder="请输入标准名称"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="searchClick">查 询</el-button>
+                            <el-button type="default" @click="tableResetCondition">重 置</el-button>
+                        </el-form-item>
+                    </el-row>
+                </el-form>
+
+				<!-- 数据 -->
+                <el-table :data="tableData"
+                          @sort-change="tableSortChange"
+                          @cell-dblclick="cellDblclick"
+                          ref="mytable" stripe
+                          highlight-current-row height="300"
+                          border>
+                    <el-table-column prop="standard_code"
+                                     label="标准编号" sortable="custom"
+                                     width="200" >
+                    </el-table-column>
+                    <el-table-column prop="standard_name"
+                                     label="标准名称" sortable="custom"
+                                     width="300">
+                    </el-table-column>
+                </el-table>
+
+				<!-- 分页 -->
+                <el-pagination class="pagination"
+                               :current-page="tableSearchModel.currentPage"
+                               :total="tableTotal"
+                                @size-change="tableSizeChange" :page-size="tableSearchModel.pageSize" 
+                               @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/common/js/PmStandardList.js"></script>

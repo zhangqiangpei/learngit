@@ -1,0 +1,79 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div id="update" class="main">
+	<el-dialog title="修改角色" 
+                   :visible.sync="dialogVisible">
+            <el-form :model="updateModel"
+                     :rules="updateRules"
+                     ref="updateModel"
+                     label-width="100px"
+                      >
+
+   				<el-form-item label="应用名称" prop="applicationId">
+                	 <el-select v-model="updateModel.applicationId" filterable  placeholder="请选择应用名称" @change="appchange" size="small">
+	                   <el-option
+					        v-for="item in appoptions"
+					        :key="item.id"
+					        :label="item.name"
+					        :value="item.id">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+                
+                <el-form-item label="角色名称" prop="name">
+                    <el-input v-model="updateModel.name" placeholder="请输入角色名称(长度：1-32)" size="small"></el-input>
+                </el-form-item>
+ 
+                <el-form-item label="角色类型" prop="type">
+                	 <el-select v-model="updateModel.type" filterable  placeholder="请选择角色类型" size="small">
+	                   <el-option
+					        v-for="item in typeoptions"
+					        :key="item.key"
+					        :label="item.label"
+					        :value="item.value">
+					    </el-option>
+                    </el-select>
+                </el-form-item>
+ 
+                <el-form-item label="角色描述" prop="description">
+                	<el-input v-model="updateModel.description" type="textarea" autosize placeholder="请输入描述(长度：0-256)" size="small"></el-input>
+                </el-form-item>
+                
+                
+               <!--  <div class="am-form-group" >
+					<table  id="permissionTbup" class="hidden">  
+				        <thead>
+				            <tr>
+				                <th>菜单名称</th>
+				                <th>权限</th>
+				                <th>权限</th>
+				                <th>权限</th>
+				                <th>权限</th>
+				                <th>权限</th>
+				            </tr>
+				        </thead>
+				        <tbody>
+				        </tbody>
+				    </table>  
+				</div>  -->
+ 
+                
+                <el-form-item align="center">
+                    <el-button type="primary" @click="updateSubmit" size="small">确定</el-button>
+                    <el-button @click="updateCancel" size="small">取消</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/sys/SysRoleManage/js/SysRoleManageUpdate.js"></script>
+<style>
+.hidden {
+    display: none;
+}
+</style>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+			<textarea id="editor_id" name="content" style="height:270px;">
+		    	 
+		    </textarea>
+			<script src="frame/kindeditor/kindeditor-all.js"></script>
+			<script src="frame/kindeditor/lang/zh-CN.js"></script>
+			<script>
+			var editor = KindEditor.create('textarea[name="content"]', {
+			     width:'99%',
+			     minHeight:'400px',
+			     afterBlur:function(){ this.sync(); },
+			     afterCreate:function(){this.sync();},
+			     items : [
+			         'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+			         'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			         'insertunorderedlist']
+			 });
+			
+			</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	 <link href="/business/user/country/css/country.css" rel="stylesheet" />
+</head>
+<body>
+<div id="info" class="main_div">
+	<div>
+		<span class="home_span">
+		国家>{{continentName}}>{{chineseName}}
+		</span>
+	</div>
+	<div class="contry_div" >
+		<span class="contry_span">政治环境</span>
+	</div>
+	<div style="width: 100%;">
+	<img class="separate_img"  src="/common/images/u1934.png">
+	</div>
+	<div class="info_div">
+		<p v-for="item in PoliticalEnvironment" v-if="PoliticalEnvironment&&PoliticalEnvironment.length!=0">
+                <span>【{{item.fieldName}}】 </span>
+                <span>{{item.fieldValue}}</span>
+        </p>
+        <p  v-else>
+       	<span style="font-size: 18px;">暂无内容</span>
+       </p>
+	</div>
+	
+</div>
+</body>
+<script src="/frame/jquery/jquery.min.js"></script>
+<script src="/frame/vue/vue.min.js"></script>
+<script src="/frame/elementui/elementui.js"></script>
+<script src="/frame/awaken/awaken.core.js"></script>
+<script src="/frame/awaken/awaken.common.js"></script>
+<script src="/common/js/com.js"></script>
+<script src="/business/user/country/js/PoliticalEnvironment.js"></script>
+</html>
+

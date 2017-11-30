@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 公用方法 -->
+    <script src="/frame/jquery/jquery.min.js"></script>
+    <script src="/frame/awaken/awaken.init.js"></script>
+    <script src="/frame/awaken/awaken.util.js"></script>
+    <script>
+        //初始化头部
+        initHeadConfig();
+    </script>
+</head>
+<body>
+<div id="main" class="main">
+    <!-- 查询条件 -->
+    <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel">
+        <el-row>
+            <el-form-item label="英文缩写" prop="iso2code">
+                <el-input v-model="tableSearchModel.iso2code" placeholder="请输入两位或者三位缩写"></el-input>
+            </el-form-item>
+            <el-form-item label="英文名" prop="englishName">
+                <el-input v-model="tableSearchModel.englishName" placeholder="请输入国家英文名"></el-input>
+            </el-form-item>
+            <el-form-item label="中文名" prop="chineseName">
+                <el-input v-model="tableSearchModel.chineseName" placeholder="请输入国家中文名"></el-input>
+            </el-form-item>
+            <el-form-item label="所属洲" prop="continentCode">
+                <el-select v-model="tableSearchModel.continentCode" placeholder="请选择所属洲" clearable size=10>
+                    <el-option :key="cc.key" :label="cc.label" :value="cc.value"
+                               v-for="cc in continentCodeList"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="searchClick" size="small">查 询</el-button>
+                <el-button type="default" @click="resetClick" size="small">重 置</el-button>
+            </el-form-item>
+        </el-row>
+        <el-row>
+            <el-button type="primary" size="small" @click="addClick">新 增</el-button>
+            <el-button type="default" @click="delClick" size="small">删 除</el-button>
+        </el-row>
+    </el-form>
+    <!-- 数据 -->
+    <el-table id="tableId" height=100% :data="tableData" @sort-change="tableSortChange" @selection-change="tableChange"
+              ref="mytable" stripe border style="margin-top: 10px">
+        <el-table-column type="selection"></el-table-column>
+        <el-table-column label="中文名" prop="CHINESE_NAME"></el-table-column>
+        <el-table-column label="英文名" prop="ENGLISH_NAME"></el-table-column>
+        <el-table-column label="两位缩写" prop="ISO2CODE"></el-table-column>
+        <el-table-column label="三位缩写" prop="ISOCODE"></el-table-column>
+        <el-table-column label="所属洲" prop="CONTINENT_NAME" width="133"></el-table-column>
+        <el-table-column label="创建时间" prop="CREATE_TIME" width="166"></el-table-column>
+        <el-table-column label="操作" width="111">
+            <template scope="scope">
+                <el-button type="primary" @click="detailClick(scope.row)" size="small">查看详情</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <!-- 分页 -->
+    <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"
+                   @size-change="tableSizeChange"
+                   :page-size="tableSearchModel.pageSize" @current-change="tableCurrentChange"
+                   layout="total, sizes, prev, pager, next, jumper"></el-pagination>
+</div>
+<!-- 本页面js -->
+<script src="/business/iis/IisCountryInfo/js/IisCountryInfoMain.js"></script>
+</body>
+</html>

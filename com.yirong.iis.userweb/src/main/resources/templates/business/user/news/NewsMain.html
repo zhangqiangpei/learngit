@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>新闻</title>
+
+    <link href="/frame/elementui/elementui.css" rel="stylesheet" />
+    <link href="/common/css/reset.css" rel="stylesheet" />
+    <link href="/common/css/com.css" rel="stylesheet" />
+    <link href="/business/user/news/css/NewsMain.css" rel="stylesheet" />
+</head>
+<body>
+    
+    <!---------------网页头部start----------------->
+    <div id="header" class="header"></div>
+    <!---------------网页头部end------------------->
+        
+    <!---------------网页搜索工具栏(如有)start---------->
+    <div id="toolbar" class="toolbar">
+        
+    </div>
+    <!---------------网页搜索工具栏(如有)end----------->
+    
+    <!---------------网页主体start----------------->
+    <div id="main" class="main  clearfix">
+        <el-row :gutter="20">
+            <el-col :span="4">
+                <el-form :model="tableSearchModel">
+                    <el-form-item>
+                        <el-select v-model="tableSearchModel.continent" size="medium" :clearable="true" @change="setContinentsCode" placeholder="选择洲">
+                            <el-option
+                                    v-for="item in continents"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-select v-model="country" size="medium" :clearable="true" @change="setCountryCode" placeholder="选择国家">
+                            <el-option
+                                    v-for="item in countries"
+                                    :key="item.englishName"
+                                    :label="item.chineseName"
+                                    :value="item.englishName">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-form>
+            </el-col>
+            <el-col :span="20">
+                <el-table  :data="tableData" @sort-change="tableSortChange"
+                           @selection-change="tableChange" ref="mytable" border>
+                    <el-table-column :render-header="renderHeader">
+                        <template scope="scope">
+                            <div v-if='scope.row.COUNTRY_ENG_NAME === "China"'>
+                                <div class="newsTitle">
+                                    <a :href="'/forward.do?viewPath=business/user/news/NewsDetail.html&esId=' + scope.row.id">
+                                        【{{scope.row.COUNTRY_CHN_NAME}}】{{scope.row.TITLE}}</a>
+                                </div>
+                                <div >摘要：{{scope.row.SUMMARY}}</div>
+                                <div class="divListContent">
+                                    <span>来源：<a>{{scope.row.SOURCE}}</a></span>
+                                    <span>国家：<a>{{scope.row.COUNTRY_CHN_NAME}}</a></span>
+                                    <span>类型：<a>{{scope.row.TYPE}}</a></span>
+                                    <span><a>{{scope.row.RELEASE_TIME}}</a></span>
+                                </div>
+                            </div>
+                            <div v-else-if='scope.row.COUNTRY_ENG_NAME === "America"'>
+                                <div class="newsTitle">
+                                    <a :href="'/forward.do?viewPath=business/user/news/NewsDetail.html&esId=' + scope.row.id">
+                                        【{{scope.row.COUNTRY_ENG_NAME}}】{{scope.row.TITLE_EN}}</a>
+                                </div>
+                                <div >摘要：{{scope.row.SUMMARY}}</div>
+                                <div class="divListContent">
+                                    <span>Source：<a>{{scope.row.SOURCE}}</a></span>
+                                    <span>Country：<a>{{scope.row.COUNTRY_ENG_NAME}}</a></span>
+                                    <span>Type：<a>{{scope.row.TYPE}}</a></span>
+                                    <span><a>{{scope.row.RELEASE_TIME}}</a></span>
+                                </div>
+                            </div>
+                            <div v-else>
+                                <div class="newsTitle">
+                                    <a :href="'/forward.do?viewPath=business/user/news/NewsDetail.html&esId=' + scope.row.id">
+                                        【{{scope.row.COUNTRY_ENG_NAME}}】{{scope.row.TITLE}}</a>
+                                </div>
+                                <div class="newsEngTitle">
+                                    <a :href="'/forward.do?viewPath=business/user/news/NewsDetail.html&esId=' + scope.row.id">
+                                        【{{scope.row.COUNTRY_ENG_NAME}}】{{scope.row.TITLE_EN}}</a>
+                                </div>
+                                <div >摘要：{{scope.row.SUMMARY}}</div>
+                                <div class="divListContent">
+                                    <span>Source：<a>{{scope.row.SOURCE}}</a></span>
+                                    <span>Country：<a>{{scope.row.COUNTRY_ENG_NAME}}</a></span>
+                                    <span>Type：<a>{{scope.row.TYPE}}</a></span>
+                                    <span><a>{{scope.row.RELEASE_TIME}}</a></span>
+                                </div>
+                            </div>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"
+                               @size-change="tableSizeChange"
+                               :page-size="tableSearchModel.pageSize" @current-change="tableCurrentChange"
+                               layout="total, sizes, prev, pager, next, jumper"></el-pagination>
+            </el-col>
+        </el-row>
+    </div>
+    <!---------------网页主体end------------------->
+     
+    <!---------------网页底部start----------------->
+    <div id="footer" class="footer"></div>
+    <!---------------网页底部end------------------->
+    
+</body>
+</html>
+<script src="/frame/jquery/jquery.min.js"></script>
+<script src="/frame/vue/vue.min.js"></script>
+<script src="/frame/elementui/elementui.js"></script>
+<script src="/frame/awaken/awaken.core.js"></script>
+<script src="/frame/awaken/awaken.table.js"></script>
+<script src="/frame/awaken/awaken.tree.js"></script>
+<script src="/frame/awaken/awaken.dialog.js"></script>
+<script src="/frame/awaken/awaken.common.js"></script>
+<script src="/frame/awaken/awaken.util.js"></script>
+<script src="/common/js/com.js"></script>
+<script src="/business/user/news/js/NewsMain.js"></script>

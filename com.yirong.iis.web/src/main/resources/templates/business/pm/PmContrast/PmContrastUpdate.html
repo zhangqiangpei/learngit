@@ -1,0 +1,33 @@
+<div id="update" class="main">
+	<el-dialog title="修改对照" 
+                   :visible.sync="dialogVisible">
+            <el-form :model="updateModel"
+                     :rules="updateRules"
+                     ref="updateModel"
+                     label-width="100px"
+                      >
+                <el-form-item label="源编码" prop="sourceCode">
+                    <el-input v-model="updateModel.sourceCode" placeholder="请输入标准编码(长度：1-32)"></el-input>
+                </el-form-item>
+                <el-form-item label="源名称" prop="sourceName">
+                    <el-input v-model="updateModel.sourceName" placeholder="请输入标准名称(长度：1-64)"></el-input>
+                </el-form-item>
+                <el-form-item label="标准编码" prop="standardCode">
+                    <el-input v-model="updateModel.standardCode" placeholder="请选择标准" icon="search" :on-icon-click="changeClick" :disabled="true"></el-input>
+                </el-form-item>
+                <el-form-item label="标准名称" prop="standardName">
+                    <el-input v-model="updateModel.standardName" placeholder="请选择标准" icon="search" :on-icon-click="changeClick" :disabled="true"></el-input>
+                </el-form-item>
+                 <el-form-item label="标准分类名称" prop="standardTypeName">
+                    <el-input v-model="standardTypeName" :disabled="true"></el-input>
+                </el-form-item>
+                <el-row style="text-align:center">
+                    <el-button type="primary" @click="updateSubmit" size="small">确定</el-button>
+                    <el-button @click="updateCancel" size="small">取消</el-button>
+                </el-row>
+            </el-form>
+        </el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/pm/PmContrast/js/PmContrastUpdate.js"></script>

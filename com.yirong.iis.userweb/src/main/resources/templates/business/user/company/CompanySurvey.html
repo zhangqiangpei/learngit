@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>企业概述</title>
+
+    <link href="/frame/elementui/elementui.css" rel="stylesheet" />
+    <link href="/common/css/reset.css" rel="stylesheet" />
+    <link href="/common/css/com.css" rel="stylesheet" />
+    <link href="/business/user/company/css/CompanyDetail.css" rel="stylesheet" />  
+</head>
+<body>
+ 
+    <!---------------网页主体start----------------->
+    <div id="main" class="clearfix">
+     		<el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel">
+           	 <el-row>
+	             <el-input placeholder="输入关键字" v-model="tableSearchModel.keyWord" style="width:950px;" size="small" class="input-with-select">
+				      <el-button slot="append" icon="el-icon-search" @click="searchClick"></el-button>
+				  </el-input>
+            </el-row>
+ 			</el-form>
+ 
+          <!-- 企业概况 -->
+		  <div class="div-main">
+		  		<div class="div-title">
+		  			<span>企业概况</span>
+		  			<div class="div-bt">
+		  				<el-button type="primary" @click="chnTranslate" size="mini">中文</el-button>
+		  				<el-button type="primary" @click="engTranslate" size="mini">英文</el-button>
+		  			</div>
+		  		</div>
+		  		<div class="div-content">
+		  			<div class="div-c-name">
+		  				<!-- <img id="u6670_img" class="c-img" src="business/user/company/css/img/company.png"> -->
+		  				<span>{{surveyEntiy.companyName}}</span>
+		  			</div>
+		  			<div id="ctdiv">
+		  				<span>{{surveyEntiy.textInfo}}</span>
+		  			</div>
+		  			
+		  			<div style="display:none" id="engctdiv">
+		  				<span>{{surveyEntiy.textInfoEng}}</span>
+		  			</div>
+		  			
+		  			<div style="display:none" id="chnctdiv">
+		  				<span>{{surveyEntiy.textInfoChn}}</span>
+		  			</div>
+
+		  		</div>
+		  		
+		  		 
+		  </div>
+             
+    </div>
+    <!---------------网页主体end------------------->
+    
+    
+    <script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/vue/vue.min.js"></script>
+	<script src="/frame/elementui/elementui.js"></script>
+	<script src="/frame/awaken/awaken.core.js"></script>
+	<script src="/frame/awaken/awaken.table.js"></script>
+	<script src="/frame/awaken/awaken.tree.js"></script>
+	<script src="/frame/awaken/awaken.dialog.js"></script>
+	<script src="/frame/awaken/awaken.common.js"></script>
+	<script src="/frame/awaken/awaken.util.js"></script>
+    <script src="/common/js/com.js"></script>
+    <!-- 本页面js -->
+	<script src="/business/user/company/js/CompanySurvey.js"></script>
+</body>
+</html>

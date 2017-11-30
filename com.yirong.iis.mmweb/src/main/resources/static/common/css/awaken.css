@@ -1,0 +1,227 @@
+﻿html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.tl {
+    text-align: left;
+}
+
+.tc {
+    text-align: center;
+}
+
+.tr {
+    text-align: right;
+}
+
+.wrap {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+header {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+    height: 78px;
+    line-height: 78px;
+    background: url(img/u0_state0.jpg) left center;
+    background-size: cover;
+    z-index: 1;
+}
+
+.header-logo {
+    float: left;
+    background: url(img/u46.png) no-repeat left center;
+    background-size: 38px;
+    padding-left: 50px;
+    margin-top: 16px;
+    color: #fff;
+}
+
+    .header-logo .p1 {
+        font-size: 20px;
+        line-height: 35px;
+    }
+
+    .header-logo .p2 {
+        font-size: 12px;
+        line-height: 12px;
+    }
+
+.header-nav {
+    float: left;
+    margin: 15px 0 0 50px;
+}
+
+    .header-nav a {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: url(img/u414.png);
+        opacity: 0.2;
+        margin-right: 15px;
+    }
+
+        .header-nav a:hover, .header-nav a.cur {
+            background: url(img/u429.png);
+            opacity: 1;
+        }
+
+        .header-nav a img {
+            float: left;
+            margin-top: 8px;
+            margin-left: 7px;
+            width: 26px;
+            height: 24px;
+            margin: 8px 7px;
+            text-align: center;
+        }
+
+.header-operations {
+    display: inline-block;
+    float: right;
+    padding-right: 30px;
+    height: 100%;
+}
+
+    .header-operations li {
+        color: #fff;
+        display: inline-block;
+        vertical-align: middle;
+        padding: 0 10px;
+        margin: 0 10px;
+        cursor: pointer;
+    }
+
+    .header-operations .notice {
+        position: relative;
+        float: left;
+        width: 20px;
+        height: 24px;
+        background: url(img/u400.png) no-repeat left center;
+        background-size: 20px 24px;
+    }
+
+        .header-operations .notice span {
+            position: absolute;
+            right: -5px;
+            top: -5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 15px;
+            line-height: 15px;
+            color: #fff;
+            background-color: red;
+            text-align: center;
+        }
+
+    .header-operations .msg {
+        position: relative;
+        float: left;
+        width: 24px;
+        height: 24px;
+        background: url(img/u404.png) no-repeat left center;
+        background-size: 24px 16px;
+        margin-left: 20px;
+    }
+
+        .header-operations .msg span {
+            position: absolute;
+            right: -7px;
+            top: -5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 15px;
+            line-height: 15px;
+            color: #fff;
+            background-color: #c7c704;
+            text-align: center;
+        }
+
+    .header-operations .user {
+        display: inline-block;
+        padding-left: 70px;
+        background: url(img/头像_u46.png) no-repeat left center;
+        background-size: 60px;
+    }
+
+
+
+.container {
+    padding-top: 78px;
+    height: 100%;
+}
+
+.left {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.menu {
+    border-radius: 0;
+    min-height: 100%;
+    background-color: #f5f5f5;
+    /* border-right: 1px solid #e0e0e0; */
+}
+
+.content {
+    height: 100%;
+}
+
+.pagination {
+    margin-top: 10px;
+    text-align: center;
+}
+
+    .pagination .el-pagination__total {
+        line-height: 31px;
+    }
+
+/**********start(2017-7-27样式调整)**************/
+.main {
+    padding: 10px;
+}
+.el-form--inline .el-form-item{
+	margin-bottom:10px;	
+}
+
+.el-table .el-icon-edit,.el-table .el-icon-delete{
+	color: #8492a6;
+    margin: 0 5px;
+    font-size: 1em;
+    cursor:pointer;
+}
+/**********end********************************/
+
+
+/**********start(2017-7-27样式调整)**************/
+.main {
+    padding: 10px;
+}
+.el-form-item{
+	margin-bottom:10px;	
+}
+
+.el-table .el-icon-edit,.el-table .el-icon-delete{
+	color: #8492a6;
+    margin: 0 5px;
+    font-size: 1em;
+    cursor:pointer;
+}
+/**********end********************************/
+
+button[name^="per_"] {visibility:hidden;}

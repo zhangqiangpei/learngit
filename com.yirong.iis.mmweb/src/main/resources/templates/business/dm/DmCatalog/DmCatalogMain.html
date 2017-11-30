@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 公用方法 -->
+	<script src="/frame/jquery/jquery.min.js"></script>
+	<script src="/frame/awaken/awaken.init.js"></script>
+	<script>
+		//初始化头部
+		initHeadConfig();
+	</script>
+</head>
+<body>
+	 <div id="main" class="main">
+        <el-row :gutter="20">
+            <el-col :span="4">
+            <div class="treeHead"><span>目录分类</span></div> 
+            	<el-tree id="treeId" node-key="id" ref="tree" :data="treeData" :props="treeProps" :expand-on-click-node="false" 
+            	:highlight-current="true" :default-expand-all="true" @node-click="treeNodeClick"></el-tree>
+            </el-col>
+            <el-col :span="20"> 
+            <el-form :inline="true" :model="tableSearchModel" ref="tableSearchModel"> 
+	            <el-row> 
+	            	<el-form-item label="目录名称" prop="catalogName"> 
+	            		<el-input v-model="tableSearchModel.catalogName" placeholder="请输入目录名称"></el-input> 
+	            	</el-form-item> 
+		            	<el-form-item> 
+		            	<el-button type="primary" @click="searchClick"  size="small" name="per_dm_catalog_show">查 询</el-button> 
+		            	<el-button type="default" @click="tableResetCondition"  size="small">重 置</el-button> 
+		            </el-form-item> 
+		        </el-row> 
+		        <el-row> 
+			        <el-form-item>
+		            	<el-button type="primary" @click="addTypeClick" icon="plus" size="small" name="per_dm_catalog_addType">新增目录分类</el-button>
+	                    <el-button type="primary" @click="updateTypeClick" icon="edit" size="small" name="per_dm_catalog_editType">修改目录分类</el-button>
+	                    <el-button type="primary" @click="delTypeClick" icon="delete" size="small" name="per_dm_catalog_delType">删除标准分类</el-button> 
+		            	<el-button type="primary" @click="addClick" icon="plus" size="small" name="per_dm_catalog_add">新增</el-button> 
+		            	<el-button type="primary" @click="updateClick"  icon="edit" size="small" name="per_dm_catalog_edit">修改</el-button> 
+		            	<el-button type="primary" @click="delClick" icon="delete" size="small" name="per_dm_catalog_del">删除</el-button> 
+		            </el-form-item> 
+	            </el-row> 
+            </el-form> 
+            <el-table id="tableId" height=100% :data="tableData" @sort-change="tableSortChange" @selection-change="tableChange" ref="mytable" stripe border > 
+	            <el-table-column type="selection" align="center" width="45">
+	            </el-table-column> <el-table-column prop="catalog_code" label="目录编码" sortable="custom" >
+	            </el-table-column> <el-table-column prop="catalog_name" label="目录名称" sortable="custom" width="180">
+	            </el-table-column> <el-table-column prop="catalog_attr_name" label="目录属性" sortable="custom" width="200">  
+	            </el-table-column> <el-table-column prop="catalog_remark" label="目录说明" sortable="custom">
+	            </el-table-column> <el-table-column prop="create_time" label="创建时间" sortable="custom" width="180"> </el-table-column> 
+            </el-table>
+            	<el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"  @size-change="tableSizeChange"  :page-size="tableSearchModel.pageSize"
+            	@current-change="tableCurrentChange" layout="total, sizes, prev, pager, next, jumper"></el-pagination>
+            </el-col>
+        </el-row>
+    </div>
+    
+	<!-- 本页面js -->
+	<script src="/business/dm/DmCatalog/js/DmCatalogMain.js"></script>
+</body>
+</html>
