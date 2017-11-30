@@ -8,8 +8,6 @@ if(typeof(window._)!='function'){
 
 ////////////////////////////
 var isIE=/msie/i.test(navigator.userAgent);
-//var isAdmin=true;
-//var isAdminEdit=true;
 
 var tabMainCount=0;
 function setAdminEdit(){
@@ -153,7 +151,7 @@ function initHomeDoc(){
 	for (var i=0; i<hJson.items.length; i++) reloadItem(i);
     
     //加载各个item内容
-    initItemContent();
+    if(hJson.items.length>0)initItemContent();
     
 	initTemplate_Item();
 	//alert(Obj2str(hJson))
@@ -219,24 +217,33 @@ function saveItem(idx){
 		item[aForm.elements[i].name]=aForm.elements[i].value;
 	}
 	reloadItem(idx);
-	saveJSON();
 }
 
 //删除Item
 function deleteItem(idx){
     z.confirm('确实要删除此模块？',function(action, instance){
         if(action=='confirm'){
+            //删除对应布局
            for (var i=0; i<hJson.items.length; i++){
                 if (hJson.items[i].idx==idx) {
                     hJson.items.splice(i,1);
                     break;
                 }
             }
+            //删除对应数据项
+            if(vm.thematicItemDatas.length>0){
+                for (var i=0; i<vm.thematicItemDatas.length; i++){
+                    if (vm.thematicItemDatas[i].thematicItemId==idx) {
+                        vm.thematicItemDatas.splice(i,1);
+                        break;
+                    }
+                }
+            }
+            
             var oDiv=_('#MainIndexItem_'+idx);
             if (oDiv){
                 oDiv.parentNode.removeChild(oDiv);
             }
-            saveJSON();
             initTemplate_Item();
         }
     })
@@ -275,12 +282,10 @@ function saveItemSite(){
 			}
 		}
 	}
-	saveJSON();
 }
 
 function changePageLayout(){
 	hJson.cols=_('#txtPageLayout').value;
-	saveJSON();
 	hJson.items.sort(function(a, b){return a.row-b.row});
 	initHomeDoc();
 }
@@ -454,6 +459,14 @@ function initItemContent(){
                     fnShowChart(oDiv,data[i].thematicItemData);
                 }
                 if(data[i].type=='text'||data[i].type=='table')oDiv.innerHTML = data[i].thematicItemData;
+                vm.thematicItemIds.push(data[i].id);
+                //存储数据项(排除无用数据)，为方便更新操作
+                var jo = {};
+                jo.thematicId = data[i].thematicId;
+                jo.thematicItemId = data[i].thematicItemId;
+                jo.thematicItemData = data[i].thematicItemData;
+                jo.type = data[i].type;
+                vm.thematicItemDatas.push(jo);
             }
         }
     }
@@ -500,7 +513,7 @@ function showItemEdit(idx){
 	if (item.type=='text'){
 		vm.dialogEditTextVisible = true;
 		var sHTML = oDiv.innerHTML;
-        if(sHTML)setTimeout(function(){$('#keFrame').get(0).contentWindow.editor.html(sHTML)},100);
+        if(sHTML)setTimeout(function(){$('#keFrame').get(0).contentWindow.editor.html(sHTML)},500);
 	}
 	//表格
 	if (item.type=='table'){
@@ -524,6 +537,7 @@ function fnAfterSaveEdit(){
         _('#miiTitle_'+idx).style.display='none';
     }else{
         item.title = vm.itemTit;
+        $('#miiTitle_'+idx).find('td').get(0).innerHTML = vm.itemTit;
         _('#miiTitle_'+idx).style.display='';
         
     }
@@ -548,19 +562,20 @@ function fnSaveItemData(idx,itemData){
     var jo = {};
     jo.thematicItemId = idx;
     jo.type = getJsonItem(idx).type;
-    jo.thematicItemData = typeof(itemData)=='String'?itemData:z.Obj2str(itemData);
-    if(vm.thematicItemData.length==0){
-        vm.thematicItemData.push(jo);
+    jo.thematicItemData = typeof(itemData)=='string'?itemData:z.Obj2str(itemData);
+    if(z.isNotNullOrEmpty(vm.thematicId))jo.thematicId = vm.thematicId;
+    if(vm.thematicItemDatas.length==0){
+        vm.thematicItemDatas.push(jo);
     }else{
         var cnt = 0;
-        for(var i=0;i<vm.thematicItemData.length;i++){
-            if(vm.thematicItemData[i].thematicItemId == idx){
-                vm.thematicItemData[i].thematicItemData = typeof(itemData)=='String'?itemData:z.Obj2str(itemData);
+        for(var i=0;i<vm.thematicItemDatas.length;i++){
+            if(vm.thematicItemDatas[i].thematicItemId == idx){
+                vm.thematicItemDatas[i].thematicItemData = typeof(itemData)=='string'?itemData:z.Obj2str(itemData);
                 cnt ++;
                 break;
             }
         }
-        if(!cnt)vm.thematicItemData.push(jo);
+        if(!cnt)vm.thematicItemDatas.push(jo);
     }
 }
 

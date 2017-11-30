@@ -11,6 +11,8 @@ import com.yirong.iis.tp.common.entity.LtEtCode;
 import com.yirong.iis.tp.tslt.et.service.LtEtCodeService;
 import com.yirong.iis.tp.tslt.et.service.LtEtDataService;
 import com.yirong.iis.tp.tslt.et.userentity.LtEtDataUserEntity;
+import com.yirong.iis.tp.tslt.et.util.CommandLine;
+import com.yirong.iis.tp.tslt.et.util.LoginClient;
 import com.yirong.iis.tp.tslt.et.util.StarterConsumer;
 
 /**
@@ -45,6 +47,11 @@ public class LtEtIef {
 	private static SysDictionaryService sysDictionaryService;
 
 	/**
+	 * 登录客户端
+	 */
+	private static LoginClient loginClient;
+
+	/**
 	 * 功能描述：初始化
 	 *
 	 * @author 刘捷(liujie)
@@ -59,11 +66,32 @@ public class LtEtIef {
 	 *
 	 */
 	public static void run() {
+		CommandLine commandLine = new CommandLine("Demo::SESS_Demo", "ELEKTRON_DD", "user2", "", "login");
+		loginClient = new LoginClient(commandLine);
+		loginClient.sendRequest();// 发送登录信息
+		loginClient.run();
+	}
+
+	/**
+	 * 功能描述：运行数据
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 *         创建时间 ：2017年11月28日 下午5:10:31
+	 *         </p>
+	 *
+	 *         <p>
+	 *         修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 *
+	 */
+	public static void runData() {
 		// 获取代码表类型信息
 		List<SysDictionaryEntity> sdeList = sysDictionaryService.findListByCodeAndAppId("020", null);
 		if (null != sdeList && sdeList.size() > 0) {
 			for (SysDictionaryEntity sde : sdeList) {
-				if("020".equals(sde.getCode())) {
+				if ("020".equals(sde.getCode())) {
 					continue;
 				}
 				List<LtEtCode> list = ltEtCodeService.findByCodeType(sde.getCode());
@@ -79,8 +107,8 @@ public class LtEtIef {
 						}
 					}
 					// 异步线程运行
-					StarterConsumer starterConsumer = new StarterConsumer("Demo::SESS_Demo", "ELEKTRON_DD", "user2",
-							codeStrs.toString(), sde.getCode());
+					StarterConsumer starterConsumer = new StarterConsumer(loginClient, "Demo::SESS_Demo", "ELEKTRON_DD",
+							"user2", codeStrs.toString(), sde.getCode());
 					starterConsumer.start();
 				}
 			}
@@ -127,6 +155,26 @@ public class LtEtIef {
 	 */
 	public static LtEtCode doLtEtCode(String code, String pcode, boolean isLink) {
 		return ltEtCodeService.doLtEtCode(code, pcode, isLink);
+	}
+
+	/**
+	 * 功能描述：根据编码获取代码信息
+	 *
+	 * @author 刘捷(liujie)
+	 *         <p>
+	 * 		创建时间 ：2017年11月30日 下午1:54:14
+	 *         </p>
+	 *
+	 *         <p>
+	 * 		修改历史：(修改人，修改时间，修改原因/内容)
+	 *         </p>
+	 *
+	 * @param ricCode
+	 * @return
+	 *
+	 */
+	public static LtEtCode getLtEtCode(String ricCode) {
+		return ltEtCodeService.cacheFindByRicCode(ricCode);
 	}
 
 	@Autowired(required = true)

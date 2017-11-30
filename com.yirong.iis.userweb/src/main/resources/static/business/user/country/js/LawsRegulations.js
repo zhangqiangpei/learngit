@@ -1,4 +1,4 @@
-var peVue = new Vue({
+var lawVue = new Vue({
     el: '#info',
     data: {
     	continentName:'',
@@ -9,7 +9,8 @@ var peVue = new Vue({
     	source:'',
     	LawsRegulationsArray:[],
     	tabPosition:'right',
-    	lawArray:[]
+    	lawArray:[],
+    	showId:''
     },
     methods: {
     	//根据国家英文名查询
@@ -43,7 +44,7 @@ var peVue = new Vue({
 						this.LawsRegulationsArray[i]["children"].push(laws[j]);
 					}
 				}
-				this.lawArray[laws[j].id]=laws.content;
+				this.lawArray[laws[j].id]=laws[j].content;
 			}
         },
         GetQueryString: function(name){
@@ -51,8 +52,9 @@ var peVue = new Vue({
              var r = window.location.search.substr(1).match(reg);
              if(r!=null)return  unescape(r[2]); return null;
         },
-        showContent:function(){
-        	alert("aaa");
+        showContent:function(value){
+        	this.showId=value;
+        	ak.dialog("info_div","/business/user/country/LawsRegulationInfo.html");
         }
     },
     mounted: function() {

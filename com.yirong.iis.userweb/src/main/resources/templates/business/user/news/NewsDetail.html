@@ -24,25 +24,25 @@
 
 <!---------------网页主体start----------------->
 <div id="main" class="main  clearfix">
-    <el-row v-if="onlyChinese" :gutter="30">
+    <el-row v-show="isChinese" :gutter="30">
         <el-col :span="16">
             <div class="row clearfix">
                 <div class="row-l">
                     <div class="title">速递详情</div>
-                    <!--startprint-->
-                    <div class="content category" style="min-height: 600px;">
+                    <div id="isChineseContent" class="content category" style="min-height: 600px;">
                         <div class="newsTitle">【{{news.COUNTRY_CHN_NAME}}】{{news.TITLE}}</div>
                         <div class="divListContent">
                             <span>来源：<a>{{news.SOURCE}}</a></span>
                             <span>国家：<a>{{news.COUNTRY_CHN_NAME}}</a></span>
                             <span>类型：<a>{{news.TYPE}}</a></span>
                             <span><a>{{news.RELEASE_TIME}}</a></span>
-                            <div style="float: right;">
+                            <div class="newsOption">
                                 <span v-if ="!isFavorite"><a><el-button @click="addFavorite" type="text" size="mini">收藏</el-button></a></span>
                                 <span v-else ><a><el-button @click="cancelFavorite" type="text" size="mini">取消收藏</el-button></a></span>
                                 <span><a><el-button @click="print" type="text" size="mini">打印</el-button></a></span>
                                 <span><a>分享</a></span>
-                                <span><a><el-button type="text" size="mini">取消跟踪</el-button></a></span>
+                                <span v-if="!isTrack"><a><el-button @click="addTrack" type="text" size="mini">追踪</el-button></a></span>
+                                <span v-else><a>已追踪</a></span>
                             </div>
                         </div>
                         <div class="sp"></div>
@@ -50,7 +50,6 @@
                             {{news.CONTENT}}
                         </div>
                     </div>
-                    <!--endprint-->
                 </div>
             </div>
         </el-col>
@@ -80,15 +79,31 @@
         </el-col>
     </el-row>
 
-    <el-row v-else :gutter="30">
+    <el-row v-show="!isChinese" :gutter="30">
         <!-- 显示原文内容 -->
         <el-col :span="12">
             <div class="row clearfix">
                 <div class="row-l">
                     <div class="title">Global > {{news.COUNTRY_ENG_NAME}}</div>
-                    <!--startprint-->
-                    <div class="content category" style="min-height: 600px;">
-                        <div class="newsTitle">【{{news.COUNTRY_ENG_NAME}}】{{news.TITLE}}</div>
+                    <!--startPrintContent-->
+                    <div id="content" class="content category" style="min-height: 600px;">
+                        <div class="newsTitle">
+                            <el-row>
+                                <el-col :span="22">
+                                    【{{news.COUNTRY_ENG_NAME}}】{{news.TITLE}}
+                                </el-col>
+                                <el-col :span="1">
+                                    <div id="printContentBtn" class="print" >
+                                        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    </div>
+                                </el-col>
+                                <el-col :span="1">
+                                    <div id="fullScreenContent" class="fullscreen" >
+                                        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    </div>
+                                </el-col>
+                            </el-row>
+                        </div>
                         <div class="divListContent">
                             <span>Source：<a>{{news.SOURCE}}</a></span>
                             <span>Country：<a>{{news.COUNTRY_ENG_NAME}}</a></span>
@@ -100,17 +115,17 @@
                             {{news.CONTENT}}
                         </div>
                     </div>
-                    <!--endprint-->
+                    <!--endPrintContent-->
                 </div>
             </div>
         </el-col>
         <!-- 显示英文内容 -->
-        <el-col v-if="chooseEng" :span="12">
+        <el-col v-show="chooseEng" :span="12">
             <div class="row clearfix">
                 <div class="row-l">
                     <div class="title">Global > {{news.COUNTRY_ENG_NAME}}
                         <div style="float: right;">
-                            <el-button type="primary" size="small">追踪</el-button>
+                            <el-button @click="addTrack" type="primary" size="small">追踪</el-button>
                             <el-popover
                                     ref="popover"
                                     placement="bottom"
@@ -118,7 +133,7 @@
                                 <el-row>
                                 <el-button type="primary" size="small" @click="turnToChinese">转中文</el-button>
                                 </el-row>
-                                <el-row style="margin-top: 3px;">
+                                <el-row v-if="!isEnglish" style="margin-top: 3px;">
                                 <el-button type="primary" size="small" @click="turnToEnglish">转英文</el-button>
                                 </el-row>
                             </el-popover>
@@ -126,9 +141,25 @@
                         </div>
                     </div>
 
-                    <!--startprint-->
-                    <div class="content category" style="min-height: 600px;">
-                        <div class="newsTitle">【{{news.COUNTRY_ENG_NAME}}】{{news.TITLE_EN}}</div>
+                    <!--startPrintContentEN-->
+                    <div id="contentEN"  class="content category" style="min-height: 600px;">
+                        <div class="newsTitle">
+                            <el-row>
+                            <el-col :span="22">
+                            【{{news.COUNTRY_ENG_NAME}}】{{news.TITLE_EN}}
+                            </el-col>
+                                <el-col :span="1">
+                                    <div id="printContentBtnEN" class="print" >
+                                        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    </div>
+                                </el-col>
+                                <el-col :span="1">
+                                    <div id="fullScreenContentEN" class="fullscreen" >
+                                        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    </div>
+                                </el-col>
+                            </el-row>
+                        </div>
                         <div class="divListContent">
                             <span>Source：<a>{{news.SOURCE}}</a></span>
                             <span>Country：<a>{{news.COUNTRY_ENG_NAME}}</a></span>
@@ -140,18 +171,18 @@
                             {{news.CONTENT_EN}}
                         </div>
                     </div>
-                    <!--endprint-->
+                    <!--endPrintContentEN-->
                 </div>
             </div>
         </el-col>
         <!-- 显示中文内容 -->
-        <el-col v-else :span="12">
+        <el-col v-show="!chooseEng" :span="12">
             <div class="row clearfix">
                 <div class="row-l">
                     <div class="title">全球 > {{news.COUNTRY_CHN_NAME}}
                         <div style="float: right;">
-                            <el-button type="primary" size="small">修正</el-button>
-                            <el-button type="primary" size="small">追踪</el-button>
+                            <el-button @click="correctBtnClick" type="primary" size="small">修正</el-button>
+                            <el-button @click="addTrack" type="primary" size="small">追踪</el-button>
                             <el-popover
                                     ref="popover"
                                     placement="bottom"
@@ -166,9 +197,25 @@
                             <el-button type="primary" size="small" v-popover:popover >翻译</el-button>
                         </div>
                     </div>
-                    <!--startprint-->
-                    <div class="content category" style="min-height: 600px;">
-                        <div class="newsTitle">【{{news.COUNTRY_CHN_NAME}}】{{news.TITLE_CN}}</div>
+                    <!--startPrintContentCN-->
+                    <div id="contentCN"  class="content category" style="min-height: 600px;">
+                        <div class="newsTitle">
+                            <el-row>
+                                <el-col :span="22">
+                            【{{news.COUNTRY_CHN_NAME}}】{{news.TITLE_CN}}
+                                </el-col>
+                                <el-col :span="1">
+                                    <div id="printContentBtnCN" class="print" >
+                                        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    </div>
+                                </el-col>
+                                <el-col :span="1">
+                                    <div id="fullScreenContentCN" class="fullscreen" >
+                                        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    </div>
+                                </el-col>
+                            </el-row>
+                        </div>
                         <div class="divListContent">
                             <span>来源：<a>{{news.SOURCE}}</a></span>
                             <span>国家：<a>{{news.COUNTRY_CHN_NAME}}</a></span>
@@ -180,11 +227,140 @@
                             {{news.CONTENT_CN}}
                         </div>
                     </div>
-                    <!--endprint-->
+                    <!--endPrintContentEN-->
                 </div>
             </div>
         </el-col>
     </el-row>
+
+    <!-- 语言修正对话框 -->
+    <el-dialog
+            width="33%"
+            title="修正"
+            :visible.sync="correctDialogVisible">
+        <el-row>
+            <el-col :span="10" style="text-align: center;">
+                <el-input
+                        type="textarea"
+                        :autosize="{ minRows: 4 }"
+                        placeholder="请输入内容"
+                        v-model="correctModel.sourceContent">
+                </el-input>
+            </el-col>
+            <el-col :span="4" style="text-align: center; margin-top: 30px;">
+                <img src="/business/user/news/css/img/u7224.png">
+            </el-col>
+            <el-col :span="10" style="text-align: center;">
+                <el-input
+                        type="textarea"
+                        :autosize="{ minRows: 4 }"
+                        placeholder="请输入内容"
+                        v-model="correctModel.targetContent">
+                </el-input>
+            </el-col>
+        </el-row>
+        <span slot="footer" class="dialog-footer">
+            <el-button  size="medium" @click="correctDialogVisible = false">取 消</el-button>
+            <el-button  size="medium" type="primary" @click="saveCorrect">确 定</el-button>
+        </span>
+    </el-dialog>
+    <!-- 新闻追踪对话框 -->
+    <el-dialog
+            :show-close="false"
+            :visible.sync="addProjectTrackDetailDialogVisible">
+        <template slot="title">
+            <span class="el-dialog__title">追 踪</span>
+            <el-button @click="newProjectTrackDialogVisible = true" type="primary" style="float: right;" size="small">新 建</el-button>
+        </template>
+        <el-dialog
+                title="新 建"
+                :visible.sync="newProjectTrackDialogVisible"
+                append-to-body>
+            <!--<div class="sp"></div>-->
+            <el-form ref="projectTrackForm" :model="projectTrackModel" label-width="100px" :rules="rules">
+                <el-form-item label="追踪类别">
+                    <el-select v-model="projectTrackModel.typeCode" placeholder="选择追踪类别">
+                        <el-option
+                                v-for="item in trackType"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="名称" prop="projectName">
+                    <el-input v-model="projectTrackModel.projectName" placeholder="请输入名称"></el-input>
+                </el-form-item>
+                <el-form-item label="简介">
+                    <el-input v-model="projectTrackModel.projectInfo" placeholder="请输入简介"></el-input>
+                </el-form-item>
+                <el-form-item label="原因">
+                    <el-input v-model="projectTrackModel.reason" placeholder="请输入原因"></el-input>
+                </el-form-item>
+                <el-form-item label="关键字">
+                    <el-input v-model="projectTrackModel.keyWord" placeholder="请输入关键词，以逗号隔开"></el-input>
+                </el-form-item>
+            </el-form>
+            <span slot="footer">
+            <el-button @click="addProjectTrackDetailDialogVisible = false" size="medium">取 消</el-button>
+            <el-button type="primary" @click="saveProjectTrack" size="medium">确 定</el-button>
+        </span>
+        </el-dialog>
+        <!--<div class="sp"></div>-->
+        <el-row>
+            <el-form ref="tableSearchForm" :model="tableSearchModel" label-width="80px">
+                <el-form-item label="追踪类别">
+                    <el-select v-model="tableSearchModel.typeCode" @change="aptdTypeCodeChange" placeholder="选择追踪类别">
+                        <el-option
+                                v-for="item in trackType"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+            </el-form>
+        </el-row>
+        <el-row>
+            <el-form label-width="80px">
+                <el-form-item label="追踪项目">
+                    <el-table  :data="tableData" @sort-change="tableSortChange" :show-header="false"
+                               :highlight-current-row="true" @row-click="tableRowClick"
+                               @selection-change="tableChange" ref="mytable" stripe border>
+                        <el-table-column
+                                prop="PROJECT_NAME"
+                                label="名称">
+                        </el-table-column>
+                    </el-table>
+                    <el-pagination class="pagination" :current-page="tableSearchModel.currentPage" :total="tableTotal"
+                                   @size-change="tableSizeChange"
+                                   :page-size="tableSearchModel.pageSize" @current-change="tableCurrentChange"
+                                   layout="total, sizes, prev, pager, next, jumper"></el-pagination>
+                </el-form-item>
+            </el-form>
+        </el-row>
+        <el-row>
+            <el-form ref="projectTrackDetailForm" :model="projectTrackDetailModel" label-width="80px">
+                <el-form-item label="标记点">
+                    <el-select v-model="projectTrackDetailModel.isSign">
+                        <el-option
+                                v-for="item in signList"
+                                :key="item.key"
+                                :label="item.label"
+                                :value="item.key">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="排序">
+                    <el-input-number size="medium" v-model="projectTrackDetailModel.objOrder"></el-input-number>
+                </el-form-item>
+            </el-form>
+        </el-row>
+        <span slot="footer">
+            <el-button @click="addProjectTrackDetailDialogVisible = false" size="medium">取 消</el-button>
+            <el-button type="primary" @click="saveProjectTrackDetail" size="medium">确 定</el-button>
+        </span>
+    </el-dialog>
 
 </div>
 <!---------------网页主体end------------------->
@@ -204,6 +380,7 @@
 <script src="/frame/awaken/awaken.dialog.js"></script>
 <script src="/frame/awaken/awaken.common.js"></script>
 <script src="/frame/awaken/awaken.util.js"></script>
+<script src="/frame/print/jQuery.print.js"></script>
 <script src="/common/js/com.js"></script>
 <script src="/common/js/common.js"></script>
 <script src="/business/user/news/js/NewsDetail.js"></script>

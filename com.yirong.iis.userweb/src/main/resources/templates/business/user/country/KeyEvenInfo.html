@@ -1,0 +1,22 @@
+<div id="info_div">
+	<el-dialog title="新闻详情" :visible.sync="dialogVisible" fullscreen="true">
+		<div>
+		<span>来源:{{source}}</span><span style="float:right">发布时间:{{releaseTime}}</span>
+		</div>
+		<div  style="font-size: 14px;" v-html="content" >
+		</div>
+	</el-dialog>
+</div>
+
+
+
+<script src="/frame/jquery/jquery.min.js"></script>
+<script src="/frame/vue/vue.min.js"></script>
+<script src="/frame/elementui/elementui.js"></script>
+<script src="/frame/awaken/awaken.core.js"></script>
+<script src="/frame/awaken/awaken.common.js"></script>
+<script src="/common/js/com.js"></script>
+<script src="/business/user/country/js/KeyEventInfo.js"></script>
+</html>
+
+

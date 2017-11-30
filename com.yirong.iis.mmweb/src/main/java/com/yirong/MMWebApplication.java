@@ -1,10 +1,14 @@
 package com.yirong;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
+import com.yirong.commons.web.eif.CommonsWebEif;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +33,13 @@ public class MMWebApplication extends BaseApplication{
 		//获取配置信息awaken.properties
 		String configPath =  System.getProperty("user.dir") + File.separator + "config" + File.separator;
 		Map<String, String> map = PropertiesFileUtil.getPropertiesFileToMapFromOutFile(configPath + "yr-awaken.properties");
+
+		// 初始化过滤器配置
+		List<String> excludePathList = new ArrayList<String>();
+		excludePathList.add("/file/upFlagFile");
+		CommonsWebEif.initInterceptors(null, excludePathList);
+
+
 		//获取配置信息jdbc.properties
 		Map<String, String> jdbcMap = PropertiesFileUtil.getPropertiesFileToMapFromOutFile(configPath + "yr-awaken-jdbc.properties");
 				

@@ -36,20 +36,8 @@ public class LtTrkdCompanyOfficer extends IdEntity{
 	@Column(name="COMPANY_ID",nullable=false,length=32)
 	public String companyId;
 	
-	/**
-	 * 状态
-	 */
-	@Column(name="STATUS",nullable=true,length=10)
-	public String status;
-	
 	@Column(name="RANK",nullable=true,length=10)
 	public Integer rank;
-	
-	/**
-	 * 人员id
-	 */
-	@Column(name="PERSON_ID",nullable=true,length=20)
-	public String personId;
 	
 	/**
 	 * 姓
@@ -64,55 +52,34 @@ public class LtTrkdCompanyOfficer extends IdEntity{
 	public String firstName;
 	
 	/**
-	 * 前缀
-	 */
-	@Column(name="PREFERREDP_NAME",nullable=true,length=20)
-	public String preferredpName;
-	
-	/**
-	 * 首选名称
-	 */
-	@Column(name="PREFIX",nullable=true,length=50)
-	public String prefix;
-	
-	/**
-	 * 中间初始
-	 */
-	@Column(name="MIDDLE_INITIAL",nullable=true,length=20)
-	public String middleInitial;
-	
-	/**
 	 * 年龄
 	 */
 	@Column(name="AGE",nullable=true,length=3)
 	public Integer age;
 	
 	/**
-	 * 性别
+	 * 职位开始时间
 	 */
-	@Column(name="SEX",nullable=true,length=2)
-	public Integer sex;
+	@Column(name="TITLE_START",nullable=true,length=20)
+	public String titleStart;
 	
 	/**
-	 * 入职日期
+	 * 加入公司时间
 	 */
-	@Column(name="OFFICER_START",nullable=true,length=20)
-	public String officerStart;
-	
-	@Column(name="DIRECTOR_START",nullable=true,length=20)
-	public String directorStart;
+	@Column(name="SINCE",nullable=true,length=20)
+	public String since;
 	
 	/**
-	 * 个人简历
+	 * 岗位
 	 */
-	@Column(name="BIOGRAPHY",nullable=true)
-	public String biography;
+	@Column(name="TITLE",nullable=true,length=500)
+	public String title;
 	
-	@Column(name="ACTIVE",nullable=true,length=1)
-	public Integer active;
-	
-	@Column(name="PERSON_ACTIVE",nullable=true,length=1)
-	public Integer personActive;
+	/**
+	 * 英文名字中的中间名
+	 */
+	@Column(name="MI",nullable=true,length=500)
+	public String mi;
 	
 	/**
 	* 创建时间
@@ -128,28 +95,12 @@ public class LtTrkdCompanyOfficer extends IdEntity{
 		this.companyId = companyId;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 	public Integer getRank() {
 		return rank;
 	}
 
 	public void setRank(Integer rank) {
 		this.rank = rank;
-	}
-
-	public String getPersonId() {
-		return personId;
-	}
-
-	public void setPersonId(String personId) {
-		this.personId = personId;
 	}
 
 	public String getLastName() {
@@ -168,30 +119,6 @@ public class LtTrkdCompanyOfficer extends IdEntity{
 		this.firstName = firstName;
 	}
 
-	public String getPreferredpName() {
-		return preferredpName;
-	}
-
-	public void setPreferredpName(String preferredpName) {
-		this.preferredpName = preferredpName;
-	}
-
-	public String getPrefix() {
-		return prefix;
-	}
-
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
-
-	public String getMiddleInitial() {
-		return middleInitial;
-	}
-
-	public void setMiddleInitial(String middleInitial) {
-		this.middleInitial = middleInitial;
-	}
-
 	public Integer getAge() {
 		return age;
 	}
@@ -200,52 +127,36 @@ public class LtTrkdCompanyOfficer extends IdEntity{
 		this.age = age;
 	}
 
-	public Integer getSex() {
-		return sex;
+	public String getTitleStart() {
+		return titleStart;
 	}
 
-	public void setSex(Integer sex) {
-		this.sex = sex;
+	public void setTitleStart(String titleStart) {
+		this.titleStart = titleStart;
 	}
 
-	public String getOfficerStart() {
-		return officerStart;
+	public String getSince() {
+		return since;
 	}
 
-	public void setOfficerStart(String officerStart) {
-		this.officerStart = officerStart;
+	public void setSince(String since) {
+		this.since = since;
 	}
 
-	public String getDirectorStart() {
-		return directorStart;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setDirectorStart(String directorStart) {
-		this.directorStart = directorStart;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getBiography() {
-		return biography;
+	public String getMi() {
+		return mi;
 	}
 
-	public void setBiography(String biography) {
-		this.biography = biography;
-	}
-
-	public Integer getActive() {
-		return active;
-	}
-
-	public void setActive(Integer active) {
-		this.active = active;
-	}
-
-	public Integer getPersonActive() {
-		return personActive;
-	}
-
-	public void setPersonActive(Integer personActive) {
-		this.personActive = personActive;
+	public void setMi(String mi) {
+		this.mi = mi;
 	}
 
 	public Date getCreateTime() {

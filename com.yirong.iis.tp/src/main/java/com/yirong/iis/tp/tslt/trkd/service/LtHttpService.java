@@ -19,6 +19,9 @@ public abstract class LtHttpService {
 	@Autowired
 	private ILtTokenService ltTokenService;
 	
+	@Autowired
+	private ILtTrkdRequestLogService ltTrkdRequestLogService;
+	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	/**
@@ -28,15 +31,17 @@ public abstract class LtHttpService {
 	 */
 	public Map<String, Object> request(Map<String, Object> param){
 		//token过期重新获取token
-		if(StringUtil.isNullOrEmpty(LtConstant.ltToken) || new Date().getTime() >= LtConstant.expiration.getTime()){
-			Map<String,Object> tokenMap = ltTokenService.getToken();
-			if(null == tokenMap || !tokenMap.containsKey("code") ||
-					ResultUtil.STATUS_CODE_SUCCESS != Integer.parseInt(tokenMap.get("code").toString())){
-				logger.error("路透token获取失败，接口请求失败！");
-				return ResultUtil.newError("路透token获取失败，接口请求失败！").toMap();
+		synchronized(this){
+			//预留10秒误差时间
+			if(StringUtil.isNullOrEmpty(LtConstant.ltToken) || new Date().getTime() >= LtConstant.expiration.getTime() - 10000){
+				Map<String,Object> tokenMap = ltTokenService.getToken();
+				if(null == tokenMap || !tokenMap.containsKey("code") ||
+						ResultUtil.STATUS_CODE_SUCCESS != Integer.parseInt(tokenMap.get("code").toString())){
+					logger.error("路透token获取失败，接口请求失败！");
+					return ResultUtil.newError("路透token获取失败，接口请求失败！").toMap();
+				}
 			}
 		}
-		
 		return exec(param);
 	}
 	
@@ -58,6 +63,21 @@ public abstract class LtHttpService {
 	 */
 	public String getHttpUrl(String code){
 		return new StringBuffer("http://").append(SysParameterEif.getValueByCode("Trkd-Url")).append(LtConstant.trkdMap.get(code)).toString();
+	}
+	
+	/**
+	 * 添加请求操作日志记录
+	 * @param name
+	 * @param param
+	 * @param result
+	 * @param status
+	 */
+	public void addRequestLog(String name,String param,String result,Integer status,String companyId){
+		try {
+			ltTrkdRequestLogService.addRequestLog(name,param,result,status,companyId);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 	/**

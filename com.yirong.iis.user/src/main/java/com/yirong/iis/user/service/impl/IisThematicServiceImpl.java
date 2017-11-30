@@ -1,5 +1,6 @@
 package com.yirong.iis.user.service.impl;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import com.yirong.awaken.core.dao.IBaseDao;
 import com.yirong.awaken.core.dao.specification.RestrictionNames;
 import com.yirong.awaken.core.dao.specification.SimpleSpecificationBuilder;
 import com.yirong.awaken.core.service.impl.BaseService;
+import com.yirong.awaken.core.util.BeanUtil;
 import com.yirong.awaken.core.util.ResultUtil;
 import com.yirong.commons.logging.Logger;
 import com.yirong.commons.logging.LoggerFactory;
@@ -122,7 +124,10 @@ public class IisThematicServiceImpl extends BaseService<IisThematic, String>
 			logger.warn(result);
 			return ResultUtil.newError(result).toMap();
 		} else {// 有该数据
-			return saveIisThematic(iisThematic);
+			BeanUtil.copyPropertiesIgnoreNull(iisThematic,iisThematicTemp);
+			iisThematicTemp.setModifyTime(new Date());
+			this.save(iisThematicTemp);
+			return ResultUtil.newOk("操作成功").toMap();
 		}
 	}
 	

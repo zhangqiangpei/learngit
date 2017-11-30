@@ -83,7 +83,7 @@ public class IisCountrySurveyServiceImpl extends BaseService<IisCountrySurvey, S
     @Override
     public Map saveIisCountrySurvey(IisCountrySurvey iisCountrySurvey) {
         // 根据编码及分类ID获取数据（唯一键）
-        IisCountrySurvey iisCountrySurveyTemp = this.iisCountrySurveyDao.findOne(iisCountrySurvey.getId());
+        IisCountrySurvey iisCountrySurveyTemp = this.iisCountrySurveyDao.getByCountryEngNameAndFieldName(iisCountrySurvey.getCountryEngName(),iisCountrySurvey.getFieldName());
         String id = iisCountrySurvey.getId();
         if (null == iisCountrySurveyTemp
                 || (StringUtil.isNotNullOrEmpty(id) && id.equals(iisCountrySurveyTemp
@@ -152,7 +152,7 @@ public class IisCountrySurveyServiceImpl extends BaseService<IisCountrySurvey, S
     @Override
     public Map delIisCountrySurvey(String idStrs) {
         // 处理id集合串
-        String[] ids = idStrs.split(",");
+        String[] ids = idStrs.replace("[","").replace("]","").replace("\"","").split(",");
         /** 先判断所有ID是否允许删除 **/
         StringBuffer sb = new StringBuffer();
         for (String id : ids) {
@@ -193,13 +193,12 @@ public class IisCountrySurveyServiceImpl extends BaseService<IisCountrySurvey, S
      */
     @Override
     public Map queryIisCountrySurveyById(String id) {
-        StringBuffer sql = new StringBuffer();
-        sql.append("");
-        sql.append("");
-        sql.append("");
-        sql.append(" ");
-        sql.append("");
         List<Object> param = new ArrayList<Object>();
+        StringBuffer sql = new StringBuffer();
+        sql.append("SELECT ID \"id\",FIELD_NAME,FIELD_VALUE ");
+        sql.append("FROM IIS_COUNTRY_SURVEY ");
+        sql.append("WHERE ID = ? ");
+        param.add(id);
         Map map = this.exeSqlMap(sql.toString(), param);
         return ResultUtil.newOk("操作成功").setData(map).toMap();
     }
@@ -223,7 +222,7 @@ public class IisCountrySurveyServiceImpl extends BaseService<IisCountrySurvey, S
         // 拼装查询sql
         List<Object> param = new ArrayList<Object>();
         StringBuffer sql = new StringBuffer();
-        sql.append("SELECT ID,FIELD_NAME,FIELD_VALUE,CREATE_TIME,");
+        sql.append("SELECT ID \"id\",FIELD_NAME,FIELD_VALUE,CREATE_TIME,");
         sql.append("(SELECT USER_DISPLAY_NAME FROM SYS_USER WHERE ID = CREATOR) CREATOR_NAME ");
         sql.append("FROM IIS_COUNTRY_SURVEY ");
         sql.append("WHERE 1=1 ");

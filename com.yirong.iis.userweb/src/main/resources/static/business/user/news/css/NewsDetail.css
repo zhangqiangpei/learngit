@@ -1,7 +1,62 @@
 @media print {
-    .noprint{
+    .print{
         display: none;
     }
+    .fullscreen{
+        display: none;
+    }
+    .newsOption{
+        display: none;
+    }
+}
+.pagination {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.pagination .el-pagination__total {
+    line-height: 31px;
+}
+
+.el-dialog__body{
+    padding: 10px 20px;
+}
+
+.category:-webkit-full-screen {
+    background-color: rgb(255, 255, 255);
+}
+.newsOption{
+    float: right;
+}
+.print a{
+    cursor: pointer;
+    width:24px;
+    height:24px;
+    padding-bottom: 3px;
+    background: url('/business/user/news/css/img/u7198.svg') no-repeat center center;
+    background-size: 24px 24px;
+}
+.print a:hover {
+    width:24px;
+    height:24px;
+    background: url('/business/user/news/css/img/u7198_mouseOver.svg') no-repeat center center;
+    background-size: 24px 24px;
+}
+
+.fullscreen a{
+    margin-left: 6px;
+    cursor: pointer;
+    width:18px;
+    height:18px;
+    padding-bottom: 3px;
+    background: url('/business/user/news/css/img/fullscreen.svg') no-repeat center center;
+    background-size: 18px 18px;
+}
+.fullscreen a:hover {
+    width:18px;
+    height:18px;
+    background: url('/business/user/news/css/img/fullscreen_mouseOver.svg') no-repeat center center;
+    background-size: 18px 18px;
 }
 
 .divListContent{
@@ -192,35 +247,6 @@
     padding:5px;
     font-size:14px;
 }
-/***
-.keyword {
-    width: 580px;
-    padding: 10px 50px 10px 30px;
-    font-size: 16px;
-    border-radius: 25px;
-    border: 1px solid #ccc;
-}
-
-.keyword:focus {
-    border: 1px solid #009BEF;
-}
-
-.btnSearch {
-    position: relative;
-    float: right;
-    margin: -33px 15px 0 0;
-    width: 24px;
-    height: 24px;
-    background: url(/business/user/index/css/img/u1572.png) no-repeat;
-    cursor: pointer;
-    z-index: 9999;
-}
-
-.btnSearch:hover {
-    background: url(/business/user/index/css/img/u1572_mouseOver.png) no-repeat;
-}
-**/
-
 
 .keyword .el-input__inner {
     padding: 9px 10px 10px 10px;
@@ -438,149 +464,4 @@
 .rank {
     padding: 0 7px 10px 7px;
     min-height: 450px;
-}
-
-.el-table {
-    color: #646E7C;
-    border: 0;
-}
-
-.el-table a{
-    color: #646E7C;
-}
-
-
-.el-table::after,
-.el-table::before {
-    background-color: transparent;
-}
-
-.el-table thead .cell {
-    font-weight: normal;
-}
-
-.el-table th {
-    background-color: transparent;
-}
-
-.el-table td {
-    border-bottom: 0;
-}
-
-.el-table__footer-wrapper thead div,
-.el-table__header-wrapper thead div {
-    background-color: transparent;
-}
-
-.el-table .cell,
-.el-table th>div {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.el-table_1_column_1 .cell {
-    text-align: center;
-}
-
-.el-table_1_column_2 .cell a {
-    white-space: nowrap;
-}
-
-.el-table__row:nth-child(1) .el-table_1_column_1 {
-    color: #ff0000;
-}
-
-.el-table__row:nth-child(2) .el-table_1_column_1 {
-    color: #FD5E18;
-}
-
-.el-table__row:nth-child(3) .el-table_1_column_1 {
-    color: #FFC037;
-}
-
-.el-rate__icon {
-    font-size: 12px;
-
-}
-
-#rank .el-tabs__header{
-    margin-bottom:0px;
-}
-
-#rank .el-tabs__content{
-    padding:0 10px;
-}
-
-#rank .el-table td{
-    border-bottom: 1px solid #dfe6ec;
-}
-
-.tab_honor td{
-    padding:9px 0;
-}
-
-.tab_honor .stat{
-    margin-top:20px;
-}
-
-.tab_honor .typeName{
-    font-size: 20px;
-    text-align:left;
-    margin-bottom:10px;
-}
-
-.tab_honor .class_up{
-    color: #009BEF;
-}
-
-.tab_honor .class_srh{
-    color: #33CCCC;
-}
-
-.tab_honor .class_down{
-    color: #FFC037;
-}
-
-.tab_honor a{
-    padding-right:15px;
-}
-
-.divTabs{
-    border-top: 1px solid #dfe6ec;
-}
-
-.divInfo{
-    padding:10px;
-    color:#646E7C;
-}
-
-.divInfo img{
-    margin-right:20px;
-}
-.divInfo p{
-    height:30px;
-    line-height:30px;
-}
-
-.divInfo p span{
-    margin:10px 20px 10px 0;
-}
-
-.divUpload{
-    padding:10px;
-}
-
-.msgDetailForm {
-}
-.msgDetailForm label {
-    color: #99a9bf;
-}
-.msgDetailForm span {
-    word-break:normal;
-    width:auto;
-    display:block;
-    white-space:pre-wrap;
-    word-wrap : break-word;
-    overflow: hidden;
-    color: black;
 }

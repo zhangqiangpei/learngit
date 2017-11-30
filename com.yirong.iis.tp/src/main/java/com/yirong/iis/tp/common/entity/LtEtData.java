@@ -1,8 +1,6 @@
 package com.yirong.iis.tp.common.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -63,28 +61,10 @@ public class LtEtData implements Serializable {
 	public String fieldType;
 
 	/**
-	 * 整型值
+	 * 数值
 	 */
-	@Column(name = "INTGER_VALUE", nullable = true, length = 15)
-	public BigInteger intgerValue;
-
-	/**
-	 * 字符串值
-	 */
-	@Column(name = "STRING_VALUE", nullable = true, length = 100)
-	public String stringValue;
-
-	/**
-	 * 浮点型值
-	 */
-	@Column(name = "FLOAT_VALUE", nullable = true, length = 22)
-	public BigDecimal floatValue;
-
-	/**
-	 * 时间型值
-	 */
-	@Column(name = "DATE_VALUE", nullable = true)
-	public Date dateValue;
+	@Column(name = "DATA_VALUE", nullable = true, length = 100)
+	public String dataValue;
 
 	/**
 	 * 创建时间
@@ -130,30 +110,6 @@ public class LtEtData implements Serializable {
 		this.fieldId = fieldId;
 	}
 
-	public String getStringValue() {
-		return this.stringValue;
-	}
-
-	public void setStringValue(String stringValue) {
-		this.stringValue = stringValue;
-	}
-
-	public BigDecimal getFloatValue() {
-		return this.floatValue;
-	}
-
-	public void setFloatValue(BigDecimal floatValue) {
-		this.floatValue = floatValue;
-	}
-
-	public Date getDateValue() {
-		return this.dateValue;
-	}
-
-	public void setDateValue(Date dateValue) {
-		this.dateValue = dateValue;
-	}
-
 	public Date getCreateTime() {
 		return this.createTime;
 	}
@@ -170,11 +126,11 @@ public class LtEtData implements Serializable {
 		this.modifyTime = modifyTime;
 	}
 
-	public BigInteger getIntgerValue() {
-		return intgerValue;
+	public String getDataValue() {
+		return dataValue;
 	}
 
-	public void setIntgerValue(BigInteger intgerValue) {
-		this.intgerValue = intgerValue;
+	public void setDataValue(String dataValue) {
+		this.dataValue = dataValue;
 	}
 }

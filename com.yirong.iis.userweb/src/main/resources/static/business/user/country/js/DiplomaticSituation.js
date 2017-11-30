@@ -41,11 +41,10 @@ var infoVe = new Vue({
         }
     },
     mounted: function() {
-    	debugger;
     	this.englishName = this.GetQueryString("eName");
     	this.getCountryInfo();
     	this.getDiplomaticSituation();
-    	
+    	var result = ak.msService("user","IisCountryNationalFlagApi/save",{}).data;
     }
 })
 

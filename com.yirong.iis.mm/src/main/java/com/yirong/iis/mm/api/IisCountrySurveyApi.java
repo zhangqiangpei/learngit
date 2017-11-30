@@ -111,7 +111,7 @@ public class IisCountrySurveyApi {
 		String id = JsonUtil.getJsonStrByAttrName(paramAll, pathName);
 		// 处理业务
 		Map map = iisCountrySurveyService.queryIisCountrySurveyById(id);
-		return JsonUtil.ObjectToString(map);
+		return JsonUtil.ObjectToStringClob(map);
 	}
 
 	/**

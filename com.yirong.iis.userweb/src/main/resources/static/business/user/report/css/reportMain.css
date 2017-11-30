@@ -227,13 +227,13 @@
     width: 25%;
     text-align: center;
     height: 190px;
-    background: url(/business/user/index/css/img/u1515.png) no-repeat center top;
+    background: url(/business/user/report/css/img/u1515.png) no-repeat center top;
     background-size: 160px 147px;
     cursor: pointer;
 }
 
 .hot .item:hover {
-    background: url(/business/user/index/css/img/u1515_mouseOver.png) no-repeat center top;
+    background: url(/business/user/report/css/img/u1515_mouseOver.png) no-repeat center top;
     background-size: 160px 147px;
 }
 
@@ -250,7 +250,7 @@
 
 .hot .thematicList p.cur{
     margin-top:7px;
-    background:url(/business/user/index/css/img/u342.png) no-repeat 50% 0;
+    background:url(/business/user/report/css/img/u342.png) no-repeat 50% 0;
 }
 
 .thematicList{
@@ -275,32 +275,32 @@
 }
 
 .enter .a1 {
-    background: url(/business/user/index/css/img/u1493.svg) no-repeat center top;
+    background: url(/business/user/report/css/img/u1493.svg) no-repeat center top;
     background-size: 60px;
 }
 
 .enter .a1:hover {
-    background: url(/business/user/index/css/img/u1493_mouseOver.svg) no-repeat center top;
+    background: url(/business/user/report/css/img/u1493_mouseOver.svg) no-repeat center top;
     background-size: 60px;
 }
 
 .enter .a2 {
-    background: url(/business/user/index/css/img/u1498.svg) no-repeat center top;
+    background: url(/business/user/report/css/img/u1498.svg) no-repeat center top;
     background-size: 60px;
 }
 
 .enter .a2:hover {
-    background: url(/business/user/index/css/img/u1498_mouseOver.svg) no-repeat center top;
+    background: url(/business/user/report/css/img/u1498_mouseOver.svg) no-repeat center top;
     background-size: 60px;
 }
 
 .enter .a3 {
-    background: url(/business/user/index/css/img/u1503.svg) no-repeat center top;
+    background: url(/business/user/report/css/img/u1503.svg) no-repeat center top;
     background-size: 60px;
 }
 
 .enter .a3:hover {
-    background: url(/business/user/index/css/img/u1503_mouseOver.svg) no-repeat center top;
+    background: url(/business/user/report/css/img/u1503_mouseOver.svg) no-repeat center top;
     background-size: 60px;
 }
 

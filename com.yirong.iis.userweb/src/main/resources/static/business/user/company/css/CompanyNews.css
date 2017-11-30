@@ -1,0 +1,30 @@
+.el-button--text {
+	border: none;
+	background: 0 0;
+	padding-left: 0;
+	padding-right: 0;
+	
+	font-family: '\5FAE\8F6F\96C5\9ED1';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: #00253E;
+    text-align: left;
+}
+
+
+
+.el-button--text:focus, .el-button--text:hover {
+	color: #FF6600
+}
+
+.fytitle{
+	font-size: 12px;
+    color: #047CC0;
+}
+
+.div-main{
+   /*  height: 453px; */
+    margin-top: 10px;
+    width: 947px;
+}

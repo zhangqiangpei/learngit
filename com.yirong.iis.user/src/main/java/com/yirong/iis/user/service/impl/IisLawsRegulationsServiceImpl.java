@@ -196,16 +196,17 @@ public class IisLawsRegulationsServiceImpl extends BaseService<IisLawsRegulation
 	 */
 	@Override
 	public Map queryIisLawsRegulationsById(String id) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("");
-		sql.append("");
-		sql.append("");
-		sql.append(" ");
-		sql.append("");
+		if(StringUtil.isNullOrEmpty(id)){
+			return ResultUtil.newError("参数错误!").toMap();
+		}
 		List<Object> param = new ArrayList<Object>();
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT ID \"id\",CLASSIFY_ID \"classifyId\",TITLE \"title\",CONTENT \"content\"");
+		sql.append("FROM IIS_LAWS_REGULATIONS ");
+		sql.append("WHERE ID = ?");
+		param.add(id);
 		Map map = this.exeSqlMap(sql.toString(), param);
-		return ResultUtil.newOk("操作成功")
-				.setData(map).toMap();
+		return ResultUtil.newOk("操作成功").setData(map).toMap();
 	}
 
 	/**

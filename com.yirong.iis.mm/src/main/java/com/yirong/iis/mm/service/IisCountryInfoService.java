@@ -35,7 +35,7 @@ public interface IisCountryInfoService extends IBaseService<IisCountryInfo, Stri
 	 * @param iisCountryInfo
 	 * @return
 	 */
-	Map saveIisCountryInfo(IisCountryInfo iisCountryInfo);
+	Map saveIisCountryInfo(IisCountryInfo iisCountryInfo,boolean isUpdate);
 
 	/**
 	 * 功能描述：修改国家信息表

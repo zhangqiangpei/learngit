@@ -24,8 +24,8 @@
 	<div class="info_div">
 		<div v-for="item in RegulatoryPolicy" v-if="RegulatoryPolicy&&RegulatoryPolicy.length!=0" style="margin-top:20px;">
 		<p>
-          <span style="font-size: 18px;">{{item.fileName}}</span><span style="float:right">语言：{{item.languaged}} {{item.createTime}}</span>
-          <span style="font-size: 14px;color: #646E7C;float:left">来源：{{item.source}}</span>
+          <span style="font-size: 18px;">{{item.fileName}}</span><span style="float:right">语言:{{item.language}} {{item.createTime}}</span>
+          <span style="font-size: 14px;color: #646E7C;display:block">{{item.source}}</span>
        </p>
        </div>
        <div v-else>

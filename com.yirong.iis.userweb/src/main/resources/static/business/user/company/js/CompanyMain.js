@@ -3,13 +3,13 @@ var mainAttr={
     data:{
         //查询对象
         tableSearchModel: {
-        	continentCode:null,
-        	countryEngName:null,
+        	countryEnglishName:null,
         	industryCode:null,
         	startDt:null,
         	endDt:null,
         	frequency:null,
-        	keyWord:null
+        	keyWord:null,
+        	type:'025001'
         },
  
         continents:[],
@@ -74,18 +74,21 @@ var mainAttr={
         
         //选择洲，改变事件
         continentChange:function(code){
-        	var res = ak.msService("user", "IisCountryInfoApi/queryCountrys",{continentCode: code});
-        	if(null != res && res.code == 0){
-        		this.countrys = res.data;
-        	}
+        	z.msServiceAsync("user","IisCountryInfoApi/queryCountrys", {continentCode: code}, function (res) {
+        		if(null != res && res.code == 0){
+        			mainVue.countrys = res.data;
+                }
+            });
+        	
         },
         //跳转到详情页面
         handleClick:function(row){
         	var idx = z.getUrlParam('idx');
-        	var id = row.ID;
+        	//公司ID
+        	var id = row.companyId;
         	window.location.href = "/forward.do?viewPath=business/user/company/CompanyDetail.html&id="+id+"&idx="+idx;
         },
-        detalClick:function(row){
+        detailClick:function(row){
         	
         },
         //动态资讯
@@ -132,9 +135,9 @@ var mainAttr={
     	this.frequencys = this.selectSearch("023");
     	
         //初始化table
-        this.tableInit("user", "IisFinancialOverviewApi/list");
+        this.tableInit("user", "IisCompanyApi/list");
         //默认排序
-        this.tableInitSort("O.CREATE_TIME", "desc");
+        this.tableInitSort("companyName", "asc");
         this.searchClick();
         
         //动态资讯

@@ -43,12 +43,6 @@ public class LtEtField implements Serializable {
 	public String id;
 
 	/**
-	 * 字段唯一标识
-	 */
-	@Column(name = "FIELD_ID", nullable = false, length = 22)
-	public String fieldId;
-
-	/**
 	 * 字段编码
 	 */
 	@Column(name = "FIELD_CODE", nullable = false, length = 40)
@@ -114,14 +108,6 @@ public class LtEtField implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getFieldId() {
-		return this.fieldId;
-	}
-
-	public void setFieldId(String fieldId) {
-		this.fieldId = fieldId;
 	}
 
 	public String getFieldCode() {
