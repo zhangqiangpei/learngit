@@ -4,7 +4,6 @@ var vm = new Vue({
         dialogEditTextVisible:false,
 		dialogEditGridVisible:false,
         dialogEditChartVisible:false,
-        curItemIdx:'',//当前编辑对象index
         curItemCnt:'',//当前编辑对象内容
         itemTit:'',
         titDisplay:'1',
@@ -14,8 +13,11 @@ var vm = new Vue({
 		checkedColumns:['id'],
 		columns:[],
 		gridData:[],
+        status:'0',
+        thematicId:'',
         thematicTit:'',//专题名称
-        thematicItemData:[]//专题模块数据
+        thematicItemIds:[],//专题模块项id集合
+        thematicItemDatas:[]//专题模块数据
     },
     methods: {
         saveText:function(){
@@ -89,21 +91,62 @@ var vm = new Vue({
             var param = {};
             param.thematicName = this.thematicTit;
             param.thematicLayout = z.Obj2str(hJson);
-            z.msServiceAsync("user", "IisThematicApi/save",param,function(r){
-                if(null != r && r.code == 0){
-                    z.info('保存专题布局成功！');
-                    //保存专题数据
-                    if(vm.thematicItemData.length>0&&z.isNotNullOrEmpty(r.data.id)){
-                        for(var i=0;i<vm.thematicItemData.length;i++){
-                            vm.thematicItemData[i].thematicId = r.data.id;
+            param.status = this.status;
+            if(z.isNullOrEmpty(this.thematicId)){
+                //新增
+                z.msServiceAsync("user", "IisThematicApi/save",param,function(r){
+                    if(null != r && r.code == 0){
+                        z.success('保存专题布局成功！');
+                        //保存专题数据
+                        if(vm.thematicItemDatas.length>0&&z.isNotNullOrEmpty(r.data.id)){
+                            vm.thematicId = r.data.id;
+                            for(var i=0;i<vm.thematicItemDatas.length;i++){
+                                vm.thematicItemDatas[i].thematicId = r.data.id;
+                            }
+                                z.msServiceAsync("user", "IisThematicItemApi/saveBatch",{items:z.Obj2str(vm.thematicItemDatas)},function(r){
+                                    if(null != r && r.code == 0)z.success('保存专题数据成功！');
+                            })
                         }
-                            z.msServiceAsync("user", "IisThematicItemApi/saveBatch",{items:z.Obj2str(vm.thematicItemData)},function(r){
-                                if(null != r && r.code == 0)z.info('保存专题数据成功！');
-                        })
                     }
-        	    }
-            });
+                });
+                
+            }else{
+                //更新
+                param.id = this.thematicId;
+                z.msServiceAsync("user", "IisThematicApi/update",param,function(r){
+                    if(null != r && r.code == 0){
+                        z.success('更新专题布局成功！');
+                        //先删除专题数据再保存专题数据
+                        var result;
+                        if(vm.thematicItemIds.length>0){
+                            result = z.msService("user", "IisThematicItemApi/delete",{ids:vm.thematicItemIds.toString()});
+                        }
+                        if(vm.thematicItemDatas.length>0){
+                            result = z.msService("user", "IisThematicItemApi/saveBatch",{items:z.Obj2str(vm.thematicItemDatas)});
+                            if(null != result && result.code == 0)z.success('保存专题数据成功！');
+                        }
+                    }
+                });
+            }
+            
         	
+        },
+        publicThematic:function(status){
+            if(z.isNullOrEmpty(this.thematicId)){
+                z.error('专题ID为空！');
+                return;
+            }
+            var param = {};
+            param.id = this.thematicId;
+            param.status = status;
+            z.msServiceAsync("user", "IisThematicApi/update",param,function(r){
+                if(null != r && r.code == 0){
+                    z.success(status?'发布专题成功！':'取消发布成功');
+                    vm.status = status;
+                    return;
+                }
+                z.error('操作失败');
+            })
         }
 	},
     mounted: function () {

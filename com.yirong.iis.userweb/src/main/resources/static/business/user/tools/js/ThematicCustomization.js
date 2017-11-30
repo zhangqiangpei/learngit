@@ -3,16 +3,57 @@ vm = new Vue({
     data: {
         keyword:'',
         tabActiveName:'first',
-        thematic:[{name:'美元汇率',id:'1',isPublish:1},{name:'阿根廷大选',id:'2',isPublish:1},{name:'长江基建',id:'3',isPublish:1},{name:'未发布',id:'1',isPublish:0},{name:'未发布',id:'2',isPublish:0},{name:'未发布',id:'3',isPublish:0}]
+        thematicList:[]
     },
     methods: {
+        //按发布状态
+        fnInitThematicListByStatus:function(){
+            var param = {};
+            param.pageSize = 100;
+            param.currentPage = 1;
+            z.msServiceAsync("user", "IisThematicApi/list",param,function(r){
+                 if(r!=null&&r.code==0){
+                     vm.thematicList = r.data.data;
+                 }
+            })
+        },
+        fnShowThematic:function(id){
+            window.open('/forward.do?viewPath=business/user/tools/thematic/ThematicCustomizationOpt.html&thematicId='+id);
+        },
         fnAutoSrhThematic:function(keyword,cb){
-            cb([{value:'智能匹配结果'},{value:'智能匹配结果'},{value:'智能匹配结果'}]);
+            var param = {};
+            param.pageSize = 10;
+            param.currentPage = 1;
+            param.thematicName = keyword;
+            z.msServiceAsync("user", "IisThematicApi/list",param,function(r){
+                 if(r!=null&&r.code==0){
+                     var data = r.data.data;
+                     if(data.length>0){
+                         var arr = [];
+                         for(var i=0;i<data.length;i++){
+                             var jo = {};
+                             jo.value = data[i].thematicName;
+                             jo.id = data[i].id;
+                             arr.push(jo);
+                         }
+                         cb(arr);
+                     }else{
+                         cb([]);
+                     }
+                 }else{
+                     cb([]);
+                 }
+            })
+            
         },
         fnSelThematic:function(){
-            alert(this.keyword);
+            $('#iframeThematicOpt').attr('src','/forward.do?viewPath=business/user/tools/thematic/ThematicCustomizationList.html&thematicName='+this.keyword);
+            //var vo = document.getElementById('iframeThematicOpt').contentWindow.vm;
+            //vo.$data.thematicName = this.keyword;
+            //vo.fnInitThematicList();
         }
     },
     mounted: function() {
+        this.fnInitThematicListByStatus();
     }
 })

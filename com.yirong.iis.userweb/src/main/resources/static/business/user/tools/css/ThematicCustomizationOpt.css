@@ -1,4 +1,4 @@
-html,body {width: 975px; min-width: 975px;}
+html,body {width: 975px; min-width: 975px;margin: 0 auto;}
 
 .MainIndexItem{
 	min-height:100px;

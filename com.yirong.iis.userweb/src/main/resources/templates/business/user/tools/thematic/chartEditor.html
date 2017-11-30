@@ -24,7 +24,7 @@
     </div>
     <div class="optContent content_0">
         <template>
-            <div class="col-xs-3 cs-thumbnail-listing ng-scope cs-chart-outer-layer-v2" v-for="(item,index) in chartList" :id="item.id"  @click="fnSelChart(item.id)">
+            <div class="col-xs-3 cs-thumbnail-listing ng-scope cs-chart-outer-layer-v2" v-for="(item,index) in chartList" :id="item.id"  @click="fnSelChart(item)">
                 <div class="cs-a cs-chart-inner-layer" >
                     <div class="cs-chart-basic-associator">
                         <img :class="index==0?'nav-img cs-img active':'nav-img cs-img'" alt="item.name" :src="item.icon">
@@ -58,11 +58,11 @@
                                 </el-tree>
                             </el-col>
                             <el-col  :span="12"  class="divDataConfig" id="divDataConfig">
-                                <div class="tit">X轴</div>
+                                <div class="tit">分组</div>
                                 <div class="divFieldInput xFieldInput">
                                     <span class="tip">请拖入数据</span>
                                 </div>
-                                <div class="tit">Y轴</div>
+                                <div class="tit">指标</div>
                                 <div class="divFieldInput yFieldInput">
                                     <span class="tip">请拖入数据</span>
                                 </div>
@@ -87,8 +87,8 @@
         发布图表
     </div>
     <div>
-        <el-button id="btnPrev" style="margin-top:12px;display:none" @click="fnStep(0)">上一步</el-button>
-        <el-button style="margin-top:12px;" @click="fnStep(1)">下一步</el-button>
+        <el-button plain id="btnPrev" style="margin-top:12px;display:none" @click="fnStep(0)">上一步</el-button>
+        <el-button plain style="margin-top:12px;" @click="fnStep(1)">下一步</el-button>
     </div>
     
 </div> 
@@ -99,5 +99,6 @@
 <script src="/frame/vue/vue.min.js"></script>
 <script src="/frame/elementui/elementui.js"></script>
 <script src="/frame/echarts/echarts.min.js"></script>
+<script src="/frame/echarts/myEcharts.js"></script>
 <script src="/common/js/com.js"></script>
 <script src="/business/user/tools/js/ThematicChartEdit.js"></script>

@@ -28,6 +28,8 @@
                         <el-input v-model="thematicTit" placeholder="请输入专题名称" size="small" style="width:300px">
                         </el-input>
                         <el-button size="small" @click="saveThematic">保存</el-button>
+                        <el-button size="small" v-if="status==1" @click="publicThematic(0)" style="margin-left: 0">取消发布</el-button>
+                        <el-button size="small" v-else @click="publicThematic(1)" style="margin-left: 0">发布</el-button>
                     </div>
                 </td>
             </tr>
@@ -105,26 +107,41 @@
 
 
 <script type="text/javascript">
-//    var strHomeJSON='{&#34;cols&#34;:&#34;*|260,*,270&#34;,&#34;items&#34;:[{&#34;type&#34;:&#34;text&#34;,&#34;title&#34;:&#34;文本框&#34;,&#34;idx&#34;:1,&#34;col&#34;:0,&#34;row&#34;:0,&#34;tab&#34;:1},{&#34;col&#34;:2,&#34;row&#34;:1,&#34;type&#34;:&#34;chart&#34;,&#34;title&#34;:&#34;图表&#34;,&#34;idx&#34;:3,&#34;tab&#34;:1},{&#34;type&#34;:&#34;table&#34;,&#34;title&#34;:&#34;表格&#34;,&#34;idx&#34;:2,&#34;col&#34;:1,&#34;row&#34;:0,&#34;tab&#34;:1}]}'.replace(/&#34;/img,'"');
     var hJson;
-    var thematicId = 'ff8080815ffaf883015ffb78f3b0000a';
+    var thematicId = '';
+    var isAdminEdit = '';
+    var url = '';
+    //判断是否新页面打开
+    if(parent.document.getElementById("iframeThematicOpt")){
+        url = parent.document.getElementById("iframeThematicOpt").contentWindow.location.search;
+    }else{
+        //新开选项卡，重置html body的宽度
+        $('html').css('min-width','1200px');
+        $('html').css('width','1200px');
+        $(document.body).css('min-width','1200px');
+        $(document.body).css('width','1200px');
+    }
+    thematicId = z.url(url).thematicId;
+    isAdminEdit = z.url(url).isEdit;
+    
+    vm.status = z.url(url).status;
+    vm.thematicId = thematicId;
+    
     //获取布局数据
-    var result = z.msService("user", "IisThematicApi/get",{id:thematicId});
-    if(null != result && result.code == 0){
-        try{hJson = result.data.thematicLayout;}catch(e){}
+    if(z.isNotNullOrEmpty(thematicId)){
+        var result = z.msService("user", "IisThematicApi/get",{id:thematicId});
+        if(null != result && result.code == 0){
+            vm.thematicTit = result.data.thematicName;
+            try{hJson = result.data.thematicLayout;}catch(e){}
+        }
     }
     
 	if (z.isNullOrEmpty(hJson)){
 		hJson = {cols:'*|260,*,260',items:[]};
 	}
 	
-//	try{
-//		eval('hJson='+strHomeJSON)
-//	}catch(e){}
-	
 	hJson.items.sort(function(a, b){return a.row-b.row});
 
-	var isAdminEdit=true;
 	initHomeDoc();
     
 </script>

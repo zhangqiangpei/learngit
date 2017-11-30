@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>专题定制</title>
+
+    <link href="/frame/elementui/elementui.css" rel="stylesheet" />
+    <link href="/common/css/reset.css" rel="stylesheet" />
+    <link href="/common/css/com.css" rel="stylesheet" />
+    <link href="/business/user/tools/css/ThematicList.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="main">
+        <div class="head">
+            <div class="tit">
+                <i class="el-icon-plus" @click="fnAddThematic">新增专题</i>
+            </div>
+        </div>
+        <div class="list">
+            <el-row>
+                <el-col :span="6" v-for="(item, index) in thematicList" :key="item.id">
+                    <el-card :body-style="{ padding: '0px' }">
+                        <img src="/common/images/topic.png" class="image" @click="fnShowThematic(item.id)">
+                        <div style="padding: 14px;">
+                            <span @click="fnShowThematic(item.id)" class="tit">{{item.thematicName}}</span>
+                            <div class="bottom clearfix">
+                                <time class="time">{{fnFormatDate(new Date(item.createTime.time))}}</time>
+                                <el-button type="text" class="button" @click="fnEditThematic(item)" style="margin-left:5px;">编辑</el-button>
+                                <el-button type="text" class="button" @click="fnDelThematic(item.id)">删除</el-button>
+                            </div>
+                        </div>
+                    </el-card>
+                </el-col>
+            </el-row>
+            <el-row style="text-align:center;">
+                <el-pagination  @size-change="fnSizeChange"   @current-change="fnCurrentChange"
+                :current-page="currentPage" :page-sizes="[12, 24, 48]" :page-size="pageSize"  layout="total, sizes, prev, pager, next, jumper" :total="totalCount">
+                </el-pagination>
+            </el-row>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/frame/jquery/jquery.min.js"></script>
+<script src="/frame/vue/vue.min.js"></script>
+<script src="/frame/elementui/elementui.js"></script>
+<script src="/frame/awaken/awaken.util.js"></script>
+<script src="/common/js/com.js"></script>
+<script src="/business/user/tools/js/ThematicList.js"></script>

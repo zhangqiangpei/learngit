@@ -5,6 +5,7 @@
                 {
                     "id":"1",
                     "name":"堆叠折线图",
+                    "type":"line",
                     "data":[
                         {"name":"张三","score":"100","no":"1"},
                         {"name":"李四","score":"69","no":"5"},
@@ -14,21 +15,25 @@
                 
                 },
                 {
-                   "id":"0",
-                   "name":"双向柱图",
-                   "data":[
-                        {"date":"周一","profit":"200","income":"320","expenditure":"-120"},
-                        {"date":"周二","profit":"170","income":"302","expenditure":"-132"},
-                        {"date":"周三","profit":"240","income":"341","expenditure":"-101"},
-                        {"date":"周四","profit":"244","income":"374","expenditure":"-134"},
-                        {"date":"周五","profit":"200","income":"390","expenditure":"-190"},
-                        {"date":"周六","profit":"220","income":"450","expenditure":"-230"},
-                        {"date":"周日","profit":"210","income":"420","expenditure":"-210"}
+                    "id":"0",
+                    "name":"柱状图",
+                    "type":"bar",
+                    "data":[
+                        {"city":"Beijing","date":"1月","temp":"10","income":10},
+                        {"city":"Beijing","date":"2月","temp":"15","income":"12"},
+                        {"city":"Beijing","date":"3月","temp":"12","income":"123"},
+                        {"city":"Beijing","date":"4月","temp":"14","income":"441"},
+                        {"city":"Tokyo","date":"1月","temp":"12","income":105},
+                        {"city":"Tokyo","date":"2月","temp":"15","income":"100"},
+                        {"city":"Tokyo","date":"3月","temp":"2","income":"55"},
+                        {"city":"Tokyo","date":"4月","temp":"14","income":"123"}
                     ]
+                
                 },
                 {
                    "id":"2",
                    "name":"传统饼图",
+                   "type":"pie",
                    "data":[
                         {"directAccess":"335","emailMarketing":"310","unionAd":"234","videoAd":"135","srhEngine":"1548"}
                     ]

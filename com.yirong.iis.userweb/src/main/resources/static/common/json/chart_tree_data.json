@@ -4,8 +4,9 @@
   "data": [
         {
                 "fieldCode":0,
-                "fieldName": "双向柱图",
+                "fieldName": "柱状图",
                 "type": "root",
+                "chartType": "bar",
                 "children": [
                     {
                         "fieldCode": 11,
@@ -17,6 +18,12 @@
                                 "fieldName":"时间",
                                 "field":"date",
                                 "type":"char"
+                            },
+                            {
+                                "fieldCode": 112,
+                                "fieldName":"地区",
+                                "field":"city",
+                                "type":"char"
                             }
                         ]
                     },
@@ -27,20 +34,14 @@
                         "children":[
                             {
                                 "fieldCode": 121,
-                                "fieldName":"利润",
-                                "field":"profit",
+                                "fieldName":"气温",
+                                "field":"temp",
                                 "type":"value"
                             },
                             {
                                 "fieldCode":122,
-                                "fieldName":"收入",
+                                "fieldName":"人居收入",
                                 "field":"income",
-                                "type":"value"
-                            },
-                            {
-                                "fieldCode":123,
-                                "fieldName":"支出",
-                                "field":"expenditure",
                                 "type":"value"
                             }
                         ]
@@ -51,6 +52,7 @@
                 "fieldCode": 1,
                 "fieldName": "堆叠折线图",
                 "type": "root",
+                "chartType": "line",
                 "children": [
                     {
                         "fieldCode": 11,
@@ -90,6 +92,7 @@
                 "fieldCode":2,
                 "fieldName": "传统饼图",
                 "type": "root",
+                "chartType": "pie",
                 "children": [
                     {
                         "fieldCode": 12,
