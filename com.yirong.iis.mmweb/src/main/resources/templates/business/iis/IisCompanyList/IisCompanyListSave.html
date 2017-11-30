@@ -1,0 +1,28 @@
+<div id="save" class="main">
+	<el-dialog title="新增国家列表" :visible.sync="dialogVisible" width="30%"> 
+		<el-select v-model="type" placeholder="请选择类型" style="margin-bottom:10px" @change="handleChange">
+		    <el-option
+		      v-for="item in typeList"
+		      :key="item.value"
+		      :label="item.label"
+		      :value="item.value">
+		    </el-option>
+		</el-select>
+		
+		<el-transfer v-model="selectedCompanyList" :data="companyList" 
+		:titles="['未被选择的国家', '选择的国家']"  
+		>
+		<!-- filterable :filter-method="filterMethod" filter-placeholder="请输入城市拼音" -->
+    	</el-transfer> 
+	
+		
+		<span
+		    slot="footer" class="dialog-footer"> 
+		    <el-button @click="dialogVisible = false">取 消</el-button> 
+			<el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+		</span> 
+	</el-dialog>
+</div>
+
+<!-- 本页面js -->
+<script src="/business/iis/IisCompanyList/js/IisCompanyListSave.js"></script>
